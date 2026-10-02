@@ -9,3 +9,11 @@ node_modules/
 .DS_Store
 hair-ads/material/
 hair-ads/work/takes/
+# hair-ads: превью и стоп-кадры с клиентами — не в публичный репо
+hair-ads/work/sheets/
+hair-ads/work/stock_preview/
+hair-ads/work/test/
+hair-ads/work/stock_sheet.png
+hair-ads/work/fonttest/*.png
+hair-ads/work/fonttest/*.jpg
+hair-ads/work/fonttest/[ABC].html
