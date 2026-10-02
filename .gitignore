@@ -1,0 +1,9 @@
+# Рендеры и тяжёлые медиа — не в git (лимит GitHub 100 МБ на файл)
+*.mp4
+*.mov
+*.webm
+*.wav
+takes/
+runs/*/edit/cache/
+node_modules/
+.DS_Store
