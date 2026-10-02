@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="assets/vendor/gsap.min.js"></script>
+<style>
+  @font-face { font-family: "Jost"; src: url("assets/fonts/Jost.woff2") format("woff2"); font-weight: 100 900; }
+  html, body { margin: 0; background: transparent; }
+  #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: #FAF7F2;
+          font-family: "Jost", sans-serif; -webkit-font-smoothing: antialiased; }
+
+  /* мягкие затемнения под текстом — только там, где текст */
+  .scrim-top { position: absolute; left: 0; right: 0; top: 0; height: 520px;
+               background: linear-gradient(180deg, rgba(26,19,14,.42), rgba(26,19,14,0)); }
+  .scrim-mid { position: absolute; left: -10%; right: -10%; top: 760px; height: 820px;
+               background: radial-gradient(50% 50% at 50% 50%, rgba(26,19,14,.40), rgba(26,19,14,0)); }
+
+  .scrim-end { position: absolute; inset: 0; opacity: 0;
+               background: radial-gradient(60% 34% at 50% 50%, rgba(26,19,14,.55), rgba(26,19,14,0)); }
+  .loc { position: absolute; top: 262px; left: 0; right: 0; display: flex; justify-content: center; align-items: center;
+         gap: 14px; font-weight: 400; font-size: 28px; letter-spacing: .28em; padding-left: .28em; }
+  .cta { position: absolute; top: 1440px; left: 0; right: 0; display: flex; justify-content: center; align-items: center;
+         gap: 14px; font-weight: 500; font-size: 29px; letter-spacing: .3em; padding-left: .3em; }
+
+  .h { position: absolute; left: 80px; right: 80px; top: 0; height: 1920px; display: flex; flex-direction: column;
+       justify-content: center; align-items: center; text-align: center; }
+  .h .line { display: block; font-weight: 300; font-size: 70px; line-height: 1.2; letter-spacing: .14em;
+             padding-left: .14em; text-transform: uppercase; text-shadow: 0 2px 28px rgba(0,0,0,.28); white-space: nowrap; }
+  .h .line.sm { font-size: 64px; }
+  .h .word { font-weight: 300; font-size: 84px; line-height: 1.32; letter-spacing: .22em; padding-left: .22em; }
+  .h .rule { width: 72px; height: 1px; background: #D8C3A5; margin: 0 0 40px; transform-origin: 50% 50%; }
+  .h .svc { font-weight: 400; font-size: 46px; line-height: 1.55; letter-spacing: .24em; padding-left: .24em; }
+  .h .dot { width: 6px; height: 6px; border-radius: 50%; background: #D8C3A5; margin: 6px 0; }
+  /* начальное состояние — скрыто (анимация проявляет) */
+  .h .line, .h .dot, .loc, .cta { opacity: 0; }
+  .h .rule { transform: scaleX(0); }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="14.9333" data-fps="30">
+  <div class="scrim-top"></div>
+  <div class="scrim-mid"></div>
+  <div class="scrim-end" id="scrimEnd"></div>
+
+  <div class="loc" id="loc">
+    <svg width="19" height="25" viewBox="0 0 18 24" aria-hidden="true"><path d="M9 23s7.5-8.2 7.5-13.6A7.5 7.5 0 0 0 1.5 9.4C1.5 14.8 9 23 9 23z" fill="none" stroke="#D8C3A5" stroke-width="1.5"/><circle cx="9" cy="9.4" r="2.5" fill="#D8C3A5"/></svg>
+    <span>ST. MORITZ</span>
+  </div>
+
+  <div class="h" id="t1"><span class="line">Your hair is</span><span class="line">with you every day.</span></div>
+  <div class="h" id="t2"><span class="line">It deserves to</span><span class="line">look its best.</span></div>
+  <div class="h" id="t3"><span class="line word" id="w1">Smooth.</span><span class="line word" id="w2">Silky.</span><span class="line word" id="w3">Glossy.</span></div>
+  <div class="h" id="t4"><span class="line sm">Hair treatments</span><span class="line sm">tailored to your hair.</span></div>
+  <div class="h" id="t5"><div class="rule" id="rule"></div>
+    <span class="line svc" id="s1">Keratin</span><span class="dot" id="d1"></span>
+    <span class="line svc" id="s2">Hair botox</span><span class="dot" id="d2"></span>
+    <span class="line svc" id="s3">Hair recovery</span></div>
+
+  <div class="cta" id="cta">
+    <span>DM TO BOOK</span>
+    <svg width="25" height="22" viewBox="0 0 26 23" aria-hidden="true"><path d="M13 21.5S1.5 14.6 1.5 7.4A5.9 5.9 0 0 1 13 4.6a5.9 5.9 0 0 1 11.5 2.8C24.5 14.6 13 21.5 13 21.5z" fill="none" stroke="#FAF7F2" stroke-width="1.6"/></svg>
+  </div>
+
+  <script>
+    (function () {
+      // Тайминг подложки (plate.sh): старты кадров 0 · 3.0 · 5.8 · 8.667 · 11.267, растворение 0.4 с; конец 14.933.
+      const IN = { opacity: 0, y: 18, filter: "blur(8px)" };
+      const ON = { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.85, ease: "expo.out", stagger: 0.14 };
+      const OUT = { opacity: 0, filter: "blur(6px)", duration: 0.35, ease: "expo.in" };
+      const tl = gsap.timeline({ paused: true });
+
+
+      tl.fromTo(["#loc", "#cta"], { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 1.0, ease: "expo.out", stagger: 0.15 }, 0.15);
+
+      tl.fromTo("#t1 .line", IN, ON, 0.45);
+      tl.to("#t1 .line", OUT, 2.85);
+
+      tl.fromTo("#t2 .line", IN, ON, 3.40);
+      tl.to("#t2 .line", OUT, 5.60);
+
+      tl.fromTo("#w1", IN, { ...ON, stagger: 0 }, 5.95);
+      tl.fromTo("#w2", IN, { ...ON, stagger: 0 }, 7.07);
+      tl.fromTo("#w3", IN, { ...ON, duration: 0.55, stagger: 0 }, 8.07);
+      tl.to("#t3 .line", OUT, 8.70);
+
+      tl.fromTo("#t4 .line", IN, ON, 9.10);
+      tl.to("#t4 .line", OUT, 11.05);
+
+      tl.to("#scrimEnd", { opacity: 1, duration: 0.8, ease: "sine.inOut" }, 11.2);
+      tl.to("#rule", { scaleX: 1, duration: 0.7, ease: "expo.out" }, 11.55);
+      tl.fromTo(["#s1", "#d1", "#s2", "#d2", "#s3"], IN, { ...ON, stagger: 0.16 }, 11.70);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+    })();
+  </script>
+</div>
+</body>
+</html>

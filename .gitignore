@@ -17,3 +17,10 @@ hair-ads/work/stock_sheet.png
 hair-ads/work/fonttest/*.png
 hair-ads/work/fonttest/*.jpg
 hair-ads/work/fonttest/[ABC].html
+hair-ads/out/
+hair-ads/work/*/shots/
+hair-ads/work/*/*.png
+hair-ads/work/*.png
+hair-ads/work/fine/
+hair-ads/work/grade/
+hair-ads/work/*/hf/assets/vendor/
