@@ -7,3 +7,5 @@ takes/
 runs/*/edit/cache/
 node_modules/
 .DS_Store
+hair-ads/material/
+hair-ads/work/takes/
