@@ -25,3 +25,4 @@
 | mk_22066.mp4 (720p) | https://mixkit.co/free-stock-video/opening-curtains-to-bright-sunshine-22066/ | 04 (more time) |
 | mk_43785.mp4 (1080p) | https://mixkit.co/free-stock-video/a-young-woman-meditating-high-up-in-nature-sitting-over-43785/ | 04 (more time) |
 | mk_36468.mp4 (720p) | https://mixkit.co/free-stock-video/air-moving-a-girls-hair-on-the-roof-of-a-36468/ | 04 (less frizz) |
+| mk_6047.mp4 (720p) | https://mixkit.co/free-stock-video/upset-woman-looking-in-the-mirror-6047/ | 02 (эмоция, ч/б) |
