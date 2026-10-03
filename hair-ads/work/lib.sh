@@ -9,6 +9,8 @@ TONEMAP="zscale=t=linear:npl=203,format=gbrpf32le,zscale=p=bt709,tonemap=mobius:
 GRADE_WARM="huesaturation=saturation=-1:colors=m:strength=40,huesaturation=saturation=-0.6:colors=b:strength=20,huesaturation=hue=-25:saturation=-0.3:colors=m:strength=40,colortemperature=temperature=5600:mix=0.35,eq=contrast=0.95:saturation=1.04:gamma=1.03,curves=all='0/0.035 0.5/0.51 1/0.975'"
 # Для leda_2235 (SDR, рыжее остальных): чуть меньше насыщенности и теплоты.
 GRADE_LD="$GRADE_WARM,eq=saturation=0.84,colortemperature=temperature=7000:mix=0.3"
+# Для luda_3348/3336 (очень светлый блонд выглядит выбеленным): плотнее, теплее.
+GRADE_L48="$GRADE_WARM,eq=gamma=0.86:contrast=1.07:saturation=1.12,colortemperature=temperature=4700:mix=0.25"
 # Холодный приглушённый «до» (02 PAIN).
 GRADE_COLD="huesaturation=saturation=-1:colors=m:strength=40,colortemperature=temperature=8200:mix=0.45,eq=contrast=1.04:saturation=0.55:gamma=0.97,curves=all='0/0.05 0.5/0.47 1/0.93',noise=alls=7:allf=t"
 
