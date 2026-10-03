@@ -26,3 +26,11 @@
 | mk_43785.mp4 (1080p) | https://mixkit.co/free-stock-video/a-young-woman-meditating-high-up-in-nature-sitting-over-43785/ | 04 (more time) |
 | mk_36468.mp4 (720p) | https://mixkit.co/free-stock-video/air-moving-a-girls-hair-on-the-roof-of-a-36468/ | 04 (less frizz) |
 | mk_6047.mp4 (720p) | https://mixkit.co/free-stock-video/upset-woman-looking-in-the-mirror-6047/ | 02 (эмоция, ч/б) |
+
+# Музыка (Mixkit Stock Music Free License — коммерческое использование, включая рекламу в соцсетях, без указания автора)
+| ролик | трек | автор/жанр | ссылка | старт в треке |
+|---|---|---|---|---|
+| 01 DESIRE | Hazy After Hours | Alejandro Magaña, Electronica | https://assets.mixkit.co/music/132/132.mp3 | 8.2 с (бит на 6.8 с ролика) |
+| 02 PAIN | A New Start | Chillout | https://assets.mixkit.co/music/144/144.mp3 | 0 с, приглушён до 3.85 с |
+| 03 PRIVATE | Smooth Jazz | Downtempo | https://assets.mixkit.co/music/640/640.mp3 | 6.0 с |
+| 04 TIME | Pop 08 | Chillout | https://assets.mixkit.co/music/701/701.mp3 | 3.75 с (дроп на 4.25 с) |
