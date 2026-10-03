@@ -83,18 +83,11 @@
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="22.7" data-fps="30">
+<div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="19.7" data-fps="30">
   <div class="scrim-top" id="scrimTop"></div>
   <div class="scrim-mid" id="scrimMid"></div>
   <div class="scrim-bot" id="scrimBot"></div>
   <div class="scrim-end" id="scrimEnd"></div>
-
-  <!-- маршрут на Альпах -->
-  <div id="routeWrap"><svg class="route" viewBox="0 0 1080 1920">
-    <path class="path" id="routePath" pathLength="1" d="M800 760 C 760 980, 420 960, 360 1150 S 330 1290, 300 1300"/>
-    <g id="pinA"><path class="ico" d="M800 742s-22-24-22-40a22 22 0 0 1 44 0c0 16-22 40-22 40z"/><circle class="acc" cx="800" cy="702" r="7"/></g>
-    <g id="house"><path class="ico" d="M262 1318 v-46 l38 -32 l38 32 v46 z M290 1318 v-24 h20 v24"/></g>
-  </svg></div>
 
   <div class="glow" id="glow"></div>
   <div class="loc" id="loc">
@@ -105,9 +98,6 @@
   </div>
 
   <div class="h" id="t1"><span class="line">What if your</span><span class="line">hair treatment</span><span class="line">came to you?</span></div>
-
-  <svg id="archLine" viewBox="0 0 1080 1920" style="display:none"><path id="archPath" pathLength="1" d="M240 1360 V840 A300 300 0 0 1 840 840 V1360 Z" style="stroke-dasharray:1;stroke-dashoffset:1"/></svg>
-  <div class="h" id="t2"><span class="line">No salon.</span><span class="line">No waiting.</span></div>
 
   <div class="h" id="t3"><span class="line">Premium hair care.</span><span class="line">Without leaving</span><span class="line">your space.</span></div>
 
@@ -150,7 +140,7 @@
 
   <script>
     (function () {
-      // Подложка v2: масло 0 · наш мастер 2.2 · арка (пробка/ожидание/часы) 3.4–7.4 · дом 7.0 · результат 10.9 · детали 14.8 · Альпы 17.8; конец 22.7
+      // Подложка v3: масло 0 · наш мастер 2.7 · дом 4.0 · результат 7.9 · детали 11.8 · Альпы 14.8; конец 19.7
       const IN = { opacity: 0, y: 18, filter: "blur(8px)" };
       const ON = { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: "expo.out", stagger: 0.15 };
       const OUT = { opacity: 0, filter: "blur(6px)", duration: 0.4, ease: "expo.in" };
@@ -160,59 +150,41 @@
       tl.fromTo(["#loc", "#glow"], { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 1.0, ease: "expo.out" }, 0.15);
       tl.fromTo("#pill", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 1.0, ease: "expo.out" }, 0.35);
 
-      // 1 — вопрос + маршрут
+      // 1 — вопрос (подготовка)
       tl.fromTo("#t1 .line", IN, ON, 0.55);
-      tl.to("#routeWrap", { opacity: 1, duration: 0.5, ease: "sine.inOut" }, 0.4);
-      tl.fromTo("#pinA", { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" }, 0.45);
-      tl.to("#routePath", { strokeDashoffset: 0, duration: 1.3, ease: "sine.inOut" }, 0.65);
-      tl.fromTo("#house", { opacity: 0, scale: 0.8, transformOrigin: "300px 1290px" }, { opacity: 1, scale: 1, duration: 0.6, ease: "expo.out" }, 1.75);
-      tl.to("#routeWrap", { opacity: 0, duration: 0.5, ease: "sine.inOut" }, 2.75);
-      tl.to("#t1 .line", OUT, 3.0);
+      tl.to("#t1 .line", OUT, 3.5);
 
-      // 2 — кремовая сцена: перекрасить постоянные элементы
-      tl.to(["#scrimTop", "#scrimBot", "#glow"], { opacity: 0, duration: 0.6, ease: "sine.inOut" }, 3.5);
-      tl.to("#loc", { color: DARK, textShadow: "0 0 0 rgba(0,0,0,0)", duration: 0.6, ease: "sine.inOut" }, 3.5);
-      tl.to("#loc .hair", { backgroundColor: "#B89A72", duration: 0.6 }, 3.5);
-      tl.to("#pill", { color: DARK, borderColor: "rgba(42,33,28,.85)", backgroundColor: "rgba(42,33,28,0)", duration: 0.6, ease: "sine.inOut" }, 3.5);
-      tl.to("#pill svg path", { fill: DARK, duration: 0.6 }, 3.5);
-            tl.fromTo("#t2 .line", IN, { ...ON, stagger: 0.5 }, 4.1);
-      tl.to("#t2 .line", OUT, 6.95);
-            tl.to(["#scrimTop", "#scrimBot", "#glow"], { opacity: 1, duration: 0.6, ease: "sine.inOut" }, 7.05);
-      tl.to("#loc", { color: IVORY, textShadow: "0 0 22px rgba(20,14,10,.6), 0 1px 3px rgba(0,0,0,.35)", duration: 0.6, ease: "sine.inOut" }, 7.05);
-      tl.to("#loc .hair", { backgroundColor: "#D8C3A5", duration: 0.6 }, 7.05);
-      tl.to("#pill", { color: IVORY, borderColor: "rgba(250,247,242,.92)", backgroundColor: "rgba(26,19,14,.42)", duration: 0.6, ease: "sine.inOut" }, 7.05);
-      tl.to("#pill svg path", { fill: IVORY, duration: 0.6 }, 7.05);
 
       // 3 — дома
-      tl.to("#scrimMid", { opacity: 1, duration: 0.6, ease: "sine.inOut" }, 7.3);
-      tl.fromTo("#t3 .line", IN, ON, 7.55);
-      tl.to("#t3 .line", OUT, 10.85);
+      tl.to("#scrimMid", { opacity: 1, duration: 0.6, ease: "sine.inOut" }, 4.3);
+      tl.fromTo("#t3 .line", IN, ON, 4.55);
+      tl.to("#t3 .line", OUT, 7.85);
 
       // 4 — галочки
       ["#r1", "#r2", "#r3"].forEach((id, k) => {
-        const t = 11.35 + k * 0.6;
+        const t = 8.35 + k * 0.6;
         tl.fromTo(id, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.8, ease: "expo.out" }, t);
         tl.to(id + " path", { strokeDashoffset: 0, duration: 0.45, ease: "expo.out" }, t + 0.15);
       });
-      tl.to(["#r1", "#r2", "#r3"], OUT, 14.75);
+      tl.to(["#r1", "#r2", "#r3"], OUT, 11.75);
 
       // 5 — меню-карточка
-      tl.to("#menu", { opacity: 1, duration: 0.5, ease: "sine.inOut" }, 15.05);
-      tl.to("#menuRect", { strokeDashoffset: 0, duration: 1.2, ease: "expo.inOut" }, 15.15);
-      tl.fromTo("#mcap", IN, { ...ON, stagger: 0 }, 15.45);
-      tl.fromTo(["#m1", "#m2", "#m3"], IN, { ...ON, stagger: 0.3 }, 15.65);
-      tl.to(["#ms1", "#ms2"], { scaleX: 1, duration: 0.6, ease: "expo.out", stagger: 0.3 }, 15.85);
-      tl.to("#menu", { opacity: 0, filter: "blur(6px)", duration: 0.45, ease: "expo.in" }, 17.75);
+      tl.to("#menu", { opacity: 1, duration: 0.5, ease: "sine.inOut" }, 12.05);
+      tl.to("#menuRect", { strokeDashoffset: 0, duration: 1.2, ease: "expo.inOut" }, 12.15);
+      tl.fromTo("#mcap", IN, { ...ON, stagger: 0 }, 12.45);
+      tl.fromTo(["#m1", "#m2", "#m3"], IN, { ...ON, stagger: 0.3 }, 12.65);
+      tl.to(["#ms1", "#ms2"], { scaleX: 1, duration: 0.6, ease: "expo.out", stagger: 0.3 }, 12.85);
+      tl.to("#menu", { opacity: 0, filter: "blur(6px)", duration: 0.45, ease: "expo.in" }, 14.75);
 
       // финал
-      tl.to(["#loc", "#glow", "#pill", "#scrimMid"], { opacity: 0, duration: 0.45, ease: "expo.in" }, 17.8);
-      tl.to("#scrimEnd", { opacity: 1, duration: 0.9, ease: "sine.inOut" }, 17.9);
-      tl.fromTo("#kick", IN, { ...ON, stagger: 0 }, 18.35);
-      tl.fromTo("#bigpill", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.9, ease: "expo.out" }, 18.85);
-      tl.fromTo("#bigloc", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.85, ease: "expo.out" }, 19.2);
-      tl.fromTo("#svcline", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.85, ease: "expo.out" }, 19.45);
-      tl.fromTo("#shine", { x: 0 }, { x: 760, duration: 1.1, ease: "expo.inOut" }, 20.05);
-      tl.fromTo("#shine", { x: 0 }, { x: 760, duration: 1.1, ease: "expo.inOut", immediateRender: false }, 21.4);
+      tl.to(["#loc", "#glow", "#pill", "#scrimMid"], { opacity: 0, duration: 0.45, ease: "expo.in" }, 14.8);
+      tl.to("#scrimEnd", { opacity: 1, duration: 0.9, ease: "sine.inOut" }, 14.9);
+      tl.fromTo("#kick", IN, { ...ON, stagger: 0 }, 15.35);
+      tl.fromTo("#bigpill", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.9, ease: "expo.out" }, 15.85);
+      tl.fromTo("#bigloc", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.85, ease: "expo.out" }, 16.2);
+      tl.fromTo("#svcline", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.85, ease: "expo.out" }, 16.45);
+      tl.fromTo("#shine", { x: 0 }, { x: 760, duration: 1.1, ease: "expo.inOut" }, 17.05);
+      tl.fromTo("#shine", { x: 0 }, { x: 760, duration: 1.1, ease: "expo.inOut", immediateRender: false }, 18.4);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["main"] = tl;
