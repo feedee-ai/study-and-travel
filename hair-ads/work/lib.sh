@@ -39,7 +39,7 @@ shot() {
   ffmpeg -v error -y -ss "$ss" -t "$srcdur" -i "$f" -an -vf "\
 setpts=(PTS-STARTPTS)/$sp,${fpsf},${pre}${pre_crop}scale=2160:3840:flags=lanczos,${grade},\
 scale=w='trunc(2160*$Z/2)*2':h='trunc(3840*$Z/2)*2':eval=frame:flags=bicubic,\
-crop=2160:3840:'(iw-2160)/2+iw*$xs':'(ih-3840)/2',scale=1080:1920:flags=lanczos,setsar=1,format=yuv420p" \
+crop=2160:3840:'(iw-2160)/2+iw*$xs':'max((ih-3840)/2+ih*${YS:-0}\,0)',scale=1080:1920:flags=lanczos,setsar=1,format=yuv420p" \
     -t "$dur" -c:v libx264 -preset slow -crf 12 -pix_fmt yuv420p \
     -color_range tv -colorspace bt709 -color_primaries bt709 -color_trc bt709 "$out"
 }
