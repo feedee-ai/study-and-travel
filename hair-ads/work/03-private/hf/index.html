@@ -1,0 +1,223 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="assets/vendor/gsap.min.js"></script>
+<style>
+  @font-face { font-family: "Jost"; src: url("assets/fonts/Jost.woff2") format("woff2"); font-weight: 100 900; }
+  html, body { margin: 0; background: transparent; }
+  #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: #FAF7F2;
+          font-family: "Jost", sans-serif; -webkit-font-smoothing: antialiased; }
+
+  .scrim-top { position: absolute; left: 0; right: 0; top: 0; height: 760px;
+               background: linear-gradient(180deg, rgba(26,19,14,.50), rgba(26,19,14,.25) 60%, rgba(26,19,14,0)); }
+  .scrim-mid { position: absolute; left: -10%; right: -10%; top: 700px; height: 900px; opacity: 0;
+               background: radial-gradient(50% 50% at 50% 50%, rgba(26,19,14,.45), rgba(26,19,14,0)); }
+  .scrim-bot { position: absolute; left: 0; right: 0; top: 1260px; height: 660px;
+               background: linear-gradient(0deg, rgba(26,19,14,.40), rgba(26,19,14,0)); }
+
+  /* постоянные — как во всей серии; на кремовой сцене перекрашиваются в тёмный */
+  .loc { position: absolute; top: 246px; left: 0; right: 0; display: flex; justify-content: center; align-items: center;
+         gap: 18px; font-weight: 500; font-size: 37px; letter-spacing: .26em; padding-left: .26em; color: #FAF7F2;
+         text-shadow: 0 0 22px rgba(20,14,10,.6), 0 1px 3px rgba(0,0,0,.35); opacity: 0; }
+  .loc .hair { width: 58px; height: 1.5px; background: #D8C3A5; }
+  .loc svg path { stroke: #D8C3A5; } .loc svg circle { fill: #D8C3A5; }
+  .glow { position: absolute; left: 50%; top: 268px; width: 640px; height: 150px; transform: translate(-50%,-50%);
+          background: radial-gradient(50% 50% at 50% 50%, rgba(26,19,14,.42), rgba(26,19,14,0)); opacity: 0; }
+  .pill { position: absolute; top: 1404px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 14px;
+          padding: 18px 38px 18px 44px; border-radius: 999px; border: 1.5px solid rgba(250,247,242,.92); color: #FAF7F2;
+          background: rgba(26,19,14,.42); font-weight: 500; font-size: 29px; letter-spacing: .3em; white-space: nowrap; opacity: 0; }
+  .pill svg path { fill: #FAF7F2; }
+
+  .h { position: absolute; left: 70px; right: 70px; text-align: center; }
+  .h .line { display: block; font-weight: 300; font-size: 68px; line-height: 1.2; letter-spacing: .13em; padding-left: .13em;
+             text-transform: uppercase; text-shadow: 0 2px 28px rgba(0,0,0,.32); white-space: nowrap; opacity: 0; }
+  #t1 { top: 360px; } #t3 { top: 0; height: 1920px; display: flex; flex-direction: column; justify-content: center; }
+  /* кремовая сцена: тёмный текст */
+  #t2 { top: 350px; } #t2 .line { color: #2A211C; text-shadow: none; font-size: 64px; letter-spacing: .2em; padding-left: .2em; line-height: 1.25; }
+
+  /* маршрут: «мастер едет к вам» */
+  .route { position: absolute; inset: 0; }
+  .route .path { fill: none; stroke: #FAF7F2; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .route .ico { fill: none; stroke: #FAF7F2; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+  .route .acc { fill: #D8C3A5; }
+  #routeWrap { position: absolute; inset: 0; opacity: 0; filter: drop-shadow(0 2px 10px rgba(0,0,0,.4)); }
+
+  /* рамка арки */
+  #archLine { position: absolute; inset: 0; }
+  #archLine path { fill: none; stroke: #C9AE86; stroke-width: 2; }
+
+  /* галочки */
+  .list { position: absolute; left: 0; right: 0; top: 0; height: 1920px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+  .list .row { display: flex; align-items: center; gap: 30px; width: 860px; margin: 12px 0; opacity: 0; }
+  .list svg { width: 54px; height: 54px; flex: none; overflow: visible; }
+  .list svg path { fill: none; stroke: #D8C3A5; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .list .tx { font-weight: 300; font-size: 58px; letter-spacing: .13em; text-transform: uppercase; white-space: nowrap;
+              text-shadow: 0 2px 26px rgba(0,0,0,.34); }
+
+  /* меню-карточка услуг */
+  .menu { position: absolute; left: 160px; right: 160px; top: 700px; height: 520px; opacity: 0; }
+  .menu svg.frame { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .menu svg.frame rect { fill: rgba(26,19,14,.34); stroke: #D8C3A5; stroke-width: 1.6; stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .menu .in { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+  .menu .cap { font-weight: 500; font-size: 22px; letter-spacing: .4em; padding-left: .4em; color: #D8C3A5; margin-bottom: 30px; opacity: 0; }
+  .menu .it { font-weight: 400; font-size: 46px; letter-spacing: .22em; padding-left: .22em; line-height: 1; opacity: 0; }
+  .menu .sep { width: 54px; height: 1px; background: #D8C3A5; margin: 28px 0; transform: scaleX(0); }
+
+  /* финал */
+  .end { position: absolute; left: 0; right: 0; top: 0; height: 1920px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .end .kicker { font-weight: 300; font-size: 72px; line-height: 1.2; letter-spacing: .16em; padding-left: .16em; text-transform: uppercase;
+                 text-shadow: 0 2px 28px rgba(0,0,0,.35); margin-bottom: 56px; opacity: 0; }
+  .end .bigpill { position: relative; overflow: hidden; display: flex; align-items: center; gap: 20px; opacity: 0;
+                  padding: 30px 60px 30px 70px; border-radius: 999px; background: #FAF7F2; color: #2A211C;
+                  font-weight: 500; font-size: 44px; letter-spacing: .28em; white-space: nowrap; box-shadow: 0 18px 50px rgba(0,0,0,.28); }
+  .end .shine { position: absolute; top: -20%; bottom: -20%; width: 120px; left: -160px;
+                background: linear-gradient(100deg, rgba(255,255,255,0), rgba(255,255,255,.75), rgba(255,255,255,0)); transform: skewX(-18deg); }
+  .end .bigloc { margin-top: 44px; display: flex; align-items: center; gap: 18px; font-weight: 500; font-size: 40px; opacity: 0;
+                 letter-spacing: .32em; padding-left: .32em; text-shadow: 0 1px 16px rgba(0,0,0,.35); }
+  .end .bigloc .hair { width: 70px; height: 1px; background: #D8C3A5; }
+  .end .svcline { margin-top: 18px; font-weight: 400; font-size: 25px; letter-spacing: .24em; padding-left: .24em; color: #EFE4D2; opacity: 0; }
+  .scrim-end { position: absolute; inset: 0; opacity: 0; background: radial-gradient(70% 40% at 50% 50%, rgba(26,19,14,.5), rgba(26,19,14,.18)); }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="23.7" data-fps="30">
+  <div class="scrim-top" id="scrimTop"></div>
+  <div class="scrim-mid" id="scrimMid"></div>
+  <div class="scrim-bot" id="scrimBot"></div>
+  <div class="scrim-end" id="scrimEnd"></div>
+
+  <!-- маршрут на Альпах -->
+  <div id="routeWrap"><svg class="route" viewBox="0 0 1080 1920">
+    <path class="path" id="routePath" pathLength="1" d="M800 760 C 760 980, 420 960, 360 1150 S 330 1290, 300 1300"/>
+    <g id="pinA"><path class="ico" d="M800 742s-22-24-22-40a22 22 0 0 1 44 0c0 16-22 40-22 40z"/><circle class="acc" cx="800" cy="702" r="7"/></g>
+    <g id="house"><path class="ico" d="M262 1318 v-46 l38 -32 l38 32 v46 z M290 1318 v-24 h20 v24"/></g>
+  </svg></div>
+
+  <div class="glow" id="glow"></div>
+  <div class="loc" id="loc">
+    <span class="hair"></span>
+    <svg width="27" height="36" viewBox="0 0 18 24" aria-hidden="true"><path d="M9 23s7.5-8.2 7.5-13.6A7.5 7.5 0 0 0 1.5 9.4C1.5 14.8 9 23 9 23z" fill="none" stroke-width="1.6"/><circle cx="9" cy="9.4" r="2.6"/></svg>
+    <span>ST. MORITZ</span>
+    <span class="hair"></span>
+  </div>
+
+  <div class="h" id="t1"><span class="line">What if your</span><span class="line">hair treatment</span><span class="line">came to you?</span></div>
+
+  <svg id="archLine" viewBox="0 0 1080 1920"><path id="archPath" pathLength="1" d="M240 1360 V840 A300 300 0 0 1 840 840 V1360 Z" style="stroke-dasharray:1;stroke-dashoffset:1"/></svg>
+  <div class="h" id="t2"><span class="line">No salon.</span><span class="line">No waiting.</span></div>
+
+  <div class="h" id="t3"><span class="line">Premium hair care.</span><span class="line">Without leaving</span><span class="line">your space.</span></div>
+
+  <div class="list" id="t4">
+    <div class="row" id="r1"><svg viewBox="0 0 54 54"><path pathLength="1" d="M10 28 l11 11 l23 -25"/></svg><span class="tx">Healthier.</span></div>
+    <div class="row" id="r2"><svg viewBox="0 0 54 54"><path pathLength="1" d="M10 28 l11 11 l23 -25"/></svg><span class="tx">Smoother.</span></div>
+    <div class="row" id="r3"><svg viewBox="0 0 54 54"><path pathLength="1" d="M10 28 l11 11 l23 -25"/></svg><span class="tx">More beautiful hair.</span></div>
+  </div>
+
+  <div class="menu" id="menu">
+    <svg class="frame" viewBox="0 0 760 520" preserveAspectRatio="none"><rect id="menuRect" x="1" y="1" width="758" height="518" rx="4" pathLength="1"/></svg>
+    <div class="in">
+      <div class="cap" id="mcap">TREATMENTS</div>
+      <div class="it" id="m1">KERATIN</div><div class="sep" id="ms1"></div>
+      <div class="it" id="m2">HAIR BOTOX</div><div class="sep" id="ms2"></div>
+      <div class="it" id="m3">HAIR RECOVERY</div>
+    </div>
+  </div>
+
+  <div class="pill" id="pill">
+    <span>DM TO BOOK</span>
+    <svg width="25" height="22" viewBox="0 0 26 23" aria-hidden="true"><path d="M13 21.5S1.5 14.6 1.5 7.4A5.9 5.9 0 0 1 13 4.6a5.9 5.9 0 0 1 11.5 2.8C24.5 14.6 13 21.5 13 21.5z"/></svg>
+  </div>
+
+  <div class="end">
+    <div class="kicker" id="kick">We come to you.</div>
+    <div class="bigpill" id="bigpill">
+      <span>DM TO BOOK</span>
+      <svg width="36" height="32" viewBox="0 0 26 23" aria-hidden="true"><path d="M13 21.5S1.5 14.6 1.5 7.4A5.9 5.9 0 0 1 13 4.6a5.9 5.9 0 0 1 11.5 2.8C24.5 14.6 13 21.5 13 21.5z" fill="#B89A72"/></svg>
+      <span class="shine" id="shine"></span>
+    </div>
+    <div class="bigloc" id="bigloc">
+      <span class="hair"></span>
+      <svg width="28" height="37" viewBox="0 0 18 24" aria-hidden="true"><path d="M9 23s7.5-8.2 7.5-13.6A7.5 7.5 0 0 0 1.5 9.4C1.5 14.8 9 23 9 23z" fill="none" stroke="#D8C3A5" stroke-width="1.4"/><circle cx="9" cy="9.4" r="2.5" fill="#D8C3A5"/></svg>
+      <span>ST. MORITZ</span>
+      <span class="hair"></span>
+    </div>
+    <div class="svcline" id="svcline">KERATIN · HAIR BOTOX · HAIR RECOVERY</div>
+  </div>
+
+  <script>
+    (function () {
+      // Подложка (plate.sh): Альпы 0 · зеркало 2.3 · кремовая арка 4.4–8.4 · дом 8.0 · результат 11.9 · детали 15.8 · Альпы 18.8; конец 23.7
+      const IN = { opacity: 0, y: 18, filter: "blur(8px)" };
+      const ON = { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: "expo.out", stagger: 0.15 };
+      const OUT = { opacity: 0, filter: "blur(6px)", duration: 0.4, ease: "expo.in" };
+      const DARK = "#2A211C", IVORY = "#FAF7F2";
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo(["#loc", "#glow"], { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 1.0, ease: "expo.out" }, 0.15);
+      tl.fromTo("#pill", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 1.0, ease: "expo.out" }, 0.35);
+
+      // 1 — вопрос + маршрут
+      tl.fromTo("#t1 .line", IN, ON, 0.55);
+      tl.to("#routeWrap", { opacity: 1, duration: 0.5, ease: "sine.inOut" }, 0.4);
+      tl.fromTo("#pinA", { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" }, 0.45);
+      tl.to("#routePath", { strokeDashoffset: 0, duration: 1.3, ease: "sine.inOut" }, 0.65);
+      tl.fromTo("#house", { opacity: 0, scale: 0.8, transformOrigin: "300px 1290px" }, { opacity: 1, scale: 1, duration: 0.6, ease: "expo.out" }, 1.75);
+      tl.to("#routeWrap", { opacity: 0, duration: 0.5, ease: "sine.inOut" }, 2.25);
+      tl.to("#t1 .line", OUT, 4.05);
+
+      // 2 — кремовая сцена: перекрасить постоянные элементы
+      tl.to(["#scrimTop", "#scrimBot", "#glow"], { opacity: 0, duration: 0.6, ease: "sine.inOut" }, 4.5);
+      tl.to("#loc", { color: DARK, textShadow: "0 0 0 rgba(0,0,0,0)", duration: 0.6, ease: "sine.inOut" }, 4.5);
+      tl.to("#loc .hair", { backgroundColor: "#B89A72", duration: 0.6 }, 4.5);
+      tl.to("#pill", { color: DARK, borderColor: "rgba(42,33,28,.85)", backgroundColor: "rgba(42,33,28,0)", duration: 0.6, ease: "sine.inOut" }, 4.5);
+      tl.to("#pill svg path", { fill: DARK, duration: 0.6 }, 4.5);
+      tl.to("#archPath", { strokeDashoffset: 0, duration: 1.6, ease: "expo.inOut" }, 4.9);
+      tl.fromTo("#t2 .line", IN, { ...ON, stagger: 0.5 }, 5.1);
+      tl.to("#t2 .line", OUT, 7.95);
+      tl.to("#archPath", { opacity: 0, duration: 0.5, ease: "sine.inOut" }, 7.95);
+      tl.to(["#scrimTop", "#scrimBot", "#glow"], { opacity: 1, duration: 0.6, ease: "sine.inOut" }, 8.05);
+      tl.to("#loc", { color: IVORY, textShadow: "0 0 22px rgba(20,14,10,.6), 0 1px 3px rgba(0,0,0,.35)", duration: 0.6, ease: "sine.inOut" }, 8.05);
+      tl.to("#loc .hair", { backgroundColor: "#D8C3A5", duration: 0.6 }, 8.05);
+      tl.to("#pill", { color: IVORY, borderColor: "rgba(250,247,242,.92)", backgroundColor: "rgba(26,19,14,.42)", duration: 0.6, ease: "sine.inOut" }, 8.05);
+      tl.to("#pill svg path", { fill: IVORY, duration: 0.6 }, 8.05);
+
+      // 3 — дома
+      tl.to("#scrimMid", { opacity: 1, duration: 0.6, ease: "sine.inOut" }, 8.3);
+      tl.fromTo("#t3 .line", IN, ON, 8.55);
+      tl.to("#t3 .line", OUT, 11.85);
+
+      // 4 — галочки
+      ["#r1", "#r2", "#r3"].forEach((id, k) => {
+        const t = 12.35 + k * 0.6;
+        tl.fromTo(id, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.8, ease: "expo.out" }, t);
+        tl.to(id + " path", { strokeDashoffset: 0, duration: 0.45, ease: "expo.out" }, t + 0.15);
+      });
+      tl.to(["#r1", "#r2", "#r3"], OUT, 15.75);
+
+      // 5 — меню-карточка
+      tl.to("#menu", { opacity: 1, duration: 0.5, ease: "sine.inOut" }, 16.05);
+      tl.to("#menuRect", { strokeDashoffset: 0, duration: 1.2, ease: "expo.inOut" }, 16.15);
+      tl.fromTo("#mcap", IN, { ...ON, stagger: 0 }, 16.45);
+      tl.fromTo(["#m1", "#m2", "#m3"], IN, { ...ON, stagger: 0.3 }, 16.65);
+      tl.to(["#ms1", "#ms2"], { scaleX: 1, duration: 0.6, ease: "expo.out", stagger: 0.3 }, 16.85);
+      tl.to("#menu", { opacity: 0, filter: "blur(6px)", duration: 0.45, ease: "expo.in" }, 18.75);
+
+      // финал
+      tl.to(["#loc", "#glow", "#pill", "#scrimMid"], { opacity: 0, duration: 0.45, ease: "expo.in" }, 18.8);
+      tl.to("#scrimEnd", { opacity: 1, duration: 0.9, ease: "sine.inOut" }, 18.9);
+      tl.fromTo("#kick", IN, { ...ON, stagger: 0 }, 19.35);
+      tl.fromTo("#bigpill", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.9, ease: "expo.out" }, 19.85);
+      tl.fromTo("#bigloc", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.85, ease: "expo.out" }, 20.2);
+      tl.fromTo("#svcline", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.85, ease: "expo.out" }, 20.45);
+      tl.fromTo("#shine", { x: 0 }, { x: 760, duration: 1.1, ease: "expo.inOut" }, 21.05);
+      tl.fromTo("#shine", { x: 0 }, { x: 760, duration: 1.1, ease: "expo.inOut", immediateRender: false }, 22.4);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+    })();
+  </script>
+</div>
+</body>
+</html>

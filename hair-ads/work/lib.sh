@@ -13,6 +13,8 @@ GRADE_LD="$GRADE_WARM,eq=saturation=0.84,colortemperature=temperature=7000:mix=0
 GRADE_L48="$GRADE_WARM,eq=gamma=0.86:contrast=1.07:saturation=1.12,colortemperature=temperature=4700:mix=0.25"
 # Для root_a11e кусков со стулом (смонтированный рилс со своим «светлым» фильтром): плотнее, теплее.
 GRADE_RA="$GRADE_WARM,eq=gamma=0.90:saturation=0.74,colorbalance=gm=-0.07:gh=-0.05:rm=0.03:bm=0.02,colortemperature=temperature=4900:mix=0.15"
+# Сток (Альпы и т.п.): чуть мягче контраст, меньше «стоковой» синевы, тёплый оттенок как у серии.
+GRADE_STOCK="eq=contrast=0.95:saturation=0.82:gamma=1.02,colortemperature=temperature=5900:mix=0.3,curves=all='0/0.04 0.5/0.51 1/0.97'"
 # Холодный приглушённый «до» (02 PAIN).
 GRADE_COLD="huesaturation=saturation=-1:colors=m:strength=40,colortemperature=temperature=8200:mix=0.45,eq=contrast=1.04:saturation=0.55:gamma=0.97,curves=all='0/0.05 0.5/0.47 1/0.93',noise=alls=7:allf=t"
 
