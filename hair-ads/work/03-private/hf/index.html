@@ -32,7 +32,7 @@
   .h { position: absolute; left: 70px; right: 70px; text-align: center; }
   .h .line { display: block; font-weight: 300; font-size: 68px; line-height: 1.2; letter-spacing: .13em; padding-left: .13em;
              text-transform: uppercase; text-shadow: 0 2px 28px rgba(0,0,0,.32); white-space: nowrap; opacity: 0; }
-  #t1 { top: 360px; } #t3 { top: 0; height: 1920px; display: flex; flex-direction: column; justify-content: center; }
+  #t1, #t3 { top: 0; height: 1920px; display: flex; flex-direction: column; justify-content: center; }
   /* кремовая сцена: тёмный текст */
   #t2 { top: 350px; } #t2 .line { color: #2A211C; text-shadow: none; font-size: 64px; letter-spacing: .2em; padding-left: .2em; line-height: 1.25; }
 
@@ -79,6 +79,8 @@
                  letter-spacing: .32em; padding-left: .32em; text-shadow: 0 1px 16px rgba(0,0,0,.35); }
   .end .bigloc .hair { width: 70px; height: 1px; background: #D8C3A5; }
   .end .svcline { margin-top: 18px; font-weight: 400; font-size: 25px; letter-spacing: .24em; padding-left: .24em; color: #EFE4D2; opacity: 0; }
+  .scrim-q { position: absolute; inset: 0; opacity: 0;
+             background: radial-gradient(75% 30% at 50% 50%, rgba(20,14,10,.55), rgba(20,14,10,.28) 70%, rgba(20,14,10,.2)); }
   .scrim-end { position: absolute; inset: 0; opacity: 0; background: radial-gradient(70% 40% at 50% 50%, rgba(26,19,14,.5), rgba(26,19,14,.18)); }
 </style>
 </head>
@@ -88,6 +90,7 @@
   <div class="scrim-mid" id="scrimMid"></div>
   <div class="scrim-bot" id="scrimBot"></div>
   <div class="scrim-end" id="scrimEnd"></div>
+  <div class="scrim-q" id="scrimQ"></div>
 
   <div class="glow" id="glow"></div>
   <div class="loc" id="loc">
@@ -151,6 +154,8 @@
       tl.fromTo("#pill", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 1.0, ease: "expo.out" }, 0.35);
 
       // 1 — вопрос (подготовка)
+      tl.to("#scrimQ", { opacity: 1, duration: 0.8, ease: "sine.inOut" }, 0.2);
+      tl.to("#scrimQ", { opacity: 0, duration: 0.7, ease: "sine.inOut" }, 3.55);
       tl.fromTo("#t1 .line", IN, ON, 0.55);
       tl.to("#t1 .line", OUT, 3.5);
 
