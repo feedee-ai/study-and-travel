@@ -21,10 +21,12 @@
                            rgba(26,19,14,.06) 64%, rgba(26,19,14,.40) 70%, rgba(26,19,14,.40) 82%, rgba(26,19,14,.15) 100%); }
 
   /* постоянные элементы */
-  .loc { position: absolute; top: 250px; left: 0; right: 0; display: flex; justify-content: center; align-items: center;
-         gap: 16px; font-weight: 500; font-size: 31px; letter-spacing: .3em; padding-left: .3em;
-         text-shadow: 0 1px 14px rgba(0,0,0,.35); opacity: 0; }
-  .loc .hair { width: 46px; height: 1px; background: rgba(216,195,165,.9); }
+  .loc { position: absolute; top: 246px; left: 0; right: 0; display: flex; justify-content: center; align-items: center;
+         gap: 18px; font-weight: 500; font-size: 37px; letter-spacing: .26em; padding-left: .26em;
+         text-shadow: 0 0 22px rgba(20,14,10,.6), 0 1px 3px rgba(0,0,0,.35); opacity: 0; }
+  .loc::before { content: ""; position: absolute; left: 50%; top: 50%; width: 640px; height: 150px; transform: translate(-50%,-50%);
+                 background: radial-gradient(50% 50% at 50% 50%, rgba(26,19,14,.42), rgba(26,19,14,0)); z-index: -1; }
+  .loc .hair { width: 58px; height: 1.5px; background: rgba(216,195,165,.95); }
   .pill { position: absolute; top: 1404px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 14px;
           padding: 18px 38px 18px 44px; border-radius: 999px; border: 1.5px solid rgba(250,247,242,.92);
           background: rgba(26,19,14,.42); font-weight: 500; font-size: 29px; letter-spacing: .3em; white-space: nowrap; opacity: 0; }
@@ -40,8 +42,6 @@
   .h .svc { font-weight: 400; font-size: 46px; line-height: 1.55; letter-spacing: .24em; padding-left: .24em; }
   .h .dot { width: 6px; height: 6px; border-radius: 50%; background: #D8C3A5; margin: 6px 0; opacity: 0; }
 
-  /* кадр 1: лицо в центре — текст ниже, на уровне груди */
-  #t1 { justify-content: flex-start; padding-top: 1110px; box-sizing: border-box; }
 
   /* финальный CTA-кадр */
   .end { position: absolute; left: 60px; right: 60px; top: 0; height: 1920px; text-align: center; }
@@ -65,7 +65,7 @@
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="22.8" data-fps="30">
+<div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="22.3667" data-fps="30">
   <div class="scrim-top"></div>
   <div class="scrim-mid"></div>
   <div class="scrim-bot"></div>
@@ -73,7 +73,7 @@
 
   <div class="loc" id="loc">
     <span class="hair"></span>
-    <svg width="22" height="29" viewBox="0 0 18 24" aria-hidden="true"><path d="M9 23s7.5-8.2 7.5-13.6A7.5 7.5 0 0 0 1.5 9.4C1.5 14.8 9 23 9 23z" fill="none" stroke="#D8C3A5" stroke-width="1.5"/><circle cx="9" cy="9.4" r="2.5" fill="#D8C3A5"/></svg>
+    <svg width="27" height="36" viewBox="0 0 18 24" aria-hidden="true"><path d="M9 23s7.5-8.2 7.5-13.6A7.5 7.5 0 0 0 1.5 9.4C1.5 14.8 9 23 9 23z" fill="none" stroke="#D8C3A5" stroke-width="1.6"/><circle cx="9" cy="9.4" r="2.6" fill="#D8C3A5"/></svg>
     <span>ST. MORITZ</span>
     <span class="hair"></span>
   </div>
@@ -114,7 +114,7 @@
 
   <script>
     (function () {
-      // Подложка (plate.sh): старты кадров 0 · 3.4 · 6.8 · 10.0 · 14.0 · 18.0, растворение 0.4 с; конец 22.8.
+      // Подложка v3 (plate.sh): k1 0 · k2 3.4 · k3 6.8 · k4 10.0–13.6 · k5 13.6–17.55 · k6 17.55; растворения 0.4 с; конец 22.37.
       const IN = { opacity: 0, y: 18, filter: "blur(8px)" };
       const ON = { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.85, ease: "expo.out", stagger: 0.14 };
       const OUT = { opacity: 0, filter: "blur(6px)", duration: 0.35, ease: "expo.in" };
@@ -136,21 +136,21 @@
       tl.to("#t3 .line", OUT, 9.80);
 
       tl.fromTo("#t4 .line", IN, ON, 10.45);
-      tl.to("#t4 .line", OUT, 13.80);
+      tl.to("#t4 .line", OUT, 13.30);
 
-      tl.to("#rule", { scaleX: 1, duration: 0.7, ease: "expo.out" }, 14.35);
-      tl.fromTo(["#s1", "#d1", "#s2", "#d2", "#s3"], IN, { ...ON, stagger: 0.16 }, 14.45);
-      tl.to(["#s1", "#d1", "#s2", "#d2", "#s3", "#rule"], OUT, 17.80);
+      tl.to("#rule", { scaleX: 1, duration: 0.7, ease: "expo.out" }, 13.95);
+      tl.fromTo(["#s1", "#d1", "#s2", "#d2", "#s3"], IN, { ...ON, stagger: 0.16 }, 14.05);
+      tl.to(["#s1", "#d1", "#s2", "#d2", "#s3", "#rule"], OUT, 17.30);
 
       // финал: маленькие уходят, большой CTA-блок
-      tl.to(["#loc", "#pill"], { opacity: 0, duration: 0.4, ease: "expo.in" }, 17.85);
-      tl.to("#scrimEnd", { opacity: 1, duration: 0.9, ease: "sine.inOut" }, 17.9);
-      tl.fromTo("#kick", IN, { ...ON, stagger: 0 }, 18.45);
-      tl.fromTo("#bigpill", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.9, ease: "expo.out" }, 18.95);
-      tl.fromTo("#bigloc", IN, { ...ON, stagger: 0 }, 19.30);
-      tl.fromTo("#svcline", IN, { ...ON, stagger: 0 }, 19.55);
-      tl.fromTo("#shine", { x: 0 }, { x: 760, duration: 1.1, ease: "expo.inOut" }, 20.2);
-      tl.fromTo("#shine", { x: 0 }, { x: 760, duration: 1.1, ease: "expo.inOut", immediateRender: false }, 21.6);
+      tl.to(["#loc", "#pill"], { opacity: 0, duration: 0.4, ease: "expo.in" }, 17.40);
+      tl.to("#scrimEnd", { opacity: 1, duration: 0.9, ease: "sine.inOut" }, 17.50);
+      tl.fromTo("#kick", IN, { ...ON, stagger: 0 }, 18.00);
+      tl.fromTo("#bigpill", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.9, ease: "expo.out" }, 18.50);
+      tl.fromTo("#bigloc", IN, { ...ON, stagger: 0 }, 18.85);
+      tl.fromTo("#svcline", IN, { ...ON, stagger: 0 }, 19.10);
+      tl.fromTo("#shine", { x: 0 }, { x: 760, duration: 1.1, ease: "expo.inOut" }, 19.75);
+      tl.fromTo("#shine", { x: 0 }, { x: 760, duration: 1.1, ease: "expo.inOut", immediateRender: false }, 21.10);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["main"] = tl;

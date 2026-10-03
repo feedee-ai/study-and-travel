@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="assets/vendor/gsap.min.js"></script>
+<style>
+  @font-face { font-family: "Jost"; src: url("assets/fonts/Jost.woff2") format("woff2"); font-weight: 100 900; }
+  html, body { margin: 0; background: transparent; }
+  #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: #FAF7F2;
+          font-family: "Jost", sans-serif; -webkit-font-smoothing: antialiased; }
+
+  .scrim-top { position: absolute; left: 0; right: 0; top: 0; height: 560px;
+               background: linear-gradient(180deg, rgba(26,19,14,.48), rgba(26,19,14,0)); }
+  .scrim-low { position: absolute; left: 0; right: 0; top: 820px; height: 1100px;
+               background: linear-gradient(180deg, rgba(26,19,14,0) 0%, rgba(26,19,14,.42) 35%, rgba(26,19,14,.42) 70%, rgba(26,19,14,.2) 100%); }
+  .scrim-end { position: absolute; inset: 0; opacity: 0;
+               background: linear-gradient(180deg, rgba(26,19,14,.5) 0%, rgba(26,19,14,.42) 22%, rgba(26,19,14,.05) 28%,
+                           rgba(26,19,14,.05) 55%, rgba(26,19,14,.42) 62%, rgba(26,19,14,.42) 80%, rgba(26,19,14,.15) 100%); }
+
+  /* постоянные — как во всей серии */
+  .loc { position: absolute; top: 246px; left: 0; right: 0; display: flex; justify-content: center; align-items: center;
+         gap: 18px; font-weight: 500; font-size: 37px; letter-spacing: .26em; padding-left: .26em;
+         text-shadow: 0 0 22px rgba(20,14,10,.6), 0 1px 3px rgba(0,0,0,.35); opacity: 0; }
+  .loc::before { content: ""; position: absolute; left: 50%; top: 50%; width: 640px; height: 150px; transform: translate(-50%,-50%);
+                 background: radial-gradient(50% 50% at 50% 50%, rgba(26,19,14,.42), rgba(26,19,14,0)); z-index: -1; }
+  .loc .hair { width: 58px; height: 1.5px; background: rgba(216,195,165,.95); }
+  .pill { position: absolute; top: 1404px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 14px;
+          padding: 18px 38px 18px 44px; border-radius: 999px; border: 1.5px solid rgba(250,247,242,.92);
+          background: rgba(26,19,14,.42); font-weight: 500; font-size: 29px; letter-spacing: .3em; white-space: nowrap; opacity: 0; }
+
+  /* 02 — журнальная вёрстка: текст слева, вертикальная линия-акцент */
+  .blk { position: absolute; left: 100px; right: 80px; top: 930px; }
+  .blk .bar { position: absolute; left: -34px; top: 8px; width: 2px; height: 100%; background: #D8C3A5; transform: scaleY(0); transform-origin: 50% 0; }
+  .blk .line { display: block; font-weight: 300; font-size: 70px; line-height: 1.22; letter-spacing: .12em;
+               text-transform: uppercase; text-shadow: 0 2px 26px rgba(0,0,0,.32); white-space: nowrap; opacity: 0; }
+  .blk .line.big { font-size: 88px; letter-spacing: .16em; line-height: 1.25; }
+  .blk .line.sm { font-size: 62px; }
+  .blk .tag { display: block; font-weight: 500; font-size: 24px; letter-spacing: .34em; color: #D8C3A5; margin-bottom: 26px; opacity: 0; }
+
+  #t2 { top: 1080px; }
+  /* блеск, пробегающий по словам */
+  .gloss { color: transparent; background-image: linear-gradient(100deg, #FAF7F2 0%, #FAF7F2 40%, #FFFFFF 47%, #FFF3DC 50%, #FFFFFF 53%, #FAF7F2 60%, #FAF7F2 100%);
+           background-size: 300% 100%; background-position: 100% 0; -webkit-background-clip: text; background-clip: text; text-shadow: none !important; }
+  #t3 { filter: drop-shadow(0 2px 18px rgba(0,0,0,.35)); }
+
+  /* шторка-трансформация */
+  .wipe { position: absolute; top: 0; bottom: 0; left: 0; width: 2px; background: #E9D7B8; opacity: 0;
+          box-shadow: 0 0 18px 4px rgba(233,215,184,.55); }
+
+  /* иконки услуг */
+  .svc { position: absolute; left: 70px; right: 70px; top: 880px; display: flex; justify-content: space-between; }
+  .svc .it { width: 300px; display: flex; flex-direction: column; align-items: center; gap: 26px; opacity: 0; }
+  .svc svg { width: 112px; height: 112px; overflow: visible; filter: drop-shadow(0 2px 14px rgba(0,0,0,.35)); }
+  .svc svg .s { fill: none; stroke: #FAF7F2; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .svc svg .a { fill: none; stroke: #D8C3A5; stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .svc .lb { font-weight: 400; font-size: 30px; letter-spacing: .2em; padding-left: .2em; text-align: center; line-height: 1.3;
+             text-shadow: 0 2px 16px rgba(0,0,0,.4); white-space: nowrap; }
+
+  /* финал */
+  .end .kicker { position: absolute; left: 60px; right: 60px; top: 300px; text-align: center; font-weight: 300; font-size: 64px;
+                 line-height: 1.2; letter-spacing: .14em; padding-left: .14em; text-transform: uppercase; text-shadow: 0 2px 28px rgba(0,0,0,.3); opacity: 0; }
+  .end .foot { position: absolute; left: 0; right: 0; top: 1150px; display: flex; flex-direction: column; align-items: center; }
+  .end .bigpill { position: relative; overflow: hidden; display: flex; align-items: center; gap: 20px; opacity: 0;
+                  padding: 30px 60px 30px 70px; border-radius: 999px; background: #FAF7F2; color: #2A211C;
+                  font-weight: 500; font-size: 44px; letter-spacing: .28em; white-space: nowrap; box-shadow: 0 18px 50px rgba(0,0,0,.28); }
+  .end .shine { position: absolute; top: -20%; bottom: -20%; width: 120px; left: -160px;
+                background: linear-gradient(100deg, rgba(255,255,255,0), rgba(255,255,255,.75), rgba(255,255,255,0)); transform: skewX(-18deg); }
+  .end .bigloc { margin-top: 40px; display: flex; align-items: center; gap: 18px; font-weight: 500; font-size: 40px; opacity: 0;
+                 letter-spacing: .32em; padding-left: .32em; text-shadow: 0 1px 16px rgba(0,0,0,.35); }
+  .end .bigloc .hair { width: 70px; height: 1px; background: #D8C3A5; }
+  .end .svcline { margin-top: 18px; font-weight: 400; font-size: 25px; letter-spacing: .24em; padding-left: .24em; color: #EFE4D2; opacity: 0; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="22.3667" data-fps="30">
+  <div class="scrim-top"></div>
+  <div class="scrim-low" id="scrimLow"></div>
+  <div class="scrim-end" id="scrimEnd"></div>
+
+  <div class="loc" id="loc">
+    <span class="hair"></span>
+    <svg width="27" height="36" viewBox="0 0 18 24" aria-hidden="true"><path d="M9 23s7.5-8.2 7.5-13.6A7.5 7.5 0 0 0 1.5 9.4C1.5 14.8 9 23 9 23z" fill="none" stroke="#D8C3A5" stroke-width="1.6"/><circle cx="9" cy="9.4" r="2.6" fill="#D8C3A5"/></svg>
+    <span>ST. MORITZ</span>
+    <span class="hair"></span>
+  </div>
+
+  <div class="blk" id="t1"><span class="bar" id="bar1"></span>
+    <span class="line big" id="p1">Dry.</span><span class="line big" id="p2">Frizzy.</span><span class="line" id="p3">Hard to manage.</span></div>
+  <div class="blk" id="t2"><span class="bar" id="bar2"></span>
+    <span class="line">It doesn’t have</span><span class="line">to be this way.</span></div>
+  <div class="blk" id="t3"><span class="bar" id="bar3"></span>
+    <span class="line big gloss" id="g1">Smooth.</span><span class="line big gloss" id="g2">Silky.</span><span class="line big gloss" id="g3">Glossy.</span></div>
+  <div class="blk" id="t4"><span class="bar" id="bar4"></span>
+    <span class="line sm">Hair treatments</span><span class="line sm">tailored to</span><span class="line sm">your hair.</span></div>
+
+  <div class="wipe" id="wipe"></div>
+
+  <div class="svc" id="svc">
+    <div class="it" id="i1">
+      <svg viewBox="0 0 100 100"><path class="s" pathLength="1" d="M50 8 C50 8 20 46 20 64 a30 30 0 0 0 60 0 C80 46 50 8 50 8 Z"/><path class="a" pathLength="1" d="M36 66 a14 14 0 0 0 12 14"/></svg>
+      <div class="lb">KERATIN</div></div>
+    <div class="it" id="i2">
+      <svg viewBox="0 0 100 100"><path class="s" pathLength="1" d="M50 10 C54 38 62 46 90 50 C62 54 54 62 50 90 C46 62 38 54 10 50 C38 46 46 38 50 10 Z"/><path class="a" pathLength="1" d="M80 14 v14 M73 21 h14"/></svg>
+      <div class="lb">HAIR BOTOX</div></div>
+    <div class="it" id="i3">
+      <svg viewBox="0 0 100 100"><path class="s" pathLength="1" d="M22 80 C22 40 50 16 84 16 C84 52 60 80 22 80 Z"/><path class="a" pathLength="1" d="M22 80 C40 62 56 46 72 30"/></svg>
+      <div class="lb">HAIR<br>RECOVERY</div></div>
+  </div>
+
+  <div class="pill" id="pill">
+    <span>DM TO BOOK</span>
+    <svg width="25" height="22" viewBox="0 0 26 23" aria-hidden="true"><path d="M13 21.5S1.5 14.6 1.5 7.4A5.9 5.9 0 0 1 13 4.6a5.9 5.9 0 0 1 11.5 2.8C24.5 14.6 13 21.5 13 21.5z" fill="#FAF7F2"/></svg>
+  </div>
+
+  <div class="end">
+    <div class="kicker" id="kick">Love your<br>hair again.</div>
+    <div class="foot">
+      <div class="bigpill" id="bigpill">
+        <span>DM TO BOOK</span>
+        <svg width="36" height="32" viewBox="0 0 26 23" aria-hidden="true"><path d="M13 21.5S1.5 14.6 1.5 7.4A5.9 5.9 0 0 1 13 4.6a5.9 5.9 0 0 1 11.5 2.8C24.5 14.6 13 21.5 13 21.5z" fill="#B89A72"/></svg>
+        <span class="shine" id="shine"></span>
+      </div>
+      <div class="bigloc" id="bigloc">
+        <span class="hair"></span>
+        <svg width="28" height="37" viewBox="0 0 18 24" aria-hidden="true"><path d="M9 23s7.5-8.2 7.5-13.6A7.5 7.5 0 0 0 1.5 9.4C1.5 14.8 9 23 9 23z" fill="none" stroke="#D8C3A5" stroke-width="1.4"/><circle cx="9" cy="9.4" r="2.5" fill="#D8C3A5"/></svg>
+        <span>ST. MORITZ</span>
+        <span class="hair"></span>
+      </div>
+      <div class="svcline" id="svcline">KERATIN · HAIR BOTOX · HAIR RECOVERY</div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // Подложка (plate.sh): p1 0–3.82 · шторка 3.817–4.717 · p2 3.82–7.67 · p3 7.667 · p4 11.517 · p5 14.467 · p6 17.767; конец 22.367
+      const IN = { opacity: 0, x: -22, filter: "blur(8px)" };
+      const ON = { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.85, ease: "expo.out", stagger: 0.14 };
+      const OUT = { opacity: 0, filter: "blur(6px)", duration: 0.35, ease: "expo.in" };
+      const BAR = { scaleY: 1, duration: 0.9, ease: "expo.out" };
+      const BAROUT = { scaleY: 0, duration: 0.35, ease: "expo.in", transformOrigin: "50% 100%" };
+      const tl = gsap.timeline({ paused: true });
+
+      tl.fromTo("#loc", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 1.0, ease: "expo.out" }, 0.15);
+      tl.fromTo("#pill", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 1.0, ease: "expo.out" }, 0.35);
+
+      // 1 — «до»: слова по одному
+      tl.to("#bar1", BAR, 0.30);
+      tl.fromTo("#p1", IN, { ...ON, stagger: 0 }, 0.40);
+      tl.fromTo("#p2", IN, { ...ON, stagger: 0 }, 1.10);
+      tl.fromTo("#p3", IN, { ...ON, stagger: 0 }, 1.80);
+      tl.to("#t1 .line", OUT, 3.45);
+      tl.to("#bar1", BAROUT, 3.45);
+
+      // шторка — линия едет вместе с краем перехода (справа налево)
+      tl.set("#wipe", { opacity: 1, x: 1080 }, 3.80);
+      tl.to("#wipe", { x: -10, duration: 0.92, ease: "none" }, 3.817);
+      tl.to("#wipe", { opacity: 0, duration: 0.2, ease: "expo.in" }, 4.55);
+
+      // 2 — переход
+      tl.to("#bar2", BAR, 4.55);
+      tl.fromTo("#t2 .line", IN, ON, 4.65);
+      tl.to("#t2 .line", OUT, 7.70);
+      tl.to("#bar2", BAROUT, 7.70);
+
+      // 3 — блеск по словам
+      tl.to("#bar3", BAR, 8.20);
+      tl.fromTo("#g1", IN, { ...ON, stagger: 0 }, 8.30);
+      tl.fromTo("#g2", IN, { ...ON, stagger: 0 }, 9.05);
+      tl.fromTo("#g3", IN, { ...ON, stagger: 0 }, 9.80);
+      tl.fromTo(["#g1", "#g2", "#g3"], { backgroundPosition: "100% 0" }, { backgroundPosition: "0% 0", duration: 1.4, ease: "sine.inOut", stagger: 0.12 }, 10.25);
+      tl.to("#t3 .line", OUT, 11.45);
+      tl.to("#bar3", BAROUT, 11.45);
+
+      // 4 — работа мастера
+      tl.to("#bar4", BAR, 11.85);
+      tl.fromTo("#t4 .line", IN, ON, 11.95);
+      tl.to("#t4 .line", OUT, 14.50);
+      tl.to("#bar4", BAROUT, 14.50);
+
+      // 5 — иконки услуг рисуются линией
+      tl.to("#scrimLow", { opacity: 0.6, duration: 0.6, ease: "sine.inOut" }, 14.5);
+      ["#i1", "#i2", "#i3"].forEach((id, k) => {
+        const t = 14.95 + k * 0.32;
+        tl.fromTo(id, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.7, ease: "expo.out" }, t);
+        tl.to(id + " .s", { strokeDashoffset: 0, duration: 1.0, ease: "expo.out" }, t + 0.05);
+        tl.to(id + " .a", { strokeDashoffset: 0, duration: 0.6, ease: "expo.out" }, t + 0.45);
+      });
+      tl.to(["#i1", "#i2", "#i3"], OUT, 17.55);
+
+      // финал
+      tl.to(["#loc", "#pill"], { opacity: 0, duration: 0.4, ease: "expo.in" }, 17.60);
+      tl.to("#scrimLow", { opacity: 0, duration: 0.6, ease: "sine.inOut" }, 17.7);
+      tl.to("#scrimEnd", { opacity: 1, duration: 0.9, ease: "sine.inOut" }, 17.75);
+      tl.fromTo("#kick", { opacity: 0, y: 18, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.85, ease: "expo.out" }, 18.25);
+      tl.fromTo("#bigpill", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.9, ease: "expo.out" }, 18.75);
+      tl.fromTo("#bigloc", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.85, ease: "expo.out" }, 19.10);
+      tl.fromTo("#svcline", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.85, ease: "expo.out" }, 19.35);
+      tl.fromTo("#shine", { x: 0 }, { x: 760, duration: 1.1, ease: "expo.inOut" }, 19.95);
+      tl.fromTo("#shine", { x: 0 }, { x: 760, duration: 1.1, ease: "expo.inOut", immediateRender: false }, 21.2);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+    })();
+  </script>
+</div>
+</body>
+</html>
