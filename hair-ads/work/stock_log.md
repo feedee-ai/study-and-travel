@@ -22,3 +22,6 @@
 | mk_51178.mp4 (4K) | https://mixkit.co/free-stock-video/a-young-woman-standing-in-front-of-the-bathroom-mirror-51178/ | 04 |
 | mk_52147.mp4 (4K) | https://mixkit.co/free-stock-video/a-skilled-masseuse-pours-down-an-essential-oil-into-a-52147/ | 03 (начало) |
 | mk_36400.mp4 (720p) | https://mixkit.co/free-stock-video/young-woman-brushing-her-hair-in-the-mirror-36400/ | 04 (утро) |
+| mk_22066.mp4 (720p) | https://mixkit.co/free-stock-video/opening-curtains-to-bright-sunshine-22066/ | 04 (more time) |
+| mk_43785.mp4 (1080p) | https://mixkit.co/free-stock-video/a-young-woman-meditating-high-up-in-nature-sitting-over-43785/ | 04 (more time) |
+| mk_36468.mp4 (720p) | https://mixkit.co/free-stock-video/air-moving-a-girls-hair-on-the-roof-of-a-36468/ | 04 (less frizz) |
