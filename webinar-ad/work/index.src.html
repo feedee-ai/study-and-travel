@@ -396,6 +396,7 @@ __ITEMS__
       tl.fromTo("#end h1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: E }, T.end0 + 0.4);
       tl.fromTo("#end p", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: E }, T.end0 + 0.55);
       tl.fromTo("#end .btn", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.45, ease: EB }, T.end0 + 0.7);
+      tl.fromTo("#end .down", { opacity: 0 }, { opacity: 1, duration: 0.25 }, T.end0 + 0.95);
       tl.fromTo("#end .down", { y: -10 }, { y: 14, duration: 0.4, yoyo: true, repeat: 3, ease: "sine.inOut" }, T.end0 + 1.0);
 
       window.__timelines["main"] = tl;
