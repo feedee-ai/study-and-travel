@@ -24,3 +24,9 @@ hair-ads/work/*.png
 hair-ads/work/fine/
 hair-ads/work/grade/
 hair-ads/work/*/hf/assets/vendor/
+
+# webinar-ad: медиа и артефакты пересобираются скриптами
+webinar-ad/out/
+webinar-ad/hf/.hyperframes/
+webinar-ad/hf/renders/
+__pycache__/
