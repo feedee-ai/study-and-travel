@@ -25,8 +25,8 @@ BROLL = [
     ("castle",   "v31447", 1.0, 1.9, 0.50, 1.0),
     ("uni",      "v4503",  3.0, 1.8, 0.47, 1.0),
     ("docs",     "v46533", 8.2, 1.8, 0.56, 1.0),
-    ("room",     "v4029", 32.0, 2.4, 0.62, 1.0),
-    ("keys",     "v12877", 0.2, 1.6, 0.50, 1.0),
+    ("grocery",  "v49137", 2.0, 2.4, 0.47, 1.0),
+    ("dorm",     "v40644", 2.0, 1.7, 0.40, 1.0, "eq=gamma=1.35:saturation=1.12:contrast=1.05,"),
     ("barista",  "v24405", 6.0, 1.9, 0.43, 1.0),
     ("town",     "v4235",  0.4, 3.3, 0.24, 1.0),
     ("suitcase", "v45507", 1.0, 1.6, 0.52, 1.0),
@@ -35,10 +35,10 @@ BROLL = [
     ("hug",      "v49462", 1.5, 2.9, 0.45, 1.0),
     ("webinar",  "v49282", 0.0, 2.4, 0.68, 1.0),
 ]
-for name, clip, ss, dur, xc, sp in BROLL:
+for name, clip, ss, dur, xc, sp, *extra in BROLL:
     o = f"{OUT}/{name}.mp4"
     if os.path.exists(o) and not os.environ.get('FORCE'): continue
     vf = (f"setpts=(PTS-STARTPTS)/{sp},fps=30,crop=ih*9/16:ih:max(0\\,min(iw-ih*9/16\\,iw*{xc}-ih*9/32)):0,"
-          f"scale=1080:1920:flags=lanczos,{STOCK_GRADE},unsharp=5:5:0.5:5:5:0,{GRAIN},setsar=1,format=yuv420p")
+          f"scale=1080:1920:flags=lanczos,{extra[0] if extra else ''}{STOCK_GRADE},unsharp=5:5:0.5:5:5:0,{GRAIN},setsar=1,format=yuv420p")
     run(["-ss", str(ss), "-t", str(dur * sp + 0.6), "-i", f"{STOCK}/{clip}.mp4", "-vf", vf, "-t", str(dur + 0.4)] + ENC + [o])
     print(name, "ok")

@@ -195,10 +195,12 @@ __ITEMS__
   <div id="route" class="abs">
     <div class="head">весь шлях вступу</div>
     <svg viewBox="0 0 936 330">
-      <path id="rpath" d="M40 170 C 260 70, 640 70, 880 170" fill="none" stroke="#FFD21A" stroke-width="8" stroke-linecap="round" stroke-dasharray="1 0"/>
+      <path id="rbase" d="M40 170 C 180 90, 300 250, 460 170 S 740 90, 880 170" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 16"/>
+      <path id="rpath" d="M40 170 C 180 90, 300 250, 460 170 S 740 90, 880 170" fill="none" stroke="#FFD21A" stroke-width="9" stroke-linecap="round"/>
+      <circle id="w1" r="11" fill="#0C0C0C" stroke="#fff" stroke-width="5"/><circle id="w2" r="11" fill="#0C0C0C" stroke="#fff" stroke-width="5"/>
       <circle id="rA" cx="40" cy="170" r="20" fill="#fff"/><circle cx="40" cy="170" r="8" fill="#0C0C0C"/>
       <g id="rB"><circle cx="880" cy="170" r="26" fill="#FFD21A"/><circle cx="880" cy="170" r="10" fill="#0C0C0C"/></g>
-      <g id="plane"><path d="M-22 -6 L18 -2 L28 0 L18 2 L-22 6 L-14 0 Z" fill="#fff"/><path d="M0 -2 L-10 -22 L-2 -22 L12 -2 Z M0 2 L-10 22 L-2 22 L12 2 Z" fill="#fff"/></g>
+      <g id="mk"><circle id="mkp" r="18" fill="none" stroke="#FFD21A" stroke-width="5"/><circle r="19" fill="#fff"/><circle r="11" fill="#FFD21A"/></g>
     </svg>
     <div class="lbl" style="left:0; color:#fff">Україна</div>
     <div class="lbl" id="rBl" style="right:0; color:#FFD21A">Словаччина</div>
@@ -338,16 +340,28 @@ __ITEMS__
       // ---------- 4 маршрут ----------
       const rp = document.getElementById("rpath"), L = rp.getTotalLength();
       rp.style.strokeDasharray = `${L}`;
+      const RD = T.route0 + 0.2;
+      const mkAt = (p) => { const q = rp.getPointAtLength(p * L); document.getElementById("mk").setAttribute("transform", `translate(${q.x} ${q.y})`); };
+      mkAt(0);
+      // проміжні точки маршруту: загоряються, коли маркер проходить
+      [["#w1", 0.34], ["#w2", 0.68]].forEach(([id, f]) => {
+        const q = rp.getPointAtLength(f * L); const c = document.querySelector(id); c.setAttribute("cx", q.x); c.setAttribute("cy", q.y);
+      });
       tl.fromTo("#route", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: E }, T.route0);
-      tl.fromTo(rp, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: T.routeDraw, ease: "power2.inOut" }, T.route0 + 0.2);
+      tl.fromTo("#rbase", { opacity: 0 }, { opacity: 1, duration: 0.3 }, T.route0);
+      tl.fromTo(rp, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: T.routeDraw, ease: "power2.inOut" }, RD);
       const pl = { p: 0 };
-      tl.fromTo(pl, { p: 0 }, { p: 1, duration: T.routeDraw, ease: "power2.inOut", onUpdate: () => {
-        const q = rp.getPointAtLength(pl.p * L), q2 = rp.getPointAtLength(Math.min(L, pl.p * L + 2));
-        const a = Math.atan2(q2.y - q.y, q2.x - q.x) * 180 / Math.PI;
-        document.getElementById("plane").setAttribute("transform", `translate(${q.x} ${q.y}) rotate(${a})`);
-      } }, T.route0 + 0.2);
+      tl.fromTo(pl, { p: 0 }, { p: 1, duration: T.routeDraw, ease: "power2.inOut", onUpdate: () => mkAt(pl.p) }, RD);
+      tl.fromTo("#mkp", { attr: { r: 18 }, opacity: 0.9 }, { attr: { r: 44 }, opacity: 0, duration: 0.6, ease: "power2.out", repeat: 4 }, T.route0);
+      // power2.inOut: позиція 0.34 / 0.68 шляху досягається на ~0.41 / ~0.59 тривалості
+      [["#w1", 0.415], ["#w2", 0.585]].forEach(([id, f]) => {
+        tl.set(id, { attr: { fill: "#FFD21A", stroke: "#FFD21A" } }, RD + f * T.routeDraw);
+        tl.fromTo(id, { scale: 1.8, svgOrigin: `${document.querySelector(id).getAttribute("cx")} ${document.querySelector(id).getAttribute("cy")}` },
+                  { scale: 1, duration: 0.3, ease: EB, immediateRender: false }, RD + f * T.routeDraw);
+      });
       tl.fromTo("#rB", { scale: 0, svgOrigin: "880 170" }, { scale: 1, duration: 0.4, ease: EB }, T.route0 + 0.2 + T.routeDraw - 0.1);
       tl.fromTo("#rBl", { opacity: 0.35 }, { opacity: 1, duration: 0.2 }, T.route0 + 0.2 + T.routeDraw - 0.1);
+      tl.to("#mk", { opacity: 0, duration: 0.2 }, RD + T.routeDraw);
       tl.to("#route", { opacity: 0, duration: 0.15 }, T.route1 - 0.15);
 
       // ---------- 5 шаги ----------
