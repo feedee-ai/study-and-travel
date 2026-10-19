@@ -30,6 +30,10 @@ const ST_CAPI_TOKEN = '__META_CAPI_TOKEN__';
 const ST_GRAPH_VER  = 'v24.0';
 // Регистрации на вебинар. /studying-in-slovakia/ — вебинарный лендинг («Зареєструватися», доступ через бот).
 const ST_REG_PATHS  = array( '/webinar', '/studying-in-slovakia' );
+// На регистрациях дополнительно шлём Lead — кампания увидит заявку, на что бы она ни оптимизировалась.
+const ST_REG_ALSO_LEAD = true;
+// Пиксели лендингов, куда сервер тоже шлёт события (токен имеет к ним доступ). Путь => ID.
+const ST_EXTRA_PIXELS = array( '/studying-in-slovakia' => '1557571255679048' );
 // Код из Events Manager → Test Events. Пусто в бою.
 const ST_TEST_CODE  = '';
 // Аудитория — Украина: '0XXXXXXXXX' → '380XXXXXXXXX'.
@@ -41,6 +45,7 @@ function st_track_js() {
 	$cfg = array(
 		'pixel'    => ST_PIXEL_ID,
 		'regPaths' => ST_REG_PATHS,
+		'regLead'  => ST_REG_ALSO_LEAD,
 		'endpoint' => rest_url( 'st/v1/lead' ),
 	);
 	$js = <<<'JS'
@@ -142,7 +147,9 @@ function st_track_js() {
 		var ev = eventName();
 		var subject = fields.form_subject || document.title;
 		try {
-			fbq('track', ev, { content_name: subject, content_category: location.pathname }, { eventID: id });
+			var params = { content_name: subject, content_category: location.pathname };
+			fbq('track', ev, params, { eventID: id });
+			if (ev !== 'Lead' && C.regLead) fbq('track', 'Lead', params, { eventID: id });
 		} catch (e) {}
 
 		var utm = {};
@@ -342,7 +349,7 @@ function st_capi_lead( WP_REST_Request $req ) {
 	}
 
 	$event = array(
-		'event_name'       => $event_name,
+		'event_name'       => '',
 		'event_time'       => time(),
 		'event_id'         => $event_id,
 		'action_source'    => 'website',
@@ -358,32 +365,49 @@ function st_capi_lead( WP_REST_Request $req ) {
 		$event['referrer_url'] = $referrer;
 	}
 
-	$body = array( 'data' => array( $event ) );
+	$names_to_send = array( $event_name );
+	if ( 'Lead' !== $event_name && ST_REG_ALSO_LEAD ) {
+		$names_to_send[] = 'Lead';
+	}
+	$data = array();
+	foreach ( $names_to_send as $n ) {
+		$data[] = array( 'event_name' => $n ) + $event;
+	}
+	$body = array( 'data' => $data );
 	if ( '' !== ST_TEST_CODE ) {
 		$body['test_event_code'] = ST_TEST_CODE;
 	}
 
-	$resp = wp_remote_post(
-		'https://graph.facebook.com/' . ST_GRAPH_VER . '/' . ST_PIXEL_ID . '/events?access_token=' . rawurlencode( ST_CAPI_TOKEN ),
-		array(
-			'timeout' => 6,
-			'headers' => array( 'Content-Type' => 'application/json' ),
-			'body'    => wp_json_encode( $body ),
-		)
-	);
+	$pixels = array( ST_PIXEL_ID );
+	foreach ( ST_EXTRA_PIXELS as $p => $px ) {
+		if ( 0 === strpos( $path, $p ) ) {
+			$pixels[] = $px;
+		}
+	}
 
-	st_log( array(
-		'event'  => $event_name,
-		'id'     => $event_id,
-		'url'    => $url,
-		'has_ph' => (bool) $phone,
-		'has_em' => (bool) $email,
-		'has_fn' => isset( $names[0] ),
-		'fbc'    => (bool) $fbc,
-		'fbp'    => (bool) $fbp,
-		'code'   => is_wp_error( $resp ) ? $resp->get_error_message() : wp_remote_retrieve_response_code( $resp ),
-		'resp'   => is_wp_error( $resp ) ? '' : substr( wp_remote_retrieve_body( $resp ), 0, 300 ),
-	) );
+	foreach ( array_unique( $pixels ) as $px ) {
+		$resp = wp_remote_post(
+			'https://graph.facebook.com/' . ST_GRAPH_VER . '/' . $px . '/events?access_token=' . rawurlencode( ST_CAPI_TOKEN ),
+			array(
+				'timeout' => 6,
+				'headers' => array( 'Content-Type' => 'application/json' ),
+				'body'    => wp_json_encode( $body ),
+			)
+		);
+		st_log( array(
+			'pixel'  => $px,
+			'event'  => implode( '+', $names_to_send ),
+			'id'     => $event_id,
+			'url'    => $url,
+			'has_ph' => (bool) $phone,
+			'has_em' => (bool) $email,
+			'has_fn' => isset( $names[0] ),
+			'fbc'    => (bool) $fbc,
+			'fbp'    => (bool) $fbp,
+			'code'   => is_wp_error( $resp ) ? $resp->get_error_message() : wp_remote_retrieve_response_code( $resp ),
+			'resp'   => is_wp_error( $resp ) ? '' : substr( wp_remote_retrieve_body( $resp ), 0, 300 ),
+		) );
+	}
 
 	return new WP_REST_Response( null, 204 );
 }
