@@ -36,6 +36,8 @@
 alifannk, healthy-confiteria, darya-korysheva, fedoristovv, katya.tsibrovska, proposal.romantic.ua-, sirenita_infantil, romasylchuk. Снимаются локально: `node tools/capture.mjs work/captures` (нужны клоны в /home/user и playwright).
 
 ## Дальше
-1. ElevenLabs: 3 пробных голоса на фразе сцены 1 — готовы в `voices/` (см. `voices/README.md`) → ждём выбор заказчика.
+1. ElevenLabs: 3 пробных голоса в `voices/` → выбран **№1 Andriy Tkachenko** (`hWHihsTve3RbzG4PHDBQ`), можно заменить позже.
+   Озвучка: `python3 tools/voiceover.py <out> 1.15 [script.md]`. Andriy размеренный: полный текст v4 даже на speed 1.15 = 69 с
+   (`vo/full115-all.mp3`). Короткий вариант `SCRIPT-short.md` = 52 с (`vo/short115-all.mp3`) — на согласование.
 2. Озвучка по сценам, длительности сцен = длительности фраз.
 3. Композиция HyperFrames в `hf/`, музыка Mixkit, SFX из media-use, рендер, отправка.
