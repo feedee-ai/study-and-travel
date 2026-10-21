@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1080, height=1920">
+<title>2BRO.LAB — Сайт за $40/міс</title>
+<script src="assets/vendor/gsap.min.js"></script>
+<style>
+  /* Шрифты бренда: Onest 500 + Geist Mono, подмножества latin/cyrillic. */
+  @font-face { font-family: "Onest"; src: url("assets/fonts/onest-lat.woff2") format("woff2"); font-weight: 100 900;
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: "Onest"; src: url("assets/fonts/onest-cyr.woff2") format("woff2"); font-weight: 100 900;
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+  @font-face { font-family: "Geist Mono"; src: url("assets/fonts/mono-lat.woff2") format("woff2"); font-weight: 100 900;
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  @font-face { font-family: "Geist Mono"; src: url("assets/fonts/mono-cyr.woff2") format("woff2"); font-weight: 100 900;
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116; }
+
+  :root {
+    --bg: #f9f9f7; --surface: #ffffff; --surface-2: #f2f2ef; --surface-3: #e9e9e5;
+    --ink: #0e1013; --ink-muted: #61676e; --hair: rgb(14 16 19 / 0.1); --hair-strong: rgb(14 16 19 / 0.18);
+    --void: #0e1013; --void-ink: #f5f7f7; --void-muted: #9aa1a3;
+    --accent: #14b8a6; --accent-ink: #0b7a6f; --accent-soft: #e6f7f4;
+    /* Тени бренда, увеличенные под холст 1080 (×2.4). */
+    --sh-md: 0 5px 10px -5px rgb(14 16 19 / 0.1), 0 19px 48px -19px rgb(14 16 19 / 0.14);
+    --sh-lg: 0 10px 19px -10px rgb(14 16 19 / 0.12), 0 58px 115px -48px rgb(14 16 19 / 0.26);
+  }
+  html, body { margin: 0; background: var(--bg); }
+  #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--bg); color: var(--ink);
+          font-family: "Onest", sans-serif; font-weight: 500; -webkit-font-smoothing: antialiased; }
+  .clip { position: absolute; inset: 0; }
+  .abs { position: absolute; }
+  .mono { font-family: "Geist Mono", monospace; text-transform: uppercase; letter-spacing: .08em; font-weight: 500; }
+  .w { display: inline-block; }
+  .mask { display: inline-block; overflow: hidden; vertical-align: top; padding: 0 .02em .08em; margin-bottom: -.08em; }
+
+  /* Лабораторный слой: сетка и метки (20% по брендбуку). */
+  #grid { background:
+      linear-gradient(90deg, rgb(14 16 19 / 0.045) 1px, transparent 1px) 0 0 / 108px 108px,
+      linear-gradient(0deg, rgb(14 16 19 / 0.045) 1px, transparent 1px) 0 0 / 108px 108px; }
+  #grid::after { content: ""; position: absolute; inset: 0;
+      background: radial-gradient(70% 55% at 50% 45%, rgb(249 249 247 / 0) 0%, rgb(249 249 247 / 0.65) 100%); }
+  .crop { position: absolute; width: 34px; height: 34px; border-color: rgb(14 16 19 / 0.35); border-style: solid; border-width: 0; }
+
+  #topbar { position: absolute; left: 72px; right: 72px; top: 196px; height: 56px; }
+  #lockup { position: absolute; left: 0; top: 0; display: flex; align-items: center; gap: 16px; }
+  #lockup svg { width: 54px; height: 54px; }
+  #lockup span { font-size: 30px; letter-spacing: .16em; }
+  #sceneIdx { position: absolute; right: 0; top: 13px; font-size: 24px; color: var(--ink-muted); height: 30px; overflow: hidden; width: 520px; text-align: right; }
+  #sceneIdx .lab { position: absolute; right: 0; top: 0; white-space: nowrap; }
+  #progress { position: absolute; left: 72px; right: 72px; top: 272px; height: 2px; background: var(--hair); }
+  #progress i { position: absolute; inset: 0; background: var(--ink); transform-origin: 0 50%; }
+
+  /* Телефон: тёмный предмет, внутри — живой сайт. */
+  .phone { position: absolute; width: 560px; height: 1150px; border-radius: 80px; background: #15181c;
+           box-shadow: inset 0 0 0 2px #2a2f35, var(--sh-lg); }
+  .phone .scr { position: absolute; inset: 14px; border-radius: 66px; overflow: hidden; background: #fff; }
+  .phone .scr img { position: absolute; left: 0; top: 0; width: 100%; display: block; }
+  .phone .isl { position: absolute; left: 50%; top: 30px; width: 150px; height: 42px; margin-left: -75px; border-radius: 21px; background: #0b0d10; }
+  .phone.sm { width: 300px; height: 616px; border-radius: 46px; }
+  .phone.sm .scr { inset: 8px; border-radius: 38px; }
+  .phone.sm .isl { width: 82px; height: 23px; margin-left: -41px; top: 17px; border-radius: 12px; }
+
+  .glass { background: rgb(255 255 255 / 0.74); backdrop-filter: blur(22px) saturate(1.4); -webkit-backdrop-filter: blur(22px) saturate(1.4);
+           box-shadow: inset 0 0 0 2px rgb(14 16 19 / 0.22), 0 3px 6px -3px rgb(14 16 19 / 0.14), 0 19px 48px -24px rgb(14 16 19 / 0.3); }
+  .card { background: var(--surface); border-radius: 28px; box-shadow: inset 0 0 0 2px var(--hair), var(--sh-lg); }
+
+  /* 1 · Хук */
+  #s1h { left: 0; right: 0; top: 318px; text-align: center; font-size: 80px; letter-spacing: -.03em; line-height: 1.1; white-space: nowrap; }
+  #s1price { left: 0; right: 0; top: 410px; height: 330px; display: flex; justify-content: center; align-items: flex-end; gap: 22px; }
+  #s1num { font-size: 330px; line-height: .86; letter-spacing: -.055em; }
+  #s1per { margin-bottom: 26px; height: 104px; padding: 0 34px; border-radius: 999px; background: var(--accent); color: var(--ink);
+           display: flex; align-items: center; font-size: 62px; letter-spacing: -.02em; transform-origin: 0 50%; }
+  .chip { position: absolute; left: 50%; height: 104px; margin-left: -330px; width: 660px; border-radius: 999px; display: flex; align-items: center;
+          gap: 22px; padding: 0 40px; box-sizing: border-box; font-size: 44px; letter-spacing: -.01em; }
+  .chip svg { width: 52px; height: 52px; flex: none; }
+  .chip .n { font-family: "Geist Mono", monospace; font-size: 26px; color: var(--ink-muted); letter-spacing: .08em; margin-left: auto; }
+  .chip.acc { background: var(--accent); box-shadow: 0 19px 48px -24px rgb(14 16 19 / 0.4); }
+  .chip.acc .n { color: rgb(14 16 19 / 0.65); }
+
+  /* 2 · Как обычно — без цвета */
+  .h2 { left: 0; right: 0; top: 318px; text-align: center; font-size: 84px; letter-spacing: -.032em; line-height: 1.08; white-space: nowrap; }
+  #inv { left: 100px; top: 470px; width: 880px; height: 400px; }
+  #inv .row { position: absolute; left: 56px; right: 56px; display: flex; justify-content: space-between; font-size: 24px; color: var(--ink-muted); }
+  #invAmt { position: absolute; left: 48px; top: 96px; width: 760px; height: 200px; font-size: 200px; line-height: 1; letter-spacing: -.05em; overflow: hidden; }
+  #invAmt .al { position: absolute; left: 0; top: 0; display: flex; white-space: nowrap; }
+  #invLine { position: absolute; left: 56px; right: 56px; top: 316px; display: flex; justify-content: space-between; align-items: baseline;
+             border-top: 2px solid var(--hair); padding-top: 22px; font-size: 38px; }
+  #invLine .mono { font-size: 24px; color: var(--ink-muted); }
+  .stamp { position: absolute; border: 5px solid var(--ink); color: var(--ink); border-radius: 14px; padding: 10px 22px; font-size: 36px; white-space: nowrap; }
+  #cal { left: 100px; top: 900px; width: 880px; height: 300px; }
+  #calTxt { position: absolute; left: 56px; top: 52px; }
+  #calTxt .mono { font-size: 24px; color: var(--ink-muted); }
+  #calNum { margin-top: 22px; font-size: 120px; line-height: 1; letter-spacing: -.045em; display: flex; align-items: baseline; }
+  #calNum small { font-size: 54px; letter-spacing: -.02em; margin-left: 16px; }
+  #calGrid { position: absolute; right: 56px; top: 52px; width: 390px; display: grid; grid-template-columns: repeat(7, 46px); gap: 10px; }
+  #calGrid b { width: 46px; height: 32px; border-radius: 7px; background: var(--surface-3); position: relative; overflow: hidden; }
+  #calGrid b i { position: absolute; inset: 0; background: var(--ink); }
+  #tpl { left: 100px; top: 1150px; width: 880px; height: 400px; overflow: hidden; }
+  #tpl .bar { position: absolute; left: 0; right: 0; top: 0; height: 70px; background: var(--surface-2); border-bottom: 2px solid var(--hair); }
+  #tpl .dots { position: absolute; left: 32px; top: 26px; display: flex; gap: 12px; }
+  #tpl .dots i { width: 18px; height: 18px; border-radius: 9px; background: var(--surface-3); box-shadow: inset 0 0 0 2px var(--hair-strong); }
+  #tpl .url { position: absolute; left: 170px; right: 170px; top: 16px; height: 38px; border-radius: 19px; background: var(--surface); box-shadow: inset 0 0 0 2px var(--hair); }
+  #tpl .blk { position: absolute; background: var(--surface-3); border-radius: 10px; }
+  .notif { left: 120px; width: 840px; height: 132px; border-radius: 32px; display: flex; align-items: center; gap: 26px; padding: 0 34px; box-sizing: border-box; }
+  .notif .ic { width: 72px; height: 72px; border-radius: 18px; background: var(--surface-3); display: grid; place-items: center; flex: none; }
+  .notif .ic svg { width: 40px; height: 40px; }
+  .notif .t { font-size: 36px; letter-spacing: -.01em; white-space: nowrap; }
+  .notif .s { font-size: 22px; color: var(--ink-muted); margin-top: 6px; }
+  .notif .v { margin-left: auto; font-size: 40px; white-space: nowrap; }
+
+  /* 3 · У нас наоборот */
+  #bigLock { left: 0; right: 0; top: 560px; display: flex; flex-direction: column; align-items: center; }
+  #disc { position: absolute; left: 50%; top: 180px; width: 520px; height: 520px; margin: -260px 0 0 -260px; border-radius: 50%; background: var(--accent); }
+  #ring { position: absolute; left: 50%; top: 180px; width: 520px; height: 520px; margin: -260px 0 0 -260px; border-radius: 50%; box-shadow: inset 0 0 0 3px var(--ink); }
+  #bigMark { position: relative; width: 250px; height: 250px; margin-top: 55px; }
+  #bigName { position: relative; margin-top: 150px; font-size: 76px; letter-spacing: .16em; padding-left: .16em; }
+  #flip { left: 0; right: 0; top: 1270px; text-align: center; font-size: 150px; letter-spacing: -.045em; line-height: 1; }
+  #flip span { display: inline-block; }
+  .step { left: 96px; display: flex; align-items: center; gap: 30px; font-size: 64px; letter-spacing: -.03em; white-space: nowrap; }
+  .step .node { width: 74px; height: 74px; border-radius: 50%; box-shadow: inset 0 0 0 3px var(--ink); display: grid; place-items: center; position: relative; flex: none; }
+  .step .node i { position: absolute; inset: 0; border-radius: 50%; background: var(--accent); }
+  .step .node svg { position: relative; width: 40px; height: 40px; }
+  .step .k { font-family: "Geist Mono", monospace; font-size: 26px; color: var(--ink-muted); letter-spacing: .08em; }
+  #stepLine { left: 132px; top: 400px; width: 3px; height: 62px; background: var(--ink); transform-origin: 50% 0; }
+  #badge { left: 50%; top: 600px; height: 72px; margin-left: -180px; width: 360px; border-radius: 999px; display: grid; place-items: center; font-size: 26px; overflow: hidden; }
+  #badge .lab { position: absolute; left: 0; right: 0; top: 0; height: 72px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+  #badge .on { background: var(--accent); }
+  .choice { top: 1290px; width: 440px; height: 190px; border-radius: 40px; box-sizing: border-box; padding: 30px 38px; }
+  .choice .k { font-size: 24px; color: var(--ink-muted); }
+  .choice .v { font-size: 84px; letter-spacing: -.04em; line-height: 1; margin-top: 18px; white-space: nowrap; }
+  .choice .v small { font-size: 44px; letter-spacing: -.02em; }
+  #chL { left: 90px; background: var(--surface); box-shadow: inset 0 0 0 3px var(--ink), var(--sh-lg); }
+  #chR { left: 550px; background: var(--surface); box-shadow: inset 0 0 0 3px var(--ink), var(--sh-lg); overflow: hidden; }
+  #chR .fill { position: absolute; inset: 0; background: var(--accent); }
+  #chR .in { position: relative; }
+  .cursor { width: 76px; height: 76px; }
+
+  /* 4 · Поддержка */
+  #s4h { top: 318px; }
+  #sup { left: 90px; top: 590px; width: 900px; height: 900px; border-radius: 32px; background: var(--void); color: var(--void-ink); box-shadow: var(--sh-lg); overflow: hidden; }
+  .srow { position: absolute; left: 56px; right: 56px; height: 196px; display: flex; align-items: center; gap: 30px; border-bottom: 2px solid rgb(245 247 247 / 0.12); }
+  .srow .ic { width: 88px; height: 88px; border-radius: 22px; background: rgb(245 247 247 / 0.07); box-shadow: inset 0 0 0 2px rgb(245 247 247 / 0.14); display: grid; place-items: center; flex: none; }
+  .srow .ic svg { width: 46px; height: 46px; }
+  .srow .t { font-size: 52px; letter-spacing: -.02em; white-space: nowrap; }
+  .srow .r { margin-left: auto; font-size: 24px; color: var(--void-muted); display: flex; align-items: center; gap: 14px; }
+  .srow .r b { width: 16px; height: 16px; border-radius: 8px; background: var(--accent); }
+  #spark { width: 230px; height: 90px; }
+  .dest { position: absolute; top: 676px; height: 116px; border-radius: 999px; display: flex; align-items: center; justify-content: center; gap: 16px;
+          font-size: 40px; letter-spacing: -.01em; background: rgb(245 247 247 / 0.06); box-shadow: inset 0 0 0 2px rgb(245 247 247 / 0.16); color: var(--void-ink); }
+  .dest .lit { position: absolute; inset: 0; border-radius: 999px; box-shadow: inset 0 0 0 3px var(--accent); }
+  .dest svg { width: 40px; height: 40px; position: relative; }
+  .dest span { position: relative; }
+  .dest .plus { position: absolute; top: -58px; left: 50%; width: 80px; margin-left: -40px; text-align: center; font-family: "Geist Mono", monospace; font-size: 28px; color: var(--accent); }
+  #chat { left: 90px; top: 590px; width: 900px; height: 900px; }
+  #chat .hd { position: absolute; left: 0; right: 0; top: 0; height: 128px; display: flex; align-items: center; gap: 22px; padding: 0 44px; border-bottom: 2px solid var(--hair); }
+  #chat .av { width: 72px; height: 72px; border-radius: 36px; background: var(--ink); color: var(--void-ink); display: grid; place-items: center; }
+  #chat .av svg { width: 42px; height: 42px; }
+  #chat .nm { font-size: 34px; letter-spacing: .12em; }
+  #chat .st { margin-left: auto; font-size: 22px; color: var(--accent-ink); display: flex; align-items: center; gap: 12px; }
+  #chat .st b { width: 14px; height: 14px; border-radius: 7px; background: var(--accent); }
+  .bub { position: absolute; padding: 28px 38px; border-radius: 40px; font-size: 42px; letter-spacing: -.01em; white-space: nowrap; }
+  #bubU { right: 44px; top: 176px; background: var(--ink); color: var(--void-ink); border-bottom-right-radius: 12px; }
+  #bubT { left: 44px; top: 320px; height: 104px; width: 170px; box-sizing: border-box; background: var(--surface-2); border-bottom-left-radius: 12px; display: flex; align-items: center; justify-content: center; gap: 14px; padding: 0; }
+  #bubT i { width: 16px; height: 16px; border-radius: 8px; background: var(--ink-muted); }
+  #bubA { left: 44px; top: 320px; background: var(--accent); color: var(--ink); border-bottom-left-radius: 12px; display: flex; align-items: center; gap: 16px; }
+  #bubA svg { width: 44px; height: 44px; }
+  #prev { left: 44px; top: 474px; width: 560px; height: 380px; border-radius: 28px; overflow: hidden; box-shadow: inset 0 0 0 2px var(--hair), var(--sh-md); }
+  #prev img { position: absolute; left: 0; width: 100%; }
+  #prevTag { left: 630px; top: 474px; font-size: 22px; color: var(--accent-ink); display: flex; flex-direction: column; gap: 12px; line-height: 1.4; }
+
+  /* 5 · Разово */
+  #tog { left: 110px; top: 640px; width: 860px; height: 150px; border-radius: 999px; background: var(--surface-2); box-shadow: inset 0 0 0 3px var(--hair-strong); }
+  #knob { position: absolute; left: 10px; top: 10px; width: 420px; height: 130px; border-radius: 999px; background: var(--ink); box-shadow: var(--sh-md); }
+  .tl { position: absolute; top: 0; height: 150px; width: 430px; display: grid; place-items: center; font-size: 50px; letter-spacing: -.02em; }
+  #tl1 { left: 0; } #tl2 { left: 430px; }
+  #priceK { left: 0; right: 0; top: 920px; text-align: center; font-size: 28px; color: var(--ink-muted); }
+  #price2 { left: 0; right: 0; top: 990px; display: flex; justify-content: center; font-size: 330px; line-height: 1; letter-spacing: -.055em; }
+  #priceS { left: 0; right: 0; top: 1350px; display: flex; justify-content: center; }
+  #priceS span { height: 84px; padding: 0 34px; border-radius: 999px; background: var(--accent); display: flex; align-items: center; font-size: 30px; }
+  #per2 { left: 0; right: 0; top: 1010px; text-align: center; font-size: 230px; line-height: 1; letter-spacing: -.05em; color: rgb(14 16 19 / 0.16); }
+
+  /* одометр */
+  .odo { display: inline-flex; }
+  .dg { display: inline-block; height: 1em; line-height: 1em; overflow: hidden; position: relative; }
+  .dg .col { display: flex; flex-direction: column; }
+  .dg .col span { height: 1em; line-height: 1em; text-align: center; }
+
+  /* 6 · Заявка */
+  .mcol { position: absolute; top: 0; width: 300px; }
+  .mcol .phone { position: relative; margin-bottom: 34px; }
+  #cta { left: 70px; top: 560px; width: 940px; height: 760px; border-radius: 48px; }
+  #ctaTxt { position: absolute; left: 0; right: 0; top: 74px; text-align: center; font-size: 76px; letter-spacing: -.032em; line-height: 1.12; }
+  #ctaTxt .ln { display: block; white-space: nowrap; }
+  #free { position: relative; display: inline-block; padding: 0 22px; margin-top: 8px; }
+  #free i { position: absolute; left: 0; right: 0; top: 6px; bottom: 0; border-radius: 22px; background: var(--accent); transform-origin: 0 50%; }
+  #free span { position: relative; }
+  #btn { position: absolute; left: 90px; right: 90px; top: 520px; height: 150px; border-radius: 999px; background: var(--ink); color: var(--void-ink);
+         display: flex; align-items: center; justify-content: center; gap: 26px; font-size: 50px; letter-spacing: -.015em; box-shadow: var(--sh-lg); }
+  #btn svg { width: 52px; height: 52px; }
+  #endTxt { position: absolute; left: 0; right: 0; top: 70px; display: flex; flex-direction: column; align-items: center; }
+  #endTxt svg { width: 120px; height: 120px; }
+  #endName { font-size: 64px; letter-spacing: .16em; padding-left: .16em; margin-top: 20px; }
+  #endUrl { font-size: 40px; margin-top: 22px; color: var(--accent-ink); letter-spacing: .04em; text-transform: none; }
+  #endRecap { font-size: 23px; margin-top: 26px; color: var(--ink-muted); white-space: nowrap; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-width="1080" data-height="1920" data-duration="52" data-fps="30">
+
+  <audio id="mix" data-start="0" data-duration="52" src="assets/audio/mix.mp3"></audio>
+
+  <!-- Постоянный лабораторный слой -->
+  <div id="grid" class="clip" data-start="0" data-duration="52"></div>
+  <div id="frame" class="clip" data-start="0" data-duration="52">
+    <i class="crop" style="left:40px;top:160px;border-left-width:3px;border-top-width:3px"></i>
+    <i class="crop" style="right:40px;top:160px;border-right-width:3px;border-top-width:3px"></i>
+    <i class="crop" style="left:40px;bottom:300px;border-left-width:3px;border-bottom-width:3px"></i>
+    <i class="crop" style="right:40px;bottom:300px;border-right-width:3px;border-bottom-width:3px"></i>
+    <div id="topbar">
+      <div id="lockup"><svg viewBox="216 196 819 791" fill="currentColor"><use href="#mk"/></svg><span>2BRO.LAB</span></div>
+      <div id="sceneIdx" class="mono">
+        <span class="lab">01 / 06 · Пропозиція</span>
+        <span class="lab">02 / 06 · Як зазвичай</span>
+        <span class="lab">03 / 06 · Як у нас</span>
+        <span class="lab">04 / 06 · Підтримка</span>
+        <span class="lab">05 / 06 · Разова оплата</span>
+        <span class="lab">06 / 06 · Демо безкоштовно</span>
+      </div>
+    </div>
+    <div id="progress"><i id="prog"></i></div>
+  </div>
+
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <g id="mk"><g transform="translate(0,1254) scale(0.1,-0.1)"><path d="M6190 10539 c-375 -42 -736 -198 -1025 -441 -83 -70 -526 -513 -1976 -1973 -657 -662 -704 -717 -830 -979 -111 -231 -157 -412 -166 -657 -9 -240 21 -427 102 -639 198 -520 687 -950 1225 -1077 84 -20 142 -26 292 -30 102 -3 197 -3 211 1 23 5 25 12 31 83 12 128 53 314 99 445 l44 123 -201 0 c-184 1 -209 3 -296 27 -189 51 -338 139 -486 286 -137 137 -228 286 -280 459 -38 125 -45 338 -16 469 46 207 124 353 275 512 250 264 2449 2459 2512 2507 133 102 280 168 456 206 89 19 123 21 268 16 177 -5 260 -21 385 -74 176 -73 363 -228 467 -385 212 -322 201 -722 -27 -1065 -49 -73 -249 -278 -1269 -1299 -667 -666 -1240 -1247 -1275 -1290 -427 -529 -535 -1202 -293 -1818 209 -532 676 -974 1216 -1150 599 -197 1270 -77 1747 312 41 33 644 634 1340 1334 1383 1391 1334 1338 1445 1571 110 228 144 374 152 640 6 216 -3 315 -48 486 -110 420 -389 792 -789 1053 -197 129 -435 227 -635 263 -174 31 -501 32 -509 2 -47 -176 -139 -385 -236 -535 l-49 -77 208 -7 c416 -13 609 -63 837 -214 355 -236 568 -638 525 -990 -6 -50 -20 -126 -31 -169 -24 -95 -103 -261 -156 -331 -21 -28 -583 -598 -1249 -1266 -1286 -1291 -1261 -1267 -1442 -1353 -89 -43 -193 -78 -298 -101 -118 -26 -350 -24 -473 4 -487 111 -861 497 -959 989 -23 116 -22 339 1 444 36 168 115 350 200 463 24 32 611 626 1303 1320 1149 1151 1265 1270 1325 1361 203 307 291 588 291 930 0 265 -52 480 -173 714 -317 613 -1042 982 -1770 900z"/></g></g>
+      <!-- значки: штрих 1.5 на поле 24×24, ничего залитого -->
+      <g id="i-eye" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></g>
+      <g id="i-card" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6 15h4"/></g>
+      <g id="i-check" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.3l3 3 6-6.3"/></g>
+      <g id="i-tick" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></g>
+      <g id="i-coin" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16M16 7.5c-.6-1.3-2.2-2-4-2-2.3 0-4 1.2-4 3s1.7 2.6 4 3 4 1.2 4 3-1.7 3-4 3c-1.9 0-3.5-.8-4.1-2.2"/></g>
+      <g id="i-edit" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/></g>
+      <g id="i-page" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M12 9v6M9 12h6"/></g>
+      <g id="i-user" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5"/></g>
+      <g id="i-server" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="6.5" rx="2"/><rect x="3.5" y="13.5" width="17" height="6.5" rx="2"/><path d="M7 7.3h.01M7 16.8h.01M11 7.3h6M11 16.8h6"/></g>
+      <g id="i-chart" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><path d="M7.5 15l3.5-4 3 2.5 5-6"/></g>
+      <g id="i-inbox" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 13.5l2.6-8a2 2 0 0 1 1.9-1.5h8a2 2 0 0 1 1.9 1.5l2.6 8V18a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2v-4.5z"/><path d="M3.5 13.5H8l1.5 2.5h5l1.5-2.5h4.5"/></g>
+      <g id="i-send" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 3.5L10.5 13.5M21 3.5l-6.5 17-4-7-7-4 17.5-6z"/></g>
+      <g id="i-table" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M3.5 14.5h17M9.5 9.5v10"/></g>
+      <g id="i-crm" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="7" height="15" rx="1.8"/><rect x="13.5" y="4.5" width="7" height="9" rx="1.8"/></g>
+      <g id="i-arrow" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></g>
+      <g id="i-cursor"><path d="M5 3.2l13.4 8.1-6 1.3-3.1 5.6z" fill="#0e1013" stroke="#ffffff" stroke-width="1.4" stroke-linejoin="round"/></g>
+    </defs>
+  </svg>
+
+  <!-- 1 · ХУК 0–8.6 -->
+  <section id="s1" class="clip" data-start="0" data-duration="8.75">
+    <div id="s1phones">
+      <div class="phone abs" id="p1l" style="left:-70px;top:960px"><div class="scr"><img src="assets/img/sirenita.jpg" alt=""></div><div class="isl"></div></div>
+      <div class="phone abs" id="p1r" style="left:590px;top:960px"><div class="scr"><img src="assets/img/fedoristov.jpg" alt=""></div><div class="isl"></div></div>
+      <div class="phone abs" id="p1" style="left:260px;top:800px">
+        <div class="scr">
+          <img id="p1a" src="assets/img/darya.jpg" alt="">
+          <img id="p1b" src="assets/img/katya.jpg" alt="">
+          <img id="p1c" src="assets/img/sylchuk.jpg" alt="">
+          <img id="p1d" src="assets/img/romantic.jpg" alt="">
+        </div><div class="isl"></div>
+      </div>
+    </div>
+    <div id="s1h" class="abs"><span class="mask"><span class="w">Сайт</span></span> <span class="mask"><span class="w">під</span></span> <span class="mask"><span class="w">ваш</span></span> <span class="mask"><span class="w">продукт</span></span></div>
+    <div id="s1price" class="abs"><div id="s1num">$40</div><div id="s1per">/ міс</div></div>
+    <div class="chip glass" id="c1" style="top:1196px"><svg viewBox="0 0 24 24"><use href="#i-eye"/></svg><span>Спершу дивитесь</span><span class="n">01</span></div>
+    <div class="chip glass" id="c2" style="top:1320px"><svg viewBox="0 0 24 24"><use href="#i-card"/></svg><span>Потім платите</span><span class="n">02</span></div>
+    <div class="chip acc" id="c3" style="top:1444px"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg><span>Підтримка вже в ціні</span><span class="n">03</span></div>
+  </section>
+
+  <!-- 2 · КАК ОБЫЧНО 8.5–18.5 -->
+  <section id="s2" class="clip" data-start="8.45" data-duration="10.05">
+    <div id="s2h" class="abs h2"><span class="mask"><span class="w">А</span></span> <span class="mask"><span class="w">зазвичай</span></span> <span class="mask"><span class="w">як?</span></span></div>
+    <div id="inv" data-layout-allow-overlap data-layout-allow-occlusion data-layout-allow-overflow class="abs card">
+      <div class="row mono" style="top:48px"><span>Рахунок № 0147</span><span>Розробка сайту</span></div>
+      <div id="invAmt" data-layout-allow-overlap data-layout-allow-occlusion data-layout-allow-overflow><div class="al" id="a1"><span>$</span><span class="odo" id="odoInv" data-layout-allow-overlap data-layout-allow-occlusion data-layout-allow-overflow></span><span id="invPlus">+</span></div><div class="al" id="a2">$850</div><div class="al" id="a3">$1 150</div></div>
+      <div id="invLine"><span>Оплата</span></div>
+      <div class="stamp mono" id="stamp1" style="right:48px;top:296px">100% наперед</div>
+    </div>
+    <div id="cal" data-layout-allow-overlap data-layout-allow-occlusion data-layout-allow-overflow class="abs card">
+      <div id="calTxt"><div class="mono">Очікування</div><div id="calNum"><span>+</span><span class="odo" id="odoCal" data-layout-allow-overlap data-layout-allow-occlusion data-layout-allow-overflow></span><small>днів</small></div></div>
+      <div id="calGrid"></div>
+    </div>
+    <div id="tpl" data-layout-allow-overlap data-layout-allow-occlusion data-layout-allow-overflow class="abs card">
+      <div class="bar"><div class="dots"><i></i><i></i><i></i></div><div class="url"></div></div>
+      <div class="blk" style="left:48px;top:112px;width:300px;height:38px"></div>
+      <div class="blk" style="left:600px;top:112px;width:232px;height:38px"></div>
+      <div class="blk" style="left:48px;top:186px;width:784px;height:120px"></div>
+      <div class="blk" style="left:48px;top:336px;width:240px;height:150px"></div>
+      <div class="blk" style="left:320px;top:336px;width:240px;height:150px"></div>
+      <div class="blk" style="left:592px;top:336px;width:240px;height:150px"></div>
+      <div class="stamp mono" id="stamp2" style="left:300px;top:150px;font-size:76px;border-width:7px;padding:12px 40px;background:rgb(249 249 247 / .9)">Не те</div>
+    </div>
+    <div class="notif abs card" id="n1" data-layout-allow-overlap data-layout-allow-occlusion data-layout-allow-overflow style="top:930px"><div class="ic"><svg viewBox="0 0 24 24"><use href="#i-edit"/></svg></div><div><div class="t">Правка банера</div><div class="s mono">Новий рахунок</div></div><div class="v">+ $150</div></div>
+    <div class="notif abs card" id="n2" data-layout-allow-overlap data-layout-allow-occlusion data-layout-allow-overflow style="top:1086px"><div class="ic"><svg viewBox="0 0 24 24"><use href="#i-page"/></svg></div><div><div class="t">Ще одна сторінка</div><div class="s mono">Новий рахунок</div></div><div class="v">+ $300</div></div>
+    <div class="notif abs card" id="n3" data-layout-allow-overlap data-layout-allow-occlusion data-layout-allow-overflow style="top:1242px"><div class="ic"><svg viewBox="0 0 24 24"><use href="#i-user"/></svg></div><div><div class="t">Розробник</div><div class="s mono">Був у мережі 3 тижні тому</div></div></div>
+  </section>
+
+  <!-- 3 · У НАС НАОБОРОТ 18.3–29.2 -->
+  <section id="s3" class="clip" data-start="18.25" data-duration="11.0">
+    <div id="bigLock" class="abs">
+      <div id="disc"></div><div id="ring"></div>
+      <svg id="bigMark" viewBox="216 196 819 791" fill="currentColor"><use href="#mk"/></svg>
+      <div id="bigName">2BRO.LAB</div>
+    </div>
+    <div id="flip" class="abs"><span>навпаки</span></div>
+
+    <div class="phone abs" id="p3" style="left:260px;top:560px"><div class="scr"><img id="p3img" src="assets/img/darya.jpg" alt=""></div><div class="isl"></div></div>
+    <div id="badge" class="abs glass mono"><div class="lab" id="bdg1">Демо</div><div class="lab on" id="bdg2"><svg viewBox="0 0 24 24" style="width:34px;height:34px"><use href="#i-tick"/></svg>Ваш сайт</div></div>
+    <div class="step abs" id="st1" style="top:300px"><div class="node"><i id="st1f"></i><svg viewBox="0 0 24 24"><use href="#i-tick"/></svg></div><span>Спочатку результат</span></div>
+    <div id="stepLine" class="abs"></div>
+    <div class="step abs" id="st2" style="top:462px"><div class="node"><i id="st2f"></i><svg viewBox="0 0 24 24"><use href="#i-coin"/></svg></div><span>Потім гроші</span></div>
+    <div class="choice abs" id="chL"><div class="k mono">Не сподобалось</div><div class="v">$0</div></div>
+    <div class="choice abs" id="chR"><div class="fill" id="chRf"></div><div class="in"><div class="k mono" id="chRk">Сподобалось</div><div class="v">$40<small> / міс</small></div></div></div>
+    <svg class="cursor abs" id="cur3" viewBox="0 0 24 24" style="left:0;top:0"><use href="#i-cursor"/></svg>
+  </section>
+
+  <!-- 4 · ПОДДЕРЖКА 29.1–40.0 -->
+  <section id="s4" class="clip" data-start="29.05" data-duration="11.0">
+    <div id="s4h" data-layout-allow-overlap data-layout-allow-occlusion data-layout-allow-overflow class="abs h2">
+      <div id="s4h1"><span class="mask"><span class="w">Повна</span></span> <span class="mask"><span class="w">технічна</span></span></div>
+      <div id="s4h2"><span class="mask"><span class="w">підтримка</span></span></div>
+    </div>
+    <div id="s4h3" data-layout-allow-overlap data-layout-allow-occlusion data-layout-allow-overflow class="abs h2" style="top:318px">
+      <div><span class="mask"><span class="w">Треба</span></span> <span class="mask"><span class="w">щось</span></span> <span class="mask"><span class="w">змінити?</span></span></div>
+      <div style="color:var(--accent-ink)"><span class="mask"><span class="w">Просто</span></span> <span class="mask"><span class="w">пишете</span></span> <span class="mask"><span class="w">нам</span></span></div>
+    </div>
+    <div id="sup" class="abs">
+      <div class="srow" id="r1" style="top:40px"><div class="ic"><svg viewBox="0 0 24 24"><use href="#i-server"/></svg></div><div class="t">Швидкий хостинг</div><div class="r mono"><b></b>Онлайн</div></div>
+      <div class="srow" id="r2" style="top:236px"><div class="ic"><svg viewBox="0 0 24 24"><use href="#i-chart"/></svg></div><div class="t">Аналітика</div>
+        <div class="r"><svg id="spark" viewBox="0 0 230 90" fill="none"><path id="sparkP" d="M4 78 L40 64 L72 70 L104 46 L136 52 L168 30 L200 34 L226 10" stroke="#14b8a6" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+      <div class="srow" id="r3" style="top:432px;border-bottom:0"><div class="ic"><svg viewBox="0 0 24 24"><use href="#i-inbox"/></svg></div><div class="t">Заявки</div><div class="r mono" id="r3r">Одразу до вас</div></div>
+      <div class="dest" id="d1" style="left:56px;width:250px"><div class="lit"></div><svg viewBox="0 0 24 24"><use href="#i-send"/></svg><span>Telegram</span><div class="plus">+1</div></div>
+      <div class="dest" id="d2" style="left:325px;width:250px"><div class="lit"></div><svg viewBox="0 0 24 24"><use href="#i-table"/></svg><span>Таблиця</span><div class="plus">+1</div></div>
+      <div class="dest" id="d3" style="left:594px;width:250px"><div class="lit"></div><svg viewBox="0 0 24 24"><use href="#i-crm"/></svg><span>CRM</span><div class="plus">+1</div></div>
+    </div>
+    <div id="chat" class="abs card">
+      <div class="hd"><div class="av"><svg viewBox="216 196 819 791" fill="currentColor"><use href="#mk"/></svg></div><div class="nm">2BRO.LAB</div><div class="st mono"><b></b>Онлайн</div></div>
+      <div class="bub" id="bubU">Поміняйте фото на головній</div>
+      <div class="bub" id="bubT"><i></i><i></i><i></i></div>
+      <div class="bub" id="bubA"><svg viewBox="0 0 24 24"><use href="#i-tick"/></svg>Готово</div>
+      <div id="prev" class="abs"><img id="pv1" src="assets/img/katya.jpg" alt="" style="top:-760px"><img id="pv2" src="assets/img/darya.jpg" alt="" style="top:-60px"></div>
+      <div id="prevTag" class="abs mono"><span>Головна</span><span id="prevUpd">Оновлено</span></div>
+    </div>
+  </section>
+
+  <!-- 5 · РАЗОВО 39.9–44.9 -->
+  <section id="s5" class="clip" data-start="39.9" data-duration="5.0">
+    <div id="s5h" class="abs h2">
+      <div><span class="mask"><span class="w">Захочете</span></span> <span class="mask"><span class="w">платити</span></span></div>
+      <div><span class="mask"><span class="w">разово?</span></span></div>
+    </div>
+    <div id="tog" class="abs"><div id="knob"></div><div class="tl" id="tl1">Щомісяця</div><div class="tl" id="tl2">Разово</div></div>
+    <div id="priceK" class="abs mono">Вартість сайту</div>
+    <div id="per2" data-layout-allow-overlap data-layout-allow-occlusion data-layout-allow-overflow class="abs">$40</div>
+    <div id="price2" data-layout-allow-overlap data-layout-allow-occlusion data-layout-allow-overflow class="abs"><span>$</span><span class="odo" id="odo250" data-layout-allow-overlap data-layout-allow-occlusion data-layout-allow-overflow></span></div>
+    <div id="priceS" class="abs"><span class="mono">Одна оплата · сайт ваш</span></div>
+  </section>
+
+  <!-- 6 · ЗАЯВКА + ФИНАЛ 44.75–52 -->
+  <section id="s6" class="clip" data-start="44.75" data-duration="7.25">
+    <div id="mosaic" class="abs" style="left:0;top:0;width:1080px;height:1920px">
+      <div class="mcol" id="mc1" style="left:40px"></div>
+      <div class="mcol" id="mc2" style="left:390px"></div>
+      <div class="mcol" id="mc3" style="left:740px"></div>
+    </div>
+    <div id="cta" class="abs glass">
+      <div id="ctaTxt">
+        <span class="ln"><span class="mask"><span class="w">Залиште</span></span> <span class="mask"><span class="w">заявку —</span></span></span>
+        <span class="ln"><span class="mask"><span class="w">подивіться</span></span> <span class="mask"><span class="w">на</span></span> <span class="mask"><span class="w">свій</span></span> <span class="mask"><span class="w">сайт</span></span></span>
+        <span class="ln"><span id="free"><i></i><span class="mask"><span class="w">безкоштовно</span></span></span></span>
+      </div>
+      <div id="endTxt">
+        <svg viewBox="216 196 819 791" fill="currentColor"><use href="#mk"/></svg>
+        <div id="endName">2BRO.LAB</div>
+        <div id="endUrl" class="mono">2brolab.com</div>
+        <div id="endRecap" class="mono">$40/міс · Демо безкоштовно · Підтримка в ціні</div>
+      </div>
+      <div id="btn">Залишити заявку<svg viewBox="0 0 24 24"><use href="#i-arrow"/></svg></div>
+    </div>
+    <svg class="cursor abs" id="cur6" viewBox="0 0 24 24" style="left:0;top:0"><use href="#i-cursor"/></svg>
+  </section>
+
+</div>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => Array.from(document.querySelectorAll(s));
+  const tl = gsap.timeline({ paused: true });
+  const EO = "expo.out", P3 = "power3.out", PI = "power2.in";
+
+  // Слова появляются из-под маски ровно на слове озвучки.
+  const words = (sel, times, d = 0.55) => $$(sel + " .w").forEach((w, i) =>
+    tl.fromTo(w, { yPercent: 105 }, { yPercent: 0, duration: d, ease: EO }, times[i]));
+  const up = (el, t, y = 70, d = 0.7) => tl.fromTo(el, { y, opacity: 0 }, { y: 0, opacity: 1, duration: d, ease: EO }, t);
+  const pop = (el, t, s = 0.86, d = 0.6) => tl.fromTo(el, { scale: s, opacity: 0 }, { scale: 1, opacity: 1, duration: d, ease: "back.out(1.6)" }, t);
+  const out = (els, t, y = -50, d = 0.32) => tl.to(els, { y: "+=" + y, opacity: 0, duration: d, ease: PI }, t);
+
+  // Одометр: колонка цифр 0–9 дважды, крутится до нужной цифры.
+  const odo = (id, digits) => {
+    const box = document.getElementById(id);
+    return digits.split("").map((d) => {
+      const dg = document.createElement("span"); dg.className = "dg";
+      const col = document.createElement("span"); col.className = "col";
+      for (let k = 0; k < 20; k++) { const s = document.createElement("span"); s.textContent = k % 10; col.appendChild(s); }
+      dg.appendChild(col); box.appendChild(dg);
+      return { col, target: 10 + Number(d) };
+    });
+  };
+  const roll = (cols, t, d = 0.9, stag = 0.08) => cols.forEach((c, i) =>
+    tl.fromTo(c.col, { yPercent: 0 }, { yPercent: -5 * c.target, duration: d + i * stag, ease: "power4.out" }, t));
+
+  // Сцена в верхней метке и общий прогресс
+  const labs = $$("#sceneIdx .lab");
+  gsap.set(labs, { yPercent: 110 }); gsap.set(labs[0], { yPercent: 0 });
+  [8.5, 18.35, 29.1, 39.95, 44.8].forEach((t, i) => {
+    tl.to(labs[i], { yPercent: -110, duration: 0.45, ease: "power3.inOut" }, t);
+    tl.fromTo(labs[i + 1], { yPercent: 110 }, { yPercent: 0, duration: 0.45, ease: "power3.inOut" }, t);
+  });
+  tl.fromTo("#prog", { scaleX: 0 }, { scaleX: 1, duration: 52, ease: "none" }, 0);
+  tl.fromTo("#topbar", { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.6, ease: EO }, 0.05);
+
+  /* ───────── 1 · Хук ───────── */
+  tl.fromTo("#p1", { y: 300, rotation: 4 }, { y: 0, rotation: 0, duration: 0.95, ease: EO }, 0);
+  tl.fromTo("#p1l", { y: 520, x: 120, rotation: -2, scale: 0.84 }, { y: 0, x: 0, rotation: -9, scale: 0.84, duration: 1.2, ease: EO }, 0.06);
+  tl.fromTo("#p1r", { y: 520, x: -120, rotation: 2, scale: 0.84 }, { y: 0, x: 0, rotation: 9, scale: 0.84, duration: 1.2, ease: EO }, 0.06);
+  words("#s1h", [0.08, 0.38, 0.56, 0.8], 0.5);
+  // смена сайтов на экране — «под ваш продукт», любой
+  gsap.set(["#p1b", "#p1c", "#p1d"], { opacity: 0 });
+  [["#p1b", 0.4], ["#p1c", 0.58], ["#p1d", 0.82]].forEach(([s, t]) => tl.set(s, { opacity: 1 }, t));
+  tl.fromTo("#p1d", { y: 0 }, { y: -560, duration: 7.4, ease: "sine.inOut" }, 1.0);
+  tl.fromTo("#p1l img", { y: 0 }, { y: -900, duration: 8, ease: "none" }, 0.2);
+  tl.fromTo("#p1r img", { y: 0 }, { y: -700, duration: 8, ease: "none" }, 0.2);
+  tl.fromTo("#s1num", { scale: 1.55, opacity: 0, filter: "blur(18px)" }, { scale: 1, opacity: 1, filter: "blur(0px)", duration: 0.55, ease: EO }, 1.58);
+  tl.fromTo("#s1h", { y: 0 }, { y: -26, duration: 0.55, ease: EO }, 1.58);
+  tl.fromTo("#s1per", { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.5, ease: EO }, 2.56);
+  tl.fromTo("#s1phones", { scale: 1 }, { scale: 1.04, duration: 6, ease: "sine.inOut", transformOrigin: "50% 40%" }, 2.4);
+  up("#c1", 3.44, 60, 0.6); up("#c2", 4.82, 60, 0.6); up("#c3", 6.32, 60, 0.6);
+  tl.fromTo("#c3", { scale: 0.92 }, { scale: 1, duration: 0.7, ease: "back.out(2)" }, 6.32);
+  out(["#s1h", "#s1price"], 8.42, -60); out(["#c1", "#c2", "#c3"], 8.44, 40);
+  tl.to("#s1phones", { y: 500, opacity: 0, duration: 0.4, ease: PI }, 8.38);
+
+  /* ───────── 2 · Как обычно ───────── */
+  words("#s2h", [8.6, 8.74, 9.84]);
+  const invCols = odo("odoInv", "700");
+  const calCols = odo("odoCal", "30");
+  const grid = $("#calGrid");
+  for (let k = 0; k < 30; k++) { const b = document.createElement("b"); const i = document.createElement("i"); b.appendChild(i); grid.appendChild(b); }
+  up("#inv", 10.32, 90);
+  roll(invCols, 10.45, 1.0);
+  tl.fromTo("#invPlus", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 11.1);
+  tl.fromTo("#invLine", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.5, ease: EO }, 11.6);
+  tl.fromTo("#stamp1", { scale: 1.9, opacity: 0, rotation: -14 }, { scale: 1, opacity: 1, rotation: -7, duration: 0.42, ease: "power4.out" }, 11.74);
+  tl.fromTo("#inv", { x: 0 }, { keyframes: [{ x: -7, duration: 0.05 }, { x: 6, duration: 0.05 }, { x: 0, duration: 0.08 }] }, 11.86);
+  up("#cal", 12.36, 90);
+  roll(calCols, 12.6, 1.3);
+  tl.fromTo("#calGrid i", { scaleX: 0 }, { scaleX: 1, transformOrigin: "0 50%", duration: 0.12, ease: "none", stagger: 0.034 }, 12.6);
+  // «и сайт не тот»: стопка сдвигается, сверху — шаблон
+  tl.to("#inv", { scale: 0.94, opacity: 0.55, duration: 0.5, ease: P3 }, 13.95);
+  tl.to("#cal", { scale: 0.94, opacity: 0.55, y: -40, duration: 0.5, ease: P3 }, 13.95);
+  up("#tpl", 13.98, 120, 0.6);
+  tl.fromTo("#stamp2", { scale: 2.2, opacity: 0, rotation: 16 }, { scale: 1, opacity: 1, rotation: 6, duration: 0.42, ease: "power4.out" }, 14.6);
+  tl.fromTo("#tpl", { x: 0 }, { keyframes: [{ x: -8, duration: 0.05 }, { x: 7, duration: 0.05 }, { x: 0, duration: 0.08 }] }, 14.72);
+  // «каждая правка — новый счёт»: уведомления падают сверху
+  tl.to(["#cal", "#tpl"], { opacity: 0.35, duration: 0.4 }, 15.6);
+  [["#n1", 15.72], ["#n2", 16.62], ["#n3", 17.36]].forEach(([s, t]) =>
+    tl.fromTo(s, { y: -90, opacity: 0, scale: 0.96 }, { y: 0, opacity: 1, scale: 1, duration: 0.55, ease: EO }, t));
+  // счёт растёт с каждой правкой: 700 → 850 → 1150
+  tl.to("#inv", { opacity: 1, scale: 0.97, duration: 0.35 }, 15.7);
+  gsap.set(["#a2", "#a3"], { yPercent: 100 });
+  [["#a1", "#a2", 15.95], ["#a2", "#a3", 16.85]].forEach(([a, b, t]) => {
+    tl.to(a, { yPercent: -100, duration: 0.45, ease: "power3.inOut" }, t);
+    tl.to(b, { yPercent: 0, duration: 0.45, ease: "power3.inOut" }, t);
+  });
+  // крах стопки перед дропом
+  const fall = [["#inv", -9], ["#cal", 7], ["#tpl", -5], ["#n1", 11], ["#n2", -8], ["#n3", 6]];
+  fall.forEach(([s, r], i) => tl.to(s, { y: "+=1400", rotation: r, duration: 0.55, ease: "power3.in" }, 17.95 + i * 0.03));
+  out("#s2h", 17.95, -40, 0.3);
+
+  /* ───────── 3 · У нас — наоборот ───────── */
+  tl.fromTo("#disc", { scale: 0 }, { scale: 1, duration: 0.75, ease: EO }, 18.36);
+  tl.fromTo("#ring", { scale: 0.9, opacity: 1 }, { scale: 1.9, opacity: 0, duration: 1.1, ease: P3 }, 18.4);
+  tl.fromTo("#bigMark", { scale: 0.4, opacity: 0, rotation: -40 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.8, ease: EO }, 18.38);
+  tl.fromTo("#bigName", { opacity: 0, scale: 1.25, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.8, ease: EO }, 18.5);
+  tl.fromTo("#flip span", { rotation: 180, opacity: 0, scale: 0.7 }, { rotation: 0, opacity: 1, scale: 1, duration: 0.8, ease: "back.out(1.4)" }, 19.44);
+  tl.to("#bigLock", { scale: 0.6, y: -260, opacity: 0, duration: 0.5, ease: PI }, 20.2);
+  tl.to("#flip", { y: 300, opacity: 0, duration: 0.42, ease: PI }, 20.2);
+  tl.fromTo("#p3", { y: 1450 }, { y: 0, duration: 0.95, ease: EO }, 20.36);
+  tl.fromTo("#p3img", { y: 0 }, { y: -2600, duration: 8.4, ease: "sine.inOut" }, 20.8);
+  up("#badge", 20.9, 30, 0.5);
+  gsap.set("#bdg2", { yPercent: 100 });
+  tl.fromTo("#st1", { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: EO }, 20.42);
+  tl.fromTo("#st1f", { scale: 0 }, { scale: 1, duration: 0.45, ease: "back.out(2)" }, 20.96);
+  tl.fromTo("#stepLine", { scaleY: 0 }, { scaleY: 1, duration: 0.5, ease: "power2.inOut" }, 21.3);
+  tl.fromTo("#st2", { x: -60, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: EO }, 21.78);
+  // выбор: не понравилось / понравилось
+  up("#chL", 22.86, 60, 0.6);
+  tl.fromTo("#cur3", { x: 700, y: 1800, opacity: 0 }, { x: 330, y: 1400, opacity: 1, duration: 0.7, ease: P3 }, 23.0);
+  tl.to("#chL", { scale: 1.03, duration: 0.3, ease: P3 }, 23.55);
+  tl.fromTo("#chL .v", { scale: 1 }, { keyframes: [{ scale: 1.12, duration: 0.18 }, { scale: 1, duration: 0.3 }] , transformOrigin: "0 50%" }, 24.5);
+  up("#chR", 25.34, 60, 0.6);
+  tl.to("#chL", { scale: 1, duration: 0.3 }, 25.5);
+  tl.to("#cur3", { x: 800, y: 1420, duration: 0.65, ease: "power3.inOut" }, 25.6);
+  tl.to("#cur3", { scale: 0.86, duration: 0.08, transformOrigin: "20% 15%" }, 26.3);
+  tl.to("#cur3", { scale: 1, duration: 0.2 }, 26.4);
+  tl.to("#chR", { scale: 0.97, duration: 0.08 }, 26.3);
+  tl.to("#chR", { scale: 1, duration: 0.35, ease: "back.out(2)" }, 26.38);
+  tl.fromTo("#chRf", { clipPath: "circle(0% at 55% 60%)" }, { clipPath: "circle(150% at 55% 60%)", duration: 0.6, ease: P3 }, 26.32);
+  tl.to("#chRk", { color: "rgb(14 16 19 / 0.7)", duration: 0.2 }, 26.4);
+  tl.to("#bdg1", { yPercent: -100, duration: 0.4, ease: "power3.inOut" }, 28.16);
+  tl.to("#bdg2", { yPercent: 0, duration: 0.4, ease: "power3.inOut" }, 28.16);
+  tl.fromTo("#st2f", { scale: 0 }, { scale: 1, duration: 0.45, ease: "back.out(2)" }, 28.2);
+  tl.fromTo("#p3", { scale: 1 }, { scale: 1.035, duration: 0.8, ease: EO }, 28.3);
+  tl.to("#cur3", { opacity: 0, duration: 0.3 }, 28.4);
+  out(["#st1", "#st2", "#stepLine", "#chL", "#chR"], 29.0, -40, 0.3);
+  tl.to(["#p3", "#badge"], { y: "+=700", opacity: 0, duration: 0.4, ease: PI }, 29.0);
+
+  /* ───────── 4 · Поддержка ───────── */
+  words("#s4h1", [29.22, 29.54]); words("#s4h2", [30.04]);
+  up("#sup", 29.4, 110, 0.75);
+  gsap.set(["#r1 > *", "#r2 > *", "#r3 > *"], { opacity: 0 });
+  [["#r1", 30.8], ["#r2", 32.06], ["#r3", 33.12]].forEach(([s, t]) =>
+    tl.fromTo(s + " > *", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.5, ease: EO, stagger: 0.07 }, t));
+  tl.fromTo("#sparkP", { strokeDasharray: 300, strokeDashoffset: 300 }, { strokeDashoffset: 0, duration: 0.9, ease: "power2.inOut" }, 32.3);
+  gsap.set(".dest .lit, .dest .plus", { opacity: 0 });
+  [["#d1", 34.22], ["#d2", 35.14], ["#d3", 36.3]].forEach(([s, t]) => {
+    up(s, t - 0.5, 30, 0.45);
+    tl.to(s + " .lit", { opacity: 1, duration: 0.25 }, t);
+    tl.to(s, { color: "#14b8a6", duration: 0.25 }, t);
+    tl.fromTo(s + " .plus", { y: 20, opacity: 0 }, { y: -10, opacity: 1, duration: 0.45, ease: EO }, t);
+    tl.to(s + " .plus", { opacity: 0, duration: 0.3 }, t + 0.7);
+  });
+  // «Треба щось змінити?» — переписка
+  out(["#s4h1", "#s4h2"], 36.95, -40, 0.3);
+  tl.to("#sup", { x: -1100, duration: 0.55, ease: "power3.inOut" }, 36.95);
+  tl.fromTo("#chat", { x: 1100 }, { x: 0, duration: 0.55, ease: "power3.inOut" }, 36.95);
+  words("#s4h3 > div:first-child", [37.12, 37.5, 37.74]);
+  words("#s4h3 > div:last-child", [38.5, 38.98, 39.34]);
+  pop("#bubU", 37.4, 0.8, 0.45);
+  gsap.set("#bubU", { transformOrigin: "100% 100%" });
+  pop("#bubT", 37.95, 0.7, 0.35);
+  tl.fromTo("#bubT i", { y: 0 }, { keyframes: [{ y: -10, duration: 0.15 }, { y: 0, duration: 0.15 }], stagger: 0.1, repeat: 1 }, 38.05);
+  tl.to("#bubT", { opacity: 0, duration: 0.15 }, 38.66);
+  tl.set("#bubT", { scale: 0 }, 38.82);
+  pop("#bubA", 38.7, 0.7, 0.5);
+  gsap.set("#bubA", { transformOrigin: "0 100%" });
+  up("#prev", 38.9, 40, 0.5);
+  gsap.set(["#pv2", "#prevTag"], { opacity: 0 });
+  tl.to("#pv2", { opacity: 1, duration: 0.5, ease: "sine.inOut" }, 39.3);
+  up("#prevTag", 39.2, 20, 0.4);
+  out(["#s4h3", "#chat"], 39.85, -50, 0.3);
+
+  /* ───────── 5 · Разово ───────── */
+  words("#s5h > div:first-child", [40.3, 40.78]); words("#s5h > div:last-child", [41.24]);
+  up("#tog", 40.2, 60, 0.6);
+  gsap.set("#tl1", { color: "#f5f7f7" });
+  up("#per2", 40.4, 40, 0.6);
+  tl.to("#knob", { x: 420, duration: 0.5, ease: "power3.inOut" }, 41.24);
+  tl.to("#tl1", { color: "#0e1013", duration: 0.3 }, 41.3);
+  tl.to("#tl2", { color: "#f5f7f7", duration: 0.3 }, 41.3);
+  tl.to("#per2", { y: -60, opacity: 0, duration: 0.35, ease: PI }, 41.6);
+  up("#priceK", 41.92, 20, 0.5);
+  tl.fromTo("#price2", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: EO }, 42.86);
+  roll(odo("odo250", "250"), 42.86, 0.9);
+  tl.fromTo("#priceS span", { scaleX: 0, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.5, ease: EO }, 43.7);
+  out(["#s5h", "#tog", "#priceK", "#price2", "#priceS"], 44.62, -50, 0.3);
+
+  /* ───────── 6 · Заявка и финал ───────── */
+  tl.to(["#topbar", "#progress", ".crop"], { opacity: 0, duration: 0.4, ease: "sine.inOut" }, 44.7);
+  const cases = ["romantic", "darya", "sirenita", "fedoristov", "katya", "confiteria", "sylchuk", "alifannk", "darya"];
+  const offs = [0, 600, 1200, 300, 900, 0, 450, 1500, 700];
+  ["#mc1", "#mc2", "#mc3"].forEach((c, ci) => {
+    const col = $(c);
+    for (let k = 0; k < 4; k++) {
+      const n = cases[(ci * 4 + k) % cases.length];
+      const ph = document.createElement("div"); ph.className = "phone sm";
+      ph.innerHTML = `<div class="scr"><img src="assets/img/${n}.jpg" alt="" style="top:-${offs[(ci * 4 + k) % offs.length]}px"></div><div class="isl"></div>`;
+      col.appendChild(ph);
+    }
+  });
+  tl.fromTo("#mc1", { y: 1500 }, { y: -560, duration: 7.4, ease: "power2.out" }, 44.72);
+  tl.fromTo("#mc2", { y: -1500 }, { y: -260, duration: 7.4, ease: "power2.out" }, 44.72);
+  tl.fromTo("#mc3", { y: 1700 }, { y: -660, duration: 7.4, ease: "power2.out" }, 44.72);
+  tl.fromTo("#cta", { y: 120, opacity: 0, scale: 0.96 }, { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: EO }, 44.82);
+  words("#ctaTxt .ln:nth-child(1)", [44.94, 45.42]);
+  words("#ctaTxt .ln:nth-child(2)", [46.16, 46.96, 47.12, 47.36]);
+  words("#ctaTxt .ln:nth-child(3)", [47.84]);
+  tl.fromTo("#free i", { scaleX: 0 }, { scaleX: 1, duration: 0.55, ease: EO }, 47.9);
+  up("#btn", 45.5, 50, 0.6);
+  tl.fromTo("#cur6", { x: 980, y: 1700, opacity: 0 }, { x: 640, y: 1170, opacity: 1, duration: 0.6, ease: P3 }, 45.6);
+  tl.to("#cur6", { scale: 0.86, duration: 0.08, transformOrigin: "20% 15%" }, 46.0);
+  tl.to("#cur6", { scale: 1, duration: 0.2 }, 46.1);
+  tl.to("#btn", { scale: 0.98, duration: 0.08 }, 46.0);
+  tl.to("#btn", { scale: 1, duration: 0.3, ease: "back.out(2)" }, 46.08);
+  tl.to("#cur6", { x: 1000, y: 1500, opacity: 0, duration: 0.6, ease: PI }, 46.6);
+  // финальная карточка
+  gsap.set("#endTxt > *", { opacity: 0 });
+  tl.to("#ctaTxt", { opacity: 0, y: -30, duration: 0.35, ease: PI }, 48.95);
+  tl.fromTo("#endTxt > *", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, ease: EO, stagger: 0.12 }, 49.15);
+  tl.fromTo("#endTxt svg", { rotation: -30, scale: 0.6 }, { rotation: 0, scale: 1, duration: 0.8, ease: EO }, 49.15);
+  tl.to("#btn", { keyframes: [{ scale: 1.035, duration: 0.35, ease: "sine.inOut" }, { scale: 1, duration: 0.45, ease: "sine.inOut" }] }, 50.6);
+  tl.to("#mosaic", { opacity: 0.55, duration: 1.2, ease: "sine.inOut" }, 49.0);
+
+  window.__timelines["main"] = tl;
+})();
+</script>
+</body>
+</html>

@@ -39,4 +39,4 @@ alifannk, healthy-confiteria, darya-korysheva, fedoristovv, katya.tsibrovska, pr
 1. ElevenLabs: 3 пробных голоса в `voices/` → выбран **№1 Andriy Tkachenko** (`hWHihsTve3RbzG4PHDBQ`), можно заменить позже.
    Озвучка: `python3 tools/voiceover.py vo/v5 1.15` → `vo/v5-all.mp3`.
 2. Озвучка по сценам, длительности сцен = длительности фраз.
-3. Композиция HyperFrames в `hf/`, музыка Mixkit, SFX из media-use, рендер, отправка.
+3. Композиция HyperFrames в `hf/` — собрана (v1, 52 с), см. `README.md`.
