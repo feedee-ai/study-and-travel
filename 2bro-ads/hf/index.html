@@ -166,7 +166,17 @@
   #bubA { left: 44px; top: 320px; background: var(--accent); color: var(--ink); border-bottom-left-radius: 12px; display: flex; align-items: center; gap: 16px; }
   #bubA svg { width: 44px; height: 44px; }
   #prev { left: 44px; top: 474px; width: 560px; height: 380px; border-radius: 28px; overflow: hidden; box-shadow: inset 0 0 0 2px var(--hair), var(--sh-md); }
-  #prev img { position: absolute; left: 0; width: 100%; }
+  #prev { background: var(--surface); }
+  #prev .nav { position: absolute; left: 28px; right: 28px; top: 24px; height: 30px; display: flex; align-items: center; gap: 14px; }
+  #prev .nav svg { width: 30px; height: 30px; }
+  #prev .nav i { height: 8px; border-radius: 4px; background: var(--surface-3); }
+  #prev .ln { position: absolute; left: 28px; border-radius: 8px; background: var(--ink); }
+  #prev .ln.m { background: var(--surface-3); }
+  #prev .bt { position: absolute; left: 28px; top: 290px; width: 150px; height: 48px; border-radius: 24px; background: var(--ink); }
+  .pic { position: absolute; left: 290px; top: 78px; width: 242px; height: 274px; border-radius: 18px; overflow: hidden; }
+  #picA { background: var(--surface-2); }
+  #picB { background: var(--accent-soft); }
+  #picEdge { position: absolute; left: 290px; top: 70px; width: 4px; height: 290px; border-radius: 2px; background: var(--accent); }
   #prevTag { left: 630px; top: 474px; font-size: 22px; color: var(--accent-ink); display: flex; flex-direction: column; gap: 12px; line-height: 1.4; }
 
   /* 5 · Разово */
@@ -189,30 +199,55 @@
   /* 6 · Заявка */
   .mcol { position: absolute; top: 0; width: 300px; }
   .mcol .phone { position: relative; margin-bottom: 34px; }
-  #cta { left: 70px; top: 560px; width: 940px; height: 760px; border-radius: 48px; }
-  #ctaTxt { position: absolute; left: 0; right: 0; top: 74px; text-align: center; font-size: 76px; letter-spacing: -.032em; line-height: 1.12; }
-  #ctaTxt .ln { display: block; white-space: nowrap; }
-  #free { position: relative; display: inline-block; padding: 0 22px; margin-top: 8px; }
-  #free i { position: absolute; left: 0; right: 0; top: 6px; bottom: 0; border-radius: 22px; background: var(--accent); transform-origin: 0 50%; }
+  #veil { position: absolute; inset: 0; background: linear-gradient(180deg, rgb(249 249 247 / 0.35) 0%, rgb(249 249 247 / 0.93) 14%, rgb(249 249 247 / 0.93) 84%, rgb(249 249 247 / 0.4) 100%); }
+  #ctaH { left: 0; right: 0; top: 300px; text-align: center; font-size: 82px; letter-spacing: -.034em; line-height: 1.12; }
+  #ctaH .ln { display: block; white-space: nowrap; }
+  #free { position: relative; display: inline-block; padding: 2px 30px 10px; margin-top: 12px; }
+  #free i { position: absolute; inset: 0; border-radius: 26px; background: var(--accent); transform-origin: 0 50%; }
   #free span { position: relative; }
-  #btn { position: absolute; left: 90px; right: 90px; top: 520px; height: 150px; border-radius: 999px; background: var(--ink); color: var(--void-ink);
-         display: flex; align-items: center; justify-content: center; gap: 26px; font-size: 50px; letter-spacing: -.015em; box-shadow: var(--sh-lg); }
-  #btn svg { width: 52px; height: 52px; }
-  #endTxt { position: absolute; left: 0; right: 0; top: 70px; display: flex; flex-direction: column; align-items: center; }
-  #endTxt svg { width: 120px; height: 120px; }
-  #endName { font-size: 64px; letter-spacing: .16em; padding-left: .16em; margin-top: 20px; }
-  #endUrl { font-size: 40px; margin-top: 22px; color: var(--accent-ink); letter-spacing: .04em; text-transform: none; }
-  #endRecap { font-size: 23px; margin-top: 26px; color: var(--ink-muted); white-space: nowrap; }
+  #form { left: 110px; top: 700px; width: 860px; height: 640px; border-radius: 40px; background: var(--void); color: var(--void-ink); box-shadow: var(--sh-lg); overflow: hidden; }
+  #form .hd { position: absolute; left: 52px; right: 52px; top: 44px; display: flex; justify-content: space-between; font-size: 24px; color: var(--void-muted); }
+  #form .hd b { display: inline-block; width: 14px; height: 14px; border-radius: 7px; background: var(--accent); margin-right: 12px; }
+  .fld { position: absolute; left: 52px; right: 52px; }
+  .fld .lb { font-size: 22px; color: var(--void-muted); margin-bottom: 14px; }
+  .fld .in { height: 104px; border-radius: 24px; background: rgb(245 247 247 / 0.06); box-shadow: inset 0 0 0 2px rgb(245 247 247 / 0.16);
+             display: flex; align-items: center; padding: 0 32px; font-size: 44px; letter-spacing: -.01em; }
+  .fld .in { position: relative; }
+  .fld .ring { position: absolute; inset: 0; border-radius: 24px; box-shadow: inset 0 0 0 3px var(--accent); opacity: 0; }
+  .fld .c { display: none; }
+  .caret { display: inline-block; width: 3px; height: 50px; margin-left: 4px; background: var(--accent); }
+  #send { position: absolute; left: 52px; right: 52px; top: 470px; height: 120px; border-radius: 999px; background: var(--accent); color: var(--ink);
+          display: flex; align-items: center; justify-content: center; gap: 22px; font-size: 46px; letter-spacing: -.015em; }
+  #send svg { width: 48px; height: 48px; }
+  #ok { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  #okDisc { width: 190px; height: 190px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; color: var(--ink); }
+  #okDisc svg { width: 110px; height: 110px; }
+  #okT { font-size: 66px; letter-spacing: -.03em; margin-top: 44px; }
+  #okS { font-size: 26px; color: var(--void-muted); margin-top: 22px; }
+  /* финал: знак в бирюзовом круге, имя, адрес, три обещания, кнопка */
+  #end { left: 0; right: 0; top: 380px; display: flex; flex-direction: column; align-items: center; }
+  #endDisc { width: 360px; height: 360px; border-radius: 50%; background: var(--accent); display: grid; place-items: center; }
+  #endDisc svg { width: 190px; height: 190px; }
+  #endName { font-size: 104px; letter-spacing: .14em; padding-left: .14em; margin-top: 64px; line-height: 1; }
+  #endUrl { margin-top: 40px; height: 84px; padding: 0 40px; border-radius: 999px; box-shadow: inset 0 0 0 3px var(--ink); display: flex; align-items: center;
+            font-size: 40px; letter-spacing: .04em; text-transform: none; }
+  #endChips { margin-top: 56px; display: flex; gap: 16px; }
+  #endChips span { height: 72px; padding: 0 28px; border-radius: 999px; background: var(--surface); box-shadow: inset 0 0 0 2px var(--hair), var(--sh-md);
+                   display: flex; align-items: center; font-size: 23px; white-space: nowrap; }
+  #endChips span.acc { background: var(--accent); box-shadow: var(--sh-md); }
+  #endBtn { margin-top: 56px; width: 760px; height: 150px; border-radius: 999px; background: var(--ink); color: var(--void-ink);
+            display: flex; align-items: center; justify-content: center; gap: 26px; font-size: 50px; letter-spacing: -.015em; box-shadow: var(--sh-lg); }
+  #endBtn svg { width: 52px; height: 52px; }
 </style>
 </head>
 <body>
-<div id="root" data-composition-id="main" data-start="0" data-width="1080" data-height="1920" data-duration="52" data-fps="30">
+<div id="root" data-composition-id="main" data-start="0" data-width="1080" data-height="1920" data-duration="51.3" data-fps="30">
 
-  <audio id="mix" data-start="0" data-duration="52" src="assets/audio/mix.mp3"></audio>
+  <audio id="mix" data-start="0" data-duration="51.3" src="assets/audio/mix.mp3"></audio>
 
   <!-- Постоянный лабораторный слой -->
-  <div id="grid" class="clip" data-start="0" data-duration="52"></div>
-  <div id="frame" class="clip" data-start="0" data-duration="52">
+  <div id="grid" class="clip" data-start="0" data-duration="51.3"></div>
+  <div id="frame" class="clip" data-start="0" data-duration="51.3">
     <i class="crop" style="left:40px;top:160px;border-left-width:3px;border-top-width:3px"></i>
     <i class="crop" style="right:40px;top:160px;border-right-width:3px;border-top-width:3px"></i>
     <i class="crop" style="left:40px;bottom:300px;border-left-width:3px;border-bottom-width:3px"></i>
@@ -276,7 +311,7 @@
   </section>
 
   <!-- 2 · КАК ОБЫЧНО 8.5–18.5 -->
-  <section id="s2" class="clip" data-start="8.45" data-duration="10.05">
+  <section id="s2" class="clip" data-start="8.45" data-duration="9.67">
     <div id="s2h" class="abs h2"><span class="mask"><span class="w">А</span></span> <span class="mask"><span class="w">зазвичай</span></span> <span class="mask"><span class="w">як?</span></span></div>
     <div id="inv" data-layout-allow-overlap data-layout-allow-occlusion data-layout-allow-overflow class="abs card">
       <div class="row mono" style="top:48px"><span>Рахунок № 0147</span><span>Розробка сайту</span></div>
@@ -304,7 +339,7 @@
   </section>
 
   <!-- 3 · У НАС НАОБОРОТ 18.3–29.2 -->
-  <section id="s3" class="clip" data-start="18.25" data-duration="11.0">
+  <section id="s3" class="clip" data-start="17.87" data-duration="11.0">
     <div id="bigLock" class="abs">
       <div id="disc"></div><div id="ring"></div>
       <svg id="bigMark" viewBox="216 196 819 791" fill="currentColor"><use href="#mk"/></svg>
@@ -323,7 +358,7 @@
   </section>
 
   <!-- 4 · ПОДДЕРЖКА 29.1–40.0 -->
-  <section id="s4" class="clip" data-start="29.05" data-duration="11.0">
+  <section id="s4" class="clip" data-start="28.67" data-duration="10.68">
     <div id="s4h" data-layout-allow-overlap data-layout-allow-occlusion data-layout-allow-overflow class="abs h2">
       <div id="s4h1"><span class="mask"><span class="w">Повна</span></span> <span class="mask"><span class="w">технічна</span></span></div>
       <div id="s4h2"><span class="mask"><span class="w">підтримка</span></span></div>
@@ -346,13 +381,24 @@
       <div class="bub" id="bubU">Поміняйте фото на головній</div>
       <div class="bub" id="bubT"><i></i><i></i><i></i></div>
       <div class="bub" id="bubA"><svg viewBox="0 0 24 24"><use href="#i-tick"/></svg>Готово</div>
-      <div id="prev" class="abs"><img id="pv1" src="assets/img/katya.jpg" alt="" style="top:-760px"><img id="pv2" src="assets/img/darya.jpg" alt="" style="top:-60px"></div>
+      <div id="prev" class="abs">
+        <div class="nav"><svg viewBox="216 196 819 791" fill="currentColor"><use href="#mk"/></svg><i style="width:60px"></i><i style="width:60px"></i><i style="width:60px"></i></div>
+        <div class="ln" style="top:96px;width:226px;height:30px"></div>
+        <div class="ln" style="top:138px;width:180px;height:30px"></div>
+        <div class="ln m" style="top:196px;width:226px;height:12px"></div>
+        <div class="ln m" style="top:218px;width:196px;height:12px"></div>
+        <div class="ln m" style="top:240px;width:150px;height:12px"></div>
+        <div class="bt"></div>
+        <svg class="pic" id="picA" viewBox="0 0 242 274"><circle cx="172" cy="78" r="30" fill="#9aa1a3"/><path d="M0 274 L0 210 L70 128 L128 196 L168 156 L242 230 L242 274 Z" fill="#61676e"/><path d="M0 274 L0 238 L96 182 L170 236 L242 214 L242 274 Z" fill="#0e1013"/></svg>
+        <svg class="pic" id="picB" viewBox="0 0 242 274"><circle cx="121" cy="120" r="74" fill="#14b8a6"/><rect x="40" y="206" width="162" height="22" rx="11" fill="#0e1013"/><rect x="72" y="238" width="98" height="14" rx="7" fill="#0b7a6f"/><circle cx="121" cy="120" r="30" fill="#e6f7f4"/></svg>
+        <div id="picEdge"></div>
+      </div>
       <div id="prevTag" class="abs mono"><span>Головна</span><span id="prevUpd">Оновлено</span></div>
     </div>
   </section>
 
   <!-- 5 · РАЗОВО 39.9–44.9 -->
-  <section id="s5" class="clip" data-start="39.9" data-duration="5.0">
+  <section id="s5" class="clip" data-start="39.2" data-duration="5.0">
     <div id="s5h" class="abs h2">
       <div><span class="mask"><span class="w">Захочете</span></span> <span class="mask"><span class="w">платити</span></span></div>
       <div><span class="mask"><span class="w">разово?</span></span></div>
@@ -364,26 +410,34 @@
     <div id="priceS" class="abs"><span class="mono">Одна оплата · сайт ваш</span></div>
   </section>
 
-  <!-- 6 · ЗАЯВКА + ФИНАЛ 44.75–52 -->
-  <section id="s6" class="clip" data-start="44.75" data-duration="7.25">
+  <!-- 6 · ЗАЯВКА + ФИНАЛ -->
+  <section id="s6" class="clip" data-start="44.05" data-duration="7.25">
     <div id="mosaic" class="abs" style="left:0;top:0;width:1080px;height:1920px">
       <div class="mcol" id="mc1" style="left:40px"></div>
       <div class="mcol" id="mc2" style="left:390px"></div>
       <div class="mcol" id="mc3" style="left:740px"></div>
     </div>
-    <div id="cta" class="abs glass">
-      <div id="ctaTxt">
-        <span class="ln"><span class="mask"><span class="w">Залиште</span></span> <span class="mask"><span class="w">заявку —</span></span></span>
-        <span class="ln"><span class="mask"><span class="w">подивіться</span></span> <span class="mask"><span class="w">на</span></span> <span class="mask"><span class="w">свій</span></span> <span class="mask"><span class="w">сайт</span></span></span>
-        <span class="ln"><span id="free"><i></i><span class="mask"><span class="w">безкоштовно</span></span></span></span>
+    <div id="veil"></div>
+    <div id="ctaH" class="abs">
+      <span class="ln" id="cl1">Залиште заявку —</span>
+      <span class="ln" id="cl2">подивіться на свій сайт</span>
+      <span class="ln" id="cl3"><span id="free"><i></i><span>безкоштовно</span></span></span>
+    </div>
+    <div id="form" class="abs">
+      <div id="formIn">
+        <div class="hd mono"><span><b></b>Заявка</span><span>Демо безкоштовно</span></div>
+        <div class="fld" style="top:120px"><div class="lb mono">Ім’я</div><div class="in" id="in1"><i class="ring"></i><span id="t1"></span><i class="caret" id="k1"></i></div></div>
+        <div class="fld" style="top:290px"><div class="lb mono">Телефон або username</div><div class="in" id="in2"><i class="ring"></i><span id="t2"></span><i class="caret" id="k2"></i></div></div>
+        <div id="send">Залишити заявку<svg viewBox="0 0 24 24"><use href="#i-arrow"/></svg></div>
       </div>
-      <div id="endTxt">
-        <svg viewBox="216 196 819 791" fill="currentColor"><use href="#mk"/></svg>
-        <div id="endName">2BRO.LAB</div>
-        <div id="endUrl" class="mono">2brolab.com</div>
-        <div id="endRecap" class="mono">$40/міс · Демо безкоштовно · Підтримка в ціні</div>
-      </div>
-      <div id="btn">Залишити заявку<svg viewBox="0 0 24 24"><use href="#i-arrow"/></svg></div>
+      <div id="ok"><div id="okDisc"><svg viewBox="0 0 24 24"><use href="#i-tick"/></svg></div><div id="okT">Заявку прийнято</div><div id="okS" class="mono">Покажемо ваш сайт до оплати</div></div>
+    </div>
+    <div id="end" class="abs">
+      <div id="endDisc"><svg viewBox="216 196 819 791" fill="#0e1013"><use href="#mk"/></svg></div>
+      <div id="endName">2BRO.LAB</div>
+      <div id="endUrl" class="mono">2brolab.com</div>
+      <div id="endChips" class="mono"><span class="acc">$40 / міс</span><span>Демо безкоштовно</span><span>Підтримка в ціні</span></div>
+      <div id="endBtn">Залишити заявку<svg viewBox="0 0 24 24"><use href="#i-arrow"/></svg></div>
     </div>
     <svg class="cursor abs" id="cur6" viewBox="0 0 24 24" style="left:0;top:0"><use href="#i-cursor"/></svg>
   </section>
@@ -394,7 +448,17 @@
 (() => {
   const $ = (s) => document.querySelector(s);
   const $$ = (s) => Array.from(document.querySelectorAll(s));
-  const tl = gsap.timeline({ paused: true });
+  // Из озвучки вырезаны две паузы (перед «як» и перед «у Telegram») — те же CUTS стоят в tools/mix.py.
+  // Отметки ниже записаны по исходной дорожке; R() переводит их в смонтированное время.
+  const CUTS = [[9.44, 0.38], [33.78, 0.32]];
+  const R = (t) => { let d = 0; for (const [a, l] of CUTS) { if (t >= a + l) d += l; else if (t > a) d += t - a; } return t - d; };
+  const T = gsap.timeline({ paused: true });
+  const at = (p) => (typeof p === "number" ? R(p) : p);
+  const tl = {
+    to: (t, v, p) => T.to(t, v, at(p)),
+    fromTo: (t, a, b, p) => T.fromTo(t, a, b, at(p)),
+    set: (t, v, p) => T.set(t, v, at(p)),
+  };
   const EO = "expo.out", P3 = "power3.out", PI = "power2.in";
 
   // Слова появляются из-под маски ровно на слове озвучки.
@@ -425,7 +489,7 @@
     tl.to(labs[i], { yPercent: -110, duration: 0.45, ease: "power3.inOut" }, t);
     tl.fromTo(labs[i + 1], { yPercent: 110 }, { yPercent: 0, duration: 0.45, ease: "power3.inOut" }, t);
   });
-  tl.fromTo("#prog", { scaleX: 0 }, { scaleX: 1, duration: 52, ease: "none" }, 0);
+  tl.fromTo("#prog", { scaleX: 0 }, { scaleX: 1, duration: 51.3, ease: "none" }, 0);
   tl.fromTo("#topbar", { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.6, ease: EO }, 0.05);
 
   /* ───────── 1 · Хук ───────── */
@@ -553,9 +617,12 @@
   pop("#bubA", 38.7, 0.7, 0.5);
   gsap.set("#bubA", { transformOrigin: "0 100%" });
   up("#prev", 38.9, 40, 0.5);
-  gsap.set(["#pv2", "#prevTag"], { opacity: 0 });
-  tl.to("#pv2", { opacity: 1, duration: 0.5, ease: "sine.inOut" }, 39.3);
-  up("#prevTag", 39.2, 20, 0.4);
+  gsap.set("#prevTag", { opacity: 0 });
+  // фото на главной меняется шторкой: новая картинка открывается слева направо, за ней идёт бирюзовая кромка
+  tl.fromTo("#picB", { clipPath: "inset(0 100% 0 0)" }, { clipPath: "inset(0 0% 0 0)", duration: 0.6, ease: "power3.inOut" }, 39.15);
+  tl.fromTo("#picEdge", { x: 0, opacity: 0 }, { x: 238, opacity: 1, duration: 0.6, ease: "power3.inOut" }, 39.15);
+  tl.to("#picEdge", { opacity: 0, duration: 0.2 }, 39.75);
+  up("#prevTag", 39.4, 20, 0.4);
   out(["#s4h3", "#chat"], 39.85, -50, 0.3);
 
   /* ───────── 5 · Разово ───────── */
@@ -589,27 +656,46 @@
   tl.fromTo("#mc1", { y: 1500 }, { y: -560, duration: 7.4, ease: "power2.out" }, 44.72);
   tl.fromTo("#mc2", { y: -1500 }, { y: -260, duration: 7.4, ease: "power2.out" }, 44.72);
   tl.fromTo("#mc3", { y: 1700 }, { y: -660, duration: 7.4, ease: "power2.out" }, 44.72);
-  tl.fromTo("#cta", { y: 120, opacity: 0, scale: 0.96 }, { y: 0, opacity: 1, scale: 1, duration: 0.7, ease: EO }, 44.82);
-  words("#ctaTxt .ln:nth-child(1)", [44.94, 45.42]);
-  words("#ctaTxt .ln:nth-child(2)", [46.16, 46.96, 47.12, 47.36]);
-  words("#ctaTxt .ln:nth-child(3)", [47.84]);
-  tl.fromTo("#free i", { scaleX: 0 }, { scaleX: 1, duration: 0.55, ease: EO }, 47.9);
-  up("#btn", 45.5, 50, 0.6);
-  tl.fromTo("#cur6", { x: 980, y: 1700, opacity: 0 }, { x: 640, y: 1170, opacity: 1, duration: 0.6, ease: P3 }, 45.6);
-  tl.to("#cur6", { scale: 0.86, duration: 0.08, transformOrigin: "20% 15%" }, 46.0);
-  tl.to("#cur6", { scale: 1, duration: 0.2 }, 46.1);
-  tl.to("#btn", { scale: 0.98, duration: 0.08 }, 46.0);
-  tl.to("#btn", { scale: 1, duration: 0.3, ease: "back.out(2)" }, 46.08);
-  tl.to("#cur6", { x: 1000, y: 1500, opacity: 0, duration: 0.6, ease: PI }, 46.6);
-  // финальная карточка
-  gsap.set("#endTxt > *", { opacity: 0 });
-  tl.to("#ctaTxt", { opacity: 0, y: -30, duration: 0.35, ease: PI }, 48.95);
-  tl.fromTo("#endTxt > *", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, ease: EO, stagger: 0.12 }, 49.15);
-  tl.fromTo("#endTxt svg", { rotation: -30, scale: 0.6 }, { rotation: 0, scale: 1, duration: 0.8, ease: EO }, 49.15);
-  tl.to("#btn", { keyframes: [{ scale: 1.035, duration: 0.35, ease: "sine.inOut" }, { scale: 1, duration: 0.45, ease: "sine.inOut" }] }, 50.6);
-  tl.to("#mosaic", { opacity: 0.55, duration: 1.2, ease: "sine.inOut" }, 49.0);
+  tl.fromTo("#veil", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "sine.inOut" }, 44.85);
+  // заголовок строками целиком: подъём из лёгкого размытия
+  const line = (el, t) => tl.fromTo(el, { opacity: 0, y: 46, filter: "blur(10px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.7, ease: EO }, t);
+  line("#cl1", 44.92); line("#cl2", 46.14); line("#cl3", 47.8);
+  tl.fromTo("#free i", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: EO }, 47.86);
+  // форма бренда: два поля печатаются, курсор жмёт кнопку
+  tl.fromTo("#form", { y: 160, opacity: 0, scale: 0.96 }, { y: 0, opacity: 1, scale: 1, duration: 0.75, ease: EO }, 44.9);
+  const type = (box, text, t0, step) => {
+    const b = $(box);
+    text.split("").forEach((ch, i) => {
+      const c = document.createElement("span"); c.className = "c"; c.textContent = ch; b.appendChild(c);
+      tl.set(c, { display: "inline" }, t0 + i * step);
+    });
+  };
+  gsap.set(["#k1", "#k2"], { opacity: 0 });
+  tl.set("#in1 .ring", { opacity: 1 }, 45.12); tl.set("#k1", { opacity: 1 }, 45.12);
+  type("#t1", "Олена", 45.2, 0.07);
+  tl.set("#in1 .ring", { opacity: 0 }, 45.62); tl.set("#k1", { opacity: 0 }, 45.62);
+  tl.set("#in2 .ring", { opacity: 1 }, 45.62); tl.set("#k2", { opacity: 1 }, 45.62);
+  type("#t2", "@olena.studio", 45.66, 0.035);
+  tl.fromTo("#cur6", { x: 1000, y: 1800, opacity: 0 }, { x: 600, y: 1260, opacity: 1, duration: 0.55, ease: P3 }, 45.75);
+  tl.set("#k2", { opacity: 0 }, 46.2); tl.set("#in2 .ring", { opacity: 0 }, 46.2);
+  tl.to("#cur6", { scale: 0.86, duration: 0.08, transformOrigin: "20% 15%" }, 46.3);
+  tl.to("#cur6", { scale: 1, duration: 0.2 }, 46.4);
+  tl.to("#send", { scale: 0.97, duration: 0.08 }, 46.3);
+  tl.to("#send", { scale: 1, duration: 0.3, ease: "back.out(2)" }, 46.38);
+  tl.to("#cur6", { x: 1000, y: 1600, opacity: 0, duration: 0.5, ease: PI }, 46.7);
+  gsap.set("#ok > *", { opacity: 0 });
+  tl.to("#formIn", { opacity: 0, y: -30, duration: 0.3, ease: PI }, 46.55);
+  tl.fromTo("#okDisc", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)" }, 46.75);
+  tl.fromTo(["#okT", "#okS"], { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: EO, stagger: 0.12 }, 46.9);
+  // финал: знак в бирюзовом круге и всё предложение одним столбцом
+  tl.to(["#ctaH", "#form"], { y: -60, opacity: 0, duration: 0.35, ease: PI }, 48.9);
+  gsap.set("#end > *", { opacity: 0 });
+  tl.fromTo("#endDisc", { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: EO }, 49.05);
+  tl.fromTo("#endDisc svg", { rotation: -40, scale: 0.5 }, { rotation: 0, scale: 1, duration: 0.9, ease: EO }, 49.05);
+  tl.fromTo(["#endName", "#endUrl", "#endChips", "#endBtn"], { opacity: 0, y: 46 }, { opacity: 1, y: 0, duration: 0.7, ease: EO, stagger: 0.1 }, 49.25);
+  tl.to("#endBtn", { keyframes: [{ scale: 1.035, duration: 0.35, ease: "sine.inOut" }, { scale: 1, duration: 0.45, ease: "sine.inOut" }] }, 50.7);
 
-  window.__timelines["main"] = tl;
+  window.__timelines["main"] = T;
 })();
 </script>
 </body>
