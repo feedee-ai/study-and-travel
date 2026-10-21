@@ -24,3 +24,9 @@ hair-ads/work/*.png
 hair-ads/work/fine/
 hair-ads/work/grade/
 hair-ads/work/*/hf/assets/vendor/
+# 2bro-ads: скриншоты клиентских сайтов и тяжёлые ассеты — не в публичный репо
+2bro-ads/work/
+2bro-ads/hf/assets/img/
+2bro-ads/hf/assets/vendor/
+2bro-ads/hf/assets/sfx/
+2bro-ads/out/
