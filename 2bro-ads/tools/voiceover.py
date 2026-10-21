@@ -6,7 +6,7 @@ import json, os, subprocess, sys, urllib.request
 VOICE = 'hWHihsTve3RbzG4PHDBQ'  # Andriy Tkachenko — Advertising Narrator (выбор заказчика 21.10)
 MODEL = 'eleven_multilingual_v2'
 # Латиницу модель читает по-английски или по буквам непредсказуемо — даём произношение явно.
-SAY = {'Telegram': 'Телеграм', 'CRM': 'сі-ар-ем'}
+SAY = {'Telegram': 'Телеграм', 'CRM': 'сі-ар-ем', '$250': 'двісті п’ятдесят доларів'}
 
 out = sys.argv[1]
 speed = float(sys.argv[2]) if len(sys.argv) > 2 else 1.0
