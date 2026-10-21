@@ -2,8 +2,8 @@
 # Музыка: Mixkit «Lo-Fi 02» (764) — спокойная, без дропов; вступление баса (23.4 с трека) встаёт на «ДваБро».
 # Голос: из vo/v5-all.mp3 вырезаны две паузы (перед «як» и перед «у Telegram»), заглушён щелчок перед «Залиште».
 # Все таймкоды ниже — по исходной дорожке; R() переводит их в смонтированное время (те же CUTS в hf/index.html).
-# Использование: python3 tools/mix.py
-import os, subprocess
+# Использование: python3 tools/mix.py [--no-music]  (без музыки → mix-nomusic.wav/.mp3)
+import os, subprocess, sys
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..')
 HF = os.path.join(ROOT, 'hf', 'assets')
@@ -20,6 +20,7 @@ def R(t):
     return t - d
 
 
+NO_MUSIC = '--no-music' in sys.argv
 MUSIC = os.path.join(ROOT, 'work', 'music', '764.mp3')
 MUSIC_OFF = 23.4 - R(18.40)
 VO_END = R(48.9)
@@ -65,7 +66,7 @@ fil.append(''.join(f'[v{i}]' for i in range(len(keep))) + f"concat=n={len(keep)}
 mvol = f"if(lt(t,{VO_END}),0.30,0.30+min(1,(t-{VO_END})/0.8)*0.30)"
 fil.append(f"[1:a]atrim=start={MUSIC_OFF}:duration={DUR},asetpts=PTS-STARTPTS,volume='{mvol}':eval=frame,"
            f"afade=t=in:d=0.4,afade=t=out:st={DUR-2.2}:d=2.2[mus]")
-fil.append("[mus][vsc]sidechaincompress=threshold=0.05:ratio=4:attack=20:release=400[mduck]")
+fil.append("[mus][vsc]sidechaincompress=threshold=0.05:ratio=4:attack=20:release=400" + (",volume=0" if NO_MUSIC else "") + "[mduck]")
 labels = ['[vo]', '[mduck]']
 for k, (t, f, g) in enumerate(SFX):
     inputs += ['-i', os.path.join(HF, 'sfx', f + '.mp3')]
@@ -76,7 +77,8 @@ for k, (t, f, g) in enumerate(SFX):
 fil.append(f"{''.join(labels)}amix=inputs={len(labels)}:normalize=0:duration=longest,atrim=duration={DUR},"
            "loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000[out]")
 
-wav = os.path.join(HF, 'audio', 'mix.wav')
+name = 'mix-nomusic' if NO_MUSIC else 'mix'
+wav = os.path.join(HF, 'audio', name + '.wav')
 subprocess.run(['ffmpeg', '-v', 'error', '-y', *inputs, '-filter_complex', ';'.join(fil), '-map', '[out]', '-ac', '2', wav], check=True)
-subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', wav, '-b:a', '192k', os.path.join(HF, 'audio', 'mix.mp3')], check=True)
+subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', wav, '-b:a', '192k', os.path.join(HF, 'audio', name + '.mp3')], check=True)
 print('ok', wav)
