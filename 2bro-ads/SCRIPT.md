@@ -36,6 +36,6 @@
 alifannk, healthy-confiteria, darya-korysheva, fedoristovv, katya.tsibrovska, proposal.romantic.ua-, sirenita_infantil, romasylchuk. Снимаются локально: `node tools/capture.mjs work/captures` (нужны клоны в /home/user и playwright).
 
 ## Дальше
-1. ElevenLabs: 3 пробных голоса на фразе сцены 1 → выбор заказчика.
+1. ElevenLabs: 3 пробных голоса на фразе сцены 1 — готовы в `voices/` (см. `voices/README.md`) → ждём выбор заказчика.
 2. Озвучка по сценам, длительности сцен = длительности фраз.
 3. Композиция HyperFrames в `hf/`, музыка Mixkit, SFX из media-use, рендер, отправка.
