@@ -1,0 +1,133 @@
+<template>
+  <style>
+
+@font-face{font-family:'MontUA';src:url('assets/fonts/Montserrat-cyrillic.woff2') format('woff2');font-weight:100 900;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:'MontUA';src:url('assets/fonts/Montserrat-cyrillic-ext.woff2') format('woff2');font-weight:100 900;unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}
+@font-face{font-family:'MontUA';src:url('assets/fonts/Montserrat-latin.woff2') format('woff2');font-weight:100 900;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'MontUA';src:url('assets/fonts/Montserrat-latin-ext.woff2') format('woff2');font-weight:100 900;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'HandUA';src:url('assets/fonts/Caveat-cyrillic.woff2') format('woff2');font-weight:700;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:'HandUA';src:url('assets/fonts/Caveat-latin.woff2') format('woff2');font-weight:700;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212;}
+
+
+:root{--y:#FDDC27;--y2:#F2B705;--k:#111111;--w:#FFFFFF;--r:#E5302B;--g:#1B1A18;}
+.f{font-family:'MontUA',Montserrat,sans-serif;}
+.hand{font-family:'HandUA',cursive;font-weight:700;}
+.abs{position:absolute;}
+.row{position:absolute;left:0;width:1080px;display:flex;justify-content:center;}
+.tape{display:inline-block;font-family:'MontUA',sans-serif;font-weight:900;line-height:1.02;padding:14px 26px 18px;border-radius:14px;white-space:nowrap;}
+.tk{background:var(--k);color:var(--w);}
+.ty{background:var(--y);color:var(--k);}
+.tw{background:var(--w);color:var(--k);}
+.sh{box-shadow:0 14px 34px rgba(0,0,0,.28);}
+
+    #root{position:absolute;inset:0;overflow:visible;}
+
+    .cgrp{position:absolute;left:0;width:1080px;height:180px;display:flex;align-items:center;justify-content:center;opacity:0;}
+    .cin{max-width:900px;text-align:center;line-height:1.28;}
+    .cw{display:inline-block;font-weight:800;font-size:62px;color:#fff;padding:2px 12px 6px;border-radius:12px;margin:0 -4px;
+        --sc:rgba(17,17,17,1);-webkit-text-stroke:10px var(--sc);paint-order:stroke fill;background-color:rgba(253,220,39,0);}
+
+  </style>
+  <div id="root" data-composition-id="a-captions" data-width="1080" data-height="1920">
+    <div id='cg0' class='cgrp f' style='top:1110px'><div class='cin'><span id='cg0w0' class='cw'>де</span> <span id='cg0w1' class='cw'>ви</span> <span id='cg0w2' class='cw'>отримаєте</span></div></div>
+    <div id='cg1' class='cgrp f' style='top:1110px'><div class='cin'><span id='cg1w0' class='cw'>відповіді</span> <span id='cg1w1' class='cw'>на</span> <span id='cg1w2' class='cw'>всі</span></div></div>
+    <div id='cg2' class='cgrp f' style='top:1110px'><div class='cin'><span id='cg2w0' class='cw'>свої</span> <span id='cg2w1' class='cw'>запитання.</span></div></div>
+    <div id='cg3' class='cgrp f' style='top:1110px'><div class='cin'><span id='cg3w0' class='cw'>Ви</span> <span id='cg3w1' class='cw'>також</span> <span id='cg3w2' class='cw'>зможете</span></div></div>
+    <div id='cg4' class='cgrp f' style='top:1110px'><div class='cin'><span id='cg4w0' class='cw'>поставити</span> <span id='cg4w1' class='cw'>запитання</span> <span id='cg4w2' class='cw'>та</span></div></div>
+    <div id='cg5' class='cgrp f' style='top:1110px'><div class='cin'><span id='cg5w0' class='cw'>отримати</span> <span id='cg5w1' class='cw'>відповіді.</span></div></div>
+    <div id='cg6' class='cgrp f' style='top:1110px'><div class='cin'><span id='cg6w0' class='cw'>Приходьте</span> <span id='cg6w1' class='cw'>на</span></div></div>
+    <div id='cg7' class='cgrp f' style='top:1110px'><div class='cin'><span id='cg7w0' class='cw'>безкоштовні</span> <span id='cg7w1' class='cw'>вебінари,</span></div></div>
+    <div id='cg8' class='cgrp f' style='top:1110px'><div class='cin'><span id='cg8w0' class='cw'>розберіться</span> <span id='cg8w1' class='cw'>з</span> <span id='cg8w2' class='cw'>процесом</span></div></div>
+    <div id='cg9' class='cgrp f' style='top:1110px'><div class='cin'><span id='cg9w0' class='cw'>вступу</span> <span id='cg9w1' class='cw'>ще</span> <span id='cg9w2' class='cw'>до</span></div></div>
+    <div id='cg10' class='cgrp f' style='top:1110px'><div class='cin'><span id='cg10w0' class='cw'>того,</span></div></div>
+    <div id='cg11' class='cgrp f' style='top:1110px'><div class='cin'><span id='cg11w0' class='cw'>як</span> <span id='cg11w1' class='cw'>почнете</span> <span id='cg11w2' class='cw'>діяти.</span></div></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+tl.fromTo('#cg0',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},5.300);
+    tl.set('#cg0w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},5.340);
+    tl.set('#cg0w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},5.500);
+    tl.set('#cg0w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},5.500);
+    tl.set('#cg0w1',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},5.660);
+    tl.set('#cg0w2',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},5.660);
+    tl.to('#cg0',{opacity:0,duration:0.1,ease:'power2.in'},5.980);
+    tl.set('#cg0',{opacity:0,visibility:'hidden'},6.080);
+    tl.fromTo('#cg1',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},6.100);
+    tl.set('#cg1w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},6.140);
+    tl.set('#cg1w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},6.540);
+    tl.set('#cg1w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},6.540);
+    tl.set('#cg1w1',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},6.620);
+    tl.set('#cg1w2',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},6.620);
+    tl.to('#cg1',{opacity:0,duration:0.1,ease:'power2.in'},6.700);
+    tl.set('#cg1',{opacity:0,visibility:'hidden'},6.800);
+    tl.fromTo('#cg2',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},6.820);
+    tl.set('#cg2w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},6.860);
+    tl.set('#cg2w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},7.020);
+    tl.set('#cg2w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},7.020);
+    tl.to('#cg2',{opacity:0,duration:0.1,ease:'power2.in'},7.733);
+    tl.set('#cg2',{opacity:0,visibility:'hidden'},7.833);
+    tl.fromTo('#cg3',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},26.007);
+    tl.set('#cg3w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},26.047);
+    tl.set('#cg3w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},26.447);
+    tl.set('#cg3w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},26.447);
+    tl.set('#cg3w1',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},26.767);
+    tl.set('#cg3w2',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},26.767);
+    tl.to('#cg3',{opacity:0,duration:0.1,ease:'power2.in'},27.007);
+    tl.set('#cg3',{opacity:0,visibility:'hidden'},27.107);
+    tl.fromTo('#cg4',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},27.127);
+    tl.set('#cg4w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},27.167);
+    tl.set('#cg4w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},27.647);
+    tl.set('#cg4w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},27.647);
+    tl.set('#cg4w1',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},28.207);
+    tl.set('#cg4w2',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},28.207);
+    tl.to('#cg4',{opacity:0,duration:0.1,ease:'power2.in'},28.207);
+    tl.set('#cg4',{opacity:0,visibility:'hidden'},28.307);
+    tl.fromTo('#cg5',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},28.327);
+    tl.set('#cg5w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},28.367);
+    tl.set('#cg5w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},28.847);
+    tl.set('#cg5w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},28.847);
+    tl.to('#cg5',{opacity:0,duration:0.1,ease:'power2.in'},29.307);
+    tl.set('#cg5',{opacity:0,visibility:'hidden'},29.407);
+    tl.fromTo('#cg6',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},29.427);
+    tl.set('#cg6w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},29.467);
+    tl.set('#cg6w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},30.107);
+    tl.set('#cg6w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},30.107);
+    tl.to('#cg6',{opacity:0,duration:0.1,ease:'power2.in'},30.107);
+    tl.set('#cg6',{opacity:0,visibility:'hidden'},30.207);
+    tl.fromTo('#cg7',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},30.227);
+    tl.set('#cg7w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},30.267);
+    tl.set('#cg7w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},30.907);
+    tl.set('#cg7w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},30.907);
+    tl.to('#cg7',{opacity:0,duration:0.1,ease:'power2.in'},31.227);
+    tl.set('#cg7',{opacity:0,visibility:'hidden'},31.327);
+    tl.fromTo('#cg8',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},31.347);
+    tl.set('#cg8w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},31.387);
+    tl.set('#cg8w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},31.947);
+    tl.set('#cg8w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},31.947);
+    tl.set('#cg8w1',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},32.027);
+    tl.set('#cg8w2',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},32.027);
+    tl.to('#cg8',{opacity:0,duration:0.1,ease:'power2.in'},32.267);
+    tl.set('#cg8',{opacity:0,visibility:'hidden'},32.367);
+    tl.fromTo('#cg9',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},32.387);
+    tl.set('#cg9w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},32.427);
+    tl.set('#cg9w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},32.827);
+    tl.set('#cg9w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},32.827);
+    tl.set('#cg9w1',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},32.987);
+    tl.set('#cg9w2',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},32.987);
+    tl.to('#cg9',{opacity:0,duration:0.1,ease:'power2.in'},32.907);
+    tl.set('#cg9',{opacity:0,visibility:'hidden'},33.007);
+    tl.fromTo('#cg10',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},33.027);
+    tl.set('#cg10w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},33.067);
+    tl.to('#cg10',{opacity:0,duration:0.1,ease:'power2.in'},33.197);
+    tl.set('#cg10',{opacity:0,visibility:'hidden'},33.297);
+    tl.fromTo('#cg11',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},33.187);
+    tl.set('#cg11w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},33.227);
+    tl.set('#cg11w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},33.387);
+    tl.set('#cg11w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},33.387);
+    tl.set('#cg11w1',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},33.787);
+    tl.set('#cg11w2',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},33.787);
+    tl.to('#cg11',{opacity:0,duration:0.1,ease:'power2.in'},33.933);
+    tl.set('#cg11',{opacity:0,visibility:'hidden'},34.033);
+    window.__timelines["a-captions"] = tl;
+  </script>
+</template>

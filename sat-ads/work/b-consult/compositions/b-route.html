@@ -1,0 +1,71 @@
+<template>
+  <style>
+
+@font-face{font-family:'MontUA';src:url('assets/fonts/Montserrat-cyrillic.woff2') format('woff2');font-weight:100 900;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:'MontUA';src:url('assets/fonts/Montserrat-cyrillic-ext.woff2') format('woff2');font-weight:100 900;unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}
+@font-face{font-family:'MontUA';src:url('assets/fonts/Montserrat-latin.woff2') format('woff2');font-weight:100 900;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'MontUA';src:url('assets/fonts/Montserrat-latin-ext.woff2') format('woff2');font-weight:100 900;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'HandUA';src:url('assets/fonts/Caveat-cyrillic.woff2') format('woff2');font-weight:700;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:'HandUA';src:url('assets/fonts/Caveat-latin.woff2') format('woff2');font-weight:700;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212;}
+
+
+:root{--y:#FDDC27;--y2:#F2B705;--k:#111111;--w:#FFFFFF;--r:#E5302B;--g:#1B1A18;}
+.f{font-family:'MontUA',Montserrat,sans-serif;}
+.hand{font-family:'HandUA',cursive;font-weight:700;}
+.abs{position:absolute;}
+.row{position:absolute;left:0;width:1080px;display:flex;justify-content:center;}
+.tape{display:inline-block;font-family:'MontUA',sans-serif;font-weight:900;line-height:1.02;padding:14px 26px 18px;border-radius:14px;white-space:nowrap;}
+.tk{background:var(--k);color:var(--w);}
+.ty{background:var(--y);color:var(--k);}
+.tw{background:var(--w);color:var(--k);}
+.sh{box-shadow:0 14px 34px rgba(0,0,0,.28);}
+
+    #root{position:absolute;inset:0;overflow:visible;}
+
+    .dotc{flex:none;width:44px;height:44px;border-radius:50%;background:#111;border:9px solid #fff;margin-top:2px;box-shadow:0 0 0 4px #111;}
+
+  </style>
+  <div id="root" data-composition-id="b-route" data-width="1080" data-height="1920">
+
+    <div id="rh" class="abs" style="left:80px;top:262px">
+      <div class="tape tk" style="font-size:52px;padding:10px 24px 14px;transform:rotate(-2deg)">НА КОЖНОМУ</div><br>
+      <div class="tape tk" style="font-size:52px;padding:10px 24px 14px;margin-top:10px;transform:rotate(-2deg)">ЕТАПІ</div>
+    </div>
+    <svg id="rline" class="abs" style="left:96px;top:540px" width="12" height="640" viewBox="0 0 12 640"><line x1="6" y1="0" x2="6" y2="640" stroke="#111" stroke-width="6" stroke-dasharray="14 12" stroke-linecap="round"/></svg>
+    <div id="st0" class="abs f" style="left:80px;top:520px;width:500px;display:flex;gap:22px;align-items:flex-start">
+      <div class="dotc"></div>
+      <div><div style="font-weight:900;font-size:44px;line-height:1.05;color:#111">Підбір університету</div><div style="font-weight:700;font-size:34px;line-height:1.15;color:#111">та спеціальності</div></div></div>
+    <div id="st1" class="abs f" style="left:80px;top:685px;width:500px;display:flex;gap:22px;align-items:flex-start">
+      <div class="dotc"></div>
+      <div><div style="font-weight:900;font-size:44px;line-height:1.05;color:#111">Підготовка</div><div style="font-weight:700;font-size:34px;line-height:1.15;color:#111">документів</div></div></div>
+    <div id="st2" class="abs f" style="left:80px;top:850px;width:500px;display:flex;gap:22px;align-items:flex-start">
+      <div class="dotc"></div>
+      <div><div style="font-weight:900;font-size:44px;line-height:1.05;color:#111">Вивчення мови</div></div></div>
+    <div id="cur" class="abs f" style="left:80px;top:1040px;width:920px;height:230px;background:#111;border-radius:30px;display:flex;align-items:center;gap:28px;padding:0 40px;box-shadow:0 18px 40px rgba(0,0,0,.25)">
+      <svg width="86" height="104" viewBox="0 0 24 29"><path d="M12 0C5.4 0 0 5.2 0 11.7 0 20.4 12 29 12 29s12-8.6 12-17.3C24 5.2 18.6 0 12 0z" fill="#FDDC27"/><circle cx="12" cy="11.5" r="4.6" fill="#111"/></svg>
+      <div><div style="font-weight:900;font-size:60px;line-height:1.02;color:#fff">Особистий куратор</div>
+        <div style="font-weight:800;font-size:46px;line-height:1.15;color:#FDDC27">у Словаччині</div></div>
+    </div>
+
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    tl.fromTo('#rh',{opacity:0,y:-30},{opacity:1,y:0,duration:0.4,ease:'expo.out'},0.3);
+    tl.set('#rline',{clipPath:'inset(0px 0px 640px 0px)'},0);
+        tl.fromTo('#st0',{x:-40,opacity:0},{x:0,opacity:1,duration:0.34,ease:'expo.out'},2.43);
+    tl.fromTo('#st0 .dotc',{scale:0},{scale:1,duration:0.3,ease:'back.out(2.2)'},2.43);
+    tl.to('#rline',{clipPath:'inset(0px 0px 435px 0px)',duration:0.5,ease:'power2.inOut'},2.23);
+    tl.fromTo('#st1',{x:-40,opacity:0},{x:0,opacity:1,duration:0.34,ease:'expo.out'},4.83);
+    tl.fromTo('#st1 .dotc',{scale:0},{scale:1,duration:0.3,ease:'back.out(2.2)'},4.83);
+    tl.to('#rline',{clipPath:'inset(0px 0px 270px 0px)',duration:0.5,ease:'power2.inOut'},4.63);
+    tl.fromTo('#st2',{x:-40,opacity:0},{x:0,opacity:1,duration:0.34,ease:'expo.out'},6.11);
+    tl.fromTo('#st2 .dotc',{scale:0},{scale:1,duration:0.3,ease:'back.out(2.2)'},6.11);
+    tl.to('#rline',{clipPath:'inset(0px 0px 105px 0px)',duration:0.5,ease:'power2.inOut'},5.91);
+    tl.to('#rline',{clipPath:'inset(0px 0px 0px 0px)',duration:0.4,ease:'power2.inOut'},7.73);
+    tl.fromTo('#cur',{scale:0.6,opacity:0,y:60},{scale:1,opacity:1,y:0,duration:0.45,ease:'back.out(1.5)'},7.89);
+    tl.to(['#rh','#rline','[id^=st]','#cur'],{opacity:0,y:40,duration:0.25,ease:'power3.in',stagger:0.03},9.50);
+
+    window.__timelines["b-route"] = tl;
+  </script>
+</template>

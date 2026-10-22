@@ -1,0 +1,186 @@
+<template>
+  <style>
+
+@font-face{font-family:'MontUA';src:url('assets/fonts/Montserrat-cyrillic.woff2') format('woff2');font-weight:100 900;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:'MontUA';src:url('assets/fonts/Montserrat-cyrillic-ext.woff2') format('woff2');font-weight:100 900;unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}
+@font-face{font-family:'MontUA';src:url('assets/fonts/Montserrat-latin.woff2') format('woff2');font-weight:100 900;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'MontUA';src:url('assets/fonts/Montserrat-latin-ext.woff2') format('woff2');font-weight:100 900;unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'HandUA';src:url('assets/fonts/Caveat-cyrillic.woff2') format('woff2');font-weight:700;unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:'HandUA';src:url('assets/fonts/Caveat-latin.woff2') format('woff2');font-weight:700;unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2212;}
+
+
+:root{--y:#FDDC27;--y2:#F2B705;--k:#111111;--w:#FFFFFF;--r:#E5302B;--g:#1B1A18;}
+.f{font-family:'MontUA',Montserrat,sans-serif;}
+.hand{font-family:'HandUA',cursive;font-weight:700;}
+.abs{position:absolute;}
+.row{position:absolute;left:0;width:1080px;display:flex;justify-content:center;}
+.tape{display:inline-block;font-family:'MontUA',sans-serif;font-weight:900;line-height:1.02;padding:14px 26px 18px;border-radius:14px;white-space:nowrap;}
+.tk{background:var(--k);color:var(--w);}
+.ty{background:var(--y);color:var(--k);}
+.tw{background:var(--w);color:var(--k);}
+.sh{box-shadow:0 14px 34px rgba(0,0,0,.28);}
+
+    #root{position:absolute;inset:0;overflow:visible;}
+
+    .cgrp{position:absolute;left:0;width:1080px;height:180px;display:flex;align-items:center;justify-content:center;opacity:0;}
+    .cin{max-width:900px;text-align:center;line-height:1.28;}
+    .cw{display:inline-block;font-weight:800;font-size:62px;color:#fff;padding:2px 12px 6px;border-radius:12px;margin:0 -4px;
+        --sc:rgba(17,17,17,1);-webkit-text-stroke:10px var(--sc);paint-order:stroke fill;background-color:rgba(253,220,39,0);}
+
+  </style>
+  <div id="root" data-composition-id="b-captions" data-width="1080" data-height="1920">
+    <div id='cg0' class='cgrp f' style='top:1100px'><div class='cin'><span id='cg0w0' class='cw'>я</span> <span id='cg0w1' class='cw'>розумію</span> <span id='cg0w2' class='cw'>вас,</span></div></div>
+    <div id='cg1' class='cgrp f' style='top:1100px'><div class='cin'><span id='cg1w0' class='cw'>адже</span> <span id='cg1w1' class='cw'>сама</span> <span id='cg1w2' class='cw'>колись</span></div></div>
+    <div id='cg2' class='cgrp f' style='top:1100px'><div class='cin'><span id='cg2w0' class='cw'>опинилась</span> <span id='cg2w1' class='cw'>на</span> <span id='cg2w2' class='cw'>місці</span></div></div>
+    <div id='cg3' class='cgrp f' style='top:1100px'><div class='cin'><span id='cg3w0' class='cw'>вашої</span> <span id='cg3w1' class='cw'>дитини.</span></div></div>
+    <div id='cg4' class='cgrp f' style='top:1100px'><div class='cin'><span id='cg4w0' class='cw'>Я знаю,</span></div></div>
+    <div id='cg5' class='cgrp f' style='top:1100px'><div class='cin'><span id='cg5w0' class='cw'>як</span> <span id='cg5w1' class='cw'>це</span> <span id='cg5w2' class='cw'>відчувається.</span></div></div>
+    <div id='cg6' class='cgrp f' style='top:1100px'><div class='cin'><span id='cg6w0' class='cw'>але</span> <span id='cg6w1' class='cw'>з</span> <span id='cg6w2' class='cw'>часом</span></div></div>
+    <div id='cg7' class='cgrp f' style='top:1100px'><div class='cin'><span id='cg7w0' class='cw'>моя</span> <span id='cg7w1' class='cw'>мама</span> <span id='cg7w2' class='cw'>побачила,</span></div></div>
+    <div id='cg8' class='cgrp f' style='top:1100px'><div class='cin'><span id='cg8w0' class='cw'>що</span> <span id='cg8w1' class='cw'>я</span> <span id='cg8w2' class='cw'>справляюсь,</span></div></div>
+    <div id='cg9' class='cgrp f' style='top:1100px'><div class='cin'><span id='cg9w0' class='cw'>розвиваюсь</span> <span id='cg9w1' class='cw'>та</span> <span id='cg9w2' class='cw'>вчусь</span></div></div>
+    <div id='cg10' class='cgrp f' style='top:1100px'><div class='cin'><span id='cg10w0' class='cw'>самостійно</span> <span id='cg10w1' class='cw'>будувати</span></div></div>
+    <div id='cg11' class='cgrp f' style='top:1100px'><div class='cin'><span id='cg11w0' class='cw'>своє</span> <span id='cg11w1' class='cw'>життя.</span></div></div>
+    <div id='cg12' class='cgrp f' style='top:1100px'><div class='cin'><span id='cg12w0' class='cw'>Але</span> <span id='cg12w1' class='cw'>подивіться,</span></div></div>
+    <div id='cg13' class='cgrp f' style='top:1100px'><div class='cin'><span id='cg13w0' class='cw'>як</span> <span id='cg13w1' class='cw'>усе</span> <span id='cg13w2' class='cw'>змінилось.</span></div></div>
+    <div id='cg14' class='cgrp f' style='top:1100px'><div class='cin'><span id='cg14w0' class='cw'>Зі вступом</span> <span id='cg14w1' class='cw'>мені</span></div></div>
+    <div id='cg15' class='cgrp f' style='top:1100px'><div class='cin'><span id='cg15w0' class='cw'>допомогли</span></div></div>
+    <div id='cg16' class='cgrp f' style='top:1100px'><div class='cin'><span id='cg16w0' class='cw'>Якщо</span> <span id='cg16w1' class='cw'>ваша</span> <span id='cg16w2' class='cw'>дитина</span></div></div>
+    <div id='cg17' class='cgrp f' style='top:1100px'><div class='cin'><span id='cg17w0' class='cw'>хоче</span> <span id='cg17w1' class='cw'>навчатися</span> <span id='cg17w2' class='cw'>в</span></div></div>
+    <div id='cg18' class='cgrp f' style='top:1100px'><div class='cin'><span id='cg18w0' class='cw'>Європі,</span></div></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+tl.fromTo('#cg0',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},3.207);
+    tl.set('#cg0w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},3.247);
+    tl.set('#cg0w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},3.487);
+    tl.set('#cg0w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},3.487);
+    tl.set('#cg0w1',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},4.047);
+    tl.set('#cg0w2',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},4.047);
+    tl.to('#cg0',{opacity:0,duration:0.1,ease:'power2.in'},4.287);
+    tl.set('#cg0',{opacity:0,visibility:'hidden'},4.387);
+    tl.fromTo('#cg1',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},4.407);
+    tl.set('#cg1w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},4.447);
+    tl.set('#cg1w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},4.847);
+    tl.set('#cg1w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},4.847);
+    tl.set('#cg1w1',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},5.167);
+    tl.set('#cg1w2',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},5.167);
+    tl.to('#cg1',{opacity:0,duration:0.1,ease:'power2.in'},5.327);
+    tl.set('#cg1',{opacity:0,visibility:'hidden'},5.427);
+    tl.fromTo('#cg2',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},5.447);
+    tl.set('#cg2w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},5.487);
+    tl.set('#cg2w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},6.047);
+    tl.set('#cg2w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},6.047);
+    tl.set('#cg2w1',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},6.127);
+    tl.set('#cg2w2',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},6.127);
+    tl.to('#cg2',{opacity:0,duration:0.1,ease:'power2.in'},6.447);
+    tl.set('#cg2',{opacity:0,visibility:'hidden'},6.547);
+    tl.fromTo('#cg3',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},6.567);
+    tl.set('#cg3w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},6.607);
+    tl.set('#cg3w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},7.007);
+    tl.set('#cg3w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},7.007);
+    tl.to('#cg3',{opacity:0,duration:0.1,ease:'power2.in'},7.370);
+    tl.set('#cg3',{opacity:0,visibility:'hidden'},7.470);
+    tl.fromTo('#cg4',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},7.490);
+    tl.set('#cg4w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},7.530);
+    tl.to('#cg4',{opacity:0,duration:0.1,ease:'power2.in'},7.770);
+    tl.set('#cg4',{opacity:0,visibility:'hidden'},7.870);
+    tl.fromTo('#cg5',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},7.890);
+    tl.set('#cg5w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},7.930);
+    tl.set('#cg5w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},8.170);
+    tl.set('#cg5w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},8.170);
+    tl.set('#cg5w1',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},8.330);
+    tl.set('#cg5w2',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},8.330);
+    tl.to('#cg5',{opacity:0,duration:0.1,ease:'power2.in'},9.350);
+    tl.set('#cg5',{opacity:0,visibility:'hidden'},9.450);
+    tl.fromTo('#cg6',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},17.113);
+    tl.set('#cg6w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},17.153);
+    tl.set('#cg6w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},17.393);
+    tl.set('#cg6w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},17.393);
+    tl.set('#cg6w1',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},17.553);
+    tl.set('#cg6w2',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},17.553);
+    tl.to('#cg6',{opacity:0,duration:0.1,ease:'power2.in'},17.713);
+    tl.set('#cg6',{opacity:0,visibility:'hidden'},17.813);
+    tl.fromTo('#cg7',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},17.833);
+    tl.set('#cg7w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},17.873);
+    tl.set('#cg7w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},18.113);
+    tl.set('#cg7w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},18.113);
+    tl.set('#cg7w1',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},18.433);
+    tl.set('#cg7w2',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},18.433);
+    tl.to('#cg7',{opacity:0,duration:0.1,ease:'power2.in'},18.913);
+    tl.set('#cg7',{opacity:0,visibility:'hidden'},19.013);
+    tl.fromTo('#cg8',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},19.033);
+    tl.set('#cg8w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},19.073);
+    tl.set('#cg8w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},19.153);
+    tl.set('#cg8w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},19.153);
+    tl.set('#cg8w1',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},19.313);
+    tl.set('#cg8w2',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},19.313);
+    tl.to('#cg8',{opacity:0,duration:0.1,ease:'power2.in'},19.933);
+    tl.set('#cg8',{opacity:0,visibility:'hidden'},20.033);
+    tl.fromTo('#cg9',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},20.053);
+    tl.set('#cg9w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},20.093);
+    tl.set('#cg9w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},20.893);
+    tl.set('#cg9w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},20.893);
+    tl.set('#cg9w1',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},21.053);
+    tl.set('#cg9w2',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},21.053);
+    tl.to('#cg9',{opacity:0,duration:0.1,ease:'power2.in'},21.373);
+    tl.set('#cg9',{opacity:0,visibility:'hidden'},21.473);
+    tl.fromTo('#cg10',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},21.493);
+    tl.set('#cg10w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},21.533);
+    tl.set('#cg10w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},22.173);
+    tl.set('#cg10w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},22.173);
+    tl.to('#cg10',{opacity:0,duration:0.1,ease:'power2.in'},22.573);
+    tl.set('#cg10',{opacity:0,visibility:'hidden'},22.673);
+    tl.fromTo('#cg11',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},22.693);
+    tl.set('#cg11w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},22.733);
+    tl.set('#cg11w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},23.053);
+    tl.set('#cg11w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},23.053);
+    tl.to('#cg11',{opacity:0,duration:0.1,ease:'power2.in'},23.293);
+    tl.set('#cg11',{opacity:0,visibility:'hidden'},23.393);
+    tl.fromTo('#cg12',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},23.413);
+    tl.set('#cg12w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},23.453);
+    tl.set('#cg12w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},23.773);
+    tl.set('#cg12w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},23.773);
+    tl.to('#cg12',{opacity:0,duration:0.1,ease:'power2.in'},24.253);
+    tl.set('#cg12',{opacity:0,visibility:'hidden'},24.353);
+    tl.fromTo('#cg13',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},24.373);
+    tl.set('#cg13w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},24.413);
+    tl.set('#cg13w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},24.573);
+    tl.set('#cg13w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},24.573);
+    tl.set('#cg13w1',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},24.813);
+    tl.set('#cg13w2',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},24.813);
+    tl.to('#cg13',{opacity:0,duration:0.1,ease:'power2.in'},25.633);
+    tl.set('#cg13',{opacity:0,visibility:'hidden'},25.733);
+    tl.fromTo('#cg14',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},32.847);
+    tl.set('#cg14w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},32.887);
+    tl.set('#cg14w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},33.687);
+    tl.set('#cg14w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},33.687);
+    tl.to('#cg14',{opacity:0,duration:0.1,ease:'power2.in'},33.767);
+    tl.set('#cg14',{opacity:0,visibility:'hidden'},33.867);
+    tl.fromTo('#cg15',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},33.887);
+    tl.set('#cg15w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},33.927);
+    tl.to('#cg15',{opacity:0,duration:0.1,ease:'power2.in'},34.707);
+    tl.set('#cg15',{opacity:0,visibility:'hidden'},34.807);
+    tl.fromTo('#cg16',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},45.277);
+    tl.set('#cg16w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},45.317);
+    tl.set('#cg16w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},45.877);
+    tl.set('#cg16w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},45.877);
+    tl.set('#cg16w1',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},46.197);
+    tl.set('#cg16w2',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},46.197);
+    tl.to('#cg16',{opacity:0,duration:0.1,ease:'power2.in'},46.437);
+    tl.set('#cg16',{opacity:0,visibility:'hidden'},46.537);
+    tl.fromTo('#cg17',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},46.557);
+    tl.set('#cg17w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},46.597);
+    tl.set('#cg17w0',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},46.917);
+    tl.set('#cg17w1',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},46.917);
+    tl.set('#cg17w1',{backgroundColor:'rgba(253,220,39,0)',color:'#fff','--sc':'rgba(17,17,17,1)'},47.477);
+    tl.set('#cg17w2',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},47.477);
+    tl.to('#cg17',{opacity:0,duration:0.1,ease:'power2.in'},47.397);
+    tl.set('#cg17',{opacity:0,visibility:'hidden'},47.497);
+    tl.fromTo('#cg18',{opacity:0,scale:0.9,y:14},{opacity:1,scale:1,y:0,duration:0.16,ease:'back.out(2)'},47.517);
+    tl.set('#cg18w0',{backgroundColor:'#FDDC27',color:'#111','--sc':'rgba(17,17,17,0)'},47.557);
+    tl.to('#cg18',{opacity:0,duration:0.1,ease:'power2.in'},47.927);
+    tl.set('#cg18',{opacity:0,visibility:'hidden'},48.027);
+    window.__timelines["b-captions"] = tl;
+  </script>
+</template>
