@@ -1,0 +1,24 @@
+{
+ "raw": "/home/user/study-and-travel/sat-ads/material/raw",
+ "transcript": "/home/user/study-and-travel/sat-ads/material/transcript.json",
+ "out": "build",
+ "vf": {"*": "hqdn3d=1.2:1.2:2:2,scale=1080:1920:force_original_aspect_ratio=increase:flags=lanczos,crop=1080:1920,unsharp=5:5:0.55:5:5:0,eq=contrast=1.05:saturation=1.06:gamma=0.98,colortemperature=temperature=5600:mix=0.3,curves=all='0/0.03 0.5/0.5 1/0.97',noise=alls=3:allf=t"},
+ "segments": [
+  {"src": "video_20", "in": 1.38, "out": 4.55, "tag": "hook"},
+  {"src": "video_20", "in": 4.84, "out": 9.05, "tag": "hook2"},
+  {"src": "video_25", "in": 0.94, "out": 2.50, "tag": "know"},
+  {"src": "video_25", "in": 2.52, "out": 6.52, "tag": "worry"},
+  {"src": "video_25", "in": 6.80, "out": 8.36, "tag": "mom"},
+  {"src": "video_27", "in": 0.52, "out": 3.06, "tag": "hard"},
+  {"src": "video_27", "in": 3.10, "out": 6.06, "tag": "mom2"},
+  {"src": "video_27", "in": 6.10, "out": 9.40, "tag": "grow"},
+  {"src": "video_23", "in": 0.44, "out": 2.36, "tag": "look"},
+  {"src": "video_23", "in": 2.42, "out": 6.06, "tag": "life1"},
+  {"src": "video_23", "in": 6.30, "out": 7.18, "tag": "life2"},
+  {"src": "video_23", "in": 7.32, "out": 10.04, "tag": "life3"},
+  {"src": "video_26", "in": 0.42, "out": 2.98, "tag": "brand"},
+  {"src": "video_26", "in": 3.12, "out": 5.50, "tag": "steps"},
+  {"src": "video_26", "in": 5.72, "out": 13.06, "tag": "route"},
+  {"src": "video_22", "in": 0.06, "out": 5.96, "tag": "cta"}
+ ]
+}

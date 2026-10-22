@@ -24,3 +24,11 @@ hair-ads/work/*.png
 hair-ads/work/fine/
 hair-ads/work/grade/
 hair-ads/work/*/hf/assets/vendor/
+
+# sat-ads: исходники клиента — не в публичный репо
+sat-ads/material/
+sat-ads/out/
+sat-ads/work/**/shots/
+sat-ads/work/**/*.png
+sat-ads/work/**/*.jpg
+sat-ads/work/**/assets/vendor/
