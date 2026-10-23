@@ -42,7 +42,9 @@
 
 ## Статус
 - [x] материалы, расшифровка, выбор дублей, EDL и plate для A и B
-- [ ] генератор композиций HyperFrames, субтитры, графика
-- [ ] check + snapshot-ревью, правки
-- [ ] рендер, микс звука (голос −15 LUFS + SFX), SendUserFile
-- [ ] коммит в `claude/happy-maxwell-565ec6`, пуш
+- [x] генератор композиций HyperFrames, субтитры, графика (`work/gen_a.py`, `work/gen_b.py`, `work/hflib.py`)
+- [x] check + snapshot-ревью, правки (см. REVIEW.md)
+- [x] рендер → `out/A-webinar-batkam.mp4` (37.4 с), `out/B-konsultatsiya-istoriya.mp4` (54.1 с), отправлены пользователю
+- [x] коммит в `claude/happy-maxwell-565ec6`, пуш
+
+СДАНО. Дальше — только по запросу пользователя (короткие версии, музыка, оригиналы B, вектор логотипа).
