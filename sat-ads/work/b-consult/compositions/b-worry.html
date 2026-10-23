@@ -24,28 +24,25 @@
 
   </style>
   <div id="root" data-composition-id="b-worry" data-width="1080" data-height="1920">
-    <div class='row' style='top:262px'><div id='tp0' class='tape tk sh' style='font-size:58px;letter-spacing:.01em;margin-left:-80px'>ДИТИНА ДАЛЕКО</div></div>
-    <div class='row' style='top:350px'><div id='tp1' class='tape ty sh' style='font-size:58px;letter-spacing:.01em;margin-left:100px'>ЧУЖА КРАЇНА</div></div>
-    <div class='row' style='top:438px'><div id='tp2' class='tape tw sh' style='font-size:58px;letter-spacing:.01em;margin-left:-140px'>НОВІ ЛЮДИ</div></div>
-    <div class='row' style='top:526px'><div id='tp3' class='tape ty sh' style='font-size:58px;letter-spacing:.01em;margin-left:60px'>НЕЗНАЙОМЕ ЖИТТЯ</div></div>
-    <div id="pn1" class="abs hand" style="left:236px;top:1236px;width:608px;text-align:center;font-size:54px;color:#111;transform:rotate(-2deg)">моя мама теж переживала</div>
-    <div id="pn2" class="abs hand" style="left:236px;top:1236px;width:608px;text-align:center;font-size:54px;color:#111;transform:rotate(-2deg)">спочатку було важко…</div>
+    <div class='row' style='top:252px'><div id='tp0' class='tape tk sh' style='font-size:52px;letter-spacing:.01em;margin-left:-80px'>ДИТИНА ДАЛЕКО</div></div>
+    <div class='row' style='top:344px'><div id='tp1' class='tape ty sh' style='font-size:52px;letter-spacing:.01em;margin-left:100px'>ЧУЖА КРАЇНА</div></div>
+    <div class='row' style='top:436px'><div id='tp2' class='tape tw sh' style='font-size:52px;letter-spacing:.01em;margin-left:-140px'>НОВІ ЛЮДИ</div></div>
+    <div class='row' style='top:528px'><div id='tp3' class='tape ty sh' style='font-size:52px;letter-spacing:.01em;margin-left:60px'>НЕЗНАЙОМЕ ЖИТТЯ</div></div>
+    <div id="pn1" class="abs hand" style="left:236px;top:1262px;width:608px;text-align:center;font-size:52px;line-height:1;color:#111">моя мама теж переживала</div>
 
   </div>
   <script>
     const tl = gsap.timeline({ paused: true });
-tl.fromTo('#tp0',{opacity:0,scale:1.5,rotation:-12},{opacity:1,scale:1,rotation:-4,duration:0.22,ease:'expo.out'},0.04);
-    tl.to('#tp0',{x:-1300,rotation:-16,duration:0.38,ease:'power3.in'},8.05);
-    tl.fromTo('#tp1',{opacity:0,scale:1.5,rotation:9},{opacity:1,scale:1,rotation:3,duration:0.22,ease:'expo.out'},1.11);
-    tl.to('#tp1',{x:1300,rotation:12,duration:0.38,ease:'power3.in'},8.10);
-    tl.fromTo('#tp2',{opacity:0,scale:1.5,rotation:-6},{opacity:1,scale:1,rotation:-2,duration:0.22,ease:'expo.out'},2.07);
-    tl.to('#tp2',{x:-1300,rotation:-8,duration:0.38,ease:'power3.in'},8.15);
-    tl.fromTo('#tp3',{opacity:0,scale:1.5,rotation:12},{opacity:1,scale:1,rotation:4,duration:0.22,ease:'expo.out'},2.79);
-    tl.to('#tp3',{x:1300,rotation:16,duration:0.38,ease:'power3.in'},8.20);
+tl.fromTo('#tp0',{opacity:0,scale:1.5,rotation:-9},{opacity:1,scale:1,rotation:-3,duration:0.22,ease:'expo.out'},0.04);
+    tl.to('#tp0',{x:-1300,rotation:-12,duration:0.38,ease:'power3.in'},5.16);
+    tl.fromTo('#tp1',{opacity:0,scale:1.5,rotation:6},{opacity:1,scale:1,rotation:2,duration:0.22,ease:'expo.out'},1.13);
+    tl.to('#tp1',{x:1300,rotation:8,duration:0.38,ease:'power3.in'},5.21);
+    tl.fromTo('#tp2',{opacity:0,scale:1.5,rotation:-6},{opacity:1,scale:1,rotation:-2,duration:0.22,ease:'expo.out'},2.09);
+    tl.to('#tp2',{x:-1300,rotation:-8,duration:0.38,ease:'power3.in'},5.26);
+    tl.fromTo('#tp3',{opacity:0,scale:1.5,rotation:6},{opacity:1,scale:1,rotation:2,duration:0.22,ease:'expo.out'},2.81);
+    tl.to('#tp3',{x:1300,rotation:8,duration:0.38,ease:'power3.in'},5.31);
     tl.fromTo('#pn1',{opacity:0,clipPath:'inset(0% 100% 0% 0%)'},{opacity:1,clipPath:'inset(0% 0% 0% 0%)',duration:0.5,ease:'power2.out'},3.97);
-    tl.to('#pn1',{opacity:0,duration:0.15},5.54);
-    tl.fromTo('#pn2',{opacity:0,clipPath:'inset(0% 100% 0% 0%)'},{opacity:1,clipPath:'inset(0% 0% 0% 0%)',duration:0.45,ease:'power2.out'},5.64);
-    tl.to('#pn2',{opacity:0,duration:0.15},8.05);
+    tl.to('#pn1',{opacity:0,duration:0.15},5.22);
 
     window.__timelines["b-worry"] = tl;
   </script>

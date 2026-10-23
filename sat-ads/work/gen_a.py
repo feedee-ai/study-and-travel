@@ -65,9 +65,10 @@ files["a-count"] = scene("a-count", """
     <div id="cc" class="abs f sh" style="left:90px;top:1050px;width:900px;height:250px;background:var(--y);border-radius:30px;color:#111">
       <div class="abs" style="left:46px;top:30px;font-weight:700;font-size:28px;letter-spacing:.3em">ПОНАД</div>
       <div class="abs" style="left:38px;top:62px;font-weight:900;font-size:150px;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums;white-space:nowrap"><span id="cn">0</span><span id="cp" style="display:inline-block">+</span></div>
-      <div class="abs" style="left:540px;top:78px;width:330px">
+      <div class="abs" style="left:540px;top:34px;width:330px">
         <div style="font-weight:900;font-size:46px;line-height:1.05">студентів</div>
-        <div style="font-weight:600;font-size:31px;line-height:1.2;margin-top:8px">супроводили на&nbsp;шляху до&nbsp;вступу</div>
+        <div id="cy" style="display:inline-block;margin-top:8px;background:#111;color:var(--y);font-weight:900;font-size:38px;line-height:1;padding:7px 14px 10px;border-radius:10px">за 14 років</div>
+        <div style="font-weight:600;font-size:28px;line-height:1.2;margin-top:10px">супроводили на&nbsp;шляху до&nbsp;вступу</div>
       </div>
     </div>
 """, f"""
@@ -97,7 +98,7 @@ js.append(f"tl.fromTo('#hlm',{{scaleX:0}},{{scaleX:1,duration:0.3,ease:'power3.o
 js.append(f"tl.to('#hl b',{{color:'#fff',duration:0.12}},{19.92-T4:.2f});")
 files["a-program"] = scene("a-program", f"""
     <div id="ring" class="abs" style="left:278px;top:186px;width:524px;height:524px;border-radius:50%;border:12px solid #111"></div>
-    <div id="kk" class="abs hand" style="left:700px;top:600px;font-size:66px;color:#111;transform:rotate(-8deg);white-space:nowrap">крок за кроком</div>
+    <div id="kk" class="abs hand" style="left:712px;top:572px;font-size:62px;color:#111;transform:rotate(-8deg);white-space:nowrap">крок за кроком</div>
     <div class="row" style="top:740px"><div id="ph" class="tape tk" style="font-size:46px;padding:12px 26px 14px">ПРОГРАМА ВЕБІНАРУ</div></div>
 {chr(10).join(rows)}
 """, f"""
@@ -105,8 +106,8 @@ files["a-program"] = scene("a-program", f"""
     tl.fromTo('#ph',{{clipPath:'inset(0% 100% 0% 0%)'}},{{clipPath:'inset(0% 0% 0% 0%)',duration:0.36,ease:'power3.out'}},0.55);
     tl.fromTo('#kk',{{opacity:0,scale:0.6,rotation:-20}},{{opacity:1,scale:1,rotation:-8,duration:0.4,ease:'expo.out'}},{12.09-T4:.2f});
     {chr(10).join('    '+j for j in js)}
-    tl.to(['#ring','#kk','#ph'],{{opacity:0,scale:1.12,duration:0.28,ease:'power3.in'}},{T4E-T4-0.2:.2f});
-    tl.to('[id^=it]',{{opacity:0,x:60,duration:0.24,ease:'power3.in',stagger:0.025}},{T4E-T4-0.3:.2f});
+    tl.to(['#ring','#kk','#ph'],{{opacity:0,scale:1.12,duration:0.28,ease:'power3.in'}},{T4E-T4-0.72:.2f});
+    tl.to('[id^=it]',{{opacity:0,x:60,duration:0.24,ease:'power3.in',stagger:0.025}},{T4E-T4-0.8:.2f});
 """, """
     .num{width:68px;height:68px;border-radius:16px;background:#111;color:var(--y);font-weight:900;font-size:38px;display:flex;align-items:center;justify-content:center;}
     .itx{font-weight:800;font-size:40px;color:#111;}
@@ -194,7 +195,7 @@ for k, v in files.items():
 SFX = [("whoosh-short", 3.42, .45), ("pop", 4.30, .35), ("whoosh", 8.52, .3), ("ping", 9.50, .3),
        ("whoosh", T4 + 0.02, .4), ("click-soft", SEG["ag1"], .45), ("click", SEG["ag2"], .3), ("click-soft", SEG["ag3"], .45),
        ("click", SEG["ag4"] + 0.1, .3), ("pop", 19.86, .4), ("click-soft", 22.05, .45), ("click", 24.05, .3),
-       ("whoosh-short", T4E - 0.1, .4), ("notification", T5 + 0.15, .25), ("pop", 27.95, .35),
+       ("whoosh-short", T4E - 0.62, .4), ("notification", T5 + 0.15, .25), ("pop", 27.95, .35),
        ("whoosh-short", 29.43, .4), ("sparkle", 31.35, .3), ("whoosh", END0, .4), ("impact-bass-1", END0 + 0.4, .3),
        ("click", END0 + 1.95, .45)]
 man = json.load(open(os.path.join(SFX_DIR, "manifest.json")))
@@ -212,24 +213,14 @@ def pw(s, fx, fy, cx=None, cy=None):
 
 root_js = [
     "tl.set('#pw',{transformOrigin:'0px 0px',scale:1,x:0,y:0},0);",
-    f"tl.set('#pw',{pw(1.12, 538, 856)},2.78);",
-    f"tl.set('#pw',{pw(1, 538, 856)},{T2+0.04});",
-    f"tl.set('#pw',{pw(1, 600, 730)},{SEG['proof']});",
-    f"tl.set('#pw',{pw(1.1, 600, 730)},9.03);",
-    f"tl.set('#pw',{pw(1, 600, 730)},{SEG['step']});",
     # жёлтый мир + круг
     f"tl.fromTo('#gy',{{clipPath:'inset(100% 0% 0% 0%)'}},{{clipPath:'inset(0% 0% 0% 0%)',duration:0.3,ease:'power2.out'}},{T4-0.06});",
     f"tl.fromTo('#pclip',{{clipPath:'circle(1900px at 540px 448px)'}},{{clipPath:'circle(250px at 540px 448px)',duration:0.62,ease:'power3.inOut'}},{T4+0.12});",
     f"tl.to('#pw',{{...{pw(0.6, 600, 735, 540, 456)},duration:0.62,ease:'power3.inOut'}},{T4+0.12});",
-    f"tl.set('#pw',{pw(0.95, 540, 628, 540, 456)},{SEG['ag1']});",
-    f"tl.set('#pw',{pw(0.6, 600, 735, 540, 456)},{SEG['ag2']});",
-    f"tl.set('#pw',{pw(0.95, 540, 628, 540, 456)},{SEG['ag3']});",
-    f"tl.set('#pw',{pw(0.6, 600, 735, 540, 456)},{SEG['ag4']});",
-    f"tl.set('#pw',{pw(0.95, 540, 628, 540, 456)},{SEG['ag56']});",
-    f"tl.to('#pclip',{{clipPath:'circle(1900px at 540px 448px)',duration:0.55,ease:'power3.inOut'}},{T4E-0.12});",
-    f"tl.to('#pw',{{scale:1,x:0,y:0,duration:0.55,ease:'power3.inOut'}},{T4E-0.12});",
-    f"tl.to('#gy',{{clipPath:'inset(0% 0% 100% 0%)',duration:0.5,ease:'power2.inOut'}},{T4E+0.1});",
-    f"tl.set('#pw',{pw(1.08, 530, 604)},{SEG['cta']+2.0});",
+    # общие планы в круге уже приведены к масштабу крупного плана в plate.mp4 — трансформация постоянна
+    f"tl.to('#pclip',{{clipPath:'circle(1900px at 540px 448px)',duration:0.55,ease:'power3.inOut'}},{T4E-0.62:.3f});",
+    f"tl.to('#pw',{{scale:1,x:0,y:0,duration:0.55,ease:'power3.inOut'}},{T4E-0.62:.3f});",
+    f"tl.set('#gy',{{clipPath:'inset(0% 0% 100% 0%)'}},{T4E:.3f});",
 ]
 root_body = f"""      <div id="gy" class="full" style="background:#FDDC27;z-index:0"></div>
       <div id="pclip" class="full" style="z-index:1">

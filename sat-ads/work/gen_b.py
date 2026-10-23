@@ -9,16 +9,31 @@ VD = E["duration"]
 for f in ("hyperframes.json", "package.json", "meta.json"):
     if not os.path.exists(os.path.join(P, f)):
         shutil.copy(os.path.join(WORK, "a-webinar", f), os.path.join(P, f))
-copy_assets(P, [(os.path.join(P, "build", n), n) for n in ("plate.mp4", "voice.wav", "br17.mp4", "br15.mp4", "br19.mp4", "br18.mp4")])
+BRS = ("brNitra", "br15", "brPrague", "brBarca", "brParis")
+copy_assets(P, [(os.path.join(P, "build", n), n) for n in ("plate.mp4", "voice.wav")] + [(os.path.join(P, "build", b + ".mp4"), b + ".mp4") for b in BRS])
+
+def WT(txt, tag=None):
+    """время начала слова (по смонтированной дорожке)"""
+    for w in E["words"]:
+        if w["w"].lower().strip(".,?!:") == txt and (tag is None or w["tag"] == tag):
+            return w["t"]
+    raise SystemExit("нет слова " + txt)
 
 T_W0 = SEG["worry"] - 0.04      # уход в полароид
-T_W1 = SEG["mom2"] - 0.06       # «але з часом» — возврат
+T_W1 = SEG["mom2"]              # «але з часом» — склейка посреди раскрытия полароида
 T_L = SEG["life1"]              # B-roll
-BR = [("br17", T_L, 26.95), ("br15", 26.95, 28.40), ("br19", 30.02, 31.40), ("br18", 31.40, SEG["brand"])]
-T_LOGO = 34.45
+T_EDU = WT("навчаюсь") - 0.03   # лекция
+T_BACK = WT("легально") - 0.02  # резкий возврат на спикера
+T_TR = SEG["life3"] + 0.12      # «а інколи ми подорожуємо Європою…»
+T_TR1 = round(T_TR + (SEG["brand"] - T_TR) / 3, 3); T_TR2 = round(T_TR + 2 * (SEG["brand"] - T_TR) / 3, 3)
+# (id, старт, конец, нахлёст под следующий wipe, свой наезд)
+BR = [("brNitra", T_L, T_EDU, 0.3, False), ("br15", T_EDU, T_BACK, 0, True),
+      ("brPrague", T_TR, T_TR1, 0.3, True), ("brBarca", T_TR1, T_TR2, 0.3, True), ("brParis", T_TR2, SEG["brand"], 0, True)]
+T_LOGO = WT("стадіїн") - 0.05
 T_R0 = SEG["steps"]; T_R1 = SEG["cta"]
-T_BTN = 47.95
-END0 = 49.62
+T_BTN = WT("тисніть") - 0.03
+T_PRESS = WT("детальніше", "cta")
+END0 = round(WT("безкоштовну", "cta") - 0.12, 3)
 DUR = round(VD + 3.0, 2)
 
 files = {}
@@ -51,25 +66,22 @@ files["b-note"] = scene("b-note", """
 """)
 
 # ---------- 3. тревоги: ленты + полароид ----------
-tapes = [("ДИТИНА ДАЛЕКО", SEG["worry"], "tk", -4, -40, 262), ("ЧУЖА КРАЇНА", 10.24, "ty", 3, 50, 350),
-         ("НОВІ ЛЮДИ", 11.20, "tw", -2, -70, 438), ("НЕЗНАЙОМЕ ЖИТТЯ", 11.92, "ty", 4, 30, 526)]
+tapes = [("ДИТИНА ДАЛЕКО", SEG["worry"], "tk", -3, -40, 252), ("ЧУЖА КРАЇНА", WT("чужа"), "ty", 2, 50, 344),
+         ("НОВІ ЛЮДИ", WT("нові"), "tw", -2, -70, 436), ("НЕЗНАЙОМЕ ЖИТТЯ", WT("незнайоме"), "ty", 2, 30, 528)]
 tb, tj = [], []
 for i, (txt, t, cls, rot, dx, y) in enumerate(tapes):
-    tb.append(f"    <div class='row' style='top:{y}px'><div id='tp{i}' class='tape {cls} sh' style='font-size:58px;letter-spacing:.01em;margin-left:{dx*2}px'>{txt}</div></div>")
+    tb.append(f"    <div class='row' style='top:{y}px'><div id='tp{i}' class='tape {cls} sh' style='font-size:52px;letter-spacing:.01em;margin-left:{dx*2}px'>{txt}</div></div>")
     tj.append(f"tl.fromTo('#tp{i}',{{opacity:0,scale:1.5,rotation:{rot*3}}},{{opacity:1,scale:1,rotation:{rot},duration:0.22,ease:'expo.out'}},{t-T_W0:.2f});")
-    tj.append(f"tl.to('#tp{i}',{{x:{'-' if i%2==0 else ''}1300,rotation:{rot*4},duration:0.38,ease:'power3.in'}},{T_W1-T_W0+0.05*i:.2f});")
+    tj.append(f"tl.to('#tp{i}',{{x:{'-' if i%2==0 else ''}1300,rotation:{rot*4},duration:0.38,ease:'power3.in'}},{T_W1-T_W0-0.38+0.05*i:.2f});")
 files["b-worry"] = scene("b-worry", "\n".join(tb) + f"""
-    <div id="pn1" class="abs hand" style="left:236px;top:1236px;width:608px;text-align:center;font-size:54px;color:#111;transform:rotate(-2deg)">моя мама теж переживала</div>
-    <div id="pn2" class="abs hand" style="left:236px;top:1236px;width:608px;text-align:center;font-size:54px;color:#111;transform:rotate(-2deg)">спочатку було важко…</div>
+    <div id="pn1" class="abs hand" style="left:236px;top:1262px;width:608px;text-align:center;font-size:52px;line-height:1;color:#111">моя мама теж переживала</div>
 """, "\n    ".join(tj) + f"""
     tl.fromTo('#pn1',{{opacity:0,clipPath:'inset(0% 100% 0% 0%)'}},{{opacity:1,clipPath:'inset(0% 0% 0% 0%)',duration:0.5,ease:'power2.out'}},{SEG['mom']-T_W0:.2f});
-    tl.to('#pn1',{{opacity:0,duration:0.15}},{SEG['hard']-T_W0:.2f});
-    tl.fromTo('#pn2',{{opacity:0,clipPath:'inset(0% 100% 0% 0%)'}},{{opacity:1,clipPath:'inset(0% 0% 0% 0%)',duration:0.45,ease:'power2.out'}},{SEG['hard']-T_W0+0.1:.2f});
-    tl.to('#pn2',{{opacity:0,duration:0.15}},{T_W1-T_W0:.2f});
+    tl.to('#pn1',{{opacity:0,duration:0.15}},{T_W1-T_W0-0.32:.2f});
 """)
 
 # ---------- 4. реальность: чек-лист поверх B-roll ----------
-life = [("гарне місце", 26.0), ("навчання", 27.05), ("легальний підробіток", 27.93), ("друзі", 29.0), ("подорожі Європою", 30.95)]
+life = [("гарне місце", WT("гарному")), ("навчання", WT("навчаюсь")), ("легальний підробіток", WT("легально")), ("друзі", WT("друзів")), ("подорожі Європою", WT("подорожуємо"))]
 lb, lj = [], []
 for i, (txt, t) in enumerate(life):
     y = 880 + i * 84
@@ -102,7 +114,8 @@ files["b-brand"] = scene("b-brand", f"""
 """)
 
 # ---------- 6. маршрут: 4 остановки ----------
-stops = [("Підбір університету", "та спеціальності", 37.90), ("Підготовка", "документів", 40.30), ("Вивчення мови", "", 41.58)]
+stops = [("Підбір університету", "та спеціальності", WT("під", "route") - 0.05), ("Підготовка", "документів", WT("підготовка") - 0.05), ("Вивчення мови", "", WT("вивчення") - 0.05)]
+T_CUR = WT("особистий") - 0.03
 sb, sj = [], []
 for i, (a, b, t) in enumerate(stops):
     y = 520 + i * 165
@@ -128,8 +141,8 @@ files["b-route"] = scene("b-route", f"""
     tl.fromTo('#rh',{{opacity:0,y:-30}},{{opacity:1,y:0,duration:0.4,ease:'expo.out'}},0.3);
     tl.set('#rline',{{clipPath:'inset(0px 0px 640px 0px)'}},0);
     {chr(10).join('    '+j for j in sj)}
-    tl.to('#rline',{{clipPath:'inset(0px 0px 0px 0px)',duration:0.4,ease:'power2.inOut'}},{43.2-T_R0:.2f});
-    tl.fromTo('#cur',{{scale:0.6,opacity:0,y:60}},{{scale:1,opacity:1,y:0,duration:0.45,ease:'back.out(1.5)'}},{43.36-T_R0:.2f});
+    tl.to('#rline',{{clipPath:'inset(0px 0px 0px 0px)',duration:0.4,ease:'power2.inOut'}},{T_CUR-0.16-T_R0:.2f});
+    tl.fromTo('#cur',{{scale:0.6,opacity:0,y:60}},{{scale:1,opacity:1,y:0,duration:0.45,ease:'back.out(1.5)'}},{T_CUR-T_R0:.2f});
     tl.to(['#rh','#rline','[id^=st]','#cur'],{{opacity:0,y:40,duration:0.25,ease:'power3.in',stagger:0.03}},{T_R1-T_R0-0.3:.2f});
 """, """
     .dotc{flex:none;width:44px;height:44px;border-radius:50%;background:#111;border:9px solid #fff;margin-top:2px;box-shadow:0 0 0 4px #111;}
@@ -142,8 +155,8 @@ files["b-cta"] = scene("b-cta", """
       <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div></div>
 """, f"""
     tl.fromTo('#bt',{{scale:0.6,opacity:0}},{{scale:1,opacity:1,duration:0.38,ease:'back.out(1.8)'}},{T_BTN-T_C:.2f});
-    tl.to('#bt',{{scale:0.93,y:8,duration:0.08,ease:'power2.in'}},{48.55-T_C:.2f});
-    tl.to('#bt',{{scale:1,y:0,duration:0.25,ease:'expo.out'}},{48.63-T_C:.2f});
+    tl.to('#bt',{{scale:0.93,y:8,duration:0.08,ease:'power2.in'}},{T_PRESS-T_C:.2f});
+    tl.to('#bt',{{scale:1,y:0,duration:0.25,ease:'expo.out'}},{T_PRESS+0.08-T_C:.2f});
 """)
 files["b-end"] = scene("b-end", f"""
     <div id="eb" class="abs" style="left:0;top:0;width:1080px;height:1920px;background:var(--y)"></div>
@@ -157,7 +170,7 @@ files["b-end"] = scene("b-end", f"""
 """, f"""
     tl.fromTo('#eb',{{clipPath:'circle(0px at 540px 1140px)'}},{{clipPath:'circle(1700px at 540px 1140px)',duration:0.55,ease:'power2.inOut'}},0);
     tl.fromTo('#et1',{{y:50,opacity:0,filter:'blur(8px)'}},{{y:0,opacity:1,filter:'blur(0px)',duration:0.4,ease:'expo.out'}},0.12);
-    tl.fromTo('#et2',{{scale:1.3,opacity:0,rotation:-6}},{{scale:1,opacity:1,rotation:-2,duration:0.36,ease:'expo.out'}},{50.5-END0:.2f});
+    tl.fromTo('#et2',{{scale:1.3,opacity:0,rotation:-6}},{{scale:1,opacity:1,rotation:-2,duration:0.36,ease:'expo.out'}},{WT('консультацію') - END0 - 0.05:.2f});
     tl.fromTo('#elogo',{{y:-40,opacity:0}},{{y:0,opacity:1,duration:0.45,ease:'expo.out'}},0.5);
     tl.fromTo('#es',{{y:24,opacity:0}},{{y:0,opacity:1,duration:0.35,ease:'expo.out'}},1.25);
     tl.fromTo('#ebt',{{scale:0.7,opacity:0}},{{scale:1,opacity:1,duration:0.4,ease:'expo.out'}},1.5);
@@ -188,10 +201,10 @@ for k, v in files.items():
 # ---------- звук ----------
 SFX = [("whoosh-short", SEG["hook2"] - 0.2, .3), ("pop", 5.45, .25),
        ("whoosh", T_W0, .4)] + [("click" if i % 2 else "pop", t, .4) for i, (_, t, *_r) in enumerate(tapes)] + [
-       ("whoosh", T_W1, .45), ("whoosh-short", T_L, .4), ("whoosh-short", 26.95, .3), ("whoosh-short", 30.02, .35), ("whoosh-short", 31.40, .3)] + [
+       ("whoosh", T_W1 - 0.3, .45)] + [("whoosh-short", a, .35) for _b, a, *_r in BR] + [
        ("click-soft", t + 0.05, .45) for _, t in life] + [
        ("impact-bass-1", T_LOGO, .3), ("whoosh", T_R0 + 0.02, .4)] + [("click-soft", t, .45) for *_a, t in stops] + [
-       ("ping", 43.36, .3), ("whoosh-short", T_R1 - 0.1, .4), ("pop", T_BTN, .35), ("click", 48.55, .45),
+       ("ping", T_CUR, .3), ("whoosh-short", T_R1 - 0.1, .4), ("pop", T_BTN, .35), ("click", T_PRESS, .45),
        ("whoosh", END0, .4), ("click", END0 + 2.6, .45)]
 man = json.load(open(os.path.join(SFX_DIR, "manifest.json")))
 sfx_html = []
@@ -204,33 +217,21 @@ def pw(s, fx, fy, cx=None, cy=None):
     cx = fx if cx is None else cx; cy = fy if cy is None else cy
     return f"{{scale:{s},x:{cx - s*fx:.1f},y:{cy - s*fy:.1f}}}"
 
-POL = "inset(640px 250px 680px 250px round 6px)"
+POL = "inset(660px 250px 660px 250px round 6px)"
 PIP = "inset(250px 80px 940px 590px round 28px)"
 FULL = "inset(0px 0px 0px 0px round 0px)"
 root_js = [
     "tl.set('#pw',{transformOrigin:'0px 0px',scale:1,x:0,y:0},0);",
     f"tl.set('#pclip',{{clipPath:'{FULL}'}},0);",
-    f"tl.set('#pw',{pw(1.1, 547, 788)},1.48);",
-    f"tl.set('#pw',{pw(1, 547, 788)},{SEG['hook2']});",
-    f"tl.set('#pw',{pw(1.08, 547, 788)},5.48);",
-    f"tl.set('#pw',{pw(1, 480, 680)},{SEG['know']});",
     # тревоги: тёмный фон + полароид
     f"tl.fromTo('#gd',{{clipPath:'inset(0% 0% 100% 0%)'}},{{clipPath:'inset(0% 0% 0% 0%)',duration:0.45,ease:'power2.inOut'}},{T_W0});",
     f"tl.to('#pclip',{{clipPath:'{POL}',duration:0.55,ease:'power3.inOut'}},{T_W0});",
-    f"tl.to('#pw',{{...{pw(0.8, 480, 670, 540, 950)},duration:0.55,ease:'power3.inOut'}},{T_W0});",
+    f"tl.to('#pw',{{...{pw(0.8, 480, 670, 540, 960)},duration:0.55,ease:'power3.inOut'}},{T_W0});",
     f"tl.fromTo('#pol',{{opacity:0,scale:1.25}},{{opacity:1,scale:1,duration:0.55,ease:'power3.inOut'}},{T_W0});",
-    f"tl.set('#pw',{pw(0.8, 497, 705, 540, 950)},{SEG['hard']});",
-    f"tl.to('#pclip',{{clipPath:'{FULL}',duration:0.6,ease:'power3.inOut'}},{T_W1});",
-    f"tl.to('#pw',{{scale:1,x:0,y:0,duration:0.6,ease:'power3.inOut'}},{T_W1});",
-    f"tl.to('#pol',{{opacity:0,scale:1.4,duration:0.4,ease:'power3.in'}},{T_W1});",
-    f"tl.to('#gd',{{clipPath:'inset(100% 0% 0% 0%)',duration:0.4,ease:'power2.inOut'}},{T_W1+0.25});",
-    f"tl.set('#pw',{pw(1.08, 500, 705)},19.31);",
-    f"tl.set('#pw',{pw(1.15, 520, 712)},20.09);",
-    f"tl.set('#pw',{pw(1, 465, 668)},{SEG['look']});",
-    f"tl.set('#pw',{pw(1.1, 465, 668)},24.8);",
-    f"tl.set('#pw',{pw(1, 465, 668)},{T_L});",
-    f"tl.set('#pw',{pw(1, 470, 690)},{SEG['brand']});",
-    f"tl.set('#pw',{pw(1.08, 470, 690)},{T_LOGO});",
+    f"tl.to('#pclip',{{clipPath:'{FULL}',duration:0.6,ease:'power3.inOut'}},{T_W1-0.3:.3f});",
+    f"tl.to('#pw',{{scale:1,x:0,y:0,duration:0.6,ease:'power3.inOut'}},{T_W1-0.3:.3f});",
+    f"tl.to('#pol',{{opacity:0,scale:1.4,duration:0.35,ease:'power3.in'}},{T_W1-0.3:.3f});",
+    f"tl.to('#gd',{{clipPath:'inset(100% 0% 0% 0%)',duration:0.4,ease:'power2.inOut'}},{T_W1+0.3:.3f});",
     # маршрут: жёлтый мир + окно справа
     f"tl.fromTo('#gy',{{clipPath:'inset(100% 0% 0% 0%)'}},{{clipPath:'inset(0% 0% 0% 0%)',duration:0.3,ease:'power2.out'}},{T_R0-0.08});",
     f"tl.to('#pclip',{{clipPath:'{PIP}',duration:0.6,ease:'power3.inOut'}},{T_R0+0.1});",
@@ -239,15 +240,16 @@ root_js = [
     f"tl.to('#pw',{{scale:1,x:0,y:0,duration:0.55,ease:'power3.inOut'}},{T_R1-0.12});",
     f"tl.to('#gy',{{clipPath:'inset(0% 0% 100% 0%)',duration:0.45,ease:'power2.inOut'}},{T_R1+0.15});",
 ]
-for i, (bid, a, b) in enumerate(BR):
-    root_js.append(f"tl.fromTo('#w{bid}',{{clipPath:'inset(0% 100% 0% 0%)'}},{{clipPath:'inset(0% 0% 0% 0%)',duration:0.32,ease:'power3.inOut'}},{a});")
-    root_js.append(f"tl.fromTo('#w{bid}',{{scale:1.06}},{{scale:1.0,duration:{b-a:.2f},ease:'none'}},{a});")
+for i, (bid, a, b, ext, kb) in enumerate(BR):
+    root_js.append(f"tl.fromTo('#w{bid}',{{clipPath:'inset(0% 100% 0% 0%)'}},{{clipPath:'inset(0% 0% 0% 0%)',duration:0.32,ease:'power3.inOut'}},{a:.3f});")
+    if kb:
+        root_js.append(f"tl.fromTo('#w{bid}',{{scale:1.06}},{{scale:1.0,duration:{b-a+ext:.2f},ease:'none'}},{a:.3f});")
 br_html = "\n".join(
-    f'      <div id="w{bid}" class="full" style="z-index:{3+i}"><video id="{bid}" class="clip full" src="assets/{bid}.mp4" data-start="{a:.3f}" data-duration="{b-a+ (0.3 if i < 3 else 0):.3f}" data-track-index="{11+i%2}" muted playsinline></video></div>'
-    for i, (bid, a, b) in enumerate(BR))
+    f'      <div id="w{bid}" class="full" style="z-index:{3+i}"><video id="{bid}" class="clip full" src="assets/{bid}.mp4" data-start="{a:.3f}" data-duration="{b-a+ext:.3f}" data-track-index="{11+i%2}" muted playsinline></video></div>'
+    for i, (bid, a, b, ext, kb) in enumerate(BR))
 root_body = f"""      <div id="gd" class="full" style="background:#161514;z-index:0"></div>
       <div id="gy" class="full" style="background:#FDDC27;z-index:0"></div>
-      <div id="pol" class="abs" style="left:226px;top:616px;width:628px;height:688px;background:#fff;border-radius:8px;box-shadow:0 24px 60px rgba(0,0,0,.55);z-index:1;opacity:0"></div>
+      <div id="pol" class="abs" style="left:226px;top:636px;width:628px;height:688px;background:#fff;border-radius:8px;box-shadow:0 24px 60px rgba(0,0,0,.55);z-index:1;opacity:0"></div>
       <div id="pclip" class="full" style="z-index:2">
         <div id="pw" class="full">
           <video id="plate" class="clip full" src="assets/plate.mp4" data-start="0" data-duration="{VD}" data-track-index="1" muted playsinline></video>

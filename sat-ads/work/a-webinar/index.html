@@ -54,7 +54,7 @@
       <audio id="sfx9" class="clip" src="assets/sfx/pop.mp3" data-start="19.86" data-duration="0.72" data-track-index="29" data-volume="0.4"></audio>
       <audio id="sfx10" class="clip" src="assets/sfx/click-soft.mp3" data-start="22.05" data-duration="0.37" data-track-index="30" data-volume="0.45"></audio>
       <audio id="sfx11" class="clip" src="assets/sfx/click.mp3" data-start="24.05" data-duration="0.37" data-track-index="31" data-volume="0.3"></audio>
-      <audio id="sfx12" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="25.97" data-duration="0.57" data-track-index="32" data-volume="0.4"></audio>
+      <audio id="sfx12" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="25.45" data-duration="0.57" data-track-index="32" data-volume="0.4"></audio>
       <audio id="sfx13" class="clip" src="assets/sfx/notification.mp3" data-start="26.22" data-duration="2.46" data-track-index="33" data-volume="0.25"></audio>
       <audio id="sfx14" class="clip" src="assets/sfx/pop.mp3" data-start="27.95" data-duration="0.72" data-track-index="34" data-volume="0.35"></audio>
       <audio id="sfx15" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="29.43" data-duration="0.57" data-track-index="35" data-volume="0.4"></audio>
@@ -74,23 +74,12 @@
     <script>
       const tl = gsap.timeline({ paused: true });
 tl.set('#pw',{transformOrigin:'0px 0px',scale:1,x:0,y:0},0);
-      tl.set('#pw',{scale:1.12,x:-64.6,y:-102.7},2.78);
-      tl.set('#pw',{scale:1,x:0.0,y:0.0},3.44);
-      tl.set('#pw',{scale:1,x:0.0,y:0.0},7.5333);
-      tl.set('#pw',{scale:1.1,x:-60.0,y:-73.0},9.03);
-      tl.set('#pw',{scale:1,x:0.0,y:0.0},11.3);
       tl.fromTo('#gy',{clipPath:'inset(100% 0% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:0.3,ease:'power2.out'},11.24);
       tl.fromTo('#pclip',{clipPath:'circle(1900px at 540px 448px)'},{clipPath:'circle(250px at 540px 448px)',duration:0.62,ease:'power3.inOut'},11.42);
       tl.to('#pw',{...{scale:0.6,x:180.0,y:15.0},duration:0.62,ease:'power3.inOut'},11.42);
-      tl.set('#pw',{scale:0.95,x:27.0,y:-140.6},13.0333);
-      tl.set('#pw',{scale:0.6,x:180.0,y:15.0},15.0);
-      tl.set('#pw',{scale:0.95,x:27.0,y:-140.6},16.5667);
-      tl.set('#pw',{scale:0.6,x:180.0,y:15.0},17.8667);
-      tl.set('#pw',{scale:0.95,x:27.0,y:-140.6},20.6333);
-      tl.to('#pclip',{clipPath:'circle(1900px at 540px 448px)',duration:0.55,ease:'power3.inOut'},25.9467);
-      tl.to('#pw',{scale:1,x:0,y:0,duration:0.55,ease:'power3.inOut'},25.9467);
-      tl.to('#gy',{clipPath:'inset(0% 0% 100% 0%)',duration:0.5,ease:'power2.inOut'},26.166700000000002);
-      tl.set('#pw',{scale:1.08,x:-42.4,y:-48.3},31.3667);
+      tl.to('#pclip',{clipPath:'circle(1900px at 540px 448px)',duration:0.55,ease:'power3.inOut'},25.447);
+      tl.to('#pw',{scale:1,x:0,y:0,duration:0.55,ease:'power3.inOut'},25.447);
+      tl.set('#gy',{clipPath:'inset(0% 0% 100% 0%)'},26.067);
       window.__timelines["main"] = tl;
     </script>
   </body>

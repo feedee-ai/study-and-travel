@@ -2,23 +2,179 @@
  "raw": "/home/user/study-and-travel/sat-ads/material/raw",
  "transcript": "/home/user/study-and-travel/sat-ads/material/transcript.json",
  "out": "build",
- "vf": {"*": "hqdn3d=1.2:1.2:2:2,scale=1080:1920:force_original_aspect_ratio=increase:flags=lanczos,crop=1080:1920,unsharp=5:5:0.55:5:5:0,eq=contrast=1.05:saturation=1.06:gamma=0.98,colortemperature=temperature=5600:mix=0.3,curves=all='0/0.03 0.5/0.5 1/0.97',noise=alls=3:allf=t"},
+ "vf": {
+  "*": "hqdn3d=1.2:1.2:2:2,scale=1080:1920:force_original_aspect_ratio=increase:flags=lanczos,crop=1080:1920,unsharp=5:5:0.55:5:5:0,eq=contrast=1.05:saturation=1.06:gamma=0.98,colortemperature=temperature=5600:mix=0.3,curves=all='0/0.03 0.5/0.5 1/0.97',noise=alls=3:allf=t"
+ },
  "segments": [
-  {"src": "video_20", "in": 1.38, "out": 4.55, "tag": "hook"},
-  {"src": "video_20", "in": 4.84, "out": 9.05, "tag": "hook2"},
-  {"src": "video_25", "in": 0.94, "out": 2.50, "tag": "know"},
-  {"src": "video_25", "in": 2.52, "out": 6.52, "tag": "worry"},
-  {"src": "video_25", "in": 6.80, "out": 8.36, "tag": "mom"},
-  {"src": "video_27", "in": 0.52, "out": 3.06, "tag": "hard"},
-  {"src": "video_27", "in": 3.10, "out": 6.06, "tag": "mom2"},
-  {"src": "video_27", "in": 6.10, "out": 9.40, "tag": "grow"},
-  {"src": "video_23", "in": 0.44, "out": 2.36, "tag": "look"},
-  {"src": "video_23", "in": 2.42, "out": 6.06, "tag": "life1"},
-  {"src": "video_23", "in": 6.30, "out": 7.18, "tag": "life2"},
-  {"src": "video_23", "in": 7.32, "out": 10.04, "tag": "life3"},
-  {"src": "video_26", "in": 0.42, "out": 2.98, "tag": "brand"},
-  {"src": "video_26", "in": 3.12, "out": 5.50, "tag": "steps"},
-  {"src": "video_26", "in": 5.72, "out": 13.06, "tag": "route"},
-  {"src": "video_22", "in": 0.06, "out": 5.96, "tag": "cta"}
+  {
+   "src": "video_20",
+   "in": 1.46,
+   "out": 2.94,
+   "tag": "hook",
+   "snap": false
+  },
+  {
+   "src": "video_20",
+   "in": 2.94,
+   "out": 4.63,
+   "tag": "hookz",
+   "snap": false,
+   "zoom": [
+    1.1,
+    547,
+    788
+   ]
+  },
+  {
+   "src": "video_20",
+   "in": 4.78,
+   "out": 7.09,
+   "tag": "hook2",
+   "snap": false
+  },
+  {
+   "src": "video_20",
+   "in": 7.09,
+   "out": 9.11,
+   "tag": "hook2z",
+   "snap": false,
+   "zoom": [
+    1.08,
+    550,
+    783
+   ]
+  },
+  {
+   "src": "video_25",
+   "in": 0.91,
+   "out": 2.58,
+   "tag": "know",
+   "snap": false
+  },
+  {
+   "src": "video_25",
+   "in": 2.59,
+   "out": 6.52,
+   "tag": "worry",
+   "snap": false
+  },
+  {
+   "src": "video_25",
+   "in": 6.88,
+   "out": 8.45,
+   "tag": "mom",
+   "snap": false
+  },
+  {
+   "src": "video_27",
+   "in": 3.18,
+   "out": 5.26,
+   "tag": "mom2",
+   "snap": false
+  },
+  {
+   "src": "video_27",
+   "in": 5.26,
+   "out": 6.08,
+   "tag": "mom2z",
+   "snap": false,
+   "zoom": [
+    1.08,
+    491,
+    695
+   ]
+  },
+  {
+   "src": "video_27",
+   "in": 6.18,
+   "out": 9.48,
+   "tag": "grow",
+   "snap": false,
+   "zoom": [
+    1.15,
+    531,
+    714
+   ]
+  },
+  {
+   "src": "video_23",
+   "in": 0.44,
+   "out": 1.81,
+   "tag": "look",
+   "snap": false
+  },
+  {
+   "src": "video_23",
+   "in": 1.81,
+   "out": 2.44,
+   "tag": "lookz",
+   "snap": false,
+   "zoom": [
+    1.1,
+    472,
+    677
+   ]
+  },
+  {
+   "src": "video_23",
+   "in": 2.43,
+   "out": 6.06,
+   "tag": "life1",
+   "snap": false
+  },
+  {
+   "src": "video_23",
+   "in": 6.37,
+   "out": 7.2,
+   "tag": "life2",
+   "snap": false
+  },
+  {
+   "src": "video_23",
+   "in": 7.24,
+   "out": 10.11,
+   "tag": "life3",
+   "snap": false
+  },
+  {
+   "src": "video_26",
+   "in": 0.34,
+   "out": 2.02,
+   "tag": "brand",
+   "snap": false
+  },
+  {
+   "src": "video_26",
+   "in": 2.02,
+   "out": 3.04,
+   "tag": "brandz",
+   "snap": false,
+   "zoom": [
+    1.08,
+    483,
+    692
+   ]
+  },
+  {
+   "src": "video_26",
+   "in": 3.1,
+   "out": 5.57,
+   "tag": "steps",
+   "snap": false
+  },
+  {
+   "src": "video_26",
+   "in": 5.77,
+   "out": 13.1,
+   "tag": "route",
+   "snap": false
+  },
+  {
+   "src": "video_22",
+   "in": 0.09,
+   "out": 5.96,
+   "tag": "cta",
+   "snap": false
+  }
  ]
 }
