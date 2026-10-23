@@ -32,3 +32,5 @@ sat-ads/work/**/shots/
 sat-ads/work/**/*.png
 sat-ads/work/**/*.jpg
 sat-ads/work/**/assets/vendor/
+sat-ads/work/*/.hyperframes/
+sat-ads/work/*/renders/
