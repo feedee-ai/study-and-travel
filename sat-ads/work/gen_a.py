@@ -102,12 +102,12 @@ files["a-program"] = scene("a-program", f"""
     <div class="row" style="top:740px"><div id="ph" class="tape tk" style="font-size:46px;padding:12px 26px 14px">ПРОГРАМА ВЕБІНАРУ</div></div>
 {chr(10).join(rows)}
 """, f"""
-    tl.fromTo('#ring',{{scale:1.9,opacity:0}},{{scale:1,opacity:1,duration:0.6,ease:'power3.inOut'}},0.05);
+    tl.fromTo('#ring',{{scale:1.12,opacity:0}},{{scale:1,opacity:1,duration:0.3,ease:'power2.out'}},0.42);
     tl.fromTo('#ph',{{clipPath:'inset(0% 100% 0% 0%)'}},{{clipPath:'inset(0% 0% 0% 0%)',duration:0.36,ease:'power3.out'}},0.55);
     tl.fromTo('#kk',{{opacity:0,scale:0.6,rotation:-20}},{{opacity:1,scale:1,rotation:-8,duration:0.4,ease:'expo.out'}},{12.09-T4:.2f});
     {chr(10).join('    '+j for j in js)}
-    tl.to(['#ring','#kk','#ph'],{{opacity:0,scale:1.12,duration:0.28,ease:'power3.in'}},{T4E-T4-0.72:.2f});
-    tl.to('[id^=it]',{{opacity:0,x:60,duration:0.24,ease:'power3.in',stagger:0.025}},{T4E-T4-0.8:.2f});
+    tl.to(['#ring','#kk','#ph'],{{opacity:0,duration:0.2,ease:'power2.in'}},{T4E-T4-1.0:.2f});
+    tl.to('[id^=it]',{{opacity:0,x:60,duration:0.24,ease:'power3.in',stagger:0.025}},{T4E-T4-1.05:.2f});
 """, """
     .num{width:68px;height:68px;border-radius:16px;background:#111;color:var(--y);font-weight:900;font-size:38px;display:flex;align-items:center;justify-content:center;}
     .itx{font-weight:800;font-size:40px;color:#111;}
@@ -183,7 +183,7 @@ for i, w in enumerate(E["words"]):
     if w["w"] == "зможе": fixes[i] = "зможете"
     if w["w"] == "бронюєте": fixes[i] = "бронюйте"
 hide = [(0, 5.3), (SEG["proof"] - 0.1, SEG["qa"] - 0.05), (END0, 99)]
-groups = build_groups(E["words"], hide=hide, fixes=fixes)
+groups = build_groups(E["words"], hide=hide, fixes=fixes, seg_t0=[x["t0"] for x in E["segments"]])
 for g in groups:
     g["t1"] = min(g["t1"], END0 + 0.05)
 files["a-captions"] = captions_scene("a-captions", groups, ycenter=1200)
@@ -195,7 +195,7 @@ for k, v in files.items():
 SFX = [("whoosh-short", 3.42, .45), ("pop", 4.30, .35), ("whoosh", 8.52, .3), ("ping", 9.50, .3),
        ("whoosh", T4 + 0.02, .4), ("click-soft", SEG["ag1"], .45), ("click", SEG["ag2"], .3), ("click-soft", SEG["ag3"], .45),
        ("click", SEG["ag4"] + 0.1, .3), ("pop", 19.86, .4), ("click-soft", 22.05, .45), ("click", 24.05, .3),
-       ("whoosh-short", T4E - 0.62, .4), ("notification", T5 + 0.15, .25), ("pop", 27.95, .35),
+       ("whoosh-short", T4E - 0.5, .4), ("notification", T5 + 0.15, .25), ("pop", 27.95, .35),
        ("whoosh-short", 29.43, .4), ("sparkle", 31.35, .3), ("whoosh", END0, .4), ("impact-bass-1", END0 + 0.4, .3),
        ("click", END0 + 1.95, .45)]
 man = json.load(open(os.path.join(SFX_DIR, "manifest.json")))
@@ -215,11 +215,13 @@ root_js = [
     "tl.set('#pw',{transformOrigin:'0px 0px',scale:1,x:0,y:0},0);",
     # жёлтый мир + круг
     f"tl.fromTo('#gy',{{clipPath:'inset(100% 0% 0% 0%)'}},{{clipPath:'inset(0% 0% 0% 0%)',duration:0.3,ease:'power2.out'}},{T4-0.06});",
-    f"tl.fromTo('#pclip',{{clipPath:'circle(1900px at 540px 448px)'}},{{clipPath:'circle(250px at 540px 448px)',duration:0.62,ease:'power3.inOut'}},{T4+0.12});",
-    f"tl.to('#pw',{{...{pw(0.6, 600, 735, 540, 456)},duration:0.62,ease:'power3.inOut'}},{T4+0.12});",
+    # сначала сжимается круг, потом кадр отъезжает внутри него — края видео ни в один кадр не видны (проверено расчётом)
+    f"tl.fromTo('#pclip',{{clipPath:'circle(1900px at 540px 448px)'}},{{clipPath:'circle(250px at 540px 448px)',duration:0.45,ease:'power3.inOut'}},{T4+0.05:.3f});",
+    f"tl.to('#pw',{{...{pw(0.6, 600, 735, 540, 456)},duration:0.5,ease:'power2.inOut'}},{T4+0.35:.3f});",
     # общие планы в круге уже приведены к масштабу крупного плана в plate.mp4 — трансформация постоянна
-    f"tl.to('#pclip',{{clipPath:'circle(1900px at 540px 448px)',duration:0.55,ease:'power3.inOut'}},{T4E-0.62:.3f});",
-    f"tl.to('#pw',{{scale:1,x:0,y:0,duration:0.55,ease:'power3.inOut'}},{T4E-0.62:.3f});",
+    # обратно: наезд внутри круга, затем круг раскрывается до склейки на Q&A
+    f"tl.to('#pw',{{scale:1,x:0,y:0,duration:0.45,ease:'power2.inOut'}},{T4E-0.9:.3f});",
+    f"tl.to('#pclip',{{clipPath:'circle(1900px at 540px 448px)',duration:0.45,ease:'power3.inOut'}},{T4E-0.5:.3f});",
     f"tl.set('#gy',{{clipPath:'inset(0% 0% 100% 0%)'}},{T4E:.3f});",
 ]
 root_body = f"""      <div id="gy" class="full" style="background:#FDDC27;z-index:0"></div>

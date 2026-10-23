@@ -51,8 +51,8 @@
       <audio id="voice" class="clip" src="assets/voice.wav" data-start="0" data-duration="48.5667" data-track-index="2" data-volume="1"></audio>
       <audio id="sfx0" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="2.97" data-duration="0.57" data-track-index="20" data-volume="0.3"></audio>
       <audio id="sfx1" class="clip" src="assets/sfx/pop.mp3" data-start="5.45" data-duration="0.72" data-track-index="21" data-volume="0.25"></audio>
-      <audio id="sfx2" class="clip" src="assets/sfx/whoosh.mp3" data-start="9.13" data-duration="0.57" data-track-index="22" data-volume="0.4"></audio>
-      <audio id="sfx3" class="clip" src="assets/sfx/pop.mp3" data-start="9.17" data-duration="0.72" data-track-index="23" data-volume="0.4"></audio>
+      <audio id="sfx2" class="clip" src="assets/sfx/whoosh.mp3" data-start="8.92" data-duration="0.57" data-track-index="22" data-volume="0.4"></audio>
+      <audio id="sfx3" class="clip" src="assets/sfx/pop.mp3" data-start="9.40" data-duration="0.72" data-track-index="23" data-volume="0.4"></audio>
       <audio id="sfx4" class="clip" src="assets/sfx/click.mp3" data-start="10.26" data-duration="0.37" data-track-index="24" data-volume="0.4"></audio>
       <audio id="sfx5" class="clip" src="assets/sfx/pop.mp3" data-start="11.22" data-duration="0.72" data-track-index="25" data-volume="0.4"></audio>
       <audio id="sfx6" class="clip" src="assets/sfx/click.mp3" data-start="11.94" data-duration="0.37" data-track-index="26" data-volume="0.4"></audio>
@@ -73,14 +73,14 @@
       <audio id="sfx21" class="clip" src="assets/sfx/click-soft.mp3" data-start="37.71" data-duration="0.37" data-track-index="41" data-volume="0.45"></audio>
       <audio id="sfx22" class="clip" src="assets/sfx/click-soft.mp3" data-start="38.99" data-duration="0.37" data-track-index="42" data-volume="0.45"></audio>
       <audio id="sfx23" class="clip" src="assets/sfx/ping.mp3" data-start="40.77" data-duration="1.32" data-track-index="43" data-volume="0.3"></audio>
-      <audio id="sfx24" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="42.60" data-duration="0.57" data-track-index="44" data-volume="0.4"></audio>
+      <audio id="sfx24" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="42.20" data-duration="0.57" data-track-index="44" data-volume="0.4"></audio>
       <audio id="sfx25" class="clip" src="assets/sfx/pop.mp3" data-start="45.38" data-duration="0.72" data-track-index="45" data-volume="0.35"></audio>
       <audio id="sfx26" class="clip" src="assets/sfx/click.mp3" data-start="45.97" data-duration="0.37" data-track-index="46" data-volume="0.45"></audio>
       <audio id="sfx27" class="clip" src="assets/sfx/whoosh.mp3" data-start="47.05" data-duration="0.57" data-track-index="47" data-volume="0.4"></audio>
       <audio id="sfx28" class="clip" src="assets/sfx/click.mp3" data-start="49.65" data-duration="0.37" data-track-index="48" data-volume="0.45"></audio>
       <div id="b-hook" data-composition-id="b-hook" data-composition-src="compositions/b-hook.html" data-start="0" data-duration="3.17" data-track-index="3" data-track-kind="graphics" data-width="1080" data-height="1920" style="position:absolute;inset:0;z-index:10"></div>
       <div id="b-note" data-composition-id="b-note" data-composition-src="compositions/b-note.html" data-start="3.1667" data-duration="4.33" data-track-index="4" data-track-kind="graphics" data-width="1080" data-height="1920" style="position:absolute;inset:0;z-index:11"></div>
-      <div id="b-worry" data-composition-id="b-worry" data-composition-src="compositions/b-worry.html" data-start="9.126700000000001" data-duration="6.14" data-track-index="5" data-track-kind="graphics" data-width="1080" data-height="1920" style="position:absolute;inset:0;z-index:12"></div>
+      <div id="b-worry" data-composition-id="b-worry" data-composition-src="compositions/b-worry.html" data-start="8.9167" data-duration="6.35" data-track-index="5" data-track-kind="graphics" data-width="1080" data-height="1920" style="position:absolute;inset:0;z-index:12"></div>
       <div id="b-life" data-composition-id="b-life" data-composition-src="compositions/b-life.html" data-start="22.8667" data-duration="7.33" data-track-index="6" data-track-kind="graphics" data-width="1080" data-height="1920" style="position:absolute;inset:0;z-index:13"></div>
       <div id="b-brand" data-composition-id="b-brand" data-composition-src="compositions/b-brand.html" data-start="30.2" data-duration="3.0" data-track-index="7" data-track-kind="graphics" data-width="1080" data-height="1920" style="position:absolute;inset:0;z-index:14"></div>
       <div id="b-route" data-composition-id="b-route" data-composition-src="compositions/b-route.html" data-start="32.9" data-duration="9.9" data-track-index="8" data-track-kind="graphics" data-width="1080" data-height="1920" style="position:absolute;inset:0;z-index:15"></div>
@@ -92,10 +92,10 @@
       const tl = gsap.timeline({ paused: true });
 tl.set('#pw',{transformOrigin:'0px 0px',scale:1,x:0,y:0},0);
       tl.set('#pclip',{clipPath:'inset(0px 0px 0px 0px round 0px)'},0);
-      tl.fromTo('#gd',{clipPath:'inset(0% 0% 100% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:0.45,ease:'power2.inOut'},9.126700000000001);
-      tl.to('#pclip',{clipPath:'inset(660px 250px 660px 250px round 6px)',duration:0.55,ease:'power3.inOut'},9.126700000000001);
-      tl.to('#pw',{...{scale:0.8,x:156.0,y:424.0},duration:0.55,ease:'power3.inOut'},9.126700000000001);
-      tl.fromTo('#pol',{opacity:0,scale:1.25},{opacity:1,scale:1,duration:0.55,ease:'power3.inOut'},9.126700000000001);
+      tl.fromTo('#gd',{clipPath:'inset(0% 0% 100% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:0.4,ease:'power2.inOut'},8.9167);
+      tl.to('#pclip',{clipPath:'inset(660px 250px 660px 250px round 6px)',duration:0.45,ease:'power3.inOut'},8.9167);
+      tl.to('#pw',{...{scale:0.8,x:156.0,y:424.0},duration:0.45,ease:'power3.inOut'},8.9167);
+      tl.fromTo('#pol',{opacity:0,scale:1.25},{opacity:1,scale:1,duration:0.45,ease:'power3.inOut'},8.9167);
       tl.to('#pclip',{clipPath:'inset(0px 0px 0px 0px round 0px)',duration:0.6,ease:'power3.inOut'},14.367);
       tl.to('#pw',{scale:1,x:0,y:0,duration:0.6,ease:'power3.inOut'},14.367);
       tl.to('#pol',{opacity:0,scale:1.4,duration:0.35,ease:'power3.in'},14.367);
@@ -103,8 +103,8 @@ tl.set('#pw',{transformOrigin:'0px 0px',scale:1,x:0,y:0},0);
       tl.fromTo('#gy',{clipPath:'inset(100% 0% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:0.3,ease:'power2.out'},32.82);
       tl.to('#pclip',{clipPath:'inset(250px 80px 940px 590px round 28px)',duration:0.6,ease:'power3.inOut'},33.0);
       tl.to('#pw',{...{scale:0.66,x:484.8,y:119.6},duration:0.6,ease:'power3.inOut'},33.0);
-      tl.to('#pclip',{clipPath:'inset(0px 0px 0px 0px round 0px)',duration:0.55,ease:'power3.inOut'},42.580000000000005);
-      tl.to('#pw',{scale:1,x:0,y:0,duration:0.55,ease:'power3.inOut'},42.580000000000005);
+      tl.to('#pclip',{clipPath:'inset(0px 0px 0px 0px round 0px)',duration:0.55,ease:'power3.inOut'},42.200);
+      tl.to('#pw',{scale:1,x:0,y:0,duration:0.55,ease:'power3.inOut'},42.200);
       tl.to('#gy',{clipPath:'inset(0% 0% 100% 0%)',duration:0.45,ease:'power2.inOut'},42.85);
       tl.fromTo('#wbrNitra',{clipPath:'inset(0% 100% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:0.32,ease:'power3.inOut'},22.867);
       tl.fromTo('#wbr15',{clipPath:'inset(0% 100% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:0.32,ease:'power3.inOut'},24.487);

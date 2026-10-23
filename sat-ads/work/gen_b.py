@@ -19,7 +19,7 @@ def WT(txt, tag=None):
             return w["t"]
     raise SystemExit("нет слова " + txt)
 
-T_W0 = SEG["worry"] - 0.04      # уход в полароид
+T_W0 = SEG["worry"] - 0.25      # уход в полароид (до первой ленты)
 T_W1 = SEG["mom2"]              # «але з часом» — склейка посреди раскрытия полароида
 T_L = SEG["life1"]              # B-roll
 T_EDU = WT("навчаюсь") - 0.03   # лекция
@@ -66,13 +66,13 @@ files["b-note"] = scene("b-note", """
 """)
 
 # ---------- 3. тревоги: ленты + полароид ----------
-tapes = [("ДИТИНА ДАЛЕКО", SEG["worry"], "tk", -3, -40, 252), ("ЧУЖА КРАЇНА", WT("чужа"), "ty", 2, 50, 344),
+tapes = [("ДИТИНА ДАЛЕКО", T_W0 + 0.48, "tk", -3, -40, 252), ("ЧУЖА КРАЇНА", WT("чужа"), "ty", 2, 50, 344),
          ("НОВІ ЛЮДИ", WT("нові"), "tw", -2, -70, 436), ("НЕЗНАЙОМЕ ЖИТТЯ", WT("незнайоме"), "ty", 2, 30, 528)]
 tb, tj = [], []
 for i, (txt, t, cls, rot, dx, y) in enumerate(tapes):
     tb.append(f"    <div class='row' style='top:{y}px'><div id='tp{i}' class='tape {cls} sh' style='font-size:52px;letter-spacing:.01em;margin-left:{dx*2}px'>{txt}</div></div>")
     tj.append(f"tl.fromTo('#tp{i}',{{opacity:0,scale:1.5,rotation:{rot*3}}},{{opacity:1,scale:1,rotation:{rot},duration:0.22,ease:'expo.out'}},{t-T_W0:.2f});")
-    tj.append(f"tl.to('#tp{i}',{{x:{'-' if i%2==0 else ''}1300,rotation:{rot*4},duration:0.38,ease:'power3.in'}},{T_W1-T_W0-0.38+0.05*i:.2f});")
+    tj.append(f"tl.to('#tp{i}',{{y:-24,opacity:0,duration:0.22,ease:'power2.in'}},{T_W1-T_W0-0.72+0.04*(3-i):.2f});")
 files["b-worry"] = scene("b-worry", "\n".join(tb) + f"""
     <div id="pn1" class="abs hand" style="left:236px;top:1262px;width:608px;text-align:center;font-size:52px;line-height:1;color:#111">моя мама теж переживала</div>
 """, "\n    ".join(tj) + f"""
@@ -91,7 +91,7 @@ for i, (txt, t) in enumerate(life):
     lj.append(f"tl.fromTo('#lf{i}',{{x:-60,opacity:0}},{{x:0,opacity:1,duration:0.32,ease:'expo.out'}},{t-T_L:.2f});")
     lj.append(f"tl.fromTo('#lf{i} .ck',{{strokeDasharray:40,strokeDashoffset:40}},{{strokeDashoffset:0,duration:0.25,ease:'power2.out'}},{t-T_L+0.12:.2f});")
 files["b-life"] = scene("b-life", f"""
-    <div id="lh" class="abs hand" style="left:96px;top:790px;font-size:70px;color:#fff;transform:rotate(-3deg);text-shadow:0 4px 18px rgba(0,0,0,.5)">а тепер:</div>
+    <div id="lh" class="abs hand" style="left:96px;top:790px;font-size:72px;color:#fff;transform:rotate(-3deg);text-shadow:0 2px 6px rgba(0,0,0,.65),0 6px 24px rgba(0,0,0,.6)">а тепер:</div>
 """ + "\n".join(lb), f"""
     tl.fromTo('#lh',{{opacity:0,clipPath:'inset(0% 100% 0% 0%)'}},{{opacity:1,clipPath:'inset(0% 0% 0% 0%)',duration:0.35,ease:'power2.out'}},0.1);
     {chr(10).join('    '+j for j in lj)}
@@ -138,12 +138,12 @@ files["b-route"] = scene("b-route", f"""
         <div style="font-weight:800;font-size:46px;line-height:1.15;color:#FDDC27">у Словаччині</div></div>
     </div>
 """, f"""
-    tl.fromTo('#rh',{{opacity:0,y:-30}},{{opacity:1,y:0,duration:0.4,ease:'expo.out'}},0.3);
+    tl.fromTo('#rh',{{opacity:0,y:-30}},{{opacity:1,y:0,duration:0.4,ease:'expo.out'}},0.78);
     tl.set('#rline',{{clipPath:'inset(0px 0px 640px 0px)'}},0);
     {chr(10).join('    '+j for j in sj)}
     tl.to('#rline',{{clipPath:'inset(0px 0px 0px 0px)',duration:0.4,ease:'power2.inOut'}},{T_CUR-0.16-T_R0:.2f});
     tl.fromTo('#cur',{{scale:0.6,opacity:0,y:60}},{{scale:1,opacity:1,y:0,duration:0.45,ease:'back.out(1.5)'}},{T_CUR-T_R0:.2f});
-    tl.to(['#rh','#rline','[id^=st]','#cur'],{{opacity:0,y:40,duration:0.25,ease:'power3.in',stagger:0.03}},{T_R1-T_R0-0.3:.2f});
+    tl.to(['#rh','#rline','[id^=st]','#cur'],{{opacity:0,y:30,duration:0.22,ease:'power2.in',stagger:0.02}},{T_R1-T_R0-0.78:.2f});
 """, """
     .dotc{flex:none;width:44px;height:44px;border-radius:50%;background:#111;border:9px solid #fff;margin-top:2px;box-shadow:0 0 0 4px #111;}
 """)
@@ -192,7 +192,7 @@ for i, w in enumerate(W):
     if w["w"] == "під": fixes[i] = "Підбір"
     if w["w"] == "пір": fixes[i] = None
 hide = [(0, SEG["hook2"] - 0.05), (T_W0, T_W1 - 0.02), (T_L - 0.02, SEG["brand"] - 0.05), (T_LOGO - 0.1, T_R1 - 0.05), (T_BTN - 0.05, 99)]
-groups = build_groups(W, hide=hide, fixes=fixes)
+groups = build_groups(W, hide=hide, fixes=fixes, seg_t0=[x["t0"] for x in E["segments"]])
 files["b-captions"] = captions_scene("b-captions", groups, ycenter=1190)
 
 for k, v in files.items():
@@ -204,7 +204,7 @@ SFX = [("whoosh-short", SEG["hook2"] - 0.2, .3), ("pop", 5.45, .25),
        ("whoosh", T_W1 - 0.3, .45)] + [("whoosh-short", a, .35) for _b, a, *_r in BR] + [
        ("click-soft", t + 0.05, .45) for _, t in life] + [
        ("impact-bass-1", T_LOGO, .3), ("whoosh", T_R0 + 0.02, .4)] + [("click-soft", t, .45) for *_a, t in stops] + [
-       ("ping", T_CUR, .3), ("whoosh-short", T_R1 - 0.1, .4), ("pop", T_BTN, .35), ("click", T_PRESS, .45),
+       ("ping", T_CUR, .3), ("whoosh-short", T_R1 - 0.5, .4), ("pop", T_BTN, .35), ("click", T_PRESS, .45),
        ("whoosh", END0, .4), ("click", END0 + 2.6, .45)]
 man = json.load(open(os.path.join(SFX_DIR, "manifest.json")))
 sfx_html = []
@@ -224,10 +224,10 @@ root_js = [
     "tl.set('#pw',{transformOrigin:'0px 0px',scale:1,x:0,y:0},0);",
     f"tl.set('#pclip',{{clipPath:'{FULL}'}},0);",
     # тревоги: тёмный фон + полароид
-    f"tl.fromTo('#gd',{{clipPath:'inset(0% 0% 100% 0%)'}},{{clipPath:'inset(0% 0% 0% 0%)',duration:0.45,ease:'power2.inOut'}},{T_W0});",
-    f"tl.to('#pclip',{{clipPath:'{POL}',duration:0.55,ease:'power3.inOut'}},{T_W0});",
-    f"tl.to('#pw',{{...{pw(0.8, 480, 670, 540, 960)},duration:0.55,ease:'power3.inOut'}},{T_W0});",
-    f"tl.fromTo('#pol',{{opacity:0,scale:1.25}},{{opacity:1,scale:1,duration:0.55,ease:'power3.inOut'}},{T_W0});",
+    f"tl.fromTo('#gd',{{clipPath:'inset(0% 0% 100% 0%)'}},{{clipPath:'inset(0% 0% 0% 0%)',duration:0.4,ease:'power2.inOut'}},{T_W0});",
+    f"tl.to('#pclip',{{clipPath:'{POL}',duration:0.45,ease:'power3.inOut'}},{T_W0});",
+    f"tl.to('#pw',{{...{pw(0.8, 480, 670, 540, 960)},duration:0.45,ease:'power3.inOut'}},{T_W0});",
+    f"tl.fromTo('#pol',{{opacity:0,scale:1.25}},{{opacity:1,scale:1,duration:0.45,ease:'power3.inOut'}},{T_W0});",
     f"tl.to('#pclip',{{clipPath:'{FULL}',duration:0.6,ease:'power3.inOut'}},{T_W1-0.3:.3f});",
     f"tl.to('#pw',{{scale:1,x:0,y:0,duration:0.6,ease:'power3.inOut'}},{T_W1-0.3:.3f});",
     f"tl.to('#pol',{{opacity:0,scale:1.4,duration:0.35,ease:'power3.in'}},{T_W1-0.3:.3f});",
@@ -236,8 +236,8 @@ root_js = [
     f"tl.fromTo('#gy',{{clipPath:'inset(100% 0% 0% 0%)'}},{{clipPath:'inset(0% 0% 0% 0%)',duration:0.3,ease:'power2.out'}},{T_R0-0.08});",
     f"tl.to('#pclip',{{clipPath:'{PIP}',duration:0.6,ease:'power3.inOut'}},{T_R0+0.1});",
     f"tl.to('#pw',{{...{pw(0.66, 470, 690, 795, 575)},duration:0.6,ease:'power3.inOut'}},{T_R0+0.1});",
-    f"tl.to('#pclip',{{clipPath:'{FULL}',duration:0.55,ease:'power3.inOut'}},{T_R1-0.12});",
-    f"tl.to('#pw',{{scale:1,x:0,y:0,duration:0.55,ease:'power3.inOut'}},{T_R1-0.12});",
+    f"tl.to('#pclip',{{clipPath:'{FULL}',duration:0.55,ease:'power3.inOut'}},{T_R1-0.5:.3f});",
+    f"tl.to('#pw',{{scale:1,x:0,y:0,duration:0.55,ease:'power3.inOut'}},{T_R1-0.5:.3f});",
     f"tl.to('#gy',{{clipPath:'inset(0% 0% 100% 0%)',duration:0.45,ease:'power2.inOut'}},{T_R1+0.15});",
 ]
 for i, (bid, a, b, ext, kb) in enumerate(BR):

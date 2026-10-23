@@ -51,7 +51,7 @@
   <script>
     const tl = gsap.timeline({ paused: true });
 
-    tl.fromTo('#ring',{scale:1.9,opacity:0},{scale:1,opacity:1,duration:0.6,ease:'power3.inOut'},0.05);
+    tl.fromTo('#ring',{scale:1.12,opacity:0},{scale:1,opacity:1,duration:0.3,ease:'power2.out'},0.42);
     tl.fromTo('#ph',{clipPath:'inset(0% 100% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:0.36,ease:'power3.out'},0.55);
     tl.fromTo('#kk',{opacity:0,scale:0.6,rotation:-20},{opacity:1,scale:1,rotation:-8,duration:0.4,ease:'expo.out'},0.79);
         tl.fromTo('#it0',{x:-46,opacity:0,filter:'blur(6px)'},{x:0,opacity:1,filter:'blur(0px)',duration:0.36,ease:'expo.out'},1.73);
@@ -62,8 +62,8 @@
     tl.fromTo('#it5',{x:-46,opacity:0,filter:'blur(6px)'},{x:0,opacity:1,filter:'blur(0px)',duration:0.36,ease:'expo.out'},12.75);
     tl.fromTo('#hlm',{scaleX:0},{scaleX:1,duration:0.3,ease:'power3.out'},8.56);
     tl.to('#hl b',{color:'#fff',duration:0.12},8.62);
-    tl.to(['#ring','#kk','#ph'],{opacity:0,scale:1.12,duration:0.28,ease:'power3.in'},14.05);
-    tl.to('[id^=it]',{opacity:0,x:60,duration:0.24,ease:'power3.in',stagger:0.025},13.97);
+    tl.to(['#ring','#kk','#ph'],{opacity:0,duration:0.2,ease:'power2.in'},13.77);
+    tl.to('[id^=it]',{opacity:0,x:60,duration:0.24,ease:'power3.in',stagger:0.025},13.72);
 
     window.__timelines["a-program"] = tl;
   </script>

@@ -103,7 +103,7 @@ def captions_scene(cid, groups, ycenter=1170, css_extra=""):
     return scene(cid, "\n".join(body), "\n    ".join(js), css)
 
 
-def build_groups(words, hide=(), maxw=3, maxc=22, gap=0.28, fixes=None, tail=0.25):
+def build_groups(words, hide=(), maxw=3, maxc=22, gap=0.28, fixes=None, tail=0.25, seg_t0=None):
     """Слова -> группы субтитров. hide: [(a,b)] — интервалы без субтитров (по началу слова)."""
     fixes = fixes or {}
     ws = []
@@ -131,9 +131,14 @@ def build_groups(words, hide=(), maxw=3, maxc=22, gap=0.28, fixes=None, tail=0.2
     out = []
     for gi, g in enumerate(groups):
         t0 = g[0]["t"] - 0.06
+        if seg_t0 is not None:          # не раньше склейки, на которой звучит первое слово
+            t0 = max(t0, seg_t0[g[0]["seg"]] + 0.01)
         t1 = g[-1]["e"] + 0.05
         if gi + 1 < len(groups):
             t1 = min(t1 + tail, groups[gi + 1][0]["t"] - 0.08)
+        for ha, hb in hide:             # группа гаснет до начала скрытого участка (B-roll, графика)
+            if ha > g[0]["t"]:
+                t1 = min(t1, ha - 0.02)
         out.append({"t0": round(max(0.02, t0), 3), "t1": round(t1, 3), "words": g})
     return out
 

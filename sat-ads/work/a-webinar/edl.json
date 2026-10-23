@@ -35,21 +35,9 @@
   {
    "src": "IMG_3533",
    "in": 0.32,
-   "out": 1.82,
+   "out": 4.09,
    "tag": "proof",
    "snap": false
-  },
-  {
-   "src": "IMG_3533",
-   "in": 1.82,
-   "out": 4.09,
-   "tag": "proofz",
-   "snap": false,
-   "zoom": [
-    1.1,
-    600,
-    730
-   ]
   },
   {
    "src": "IMG_3533",
