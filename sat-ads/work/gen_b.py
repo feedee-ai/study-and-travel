@@ -168,10 +168,10 @@ files["b-end"] = scene("b-end", f"""
       <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#FDDC27" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div></div>
     <div class="row" style="top:1160px"><div id="ea">{ARROW_DOWN.format(w=60, h=120, c='#111')}</div></div>
 """, f"""
-    tl.fromTo('#eb',{{clipPath:'circle(0px at 540px 1140px)'}},{{clipPath:'circle(1700px at 540px 1140px)',duration:0.55,ease:'power2.inOut'}},0);
-    tl.fromTo('#et1',{{y:50,opacity:0,filter:'blur(8px)'}},{{y:0,opacity:1,filter:'blur(0px)',duration:0.4,ease:'expo.out'}},0.12);
+    tl.fromTo('#eb',{{clipPath:'circle(0px at 540px 1140px)'}},{{clipPath:'circle(1700px at 540px 1140px)',duration:0.45,ease:'power2.inOut'}},0);
+    tl.fromTo('#et1',{{y:50,opacity:0,filter:'blur(8px)'}},{{y:0,opacity:1,filter:'blur(0px)',duration:0.4,ease:'expo.out'}},0.45);
     tl.fromTo('#et2',{{scale:1.3,opacity:0,rotation:-6}},{{scale:1,opacity:1,rotation:-2,duration:0.36,ease:'expo.out'}},{WT('консультацію') - END0 - 0.05:.2f});
-    tl.fromTo('#elogo',{{y:-40,opacity:0}},{{y:0,opacity:1,duration:0.45,ease:'expo.out'}},0.5);
+    tl.fromTo('#elogo',{{y:-40,opacity:0}},{{y:0,opacity:1,duration:0.45,ease:'expo.out'}},0.55);
     tl.fromTo('#es',{{y:24,opacity:0}},{{y:0,opacity:1,duration:0.35,ease:'expo.out'}},1.25);
     tl.fromTo('#ebt',{{scale:0.7,opacity:0}},{{scale:1,opacity:1,duration:0.4,ease:'expo.out'}},1.5);
     tl.fromTo('#ea .ar',{{strokeDasharray:130,strokeDashoffset:130}},{{strokeDashoffset:0,duration:0.35,ease:'power2.out'}},1.75);
@@ -252,7 +252,7 @@ root_body = f"""      <div id="gd" class="full" style="background:#161514;z-inde
       <div id="pol" class="abs" style="left:226px;top:636px;width:628px;height:688px;background:#fff;border-radius:8px;box-shadow:0 24px 60px rgba(0,0,0,.55);z-index:1;opacity:0"></div>
       <div id="pclip" class="full" style="z-index:2">
         <div id="pw" class="full">
-          <video id="plate" class="clip full" src="assets/plate.mp4" data-start="0" data-duration="{VD}" data-track-index="1" muted playsinline></video>
+          <video id="plate" class="clip full" src="assets/plate.mp4" data-start="0" data-duration="{round(VD + 1.0, 3)}" data-track-index="1" muted playsinline></video>
         </div>
       </div>
 {br_html}

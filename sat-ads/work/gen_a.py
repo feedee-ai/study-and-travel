@@ -147,7 +147,7 @@ files["a-cta"] = scene("a-cta", ticket("tk2", 90, 790) + f"""
       <div class="hand" style="font-size:36px;line-height:.95;text-align:center;color:#111;margin-top:2px">подарунок<br>кожному</div>
     </div>
 """, f"""
-    tl.fromTo('#tk2',{{y:520,rotation:8,opacity:0,scale:0.82}},{{y:0,rotation:-2,opacity:1,scale:0.82,duration:0.55,ease:'expo.out'}},{29.45-T6:.2f});
+    tl.fromTo('#tk2',{{x:1000,rotation:10,opacity:1,scale:0.82,filter:'blur(8px)'}},{{x:0,rotation:-2,opacity:1,scale:0.82,filter:'blur(0px)',duration:0.55,ease:'expo.out'}},{29.45-T6:.2f});
     tl.set('#tk2-ul path',{{strokeDasharray:620,strokeDashoffset:0}},0);
     tl.fromTo('#gift',{{scale:0,rotation:-40}},{{scale:1,rotation:10,duration:0.5,ease:'back.out(1.6)'}},{31.35-T6:.2f});
 """, TICKET_CSS)
@@ -165,7 +165,7 @@ files["a-end"] = scene("a-end", f"""
     <div class="row" style="top:1010px"><div id="ebt" class="f" style="background:#111;color:var(--y);font-weight:800;font-size:54px;padding:26px 56px 30px;border-radius:24px;box-shadow:0 14px 0 rgba(0,0,0,.18)">Зареєструватися</div></div>
     <div class="row" style="top:1160px"><div id="ea">{ARROW_DOWN.format(w=60, h=120, c='#111')}</div></div>
 """, f"""
-    tl.fromTo('#eb',{{clipPath:'circle(0px at 540px 860px)'}},{{clipPath:'circle(1500px at 540px 860px)',duration:0.55,ease:'power2.inOut'}},0);
+    tl.fromTo('#eb',{{clipPath:'circle(0px at 540px 860px)'}},{{clipPath:'circle(1500px at 540px 860px)',duration:0.45,ease:'power2.inOut'}},0);
     tl.fromTo('#elogo',{{y:-40,opacity:0}},{{y:0,opacity:1,duration:0.45,ease:'expo.out'}},0.38);
     tl.fromTo('#et1',{{y:50,opacity:0,filter:'blur(8px)'}},{{y:0,opacity:1,filter:'blur(0px)',duration:0.4,ease:'expo.out'}},0.5);
     tl.fromTo('#et2',{{scale:1.3,opacity:0,rotation:-6}},{{scale:1,opacity:1,rotation:-2,duration:0.36,ease:'expo.out'}},0.62);
@@ -227,7 +227,7 @@ root_js = [
 root_body = f"""      <div id="gy" class="full" style="background:#FDDC27;z-index:0"></div>
       <div id="pclip" class="full" style="z-index:1">
         <div id="pw" class="full">
-          <video id="plate" class="clip full" src="assets/plate.mp4" data-start="0" data-duration="{VD}" data-track-index="1" muted playsinline></video>
+          <video id="plate" class="clip full" src="assets/plate.mp4" data-start="0" data-duration="{round(VD + 1.0, 3)}" data-track-index="1" muted playsinline></video>
         </div>
       </div>
       <audio id="voice" class="clip" src="assets/voice.wav" data-start="0" data-duration="{VD}" data-track-index="2" data-volume="1"></audio>

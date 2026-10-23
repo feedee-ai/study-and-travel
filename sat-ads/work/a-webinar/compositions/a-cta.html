@@ -54,7 +54,7 @@
   <script>
     const tl = gsap.timeline({ paused: true });
 
-    tl.fromTo('#tk2',{y:520,rotation:8,opacity:0,scale:0.82},{y:0,rotation:-2,opacity:1,scale:0.82,duration:0.55,ease:'expo.out'},0.08);
+    tl.fromTo('#tk2',{x:1000,rotation:10,opacity:1,scale:0.82,filter:'blur(8px)'},{x:0,rotation:-2,opacity:1,scale:0.82,filter:'blur(0px)',duration:0.55,ease:'expo.out'},0.08);
     tl.set('#tk2-ul path',{strokeDasharray:620,strokeDashoffset:0},0);
     tl.fromTo('#gift',{scale:0,rotation:-40},{scale:1,rotation:10,duration:0.5,ease:'back.out(1.6)'},1.98);
 

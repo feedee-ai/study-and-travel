@@ -9,6 +9,7 @@ base = os.path.dirname(os.path.abspath(sys.argv[1]))
 RAW = E["raw"]; OUT = os.path.join(base, E["out"]); os.makedirs(OUT, exist_ok=True)
 TR = json.load(open(E["transcript"]))
 SNAP = E.get("snap", 0.08)
+TAIL = 1.0                       # стоп-кадр в конце plate.mp4, длина голоса не меняется
 FPS = 30
 
 def run(cmd):
@@ -59,12 +60,14 @@ for k, s in enumerate(segs):
     vf = E["vf"].get(s["src"], E["vf"]["*"]) if isinstance(E["vf"], dict) else E["vf"]
     if s.get("zoom"):
         # zoom: [s, fx, fy] — наезд в s раз с неподвижной точкой (fx,fy); [s, fx, fy, tx, ty] — точка (fx,fy) уезжает в (tx,ty)
-        z = s["zoom"]; k, fx, fy = z[0], z[1], z[2]; tx, ty = (z[3], z[4]) if len(z) > 3 else (fx, fy)
-        w, h = 1080 / k, 1920 / k
-        x0 = min(max(fx - tx / k, 0), 1080 - w); y0 = min(max(fy - ty / k, 0), 1920 - h)
+        z = s["zoom"]; zk, fx, fy = z[0], z[1], z[2]; tx, ty = (z[3], z[4]) if len(z) > 3 else (fx, fy)
+        w, h = 1080 / zk, 1920 / zk
+        x0 = min(max(fx - tx / zk, 0), 1080 - w); y0 = min(max(fy - ty / zk, 0), 1920 - h)
         vf += f",scale=2160:3840:flags=lanczos,crop={w*2:.0f}:{h*2:.0f}:{x0*2:.0f}:{y0*2:.0f},scale=1080:1920:flags=lanczos"
-    run(["ffmpeg", "-v", "error", "-y", "-ss", f"{s['in']:.3f}", "-i", find(s["src"]), "-t", f"{s['dur']:.4f}", "-an",
-         "-vf", f"fps={FPS},{vf},setsar=1,format=yuv420p", "-frames:v", str(round(s["dur"] * FPS)),
+    last = k == len(segs) - 1           # последний кусок — плюс 1 с стоп-кадра под энд-кард
+    tail = f",tpad=stop_mode=clone:stop_duration={TAIL}" if last else ""
+    run(["ffmpeg", "-v", "error", "-y", "-ss", f"{s['in']:.3f}", "-t", f"{s['dur']:.4f}", "-i", find(s["src"]), "-an",
+         "-vf", f"fps={FPS},{vf}{tail},setsar=1,format=yuv420p", "-frames:v", str(round((s["dur"] + (TAIL if last else 0)) * FPS)),
          "-c:v", "libx264", "-preset", "medium", "-crf", "14", "-g", "15", "-pix_fmt", "yuv420p",
          "-color_range", "tv", "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709", p])
 lst = os.path.join(OUT, "_list.txt")
