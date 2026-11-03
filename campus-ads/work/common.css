@@ -1,0 +1,37 @@
+  @font-face { font-family: "Unbounded"; src: url("assets/fonts/unbounded-cyrillic-wght-normal.woff2") format("woff2"); font-weight: 200 900;
+               unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+  @font-face { font-family: "Unbounded"; src: url("assets/fonts/unbounded-latin-wght-normal.woff2") format("woff2"); font-weight: 200 900;
+               unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  @font-face { font-family: "Manrope"; src: url("assets/fonts/manrope-cyrillic-wght-normal.woff2") format("woff2"); font-weight: 200 800;
+               unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+  @font-face { font-family: "Manrope"; src: url("assets/fonts/manrope-latin-wght-normal.woff2") format("woff2"); font-weight: 200 800;
+               unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  :root { --y: #FFD21A; --k: #0C0C0C; --w: #FFFFFF; }
+  html, body { margin: 0; background: #000; }
+  #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; color: var(--w);
+          font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; }
+  .abs { position: absolute; }
+  .disp { font-family: "Unbounded", sans-serif; text-transform: uppercase; }
+  .pillY { display: inline-flex; align-items: center; gap: 14px; background: var(--y); color: var(--k); border-radius: 16px;
+           padding: 12px 24px 14px; font-family: "Unbounded", sans-serif; font-weight: 800; text-transform: uppercase; white-space: nowrap; }
+  .pillK { display: inline-flex; align-items: center; gap: 14px; background: rgba(12,12,12,.9); color: var(--w); border-radius: 16px;
+           padding: 12px 24px 14px; font-family: "Unbounded", sans-serif; font-weight: 700; text-transform: uppercase; white-space: nowrap; }
+  .card { position: absolute; background: #fff; color: var(--k); border-radius: 34px; box-shadow: 0 30px 80px rgba(0,0,0,.28); }
+  .cardK { position: absolute; background: rgba(12,12,12,.9); color: #fff; border-radius: 34px; box-shadow: 0 30px 80px rgba(0,0,0,.3); }
+  #plateW { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: hidden; }
+  #plateZ { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  #plate { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+  #scrimTop { left: 0; top: 0; width: 1080px; height: 820px; background: linear-gradient(180deg, rgba(0,0,0,.42) 0%, rgba(0,0,0,.16) 55%, rgba(0,0,0,0) 100%); }
+  #scrimBot { left: 0; top: 1060px; width: 1080px; height: 860px; background: linear-gradient(0deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.32) 50%, rgba(0,0,0,0) 100%); }
+  #caps { left: 70px; top: 1250px; width: 940px; height: 240px; }
+  .cap { position: absolute; left: 0; top: 0; width: 940px; height: 240px; display: flex; flex-wrap: wrap; align-content: center; justify-content: center;
+         gap: 0 18px; text-align: center; opacity: 0; }
+  .cw { display: block; font-weight: 800; font-size: 72px; line-height: 90px; letter-spacing: -0.01em; color: var(--w);
+        text-shadow: 0 4px 22px rgba(0,0,0,.55), 0 2px 4px rgba(0,0,0,.5); }
+  .cw.on { color: var(--y); }
+  /* стиль B: слова на белых плашках, активное — на жёлтой */
+  .capB .cw { color: var(--k); background: #fff; border-radius: 14px; padding: 2px 16px 6px; margin: 6px 0; text-shadow: none; font-size: 64px; line-height: 80px;
+              box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+  .capB .cw.on { background: var(--y); color: var(--k); }
+  .capB { gap: 0 12px; }
+  .ico { display: block; }

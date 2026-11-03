@@ -1,0 +1,300 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="assets/vendor/gsap.min.js"></script>
+<style>
+  @font-face { font-family: "Unbounded"; src: url("assets/fonts/unbounded-cyrillic-wght-normal.woff2") format("woff2"); font-weight: 200 900;
+               unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+  @font-face { font-family: "Unbounded"; src: url("assets/fonts/unbounded-latin-wght-normal.woff2") format("woff2"); font-weight: 200 900;
+               unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  @font-face { font-family: "Manrope"; src: url("assets/fonts/manrope-cyrillic-wght-normal.woff2") format("woff2"); font-weight: 200 800;
+               unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+  @font-face { font-family: "Manrope"; src: url("assets/fonts/manrope-latin-wght-normal.woff2") format("woff2"); font-weight: 200 800;
+               unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  :root { --y: #FFD21A; --k: #0C0C0C; --w: #FFFFFF; }
+  html, body { margin: 0; background: #000; }
+  #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; color: var(--w);
+          font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; }
+  .abs { position: absolute; }
+  .disp { font-family: "Unbounded", sans-serif; text-transform: uppercase; }
+  .pillY { display: inline-flex; align-items: center; gap: 14px; background: var(--y); color: var(--k); border-radius: 16px;
+           padding: 12px 24px 14px; font-family: "Unbounded", sans-serif; font-weight: 800; text-transform: uppercase; white-space: nowrap; }
+  .pillK { display: inline-flex; align-items: center; gap: 14px; background: rgba(12,12,12,.9); color: var(--w); border-radius: 16px;
+           padding: 12px 24px 14px; font-family: "Unbounded", sans-serif; font-weight: 700; text-transform: uppercase; white-space: nowrap; }
+  .card { position: absolute; background: #fff; color: var(--k); border-radius: 34px; box-shadow: 0 30px 80px rgba(0,0,0,.28); }
+  .cardK { position: absolute; background: rgba(12,12,12,.9); color: #fff; border-radius: 34px; box-shadow: 0 30px 80px rgba(0,0,0,.3); }
+  #plateW { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: hidden; }
+  #plateZ { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  #plate { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+  #scrimTop { left: 0; top: 0; width: 1080px; height: 820px; background: linear-gradient(180deg, rgba(0,0,0,.42) 0%, rgba(0,0,0,.16) 55%, rgba(0,0,0,0) 100%); }
+  #scrimBot { left: 0; top: 1060px; width: 1080px; height: 860px; background: linear-gradient(0deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.32) 50%, rgba(0,0,0,0) 100%); }
+  #caps { left: 70px; top: 1250px; width: 940px; height: 240px; }
+  .cap { position: absolute; left: 0; top: 0; width: 940px; height: 240px; display: flex; flex-wrap: wrap; align-content: center; justify-content: center;
+         gap: 0 18px; text-align: center; opacity: 0; }
+  .cw { display: block; font-weight: 800; font-size: 72px; line-height: 90px; letter-spacing: -0.01em; color: var(--w);
+        text-shadow: 0 4px 22px rgba(0,0,0,.55), 0 2px 4px rgba(0,0,0,.5); }
+  .cw.on { color: var(--y); }
+  /* стиль B: слова на белых плашках, активное — на жёлтой */
+  .capB .cw { color: var(--k); background: #fff; border-radius: 14px; padding: 2px 16px 6px; margin: 6px 0; text-shadow: none; font-size: 64px; line-height: 80px;
+              box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+  .capB .cw.on { background: var(--y); color: var(--k); }
+  .capB { gap: 0 12px; }
+  .ico { display: block; }
+
+  #bgY { left: 0; top: 0; width: 1080px; height: 1920px; background: var(--y); }
+  #plateW { transform-origin: 0 0; }
+
+  /* 0 — переваги: бенто */
+  #lab0 { left: 72px; top: 214px; font-size: 30px; opacity: 0; }
+  #h0 { left: 72px; top: 250px; width: 936px; display: flex; flex-wrap: wrap; gap: 0 22px; }
+  #h0 em { display: block; font-style: normal; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 80px; line-height: 94px; text-transform: uppercase;
+           text-shadow: 0 6px 30px rgba(0,0,0,.45); }
+  #h0 em.k { color: var(--k); background: var(--y); border-radius: 16px; padding: 0 18px 6px; margin: 6px 0; text-shadow: none; }
+  #bento { left: 72px; top: 300px; width: 936px; height: 440px; }
+  .tile { position: absolute; width: 458px; height: 206px; border-radius: 34px; background: #fff; color: var(--k); box-shadow: 0 24px 60px rgba(0,0,0,.25);
+          opacity: 0; overflow: hidden; }
+  .tile .ic { position: absolute; left: 26px; top: 26px; width: 76px; height: 76px; border-radius: 22px; background: var(--y); }
+  .tile .ic svg { position: absolute; left: 14px; top: 14px; width: 48px; height: 48px; }
+  .tile b { position: absolute; left: 26px; top: 116px; width: 410px; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 34px; line-height: 40px;
+            text-transform: uppercase; }
+  .tile .no { position: absolute; right: 26px; top: 30px; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 26px; opacity: .3; }
+  .tile.k { background: var(--k); color: #fff; }
+  .tile.k .ic { background: var(--y); }
+
+  /* 1 — доступно */
+  #zero { left: 72px; top: 260px; width: 936px; height: 420px; opacity: 0; }
+  #zero .n { position: absolute; left: 0; top: 0; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 300px; line-height: 320px; color: var(--y);
+             text-shadow: 0 16px 60px rgba(0,0,0,.35); }
+  #zero .t { position: absolute; left: 6px; top: 320px; font-size: 40px; }
+  #dost { left: 72px; top: 230px; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 92px; line-height: 100px; text-transform: uppercase;
+          text-shadow: 0 8px 30px rgba(0,0,0,.4); opacity: 0; }
+  #lang { left: 72px; top: 300px; width: 936px; height: 320px; opacity: 0; }
+  #lang .b { position: absolute; left: 0; top: 0; padding: 22px 34px 26px; border-radius: 34px 34px 34px 8px; background: #fff; color: var(--k); }
+  #lang .b small { display: block; font-size: 24px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; opacity: .5; }
+  #lang .b b { display: block; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 56px; line-height: 66px; }
+  #lang .ok { position: absolute; left: 0; top: 190px; font-size: 38px; }
+  #crowd { left: 72px; top: 250px; width: 936px; height: 470px; opacity: 0; }
+  #crowd .av { position: absolute; width: 150px; height: 150px; border-radius: 50%; border: 8px solid #fff; box-sizing: border-box; overflow: hidden;
+               box-shadow: 0 16px 40px rgba(0,0,0,.25); opacity: 0; }
+  #crowd .av svg { position: absolute; left: 0; top: 0; width: 134px; height: 134px; }
+  #crowd .lb { position: absolute; left: 0; top: 330px; font-size: 38px; opacity: 0; }
+  #curator { left: 72px; top: 280px; width: 860px; height: 330px; opacity: 0; }
+  #curator .card { left: 0; top: 0; width: 860px; height: 300px; }
+  #curator .ava { position: absolute; left: 36px; top: 36px; width: 110px; height: 110px; border-radius: 50%; background: var(--k); color: var(--y);
+                  font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 36px; line-height: 110px; text-align: center; }
+  #curator .on { position: absolute; left: 118px; top: 118px; width: 30px; height: 30px; border-radius: 50%; background: #2DC26B; border: 5px solid #fff; }
+  #curator .nm { position: absolute; left: 176px; top: 44px; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 32px; }
+  #curator .st { position: absolute; left: 176px; top: 92px; font-size: 26px; font-weight: 700; color: #2DC26B; }
+  #curator .msg { position: absolute; left: 36px; top: 176px; width: 780px; padding: 22px 30px 24px; border-radius: 26px 26px 26px 8px; background: #F2F2F2;
+                  font-weight: 700; font-size: 36px; line-height: 46px; box-sizing: border-box; }
+
+  /* 2 — реальність */
+  #real { left: 0; top: 260px; width: 1080px; height: 460px; text-align: center; }
+  #real .w { position: absolute; left: 0; width: 1080px; top: 40px; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 100px; line-height: 130px;
+             text-transform: uppercase; color: var(--y); text-shadow: 0 10px 40px rgba(0,0,0,.4); opacity: 0; }
+  #real .p { position: absolute; left: 0; width: 1080px; top: 210px; display: flex; justify-content: center; opacity: 0; }
+  #real .p .pillK { font-size: 40px; }
+
+  /* 3 — етапи (картка + список) */
+  #s3h { left: 72px; top: 200px; width: 380px; color: var(--k); opacity: 0; }
+  #s3h .k { font-size: 26px; padding: 10px 18px 12px; }
+  #s3h h2 { margin: 26px 0 0; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 50px; line-height: 60px; text-transform: uppercase; }
+  #s3h p { margin: 22px 0 0; font-weight: 800; font-size: 32px; line-height: 42px; }
+  #steps { left: 72px; top: 1170px; width: 936px; height: 600px; color: var(--k); }
+  #steps .r { position: absolute; left: 0; width: 936px; height: 86px; display: flex; align-items: center; gap: 26px; opacity: 0; }
+  #steps .r i { display: block; flex: none; width: 72px; height: 72px; border-radius: 50%; background: var(--k); color: var(--y); font-style: normal;
+                font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 30px; line-height: 72px; text-align: center; }
+  #steps .r b { display: block; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 42px; text-transform: uppercase; white-space: nowrap; }
+  #steps .r.last i { background: #fff; color: var(--k); }
+  #steps .line { position: absolute; left: 34px; top: 40px; width: 4px; height: 440px; background: var(--k); transform-origin: 50% 0; transform: scaleY(0); opacity: .35; }
+
+  /* 4 — CTA */
+  #q { left: 72px; top: 230px; width: 936px; opacity: 0; }
+  #q h2 { margin: 0; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 70px; line-height: 80px; text-transform: uppercase; text-shadow: 0 6px 30px rgba(0,0,0,.45); }
+  #q h2 b { color: var(--y); }
+  #form { left: 90px; top: 1080px; width: 900px; height: 560px; }
+  #form .hd { position: absolute; left: 50px; top: 44px; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 40px; }
+  #form .sub { position: absolute; left: 50px; top: 100px; font-size: 28px; font-weight: 700; opacity: .55; }
+  #form .f { position: absolute; left: 50px; width: 800px; height: 96px; border-radius: 22px; background: #F2F2F2; box-sizing: border-box; padding: 14px 26px; }
+  #form .f small { display: block; font-size: 22px; font-weight: 800; opacity: .5; text-transform: uppercase; letter-spacing: .08em; }
+  #form .f span { display: block; font-size: 34px; font-weight: 800; line-height: 44px; min-height: 44px; }
+  #form .btn { position: absolute; left: 50px; top: 410px; width: 800px; height: 110px; border-radius: 55px; background: var(--y); color: var(--k);
+               display: flex; align-items: center; justify-content: center; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 36px; text-transform: uppercase; }
+  #form .tap { position: absolute; left: 620px; top: 440px; width: 50px; height: 50px; border-radius: 50%; background: rgba(12,12,12,.85); opacity: 0;
+               box-shadow: 0 0 0 10px rgba(12,12,12,.2); }
+  #form .ok { position: absolute; left: 50px; top: 410px; width: 800px; height: 110px; border-radius: 55px; background: var(--k); color: var(--y); opacity: 0;
+              display: flex; align-items: center; justify-content: center; gap: 16px; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 36px; text-transform: uppercase; }
+
+  /* финал */
+  #end { left: 0; top: 0; width: 1080px; height: 1920px; background: var(--y); color: var(--k); clip-path: inset(100% 0 0 0); }
+  #end .wm { position: absolute; left: 0; width: 1080px; top: 520px; text-align: center; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 46px; letter-spacing: .06em; }
+  #end h1 { position: absolute; left: 60px; width: 960px; top: 620px; margin: 0; text-align: center; font-family: "Unbounded", sans-serif; font-weight: 900;
+            font-size: 96px; line-height: 106px; text-transform: uppercase; }
+  #end p { position: absolute; left: 90px; width: 900px; top: 880px; margin: 0; text-align: center; font-weight: 800; font-size: 40px; line-height: 52px; }
+  #end .btn { position: absolute; left: 160px; top: 1060px; width: 760px; height: 160px; border-radius: 80px; background: var(--k); color: var(--y);
+              display: flex; align-items: center; justify-content: center; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 48px; text-transform: uppercase; white-space: nowrap; }
+  #end .down { position: absolute; left: 508px; top: 1280px; width: 64px; height: 64px; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="46.6" data-fps="30">
+  <div id="bgY" class="abs"></div>
+  <div id="plateW"><div id="plateZ">
+    <video id="plate" class="clip" data-start="0" data-duration="44.531" data-track-index="0" src="assets/media/plate.mp4" muted playsinline></video>
+  </div></div>
+  <div id="scrimTop" class="abs"></div>
+  <div id="scrimBot" class="abs"></div>
+
+  <!-- 0 переваги -->
+  <div id="h0" class="abs"><em>Що</em><em>дає</em><em>дитині</em><em>навчання</em><em>в</em><em class="k">Словаччині?</em></div>
+  <div id="lab0" class="abs pillY">Навчання в Словаччині — це</div>
+  <div id="bento" class="abs">
+    <div class="tile" style="left:0; top:0"><div class="ic"><svg viewBox="0 0 48 48"><path d="M2 18 L24 8 L46 18 L24 28 Z" fill="#0C0C0C"/><path d="M11 23 v11 c8 6 18 6 26 0 v-11 L24 29 Z" fill="#0C0C0C"/><path d="M42 20 v14" stroke="#0C0C0C" stroke-width="3"/></svg></div><span class="no">01</span><b>Європейський диплом</b></div>
+    <div class="tile k" style="left:478px; top:0"><div class="ic"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="19" fill="none" stroke="#0C0C0C" stroke-width="4"/><path d="M31 15c-7-4-16 0-16 9s9 13 16 9M11 21h15M11 27h15" fill="none" stroke="#0C0C0C" stroke-width="4" stroke-linecap="round"/></svg></div><span class="no">02</span><b>Легальний заробіток</b></div>
+    <div class="tile k" style="left:0; top:226px"><div class="ic"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="19" fill="none" stroke="#0C0C0C" stroke-width="4"/><path d="M5 24h38M24 5c-9 10-9 28 0 38M24 5c9 10 9 28 0 38" fill="none" stroke="#0C0C0C" stroke-width="3"/></svg></div><span class="no">03</span><b>Подорожі Європою</b></div>
+    <div class="tile" style="left:478px; top:226px"><div class="ic"><svg viewBox="0 0 48 48"><path d="M6 38 L18 24 L26 30 L40 12" fill="none" stroke="#0C0C0C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 11 H41 V22" fill="none" stroke="#0C0C0C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="no">04</span><b>Своє майбутнє</b></div>
+  </div>
+
+  <!-- 1 доступно -->
+  <div id="dost" class="abs">це все<br>доступно</div>
+  <div id="zero" class="abs"><div class="n">0 €</div><div class="t pillY">за навчання в університеті</div></div>
+  <div id="lang" class="abs"><div class="b"><small>словацька</small><b>Ahoj! Ďakujem!</b></div><div class="ok pillY">мова вчиться легко</div></div>
+  <div id="crowd" class="abs"><div class="av" style="left:0px; top:70px; background:#BFD9F2"><svg viewBox="0 0 134 134"><circle cx="67" cy="54" r="24" fill="#fff"/><path d="M22 134 c0 -32 20 -46 45 -46 s45 14 45 46 Z" fill="#fff"/></svg></div><div class="av" style="left:135px; top:0px; background:#F6C9A8"><svg viewBox="0 0 134 134"><circle cx="67" cy="54" r="24" fill="#fff"/><path d="M22 134 c0 -32 20 -46 45 -46 s45 14 45 46 Z" fill="#fff"/></svg></div><div class="av" style="left:270px; top:90px; background:#BDE6CF"><svg viewBox="0 0 134 134"><circle cx="67" cy="54" r="24" fill="#fff"/><path d="M22 134 c0 -32 20 -46 45 -46 s45 14 45 46 Z" fill="#fff"/></svg></div><div class="av" style="left:405px; top:10px; background:#D7C8F2"><svg viewBox="0 0 134 134"><circle cx="67" cy="54" r="24" fill="#fff"/><path d="M22 134 c0 -32 20 -46 45 -46 s45 14 45 46 Z" fill="#fff"/></svg></div><div class="av" style="left:540px; top:80px; background:#FFE27A"><svg viewBox="0 0 134 134"><circle cx="67" cy="54" r="24" fill="#fff"/><path d="M22 134 c0 -32 20 -46 45 -46 s45 14 45 46 Z" fill="#fff"/></svg></div><div class="av" style="left:675px; top:0px; background:#E3E3E3"><svg viewBox="0 0 134 134"><circle cx="67" cy="54" r="24" fill="#fff"/><path d="M22 134 c0 -32 20 -46 45 -46 s45 14 45 46 Z" fill="#fff"/></svg></div><div class="lb pillY">дуже багато українців</div></div>
+  <div id="curator" class="abs"><div class="card"><div class="ava">S&amp;T</div><i class="on"></i>
+    <div class="nm">Куратор Study and Travel</div><div class="st">● завжди на зв'язку</div>
+    <div class="msg">Я поруч, якщо виникнуть питання вже на місці</div></div></div>
+
+  <!-- 2 реальність -->
+  <div id="real" class="abs"><div class="w">реальністю</div><div class="p"><div class="pillK">правильний шлях до вступу</div></div></div>
+
+  <!-- 3 етапи -->
+  <div id="s3h" class="abs"><div class="pillK k">Study and Travel</div><h2>на кожному етапі</h2><p>від вибору університету до життя у Словаччині</p></div>
+  <div id="steps" class="abs"><div class="line"></div>
+    <div class="r" style="top:0"><i>1</i><b>Вибір університету</b></div>
+    <div class="r" style="top:96px"><i>2</i><b>Спеціальність</b></div>
+    <div class="r" style="top:192px"><i>3</i><b>Супровід у Словаччині</b></div>
+    <div class="r" style="top:288px"><i>4</i><b>Вивчення мови</b></div>
+    <div class="r" style="top:384px"><i>5</i><b>Документи</b></div>
+    <div class="r last" style="top:480px"><i>✓</i><b>Поруч на кожному кроці</b></div>
+  </div>
+
+  <!-- 4 CTA -->
+  <div id="q" class="abs"><h2>Як ваша дитина може вступити <b>до Словаччини?</b></h2></div>
+  <div id="form" class="abs"><div class="card" style="left:0; top:0; width:900px; height:560px"></div>
+    <div class="hd" style="color:#0C0C0C">Заявка на консультацію</div><div class="sub" style="color:#0C0C0C">безкоштовно · Study and Travel</div>
+    <div class="f" style="top:160px; color:#0C0C0C"><small>Ваше ім'я</small><span id="f1t"></span></div>
+    <div class="f" style="top:276px; color:#0C0C0C"><small>Телефон</small><span id="f2t"></span></div>
+    <div class="btn">Отримати консультацію</div>
+    <div class="ok"><svg width="44" height="44" viewBox="0 0 44 44"><path d="M8 23l9 9 19-20" fill="none" stroke="#FFD21A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg>Заявку надіслано</div>
+    <div class="tap"></div>
+  </div>
+
+  <div id="caps" class="abs"></div>
+
+  <div id="end" class="abs">
+    <div class="wm">STUDY AND TRAVEL</div>
+    <h1>Безкоштовна консультація</h1>
+    <p>Вступ до університетів Словаччини — від вибору до життя на місці</p>
+    <div class="btn">Залишити заявку</div>
+    <svg class="down" viewBox="0 0 64 64"><path d="M32 8v42M14 34l18 18 18-18" stroke="#0C0C0C" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+
+  <audio id="mix" data-start="0" data-duration="46.6" data-track-index="20" src="assets/audio/mix.wav"></audio>
+  <script>
+    (function () {
+      const D = {"T": {"s1": 7.364, "s2": 20.682, "s3": 25.136, "s4": 36.318, "voiceEnd": 44.591, "lab": 0.06, "tiles": [2.6, 4.127, 5.145, 6.018], "dost": 8.345, "zero": 10.091, "lang": 10.818, "alone": 12.273, "ukr": 15.182, "cur": 16.127, "real": 22.4, "path": 23.345, "steps": [27.882, 28.973, 29.773, 32.318, 33.191, 34.355], "q": 36.338, "form": 40.555, "type1": 41.264, "tap": 42.3, "end0": 43.527, "avat": [12.273, 12.392999999999999, 12.513, 12.633, 12.753, 12.873]}, "zoom": [[0, 1.18, 1.0, 7.364, 0.49, 0.45], [7.364, 1.0, 1.04, 4.909, 0.47, 0.44], [12.273, 1.2, 1.24, 3.853999999999999, 0.47, 0.33], [16.127, 1.06, 1.1, 4.555, 0.47, 0.4], [20.682, 1.22, 1.28, 4.454000000000001, 0.48, 0.36], [25.136, 1.08, 1.12, 11.181999999999999, 0.51, 0.48], [36.318, 1.0, 1.06, 10.282000000000004, 0.46, 0.45]], "caps": [{"s": 0.025, "e": 0.679, "w": [{"t": "Навчання", "s": 0.055, "e": 0.709}]}, {"s": 0.679, "e": 1.479, "w": [{"t": "в", "s": 0.709, "e": 0.782}, {"t": "Словаччині", "s": 0.782, "e": 1.364}, {"t": "може", "s": 1.364, "e": 1.509}]}, {"s": 1.479, "e": 2.134, "w": [{"t": "дати", "s": 1.509, "e": 1.727}, {"t": "дитині", "s": 1.727, "e": 2.164}]}, {"s": 2.134, "e": 3.079, "w": [{"t": "не", "s": 2.164, "e": 2.309}, {"t": "лише", "s": 2.309, "e": 2.6}, {"t": "європейський", "s": 2.6, "e": 3.109}]}, {"s": 3.079, "e": 3.443, "w": [{"t": "диплом,", "s": 3.109, "e": 3.473}]}, {"s": 3.443, "e": 4.097, "w": [{"t": "а", "s": 3.473, "e": 3.618}, {"t": "й", "s": 3.618, "e": 3.691}, {"t": "можливість", "s": 3.691, "e": 4.127}]}, {"s": 4.097, "e": 5.115, "w": [{"t": "легально", "s": 4.127, "e": 4.491}, {"t": "заробляти,", "s": 4.491, "e": 5.145}]}, {"s": 5.115, "e": 5.843, "w": [{"t": "подорожувати", "s": 5.145, "e": 5.836}]}, {"s": 5.843, "e": 6.715, "w": [{"t": "та", "s": 5.873, "e": 6.018}, {"t": "будувати", "s": 6.018, "e": 6.418}, {"t": "своє", "s": 6.455, "e": 6.745}]}, {"s": 6.715, "e": 7.37, "w": [{"t": "майбутнє.", "s": 6.745, "e": 7.364}]}, {"s": 7.37, "e": 7.952, "w": [{"t": "І", "s": 7.4, "e": 7.582}, {"t": "так,", "s": 7.691, "e": 7.982}]}, {"s": 7.952, "e": 8.752, "w": [{"t": "це", "s": 7.982, "e": 8.127}, {"t": "все", "s": 8.127, "e": 8.309}, {"t": "доступне,", "s": 8.345, "e": 8.782}]}, {"s": 8.752, "e": 9.479, "w": [{"t": "адже", "s": 8.782, "e": 9.0}, {"t": "навчання", "s": 9.0, "e": 9.473}]}, {"s": 9.479, "e": 10.061, "w": [{"t": "у", "s": 9.509, "e": 9.582}, {"t": "Словаччині", "s": 9.582, "e": 10.091}]}, {"s": 10.061, "e": 10.788, "w": [{"t": "безкоштовне.", "s": 10.091, "e": 10.818}]}, {"s": 10.788, "e": 11.879, "w": [{"t": "Мова", "s": 10.818, "e": 11.109}, {"t": "вчиться", "s": 11.109, "e": 11.545}, {"t": "доволі", "s": 11.545, "e": 11.909}]}, {"s": 11.879, "e": 12.243, "w": [{"t": "легко,", "s": 11.909, "e": 12.273}]}, {"s": 12.243, "e": 13.115, "w": [{"t": "дитина", "s": 12.273, "e": 12.709}, {"t": "не", "s": 12.709, "e": 12.855}, {"t": "буде", "s": 12.855, "e": 13.036}]}, {"s": 13.115, "e": 13.552, "w": [{"t": "одна,", "s": 13.145, "e": 13.582}]}, {"s": 13.552, "e": 14.57, "w": [{"t": "адже", "s": 13.582, "e": 13.873}, {"t": "в", "s": 13.873, "e": 13.945}, {"t": "Словаччині", "s": 13.945, "e": 14.6}]}, {"s": 14.57, "e": 15.152, "w": [{"t": "дуже", "s": 14.6, "e": 14.782}, {"t": "багато", "s": 14.818, "e": 15.0}]}, {"s": 15.152, "e": 15.734, "w": [{"t": "українців,", "s": 15.182, "e": 15.764}]}, {"s": 15.734, "e": 16.606, "w": [{"t": "а", "s": 15.764, "e": 15.909}, {"t": "також", "s": 15.909, "e": 16.091}, {"t": "куратор", "s": 16.127, "e": 16.636}]}, {"s": 16.606, "e": 17.406, "w": [{"t": "Study", "s": 16.636, "e": 16.903}, {"t": "and", "s": 16.903, "e": 17.17}, {"t": "Travel", "s": 17.17, "e": 17.436}]}, {"s": 17.406, "e": 18.497, "w": [{"t": "буде", "s": 17.436, "e": 17.618}, {"t": "завжди", "s": 17.655, "e": 18.018}, {"t": "поруч,", "s": 18.018, "e": 18.527}]}, {"s": 18.497, "e": 19.225, "w": [{"t": "якщо", "s": 18.527, "e": 18.709}, {"t": "виникнуть", "s": 18.745, "e": 19.255}]}, {"s": 19.225, "e": 19.879, "w": [{"t": "питання", "s": 19.255, "e": 19.691}, {"t": "вже", "s": 19.691, "e": 19.909}]}, {"s": 19.879, "e": 20.697, "w": [{"t": "на", "s": 19.909, "e": 20.055}, {"t": "місці.", "s": 20.055, "e": 20.682}]}, {"s": 20.697, "e": 21.788, "w": [{"t": "Але", "s": 20.727, "e": 20.909}, {"t": "щоб", "s": 21.164, "e": 21.345}, {"t": "усе", "s": 21.455, "e": 21.782}]}, {"s": 21.788, "e": 22.879, "w": [{"t": "це", "s": 21.818, "e": 22.0}, {"t": "стало", "s": 22.036, "e": 22.4}, {"t": "реальністю,", "s": 22.4, "e": 22.909}]}, {"s": 22.879, "e": 23.679, "w": [{"t": "важливо", "s": 22.909, "e": 23.236}, {"t": "правильно", "s": 23.345, "e": 23.709}]}, {"s": 23.679, "e": 24.479, "w": [{"t": "пройти", "s": 23.709, "e": 24.036}, {"t": "шлях", "s": 24.145, "e": 24.509}]}, {"s": 24.479, "e": 25.086, "w": [{"t": "до", "s": 24.509, "e": 24.655}, {"t": "вступу.", "s": 24.655, "e": 25.136}]}, {"s": 36.288, "e": 37.325, "w": [{"t": "Хочете", "s": 36.318, "e": 36.845}, {"t": "дізнатися,", "s": 36.845, "e": 37.355}]}, {"s": 37.325, "e": 38.27, "w": [{"t": "як", "s": 37.355, "e": 37.536}, {"t": "ваша", "s": 37.573, "e": 37.791}, {"t": "дитина", "s": 37.791, "e": 38.264}]}, {"s": 38.27, "e": 38.925, "w": [{"t": "може", "s": 38.3, "e": 38.482}, {"t": "вступити", "s": 38.518, "e": 38.955}]}, {"s": 38.925, "e": 39.579, "w": [{"t": "до", "s": 38.955, "e": 39.1}, {"t": "університету", "s": 39.1, "e": 39.609}]}, {"s": 39.579, "e": 40.505, "w": [{"t": "в", "s": 39.609, "e": 39.755}, {"t": "Словаччині?", "s": 39.755, "e": 40.518}]}], "capStyle": " capB", "vdur": 44.531, "music": "m726", "moff": 0.0, "whoosh": [7.364, 20.682, 25.136, 36.318], "pops": [2.6, 4.127, 5.145, 6.018, 8.345, 10.818, 12.273, 15.182, 16.127, 23.345, 36.338, 40.555, 27.882, 28.973, 29.773, 32.318, 33.191, 34.355], "sparks": [10.091, 34.355, 42.5], "big": 43.627};
+      const tl = gsap.timeline({ paused: true });
+      const E = "power3.out", EB = "back.out(1.7)";
+      D.zoom.forEach(([t, z0, z1, d, ox, oy]) => {
+        tl.set("#plateZ", { scale: z0, transformOrigin: `${ox * 100}% ${oy * 100}%` }, t);
+        tl.to("#plateZ", { scale: z1, duration: d, ease: "sine.out" }, t + 0.001);
+      });
+      const capsEl = document.getElementById("caps");
+      D.caps.forEach((c, ci) => {
+        const el = document.createElement("div"); el.className = "cap" + D.capStyle; el.id = "cap" + ci;
+        c.w.forEach((w, wi) => { const s = document.createElement("span"); s.className = "cw"; s.id = `c${ci}w${wi}`; s.textContent = w.t; el.appendChild(s); });
+        capsEl.appendChild(el);
+        tl.fromTo(el, { opacity: 0, y: 14, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.14, ease: E }, c.s);
+        tl.set(el, { opacity: 0 }, c.e);
+        c.w.forEach((w, wi) => {
+          tl.set(`#c${ci}w${wi}`, { attr: { class: "cw on" } }, w.s);
+          tl.set(`#c${ci}w${wi}`, { attr: { class: "cw" } }, Math.min(w.e, c.e));
+        });
+      });
+
+      const T = D.T;
+      const out = (sel, t) => tl.to(sel, { opacity: 0, y: -24, duration: 0.2, ease: "power2.in" }, t - 0.2);
+
+      // ---------- 0 бенто ----------
+      [0.02, 0.12, 0.22, 0.3, 0.68, 0.76].forEach((t, i) => tl.fromTo(`#h0 em:nth-child(${i + 1})`, { opacity: 0, y: 50, scale: 0.9 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: EB }, t));
+      tl.to("#h0", { opacity: 0, y: -40, scale: 0.9, duration: 0.25, ease: "power2.in" }, T.tiles[0] - 0.3);
+      tl.fromTo("#lab0", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.35, ease: E }, T.tiles[0] - 0.1);
+      T.tiles.forEach((t, i) => tl.fromTo(`#bento .tile:nth-child(${i + 1})`, { opacity: 0, scale: 0.6, y: 40, rotation: i % 2 ? 4 : -4 },
+        { opacity: 1, scale: 1, y: 0, rotation: 0, duration: 0.42, ease: EB }, t - 0.05));
+      tl.to("#bento .tile", { opacity: 0, scale: 0.8, y: -40, duration: 0.25, ease: "power2.in", stagger: 0.04 }, T.s1 - 0.2);
+      out("#lab0", T.s1);
+
+      // ---------- 1 доступно ----------
+      tl.fromTo("#dost", { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.35, ease: E }, T.dost - 0.1);
+      out("#dost", T.zero);
+      tl.fromTo("#zero", { opacity: 0 }, { opacity: 1, duration: 0.1 }, T.zero - 0.05);
+      tl.fromTo("#zero .n", { scale: 2.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "power4.in", transformOrigin: "0% 50%" }, T.zero - 0.1);
+      tl.fromTo("#zero .t", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3, ease: EB }, T.zero + 0.3);
+      out("#zero", T.lang);
+      tl.fromTo("#lang", { opacity: 0 }, { opacity: 1, duration: 0.1 }, T.lang);
+      tl.fromTo("#lang .b", { scale: 0.5, opacity: 0, transformOrigin: "0% 100%" }, { scale: 1, opacity: 1, duration: 0.35, ease: EB }, T.lang);
+      tl.fromTo("#lang .ok", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: EB }, T.lang + 0.6);
+      out("#lang", T.alone);
+      tl.fromTo("#crowd", { opacity: 0 }, { opacity: 1, duration: 0.1 }, T.alone);
+      T.avat.forEach((t, i) => tl.fromTo(`#crowd .av:nth-child(${i + 1})`, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.35, ease: EB }, t));
+      tl.fromTo("#crowd .lb", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: EB }, T.ukr);
+      out("#crowd", T.cur);
+      tl.fromTo("#curator", { opacity: 0, y: 50, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: EB }, T.cur);
+      tl.fromTo("#curator .msg", { opacity: 0, scale: 0.8, transformOrigin: "0% 100%" }, { opacity: 1, scale: 1, duration: 0.3, ease: EB }, T.cur + 1.2);
+      tl.to("#curator .on", { scale: 1.3, duration: 0.35, yoyo: true, repeat: 5, ease: "sine.inOut" }, T.cur + 0.5);
+      out("#curator", T.s2);
+
+      // ---------- 2 реальність ----------
+      tl.fromTo("#real .w", { opacity: 0, scale: 0.4, y: 40 }, { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: "expo.out" }, T.real - 0.05);
+      tl.fromTo("#real .p", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: EB }, T.path);
+      out("#real", T.s3);
+
+      // ---------- 3 етапи: футаж уходит в карточку ----------
+      tl.to(["#scrimTop", "#scrimBot"], { opacity: 0, duration: 0.4 }, T.s3 - 0.1);
+      tl.fromTo("#plateW", { x: 0, y: 0, scale: 1, borderRadius: 0 }, { x: 476, y: 150, scale: 0.49, borderRadius: 90, duration: 0.65, ease: "power3.inOut" }, T.s3 - 0.1);
+      tl.fromTo("#s3h", { opacity: 0, x: -50 }, { opacity: 1, x: 0, duration: 0.45, ease: E }, T.s3 + 0.35);
+      tl.fromTo("#steps .line", { scaleY: 0 }, { scaleY: 1, duration: T.steps[5] - T.steps[0], ease: "none" }, T.steps[0]);
+      T.steps.forEach((t, i) => {
+        tl.fromTo(`#steps .r:nth-of-type(${i + 2})`, { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.3, ease: EB }, t - 0.05);
+        tl.fromTo(`#steps .r:nth-of-type(${i + 2}) i`, { scale: 0.3 }, { scale: 1, duration: 0.35, ease: EB }, t - 0.05);
+      });
+      tl.to(["#s3h", "#steps"], { opacity: 0, duration: 0.25 }, T.s4 - 0.25);
+      tl.to("#plateW", { x: 0, y: 0, scale: 1, borderRadius: 0, duration: 0.55, ease: "power3.inOut" }, T.s4 - 0.3);
+      tl.to(["#scrimTop", "#scrimBot"], { opacity: 1, duration: 0.4 }, T.s4);
+
+      // ---------- 4 CTA ----------
+      tl.fromTo("#q", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: E }, T.q + 0.15);
+      tl.fromTo("#form", { y: 900 }, { y: 0, duration: 0.55, ease: "power3.out" }, T.form - 0.1);
+      const typ = (id, txt, t0, dt) => { for (let k = 1; k <= txt.length; k++) tl.set(id, { textContent: txt.slice(0, k) }, t0 + k * dt); };
+      typ("#f1t", "Олена", T.type1, 0.06);
+      typ("#f2t", "+380 •• ••• •• ••", T.type1 + 0.5, 0.035);
+      tl.fromTo("#form .tap", { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.2, ease: E }, T.tap);
+      tl.to("#form .btn", { scale: 0.95, duration: 0.09, yoyo: true, repeat: 1 }, T.tap + 0.18);
+      tl.fromTo("#form .ok", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.3, ease: EB }, T.tap + 0.35);
+      tl.to("#form .tap", { opacity: 0, duration: 0.2 }, T.tap + 0.4);
+
+      // ---------- финал ----------
+      tl.fromTo("#end", { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.55, ease: "power3.inOut" }, T.end0);
+      tl.fromTo(["#end .wm", "#end h1", "#end p"], { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: E, stagger: 0.1 }, T.end0 + 0.3);
+      tl.fromTo("#end .btn", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.45, ease: EB }, T.end0 + 0.6);
+      tl.fromTo("#end .down", { opacity: 0, y: -10 }, { opacity: 1, y: 10, duration: 0.4, ease: "sine.inOut" }, T.end0 + 0.9);
+      tl.to("#end .down", { y: -6, duration: 0.4, yoyo: true, repeat: 2, ease: "sine.inOut" }, T.end0 + 1.3);
+
+      window.__timelines["main"] = tl;
+    })();
+  </script>
+</div>
+</body>
+</html>

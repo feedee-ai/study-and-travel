@@ -30,3 +30,7 @@ webinar-ad/out/
 webinar-ad/hf/.hyperframes/
 webinar-ad/hf/renders/
 __pycache__/
+campus-ads/out/
+campus-ads/*/build/
+campus-ads/*/hf/.hyperframes/
+campus-ads/*/hf/assets/media/

@@ -1,0 +1,382 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="assets/vendor/gsap.min.js"></script>
+<style>
+  @font-face { font-family: "Unbounded"; src: url("assets/fonts/unbounded-cyrillic-wght-normal.woff2") format("woff2"); font-weight: 200 900;
+               unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+  @font-face { font-family: "Unbounded"; src: url("assets/fonts/unbounded-latin-wght-normal.woff2") format("woff2"); font-weight: 200 900;
+               unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  @font-face { font-family: "Manrope"; src: url("assets/fonts/manrope-cyrillic-wght-normal.woff2") format("woff2"); font-weight: 200 800;
+               unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116; }
+  @font-face { font-family: "Manrope"; src: url("assets/fonts/manrope-latin-wght-normal.woff2") format("woff2"); font-weight: 200 800;
+               unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+  :root { --y: #FFD21A; --k: #0C0C0C; --w: #FFFFFF; }
+  html, body { margin: 0; background: #000; }
+  #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; color: var(--w);
+          font-family: "Manrope", sans-serif; -webkit-font-smoothing: antialiased; }
+  .abs { position: absolute; }
+  .disp { font-family: "Unbounded", sans-serif; text-transform: uppercase; }
+  .pillY { display: inline-flex; align-items: center; gap: 14px; background: var(--y); color: var(--k); border-radius: 16px;
+           padding: 12px 24px 14px; font-family: "Unbounded", sans-serif; font-weight: 800; text-transform: uppercase; white-space: nowrap; }
+  .pillK { display: inline-flex; align-items: center; gap: 14px; background: rgba(12,12,12,.9); color: var(--w); border-radius: 16px;
+           padding: 12px 24px 14px; font-family: "Unbounded", sans-serif; font-weight: 700; text-transform: uppercase; white-space: nowrap; }
+  .card { position: absolute; background: #fff; color: var(--k); border-radius: 34px; box-shadow: 0 30px 80px rgba(0,0,0,.28); }
+  .cardK { position: absolute; background: rgba(12,12,12,.9); color: #fff; border-radius: 34px; box-shadow: 0 30px 80px rgba(0,0,0,.3); }
+  #plateW { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; overflow: hidden; }
+  #plateZ { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  #plate { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+  #scrimTop { left: 0; top: 0; width: 1080px; height: 820px; background: linear-gradient(180deg, rgba(0,0,0,.42) 0%, rgba(0,0,0,.16) 55%, rgba(0,0,0,0) 100%); }
+  #scrimBot { left: 0; top: 1060px; width: 1080px; height: 860px; background: linear-gradient(0deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.32) 50%, rgba(0,0,0,0) 100%); }
+  #caps { left: 70px; top: 1250px; width: 940px; height: 240px; }
+  .cap { position: absolute; left: 0; top: 0; width: 940px; height: 240px; display: flex; flex-wrap: wrap; align-content: center; justify-content: center;
+         gap: 0 18px; text-align: center; opacity: 0; }
+  .cw { display: block; font-weight: 800; font-size: 72px; line-height: 90px; letter-spacing: -0.01em; color: var(--w);
+        text-shadow: 0 4px 22px rgba(0,0,0,.55), 0 2px 4px rgba(0,0,0,.5); }
+  .cw.on { color: var(--y); }
+  /* стиль B: слова на белых плашках, активное — на жёлтой */
+  .capB .cw { color: var(--k); background: #fff; border-radius: 14px; padding: 2px 16px 6px; margin: 6px 0; text-shadow: none; font-size: 64px; line-height: 80px;
+              box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+  .capB .cw.on { background: var(--y); color: var(--k); }
+  .capB { gap: 0 12px; }
+  .ico { display: block; }
+
+  /* чек-лист */
+  #hud { left: 72px; top: 214px; width: 936px; height: 80px; display: flex; align-items: center; gap: 14px; opacity: 0; }
+  #hud .lab { font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 26px; letter-spacing: .08em; text-transform: uppercase; margin-right: 10px;
+              text-shadow: 0 2px 12px rgba(0,0,0,.5); white-space: nowrap; }
+  #hud .box { position: relative; width: 66px; height: 66px; border-radius: 18px; background: rgba(12,12,12,.55); border: 4px solid rgba(255,255,255,.85);
+              box-sizing: border-box; }
+  #hud .box b { position: absolute; left: 0; top: 0; width: 58px; height: 58px; line-height: 58px; text-align: center; font-family: "Unbounded", sans-serif;
+                font-weight: 800; font-size: 26px; color: #fff; }
+  #hud .box i { position: absolute; left: -4px; top: -4px; width: 66px; height: 66px; border-radius: 18px; background: var(--y); opacity: 0; }
+  #hud .box svg { position: absolute; left: 9px; top: 9px; width: 40px; height: 40px; }
+  #hud .count { margin-left: auto; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 40px; color: var(--y); text-shadow: 0 2px 14px rgba(0,0,0,.5); }
+
+  /* хук */
+  #hook { left: 72px; top: 330px; width: 936px; height: 520px; }
+  #hook .big { position: absolute; left: -10px; top: -40px; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 380px; line-height: 400px;
+               color: var(--y); text-shadow: 0 16px 60px rgba(0,0,0,.35); }
+  #hook .t { position: absolute; left: 290px; top: 30px; width: 650px; display: flex; flex-wrap: wrap; gap: 0 18px; }
+  #hook .t em { display: block; font-style: normal; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 54px; line-height: 66px;
+                text-transform: uppercase; text-shadow: 0 4px 24px rgba(0,0,0,.45); }
+  #hook .t em.k { color: var(--y); background: rgba(12,12,12,.88); border-radius: 12px; padding: 0 14px 4px; margin: 4px 0; text-shadow: none; }
+  #hook .par { position: absolute; left: 290px; top: 300px; font-size: 30px; }
+  #loc { left: 72px; top: 1620px; font-size: 26px; gap: 10px; opacity: 0; }
+  #loc svg { width: 26px; height: 32px; }
+
+  /* заголовок факта */
+  .fh { position: absolute; left: 72px; top: 318px; display: flex; align-items: baseline; gap: 22px; opacity: 0; }
+  .fh b { display: block; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 104px; line-height: 112px; color: var(--y);
+          text-shadow: 0 8px 30px rgba(0,0,0,.35); }
+  .fh span { display: block; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 60px; text-transform: uppercase; text-shadow: 0 4px 22px rgba(0,0,0,.5); }
+
+  /* 1 мова */
+  #f1 .b1 { left: 72px; top: 470px; padding: 22px 32px 26px; border-bottom-left-radius: 8px; opacity: 0; }
+  #f1 .b1 small, #f1 .b2 small { display: block; font-size: 24px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; opacity: .55; }
+  #f1 .b1 b, #f1 .b2 b { display: block; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 50px; line-height: 62px; }
+  #f1 .b2 { left: 470px; top: 560px; padding: 22px 32px 26px; background: var(--y); border-bottom-right-radius: 8px; opacity: 0; }
+  #f1 .meter { left: 72px; top: 470px; width: 936px; height: 250px; opacity: 0; }
+  #f1 .meter .cap1 { position: absolute; left: 40px; top: 30px; font-weight: 800; font-size: 26px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.7); }
+  #f1 .meter .segs { position: absolute; left: 40px; top: 84px; width: 856px; height: 40px; display: flex; gap: 10px; }
+  #f1 .meter .segs i { display: block; flex: 1; height: 40px; border-radius: 12px; background: rgba(255,255,255,.18); overflow: hidden; position: relative; }
+  #f1 .meter .segs i b { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: var(--y); transform-origin: 0 50%; transform: scaleX(0); }
+  #f1 .meter .ends { position: absolute; left: 40px; top: 148px; width: 856px; display: flex; justify-content: space-between; font-weight: 800; font-size: 28px; }
+  #f1 .meter .ends .g { color: var(--y); }
+  #f1 .meter .brand { position: absolute; left: 40px; top: 196px; font-size: 24px; color: rgba(255,255,255,.75); font-weight: 700; }
+
+  /* 2 іспити */
+  #f2 .sheet { left: 72px; top: 470px; width: 470px; height: 300px; padding: 0; opacity: 0; }
+  #f2 .sheet .h { position: absolute; left: 36px; top: 34px; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 34px; text-transform: uppercase; }
+  #f2 .sheet .ln { position: absolute; left: 36px; height: 14px; border-radius: 7px; background: #e6e6e6; }
+  #f2 .sheet .strike { position: absolute; left: 20px; top: 140px; width: 430px; height: 16px; border-radius: 8px; background: var(--y); transform-origin: 0 50%;
+                       transform: rotate(-14deg) scaleX(0); }
+  #f2 .stamp { left: 400px; top: 640px; width: 330px; height: 150px; border: 8px solid var(--y); border-radius: 26px; color: var(--y); background: rgba(12,12,12,.82);
+               display: flex; align-items: center; justify-content: center; text-align: center; font-family: "Unbounded", sans-serif; font-weight: 900;
+               font-size: 44px; line-height: 50px; text-transform: uppercase; opacity: 0; }
+  #f2 .note { left: 590px; top: 470px; width: 380px; padding: 20px 24px 22px; border-radius: 24px; background: rgba(12,12,12,.85); font-size: 30px; line-height: 40px;
+              font-weight: 700; color: #fff; opacity: 0; }
+  #f2 .chips { left: 72px; top: 470px; width: 936px; height: 300px; opacity: 0; }
+  #f2 .chips .c { position: absolute; display: inline-flex; align-items: center; gap: 14px; padding: 16px 28px 18px 16px; border-radius: 999px; background: #fff;
+                  color: var(--k); font-weight: 800; font-size: 36px; white-space: nowrap; box-shadow: 0 16px 40px rgba(0,0,0,.25); opacity: 0; }
+  #f2 .chips .c i { display: block; width: 50px; height: 50px; border-radius: 50%; background: var(--y); }
+  #f2 .chips .to { position: absolute; left: 0; top: 214px; font-size: 32px; opacity: 0; }
+
+  /* 3 дедлайни */
+  #f3 .cal { left: 72px; top: 470px; width: 380px; height: 300px; overflow: hidden; opacity: 0; }
+  #f3 .cal .top { position: absolute; left: 0; top: 0; width: 380px; height: 74px; background: var(--k); color: var(--y); border-radius: 34px 34px 0 0;
+                  font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 30px; line-height: 74px; text-align: center; text-transform: uppercase; }
+  #f3 .cal .g { position: absolute; left: 26px; top: 92px; width: 328px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+  #f3 .cal .g i { display: block; height: 32px; border-radius: 8px; background: #eee; }
+  #f3 .cal .ring { position: absolute; width: 64px; height: 64px; border-radius: 50%; border: 6px solid #E5352B; box-sizing: border-box; }
+  #f3 .tags { left: 490px; top: 486px; width: 520px; display: flex; flex-direction: column; gap: 16px; }
+  #f3 .tags .pillK { font-size: 32px; opacity: 0; align-self: flex-start; }
+  #f3 .tags .pillY { font-size: 32px; opacity: 0; align-self: flex-start; }
+  #f3 .bars { left: 72px; top: 460px; width: 936px; height: 330px; opacity: 0; }
+  #f3 .bars .hd { position: absolute; left: 40px; top: 30px; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 34px; text-transform: uppercase; color: var(--y); }
+  #f3 .bars .row { position: absolute; left: 40px; width: 856px; height: 64px; }
+  #f3 .bars .row span { position: absolute; left: 0; top: 0; font-weight: 800; font-size: 32px; line-height: 64px; color: #fff; opacity: 0; }
+  #f3 .bars .row i { position: absolute; left: 330px; top: 18px; width: 526px; height: 28px; border-radius: 14px; background: rgba(255,255,255,.18); }
+  #f3 .bars .row b { position: absolute; left: 330px; top: 18px; width: 526px; height: 28px; border-radius: 14px; background: var(--y); transform-origin: 0 50%; transform: scaleX(0); }
+
+  /* 4 головне */
+  #f4 .dip { left: 72px; top: 460px; width: 936px; height: 330px; opacity: 0; }
+  #f4 .dip .stars { position: absolute; left: 30px; top: 25px; width: 280px; height: 280px; }
+  #f4 .dip .t1 { position: absolute; left: 350px; top: 70px; font-weight: 800; font-size: 28px; letter-spacing: .12em; text-transform: uppercase; opacity: .55; }
+  #f4 .dip .t2 { position: absolute; left: 350px; top: 112px; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 52px; line-height: 60px; text-transform: uppercase; }
+  #f4 .exp { left: 380px; top: 720px; font-size: 34px; opacity: 0; }
+
+  /* CTA: шлях */
+  #f5 { left: 72px; top: 320px; width: 936px; height: 460px; }
+  #f5 .hd { position: absolute; left: 0; top: 0; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 62px; line-height: 72px; text-transform: uppercase;
+            text-shadow: 0 4px 24px rgba(0,0,0,.45); opacity: 0; }
+  #f5 .hd b { color: var(--y); }
+  #f5 svg { position: absolute; left: 0; top: 150px; width: 936px; height: 240px; overflow: visible; }
+  #f5 .nl { position: absolute; top: 330px; font-size: 30px; opacity: 0; }
+  #f5 .badge { position: absolute; left: 270px; top: 168px; font-size: 26px; opacity: 0; }
+
+  /* финал */
+  #end { left: 0; top: 0; width: 1080px; height: 1920px; background: var(--y); color: var(--k); clip-path: circle(0% at 50% 50%); }
+  #end .vid { position: absolute; left: 340px; top: 250px; width: 400px; height: 400px; border-radius: 50%; overflow: hidden; background: #222;
+              box-shadow: 0 0 0 12px #fff, 0 30px 80px rgba(0,0,0,.25); }
+  #endv { position: absolute; left: -328px; top: -719px; width: 1100px; height: 1956px; object-fit: cover; }
+  #end .kick { position: absolute; left: 0; width: 1080px; top: 740px; text-align: center; font-family: "Unbounded", sans-serif; font-weight: 700; font-size: 34px;
+               text-transform: uppercase; letter-spacing: .04em; }
+  #end h1 { position: absolute; left: 60px; width: 960px; top: 800px; margin: 0; text-align: center; font-family: "Unbounded", sans-serif; font-weight: 900;
+            font-size: 92px; line-height: 102px; text-transform: uppercase; }
+  #end .btn { position: absolute; left: 170px; top: 1110px; width: 740px; height: 160px; border-radius: 80px; background: var(--k); color: var(--y);
+              display: flex; align-items: center; justify-content: center; gap: 24px; }
+  #end .btn b { display: block; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 50px; text-transform: uppercase; white-space: nowrap; }
+  #end .ripple { position: absolute; left: 690px; top: 1160px; width: 70px; height: 70px; border-radius: 50%; border: 6px solid var(--k); box-sizing: border-box; opacity: 0; }
+  #end .tap { position: absolute; left: 700px; top: 1170px; width: 50px; height: 50px; border-radius: 50%; background: rgba(255,255,255,.9); opacity: 0;
+              box-shadow: 0 0 0 10px rgba(255,255,255,.35); }
+  #end .wm { position: absolute; left: 0; width: 1080px; top: 1420px; text-align: center; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 44px;
+             letter-spacing: .06em; }
+  #end .wm small { display: block; font-family: "Manrope", sans-serif; font-weight: 700; font-size: 28px; letter-spacing: 0; margin-top: 10px; opacity: .7; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="49.5" data-fps="30">
+  <div id="plateW"><div id="plateZ">
+    <video id="plate" class="clip" data-start="0" data-duration="48.895" data-track-index="0" src="assets/media/plate.mp4" muted playsinline></video>
+  </div></div>
+  <div id="scrimTop" class="abs"></div>
+  <div id="scrimBot" class="abs"></div>
+
+  <div id="hud" class="abs"><div class="lab">Чек-лист</div>
+    <div class="box" id="hb1"><i></i><b>1</b><svg viewBox="0 0 40 40"><path d="M8 21l8 8 16-17" fill="none" stroke="#0C0C0C" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="40" stroke-dashoffset="40"/></svg></div>
+    <div class="box" id="hb2"><i></i><b>2</b><svg viewBox="0 0 40 40"><path d="M8 21l8 8 16-17" fill="none" stroke="#0C0C0C" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="40" stroke-dashoffset="40"/></svg></div>
+    <div class="box" id="hb3"><i></i><b>3</b><svg viewBox="0 0 40 40"><path d="M8 21l8 8 16-17" fill="none" stroke="#0C0C0C" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="40" stroke-dashoffset="40"/></svg></div>
+    <div class="box" id="hb4"><i></i><b>4</b><svg viewBox="0 0 40 40"><path d="M8 21l8 8 16-17" fill="none" stroke="#0C0C0C" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="40" stroke-dashoffset="40"/></svg></div>
+    <div class="count"><span id="hcnt">0</span>/4</div>
+  </div>
+
+  <div id="hook" class="abs">
+    <div class="big">4</div>
+    <div class="t"><em>речі</em><em>про</em><em class="k">безкоштовний</em><em class="k">вступ</em><em>до</em><em>Словаччини</em></div>
+    <div class="par pillY">які варто знати батькам</div>
+  </div>
+  <div id="loc" class="abs pillK"><svg viewBox="0 0 26 32"><path d="M13 1C6.4 1 1 6.2 1 12.6 1 21.3 13 31 13 31s12-9.7 12-18.4C25 6.2 19.6 1 13 1z" fill="#FFD21A"/><circle cx="13" cy="12.5" r="4.6" fill="#0C0C0C"/></svg>Кампус UKF · Нітра</div>
+
+  <!-- 1 мова -->
+  <div id="f1">
+    <div class="fh" id="fh1"><b>01</b><span>Мова</span></div>
+    <div class="card b1"><small>словацькою</small><b>Dobrý deň!</b></div>
+    <div class="card b2"><small>українською</small><b>Добрий день!</b></div>
+    <div class="cardK meter"><div class="cap1">рівень мови</div>
+      <div class="segs"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>
+      <div class="ends"><span>старт</span><span class="g">потрібний рівень ✓</span></div>
+      <div class="brand">Study and Travel готує заздалегідь</div></div>
+  </div>
+
+  <!-- 2 іспити -->
+  <div id="f2">
+    <div class="fh" id="fh2"><b>02</b><span>Іспити</span></div>
+    <div class="card sheet"><div class="h">Вступний іспит</div>
+      <i class="ln" style="top:110px; width:380px"></i><i class="ln" style="top:146px; width:320px"></i><i class="ln" style="top:182px; width:360px"></i><i class="ln" style="top:218px; width:250px"></i>
+      <i class="strike"></i></div>
+    <div class="abs stamp">без<br>іспитів</div>
+    <div class="abs note">на багато спеціальностей*<br><span style="opacity:.75; font-size:26px">*умови залежать від університету та факультету</span></div>
+    <div class="abs chips">
+      <div class="c" style="left:0; top:0"><i></i>сильні сторони</div>
+      <div class="c" style="left:380px; top:0"><i></i>інтереси</div>
+      <div class="c" style="left:0; top:100px"><i></i>цілі</div>
+      <div class="to pillY">→ напрям саме під вашу дитину</div>
+    </div>
+  </div>
+
+  <!-- 3 дедлайни -->
+  <div id="f3">
+    <div class="fh" id="fh3"><b>03</b><span>Дедлайни</span></div>
+    <div class="card cal"><div class="top">Дедлайн</div><div class="g"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="ring" id="calring" style="left:206px; top:156px"></div></div>
+    <div class="abs tags"><div class="pillY">місця</div><div class="pillY">дедлайни</div><div class="pillK">залежать від ВНЗ</div></div>
+    <div class="cardK bars"><div class="hd">Чим раніше — тим більше часу</div>
+      <div class="row" style="top:96px"><span>мова</span><i></i><b></b></div>
+      <div class="row" style="top:170px"><span>документи</span><i></i><b></b></div>
+      <div class="row" style="top:244px"><span>факультет</span><i></i><b></b></div>
+    </div>
+  </div>
+
+  <!-- 4 головне -->
+  <div id="f4">
+    <div class="fh" id="fh4"><b>04</b><span>Головне</span></div>
+    <div class="card dip">
+      <svg class="stars" viewBox="-140 -140 280 280"><g id="starring"><path transform="translate(0.0 -105.0)" d="M0 -15 L4.4 -4.6 L15 -4.6 L6.4 2.4 L9.5 13 L0 6.6 L-9.5 13 L-6.4 2.4 L-15 -4.6 L-4.4 -4.6 Z" fill="#FFD21A"/><path transform="translate(52.5 -90.9)" d="M0 -15 L4.4 -4.6 L15 -4.6 L6.4 2.4 L9.5 13 L0 6.6 L-9.5 13 L-6.4 2.4 L-15 -4.6 L-4.4 -4.6 Z" fill="#FFD21A"/><path transform="translate(90.9 -52.5)" d="M0 -15 L4.4 -4.6 L15 -4.6 L6.4 2.4 L9.5 13 L0 6.6 L-9.5 13 L-6.4 2.4 L-15 -4.6 L-4.4 -4.6 Z" fill="#FFD21A"/><path transform="translate(105.0 0.0)" d="M0 -15 L4.4 -4.6 L15 -4.6 L6.4 2.4 L9.5 13 L0 6.6 L-9.5 13 L-6.4 2.4 L-15 -4.6 L-4.4 -4.6 Z" fill="#FFD21A"/><path transform="translate(90.9 52.5)" d="M0 -15 L4.4 -4.6 L15 -4.6 L6.4 2.4 L9.5 13 L0 6.6 L-9.5 13 L-6.4 2.4 L-15 -4.6 L-4.4 -4.6 Z" fill="#FFD21A"/><path transform="translate(52.5 90.9)" d="M0 -15 L4.4 -4.6 L15 -4.6 L6.4 2.4 L9.5 13 L0 6.6 L-9.5 13 L-6.4 2.4 L-15 -4.6 L-4.4 -4.6 Z" fill="#FFD21A"/><path transform="translate(0.0 105.0)" d="M0 -15 L4.4 -4.6 L15 -4.6 L6.4 2.4 L9.5 13 L0 6.6 L-9.5 13 L-6.4 2.4 L-15 -4.6 L-4.4 -4.6 Z" fill="#FFD21A"/><path transform="translate(-52.5 90.9)" d="M0 -15 L4.4 -4.6 L15 -4.6 L6.4 2.4 L9.5 13 L0 6.6 L-9.5 13 L-6.4 2.4 L-15 -4.6 L-4.4 -4.6 Z" fill="#FFD21A"/><path transform="translate(-90.9 52.5)" d="M0 -15 L4.4 -4.6 L15 -4.6 L6.4 2.4 L9.5 13 L0 6.6 L-9.5 13 L-6.4 2.4 L-15 -4.6 L-4.4 -4.6 Z" fill="#FFD21A"/><path transform="translate(-105.0 0.0)" d="M0 -15 L4.4 -4.6 L15 -4.6 L6.4 2.4 L9.5 13 L0 6.6 L-9.5 13 L-6.4 2.4 L-15 -4.6 L-4.4 -4.6 Z" fill="#FFD21A"/><path transform="translate(-90.9 -52.5)" d="M0 -15 L4.4 -4.6 L15 -4.6 L6.4 2.4 L9.5 13 L0 6.6 L-9.5 13 L-6.4 2.4 L-15 -4.6 L-4.4 -4.6 Z" fill="#FFD21A"/><path transform="translate(-52.5 -90.9)" d="M0 -15 L4.4 -4.6 L15 -4.6 L6.4 2.4 L9.5 13 L0 6.6 L-9.5 13 L-6.4 2.4 L-15 -4.6 L-4.4 -4.6 Z" fill="#FFD21A"/></g>
+        <path d="M-56 -6 L0 -30 L56 -6 L0 18 Z" fill="#0C0C0C"/><path d="M-34 4 v26 c20 14 48 14 68 0 v-26 L0 18 Z" fill="#0C0C0C"/><path d="M48 -2 v34" stroke="#0C0C0C" stroke-width="5"/></svg>
+      <div class="t1">не лише</div><div class="t2">європейський<br>диплом</div>
+    </div>
+    <div class="abs exp pillY"><svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke="#0C0C0C" stroke-width="4"/><path d="M4 20h32M20 4c-8 9-8 23 0 32M20 4c8 9 8 23 0 32" fill="none" stroke="#0C0C0C" stroke-width="3"/></svg>+ міжнародний досвід</div>
+  </div>
+
+  <!-- 5 CTA шлях -->
+  <div id="f5" class="abs">
+    <div class="hd">Шлях до <b>Європи</b></div>
+    <svg viewBox="0 0 936 240">
+      <path id="p5base" d="M40 120 H 896" stroke="rgba(255,255,255,.45)" stroke-width="6" stroke-linecap="round" stroke-dasharray="2 16"/>
+      <path id="p5" d="M40 120 H 896" stroke="#FFD21A" stroke-width="10" stroke-linecap="round"/>
+      <circle id="p5a" cx="40" cy="120" r="24" fill="#fff"/><circle cx="40" cy="120" r="10" fill="#0C0C0C"/>
+      <g id="p5b"><circle cx="896" cy="120" r="30" fill="#FFD21A"/><path d="M882 120l10 10 18-20" fill="none" stroke="#0C0C0C" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></g>
+      <g id="p5m"><circle r="18" fill="#fff"/><circle r="10" fill="#FFD21A"/></g>
+    </svg>
+    <div class="nl pillK" id="p5al" style="left:0">Вибір університету</div>
+    <div class="nl pillY" id="p5bl" style="right:0">Вступ</div>
+    <div class="badge pillY">з Study and Travel</div>
+  </div>
+
+  <div id="caps" class="abs"></div>
+
+  <!-- финал -->
+  <div id="end" class="abs">
+    <div class="vid"><video id="endv" class="clip" data-start="0" data-duration="48.895" data-track-index="5" src="assets/media/plate_small.mp4" muted playsinline></video></div>
+    <div class="kick">Отримайте</div>
+    <h1>Безкоштовна консультація</h1>
+    <div class="btn"><b>Детальніше</b><svg width="60" height="60" viewBox="0 0 66 66"><circle cx="33" cy="33" r="33" fill="#FFD21A"/><path d="M22 33h22M35 23l10 10-10 10" stroke="#0C0C0C" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="ripple"></div><div class="tap"></div>
+    <div class="wm">STUDY AND TRAVEL<small>вступ до університетів Словаччини</small></div>
+  </div>
+
+  <audio id="mix" data-start="0" data-duration="49.5" data-track-index="20" src="assets/audio/mix.wav"></audio>
+  <script>
+    (function () {
+      const D = {"T": {"hud0": 3.45, "hud1": 38.536, "f1": 4.911, "f2": 15.83, "f3": 24.17, "f4": 32.562, "f5": 38.536, "end0": 44.884, "par": 2.804, "b1": 7.366, "meter": 8.366, "meterFill": 11.632, "meterStep": 0.22, "strike": 16.063, "note": 16.991, "chips": 20.705, "chipTo": 22.705, "bars": 27.116, "dip": 32.848, "exp": 37.205, "p5a": 42.125, "p5b": 44.268, "badge": 40.911, "tap": 45.411}, "zoom": [[0, 1.2, 1.03, 4.911, 0.48, 0.47], [4.911, 1.0, 1.05, 4.857000000000001, 0.49, 0.5], [9.768, 1.24, 1.28, 6.061999999999999, 0.49, 0.5], [15.83, 1.0, 1.04, 4.85, 0.6, 0.5], [20.705, 1.22, 1.26, 3.4650000000000034, 0.6, 0.38], [24.17, 1.0, 1.04, 2.95, 0.62, 0.45], [27.116, 1.22, 1.26, 5.445999999999998, 0.62, 0.28], [32.562, 1.0, 1.07, 5.974000000000004, 0.45, 0.45], [38.536, 1.08, 1.0, 6.347999999999999, 0.47, 0.47], [44.884, 1.18, 1.22, 4.6, 0.47, 0.47]], "caps": [{"s": -0.012, "e": 1.131, "w": [{"t": "Чотири", "s": 0.018, "e": 0.661}, {"t": "речі", "s": 0.661, "e": 1.018}, {"t": "про", "s": 1.018, "e": 1.161}]}, {"s": 1.131, "e": 1.988, "w": [{"t": "безкоштовний", "s": 1.161, "e": 1.732}, {"t": "вступ", "s": 1.732, "e": 1.982}]}, {"s": 1.988, "e": 2.774, "w": [{"t": "до", "s": 2.018, "e": 2.161}, {"t": "Словаччини,", "s": 2.161, "e": 2.804}]}, {"s": 2.774, "e": 3.631, "w": [{"t": "які", "s": 2.804, "e": 2.982}, {"t": "варто", "s": 3.018, "e": 3.304}, {"t": "знати", "s": 3.304, "e": 3.625}]}, {"s": 3.631, "e": 4.979, "w": [{"t": "кожному", "s": 3.661, "e": 4.089}, {"t": "з", "s": 4.089, "e": 4.161}, {"t": "батьків.", "s": 4.161, "e": 4.911}]}, {"s": 4.979, "e": 6.05, "w": [{"t": "Безкоштовно", "s": 5.009, "e": 5.83}, {"t": "—", "s": 5.866, "e": 5.973}, {"t": "так,", "s": 5.973, "e": 6.08}]}, {"s": 6.05, "e": 6.765, "w": [{"t": "але", "s": 6.08, "e": 6.259}, {"t": "навчання", "s": 6.295, "e": 6.795}]}, {"s": 6.765, "e": 7.336, "w": [{"t": "відбувається", "s": 6.795, "e": 7.33}]}, {"s": 7.336, "e": 8.336, "w": [{"t": "словацькою", "s": 7.366, "e": 7.902}, {"t": "мовою.", "s": 7.937, "e": 8.366}]}, {"s": 8.336, "e": 9.336, "w": [{"t": "Її", "s": 8.366, "e": 8.58}, {"t": "потрібно", "s": 8.58, "e": 8.759}, {"t": "реально", "s": 9.009, "e": 9.366}]}, {"s": 9.336, "e": 9.774, "w": [{"t": "вчити.", "s": 9.366, "e": 9.768}]}, {"s": 9.774, "e": 10.916, "w": [{"t": "Тому", "s": 9.804, "e": 10.054}, {"t": "Study", "s": 10.089, "e": 10.375}, {"t": "and", "s": 10.375, "e": 10.661}, {"t": "Travel", "s": 10.661, "e": 10.946}]}, {"s": 10.916, "e": 11.631, "w": [{"t": "готує", "s": 10.946, "e": 11.304}, {"t": "дитину", "s": 11.304, "e": 11.661}]}, {"s": 11.631, "e": 12.488, "w": [{"t": "до", "s": 11.661, "e": 11.732}, {"t": "потрібного", "s": 11.732, "e": 12.161}, {"t": "рівня", "s": 12.161, "e": 12.518}]}, {"s": 12.488, "e": 13.274, "w": [{"t": "заздалегідь,", "s": 12.518, "e": 13.304}]}, {"s": 13.274, "e": 13.774, "w": [{"t": "щоб", "s": 13.304, "e": 13.482}, {"t": "мова", "s": 13.518, "e": 13.804}]}, {"s": 13.774, "e": 14.631, "w": [{"t": "не", "s": 13.804, "e": 13.875}, {"t": "стала", "s": 13.875, "e": 14.089}, {"t": "перешкодою", "s": 14.089, "e": 14.661}]}, {"s": 14.631, "e": 15.059, "w": [{"t": "на", "s": 14.661, "e": 14.732}, {"t": "шляху", "s": 14.732, "e": 15.089}]}, {"s": 15.059, "e": 15.8, "w": [{"t": "до", "s": 15.089, "e": 15.232}, {"t": "вступу.", "s": 15.232, "e": 15.83}]}, {"s": 15.8, "e": 16.461, "w": [{"t": "Без", "s": 15.83, "e": 16.063}, {"t": "іспитів", "s": 16.063, "e": 16.491}]}, {"s": 16.461, "e": 17.318, "w": [{"t": "вступають", "s": 16.491, "e": 16.848}, {"t": "на", "s": 16.848, "e": 16.991}, {"t": "багато", "s": 16.991, "e": 17.17}]}, {"s": 17.318, "e": 17.961, "w": [{"t": "спеціальностей,", "s": 17.348, "e": 17.991}]}, {"s": 17.961, "e": 18.961, "w": [{"t": "але", "s": 17.991, "e": 18.134}, {"t": "умови", "s": 18.134, "e": 18.562}, {"t": "залежать", "s": 18.562, "e": 18.991}]}, {"s": 18.961, "e": 19.818, "w": [{"t": "від", "s": 18.991, "e": 19.17}, {"t": "університету", "s": 19.205, "e": 19.848}]}, {"s": 19.818, "e": 20.675, "w": [{"t": "та", "s": 19.848, "e": 19.991}, {"t": "факультету.", "s": 19.991, "e": 20.705}]}, {"s": 20.675, "e": 21.818, "w": [{"t": "Тому", "s": 20.705, "e": 20.991}, {"t": "Study", "s": 20.991, "e": 21.277}, {"t": "and", "s": 21.277, "e": 21.562}, {"t": "Travel", "s": 21.562, "e": 21.848}]}, {"s": 21.818, "e": 22.675, "w": [{"t": "допоможе", "s": 21.848, "e": 22.205}, {"t": "підібрати", "s": 22.205, "e": 22.705}]}, {"s": 22.675, "e": 23.318, "w": [{"t": "напрям", "s": 22.705, "e": 23.062}, {"t": "саме", "s": 23.062, "e": 23.348}]}, {"s": 23.318, "e": 24.14, "w": [{"t": "під", "s": 23.348, "e": 23.491}, {"t": "вашу", "s": 23.491, "e": 23.777}, {"t": "дитину.", "s": 23.777, "e": 24.17}]}, {"s": 24.14, "e": 25.086, "w": [{"t": "Місця", "s": 24.17, "e": 24.473}, {"t": "та", "s": 24.473, "e": 24.616}, {"t": "дедлайни", "s": 24.616, "e": 25.116}]}, {"s": 25.086, "e": 25.443, "w": [{"t": "залежать", "s": 25.116, "e": 25.473}]}, {"s": 25.443, "e": 26.229, "w": [{"t": "від", "s": 25.473, "e": 25.652}, {"t": "університету", "s": 25.687, "e": 26.259}]}, {"s": 26.229, "e": 27.086, "w": [{"t": "та", "s": 26.259, "e": 26.402}, {"t": "факультету.", "s": 26.402, "e": 27.116}]}, {"s": 27.086, "e": 28.086, "w": [{"t": "Чим", "s": 27.116, "e": 27.33}, {"t": "раніше", "s": 27.33, "e": 27.759}, {"t": "почати", "s": 27.759, "e": 28.116}]}, {"s": 28.086, "e": 28.586, "w": [{"t": "підготовку,", "s": 28.116, "e": 28.616}]}, {"s": 28.586, "e": 29.229, "w": [{"t": "тим", "s": 28.616, "e": 28.759}, {"t": "більше", "s": 28.759, "e": 28.938}, {"t": "часу", "s": 29.045, "e": 29.259}]}, {"s": 29.229, "e": 30.015, "w": [{"t": "буде", "s": 29.259, "e": 29.437}, {"t": "на", "s": 29.473, "e": 29.545}, {"t": "вивчення", "s": 29.545, "e": 30.045}]}, {"s": 30.015, "e": 30.3, "w": [{"t": "мови,", "s": 30.045, "e": 30.33}]}, {"s": 30.3, "e": 30.872, "w": [{"t": "оформлення", "s": 30.33, "e": 30.866}]}, {"s": 30.872, "e": 31.943, "w": [{"t": "документів", "s": 30.902, "e": 31.437}, {"t": "та", "s": 31.473, "e": 31.616}, {"t": "вибір", "s": 31.616, "e": 31.973}]}, {"s": 31.943, "e": 32.604, "w": [{"t": "факультету.", "s": 31.973, "e": 32.562}]}, {"s": 32.604, "e": 33.39, "w": [{"t": "А", "s": 32.634, "e": 32.812}, {"t": "головне,", "s": 32.848, "e": 33.42}]}, {"s": 33.39, "e": 33.747, "w": [{"t": "навчання", "s": 33.42, "e": 33.777}]}, {"s": 33.747, "e": 34.604, "w": [{"t": "в", "s": 33.777, "e": 33.848}, {"t": "Словаччині", "s": 33.848, "e": 34.42}, {"t": "може", "s": 34.42, "e": 34.598}]}, {"s": 34.604, "e": 35.247, "w": [{"t": "дати", "s": 34.634, "e": 34.848}, {"t": "дитині", "s": 34.848, "e": 35.277}]}, {"s": 35.247, "e": 36.175, "w": [{"t": "не", "s": 35.277, "e": 35.348}, {"t": "лише", "s": 35.348, "e": 35.634}, {"t": "європейський", "s": 35.634, "e": 36.205}]}, {"s": 36.175, "e": 36.604, "w": [{"t": "диплом,", "s": 36.205, "e": 36.634}]}, {"s": 36.604, "e": 37.175, "w": [{"t": "а", "s": 36.634, "e": 36.777}, {"t": "й", "s": 36.777, "e": 36.92}, {"t": "можливість", "s": 36.92, "e": 37.205}]}, {"s": 37.175, "e": 38.175, "w": [{"t": "здобути", "s": 37.205, "e": 37.634}, {"t": "міжнародний", "s": 37.634, "e": 38.205}]}, {"s": 38.175, "e": 38.524, "w": [{"t": "досвід.", "s": 38.205, "e": 38.536}]}, {"s": 38.524, "e": 39.738, "w": [{"t": "Якщо", "s": 38.554, "e": 39.018}, {"t": "ваша", "s": 39.054, "e": 39.339}, {"t": "дитина", "s": 39.339, "e": 39.768}]}, {"s": 39.738, "e": 40.452, "w": [{"t": "хоче", "s": 39.768, "e": 39.946}, {"t": "навчатися", "s": 40.054, "e": 40.482}]}, {"s": 40.452, "e": 40.881, "w": [{"t": "в", "s": 40.482, "e": 40.554}, {"t": "Європі,", "s": 40.554, "e": 40.911}]}, {"s": 40.881, "e": 41.666, "w": [{"t": "Study", "s": 40.911, "e": 41.173}, {"t": "and", "s": 41.173, "e": 41.435}, {"t": "Travel", "s": 41.435, "e": 41.696}]}, {"s": 41.666, "e": 42.595, "w": [{"t": "допоможе", "s": 41.696, "e": 42.125}, {"t": "пройти", "s": 42.125, "e": 42.375}, {"t": "цей", "s": 42.411, "e": 42.625}]}, {"s": 42.595, "e": 42.952, "w": [{"t": "шлях,", "s": 42.625, "e": 42.982}]}, {"s": 42.952, "e": 43.452, "w": [{"t": "від", "s": 42.982, "e": 43.125}, {"t": "вибору", "s": 43.125, "e": 43.482}]}, {"s": 43.452, "e": 44.095, "w": [{"t": "університету", "s": 43.482, "e": 44.089}]}, {"s": 44.095, "e": 44.884, "w": [{"t": "до", "s": 44.125, "e": 44.268}, {"t": "вступу.", "s": 44.268, "e": 44.804}]}], "capStyle": "", "vdur": 48.895, "checks": [15.482, 24.077, 32.373, 38.455], "hookW": [0.661, 1.018, 1.161, 1.732, 2.018, 2.161], "chipT": [21.191, 21.948, 22.205], "tagT": [24.17, 24.616, 25.116], "barT": [29.545, 30.33, 31.616]};
+      const tl = gsap.timeline({ paused: true });
+      const E = "power3.out", EB = "back.out(1.7)";
+      D.zoom.forEach(([t, z0, z1, d, ox, oy]) => {
+        tl.set("#plateZ", { scale: z0, transformOrigin: `${ox * 100}% ${oy * 100}%` }, t);
+        tl.to("#plateZ", { scale: z1, duration: d, ease: "sine.out" }, t + 0.001);
+      });
+      const capsEl = document.getElementById("caps");
+      D.caps.forEach((c, ci) => {
+        const el = document.createElement("div"); el.className = "cap" + D.capStyle; el.id = "cap" + ci;
+        c.w.forEach((w, wi) => { const s = document.createElement("span"); s.className = "cw"; s.id = `c${ci}w${wi}`; s.textContent = w.t; el.appendChild(s); });
+        capsEl.appendChild(el);
+        tl.fromTo(el, { opacity: 0, y: 14, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.14, ease: E }, c.s);
+        tl.set(el, { opacity: 0 }, c.e);
+        c.w.forEach((w, wi) => {
+          tl.set(`#c${ci}w${wi}`, { attr: { class: "cw on" } }, w.s);
+          tl.set(`#c${ci}w${wi}`, { attr: { class: "cw" } }, Math.min(w.e, c.e));
+        });
+      });
+
+      const T = D.T;
+      // ---------- чек-лист ----------
+      tl.fromTo("#hud", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.35, ease: E }, T.hud0);
+      tl.fromTo("#hud .box", { scale: 0.4, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: EB, stagger: 0.08 }, T.hud0);
+      D.checks.forEach((t, i) => {
+        const b = `#hb${i + 1}`;
+        tl.to(`${b} i`, { opacity: 1, duration: 0.15 }, t);
+        tl.to(`${b} b`, { opacity: 0, duration: 0.1 }, t);
+        tl.fromTo(`${b} svg path`, { strokeDashoffset: 40 }, { strokeDashoffset: 0, duration: 0.3, ease: "power2.out", immediateRender: false }, t + 0.05);
+        tl.fromTo(b, { scale: 1.35 }, { scale: 1, duration: 0.4, ease: EB, immediateRender: false }, t);
+        tl.set("#hcnt", { textContent: String(i + 1) }, t);
+      });
+      tl.to("#hud", { opacity: 0, y: -20, duration: 0.25 }, T.hud1);
+
+      // ---------- хук ----------
+      tl.fromTo("#hook .big", { scale: 2.2, opacity: 0, rotation: -10 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.5, ease: "expo.out" }, 0.02);
+      D.hookW.forEach((t, i) => tl.fromTo(`#hook .t em:nth-child(${i + 1})`, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.25, ease: E }, t));
+      tl.fromTo("#hook .par", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3, ease: EB }, T.par);
+      tl.to("#hook", { opacity: 0, y: -40, duration: 0.25, ease: "power2.in" }, T.f1 - 0.2);
+      tl.fromTo("#loc", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.35, ease: E }, 0.6);
+      tl.to("#loc", { opacity: 0, duration: 0.25 }, T.f1);
+
+      // ---------- заголовки фактов ----------
+      [["#fh1", T.f1, T.f2], ["#fh2", T.f2, T.f3], ["#fh3", T.f3, T.f4], ["#fh4", T.f4, T.f5]].forEach(([id, a, b]) => {
+        tl.fromTo(id, { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.35, ease: E }, a + 0.05);
+        tl.fromTo(id + " b", { scale: 1.6 }, { scale: 1, duration: 0.45, ease: EB, transformOrigin: "0% 60%" }, a + 0.05);
+        tl.to(id, { opacity: 0, x: 40, duration: 0.2, ease: "power2.in" }, b - 0.2);
+      });
+
+      // ---------- 1 мова ----------
+      tl.fromTo("#f1 .b1", { opacity: 0, scale: 0.6, transformOrigin: "0% 100%" }, { opacity: 1, scale: 1, duration: 0.35, ease: EB }, T.b1);
+      tl.fromTo("#f1 .b2", { opacity: 0, scale: 0.6, transformOrigin: "100% 100%" }, { opacity: 1, scale: 1, duration: 0.35, ease: EB }, T.b1 + 0.45);
+      tl.to(["#f1 .b1", "#f1 .b2"], { opacity: 0, y: -20, duration: 0.2 }, T.meter - 0.2);
+      tl.fromTo("#f1 .meter", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: E }, T.meter);
+      tl.fromTo("#f1 .meter .segs b", { scaleX: 0 }, { scaleX: 1, duration: 0.32, ease: "power2.out", stagger: T.meterStep }, T.meterFill);
+      tl.fromTo("#f1 .meter .ends .g", { opacity: 0.25 }, { opacity: 1, duration: 0.2 }, T.meterFill + 4 * T.meterStep + 0.3);
+      tl.to("#f1 .meter", { opacity: 0, duration: 0.2 }, T.f2 - 0.2);
+
+      // ---------- 2 іспити ----------
+      tl.fromTo("#f2 .sheet", { opacity: 0, y: 40, rotation: -4 }, { opacity: 1, y: 0, rotation: -2, duration: 0.4, ease: EB }, T.f2 + 0.1);
+      tl.fromTo("#f2 .strike", { scaleX: 0, rotation: -14 }, { scaleX: 1, rotation: -14, duration: 0.3, ease: "power2.out" }, T.strike);
+      tl.fromTo("#f2 .stamp", { opacity: 0, scale: 2.2, rotation: -20 }, { opacity: 1, scale: 1, rotation: -8, duration: 0.3, ease: "power4.in" }, T.strike + 0.2);
+      tl.fromTo("#f2 .stamp", { x: 0 }, { x: 6, duration: 0.05, yoyo: true, repeat: 3, immediateRender: false }, T.strike + 0.5);
+      tl.fromTo("#f2 .note", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: E }, T.note);
+      tl.to(["#f2 .sheet", "#f2 .stamp", "#f2 .note"], { opacity: 0, y: -20, duration: 0.2 }, T.chips - 0.2);
+      tl.set("#f2 .chips", { opacity: 1 }, T.chips);
+      D.chipT.forEach((t, i) => tl.fromTo(`#f2 .chips .c:nth-child(${i + 1})`, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.3, ease: EB }, t));
+      tl.fromTo("#f2 .chips .to", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3, ease: EB }, T.chipTo);
+      tl.to("#f2 .chips", { opacity: 0, duration: 0.2 }, T.f3 - 0.2);
+
+      // ---------- 3 дедлайни ----------
+      tl.fromTo("#f3 .cal", { opacity: 0, y: 40, rotation: 3 }, { opacity: 1, y: 0, rotation: 2, duration: 0.4, ease: EB }, T.f3 + 0.1);
+      tl.fromTo("#calring", { scale: 0, rotation: -90 }, { scale: 1, rotation: 0, duration: 0.4, ease: EB }, T.f3 + 0.5);
+      D.tagT.forEach((t, i) => tl.fromTo(`#f3 .tags > div:nth-child(${i + 1})`, { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.3, ease: EB }, t));
+      tl.to(["#f3 .cal", "#f3 .tags"], { opacity: 0, y: -20, duration: 0.2 }, T.bars - 0.2);
+      tl.fromTo("#f3 .bars", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: E }, T.bars);
+      D.barT.forEach((t, i) => {
+        tl.fromTo(`#f3 .bars .row:nth-of-type(${i + 2}) span`, { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25, ease: E }, t);
+        tl.fromTo(`#f3 .bars .row:nth-of-type(${i + 2}) b`, { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power2.out" }, t + 0.05);
+      });
+      tl.to("#f3 .bars", { opacity: 0, duration: 0.2 }, T.f4 - 0.2);
+
+      // ---------- 4 головне ----------
+      tl.fromTo("#f4 .dip", { opacity: 0, y: 40, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: EB }, T.dip);
+      tl.fromTo("#starring path", { scale: 0, opacity: 0, svgOrigin: "0 0" }, { scale: 1, opacity: 1, duration: 0.25, ease: EB, stagger: 0.05 }, T.dip + 0.2);
+      tl.fromTo("#starring", { rotation: 0, svgOrigin: "0 0" }, { rotation: 60, duration: T.f5 - T.dip, ease: "none" }, T.dip);
+      tl.fromTo("#f4 .exp", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: EB }, T.exp);
+      tl.to(["#f4 .dip", "#f4 .exp"], { opacity: 0, y: -20, duration: 0.2 }, T.f5 - 0.2);
+
+      // ---------- 5 шлях ----------
+      const p5 = document.getElementById("p5"), L5 = p5.getTotalLength(); p5.style.strokeDasharray = `${L5}`;
+      const mk = (p) => { const q = p5.getPointAtLength(p * L5); document.getElementById("p5m").setAttribute("transform", `translate(${q.x} ${q.y})`); }; mk(0);
+      tl.fromTo("#f5 .hd", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: E }, T.f5 + 0.1);
+      tl.fromTo("#f5 svg", { opacity: 0 }, { opacity: 1, duration: 0.3 }, T.p5a);
+      tl.fromTo("#p5al", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: E }, T.p5a);
+      const pp = { p: 0 };
+      tl.fromTo(p5, { strokeDashoffset: L5 }, { strokeDashoffset: 0, duration: T.p5b - T.p5a, ease: "power2.inOut" }, T.p5a);
+      tl.fromTo(pp, { p: 0 }, { p: 1, duration: T.p5b - T.p5a, ease: "power2.inOut", onUpdate: () => mk(pp.p) }, T.p5a);
+      tl.fromTo("#p5b", { scale: 0, svgOrigin: "896 120" }, { scale: 1, duration: 0.4, ease: EB }, T.p5b - 0.1);
+      tl.fromTo("#p5bl", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: EB }, T.p5b - 0.1);
+      tl.fromTo("#f5 .badge", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.3, ease: EB }, T.badge);
+
+      // ---------- финал ----------
+      tl.fromTo("#end", { clipPath: "circle(0% at 50% 50%)" }, { clipPath: "circle(150% at 50% 50%)", duration: 0.6, ease: "power3.inOut" }, T.end0);
+      tl.fromTo("#end .vid", { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: EB }, T.end0 + 0.25);
+      tl.fromTo(["#end .kick", "#end h1"], { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: E, stagger: 0.1 }, T.end0 + 0.35);
+      tl.fromTo("#end .btn", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.45, ease: EB }, T.end0 + 0.5);
+      tl.fromTo("#end .tap", { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.2, ease: E }, T.tap);
+      tl.to("#end .btn", { scale: 0.95, duration: 0.09, yoyo: true, repeat: 1 }, T.tap + 0.18);
+      tl.fromTo("#end .ripple", { opacity: 0.9, scale: 0.6 }, { opacity: 0, scale: 4, duration: 0.6, ease: "power2.out", immediateRender: false }, T.tap + 0.2);
+      tl.to("#end .tap", { opacity: 0, duration: 0.2 }, T.tap + 0.5);
+      tl.to("#end .vid", { scale: 0, opacity: 0, duration: 0.3, ease: "power2.in" }, D.vdur - 0.3);
+      tl.fromTo("#end .wm", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.35, ease: E }, T.end0 + 0.8);
+      tl.to("#end .btn", { scale: 1.04, duration: 0.45, yoyo: true, repeat: 3, ease: "sine.inOut" }, T.tap + 0.8);
+
+      window.__timelines["main"] = tl;
+    })();
+  </script>
+</div>
+</body>
+</html>
