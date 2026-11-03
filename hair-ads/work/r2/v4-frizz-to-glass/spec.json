@@ -1,0 +1,50 @@
+{
+ "duration": 13.45,
+ "events": [
+  {
+   "kind": "hook",
+   "t_in": 0,
+   "t_out": 1.6,
+   "y": 330,
+   "lines": [
+    "From this…"
+   ]
+  },
+  {
+   "kind": "hook",
+   "t_in": 1.75,
+   "t_out": 6.3,
+   "y": 330,
+   "lines": [
+    "What happens",
+    "in between ↓"
+   ]
+  },
+  {
+   "kind": "hook",
+   "t_in": 6.5,
+   "t_out": 10.0,
+   "y": 330,
+   "lines": [
+    "…to this ✨"
+   ]
+  },
+  {
+   "kind": "scrim",
+   "t_in": 10.05,
+   "t_out": 13.45,
+   "y0": 820,
+   "y1": 1920,
+   "a": 0.62
+  },
+  {
+   "kind": "cta",
+   "t_in": 10.25,
+   "t_out": 13.45,
+   "kicker": "Keratin · Hair Botox · Hair Recovery",
+   "main": "DM me a photo of your hair 📩",
+   "foot": "At your place in St. Moritz & around"
+  }
+ ],
+ "loc": "St. Moritz"
+}

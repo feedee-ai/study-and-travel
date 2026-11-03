@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "historyId": "94124449-b7c3-466b-97b6-a0ddbdf28357",
+  "currentRevision": "28de1d43-f60a-41e6-8c42-c8b7950612ba",
+  "pendingChanges": false,
+  "files": {
+    "assets/fonts/Inter.woff2": {
+      "hash": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+      "content": "/root/.cache/hyperframes/history/94124449-b7c3-466b-97b6-a0ddbdf28357/blobs/31/3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+    },
+    "assets/vendor/gsap.min.js": {
+      "hash": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+      "content": "/root/.cache/hyperframes/history/94124449-b7c3-466b-97b6-a0ddbdf28357/blobs/c1/c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280"
+    },
+    "index.html": {
+      "hash": "fed0a454f29de94ab584a815945910a078c652b86bb2fa3131f7c3cfa4d00309",
+      "content": "/root/.cache/hyperframes/history/94124449-b7c3-466b-97b6-a0ddbdf28357/blobs/fe/fed0a454f29de94ab584a815945910a078c652b86bb2fa3131f7c3cfa4d00309"
+    },
+    "assets/fonts/Emoji.ttf": {
+      "hash": "93cdc4ee9aa40e2afceecc63da0ca05ec7aab4bec991ece51a6b52389f48a477",
+      "content": "/root/.cache/hyperframes/history/94124449-b7c3-466b-97b6-a0ddbdf28357/blobs/93/93cdc4ee9aa40e2afceecc63da0ca05ec7aab4bec991ece51a6b52389f48a477"
+    }
+  },
+  "revisions": {
+    "672ff668-e28b-4db4-96f8-07a62e2ff211": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1793727036410,
+      "endedAt": 1793727036411,
+      "files": {
+        "index.html": {
+          "before": "/root/.cache/hyperframes/history/94124449-b7c3-466b-97b6-a0ddbdf28357/blobs/d8/d85a740a90966c034d603dfb5376aa9a77b16b40bdad70d54699a751ea6edf6a",
+          "after": "/root/.cache/hyperframes/history/94124449-b7c3-466b-97b6-a0ddbdf28357/blobs/50/50a077574311d1ba58fd9d99e535503666a030cad9c6859336d805701782a4fc"
+        }
+      }
+    },
+    "28de1d43-f60a-41e6-8c42-c8b7950612ba": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1793727496826,
+      "endedAt": 1793727496828,
+      "files": {
+        "index.html": {
+          "before": "/root/.cache/hyperframes/history/94124449-b7c3-466b-97b6-a0ddbdf28357/blobs/50/50a077574311d1ba58fd9d99e535503666a030cad9c6859336d805701782a4fc",
+          "after": "/root/.cache/hyperframes/history/94124449-b7c3-466b-97b6-a0ddbdf28357/blobs/fe/fed0a454f29de94ab584a815945910a078c652b86bb2fa3131f7c3cfa4d00309"
+        }
+      }
+    }
+  },
+  "checks": {
+    "latest": {
+      "revision": "672ff668-e28b-4db4-96f8-07a62e2ff211",
+      "id": "ee5bb783-f462-43a5-a6b0-39f09e250dd9"
+    },
+    "revisions": {
+      "672ff668-e28b-4db4-96f8-07a62e2ff211": [
+        {
+          "id": "ee5bb783-f462-43a5-a6b0-39f09e250dd9",
+          "scope": "project",
+          "report": "/home/user/study-and-travel/hair-ads/work/r2/v1-same-hair/hf/.hyperframes/artifacts/checks/ee5bb783-f462-43a5-a6b0-39f09e250dd9.json",
+          "metadata": {
+            "ok": true,
+            "browserSkipped": false,
+            "options": {
+              "samples": 9,
+              "atTransitions": false,
+              "maxIssues": 80,
+              "collapseStatic": true,
+              "tolerance": 2,
+              "timeout": 10000,
+              "contrast": true,
+              "strict": false,
+              "snapshots": false,
+              "browserGpuMode": "auto"
+            }
+          },
+          "createdAt": 1793727039120,
+          "contentHash": "55d2150cad2b5b0590f6bafd131c682a094dc58b4a395b54cddd2905bc290da4",
+          "revision": "672ff668-e28b-4db4-96f8-07a62e2ff211",
+          "inputFingerprint": "acf11686b83bae68d86964f0f347398d76c523c2aff6595a0328ac125297ffb7",
+          "inputScope": "local-project-files",
+          "attribution": "recorded-revision"
+        }
+      ]
+    },
+    "unversioned": [
+      {
+        "id": "04607c3d-c29b-4334-9ee6-489584b49ddd",
+        "scope": "project",
+        "report": "/home/user/study-and-travel/hair-ads/work/r2/v1-same-hair/hf/.hyperframes/artifacts/checks/04607c3d-c29b-4334-9ee6-489584b49ddd.json",
+        "metadata": {
+          "ok": true,
+          "browserSkipped": false,
+          "options": {
+            "samples": 9,
+            "atTransitions": false,
+            "maxIssues": 80,
+            "collapseStatic": true,
+            "tolerance": 2,
+            "timeout": 10000,
+            "contrast": true,
+            "strict": false,
+            "snapshots": false,
+            "browserGpuMode": "auto"
+          }
+        },
+        "createdAt": 1793726976283,
+        "contentHash": "04289e1f86f2435f6fdf1f2bf658b563af9a86509401c437310d6e8d7800d6cf",
+        "revision": null,
+        "inputFingerprint": "b8a90bfe086d5017e3cb240cc619e78db581ff393ca2d866e65aced86bc3fc2d",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      }
+    ]
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "renders": {
+    "latest": {
+      "id": "d2f02037-02b9-46d8-a0b2-d44f22734ac7",
+      "completedAt": 1793727563395,
+      "output": "/home/user/study-and-travel/hair-ads/work/r2/v1-same-hair/overlay.mov",
+      "status": "completed",
+      "revision": "28de1d43-f60a-41e6-8c42-c8b7950612ba"
+    },
+    "retainedRevisions": [
+      "28de1d43-f60a-41e6-8c42-c8b7950612ba",
+      "672ff668-e28b-4db4-96f8-07a62e2ff211"
+    ]
+  },
+  "pendingArtifactCleanup": []
+}

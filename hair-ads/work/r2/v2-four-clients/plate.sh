@@ -10,5 +10,5 @@ shot shots/b4.mp4 new/mur_5693.mov 9.0 2.0 0.7 1.04 1.00 "$GR"    # 2 после
 shot shots/b5.mp4 new/lud_4664.mov 1.5 1.5 0.9 1.00 1.06 "$GR"    # 3 до
 shot shots/b6.mp4 new/lud_4744.mov 17.5 2.0 0.8 1.04 1.00 "$GR"   # 3 после
 shot shots/b7.mp4 new/ann_5489.mov 134 1.5 0.9 1.00 1.05 "$GR"    # 4 Annette в процессе (утюжок)
-shot shots/b8.mp4 new/ann_5500.mov 7.4 3.4 0.6 1.00 1.05 "$GR"    # 4 после — финал/CTA
+shot shots/b8.mp4 new/ann_5500.mov 7.4 4.0 0.6 1.00 1.05 "$GR"    # 4 после — финал/CTA
 xfade_seq plate.mp4 shots/b1.mp4 fadewhite 0.3 shots/b2.mp4 smoothleft 0.35 shots/b3.mp4 fadewhite 0.3 shots/b4.mp4 smoothleft 0.35 shots/b5.mp4 fadewhite 0.3 shots/b6.mp4 smoothleft 0.35 shots/b7.mp4 fadewhite 0.3 shots/b8.mp4

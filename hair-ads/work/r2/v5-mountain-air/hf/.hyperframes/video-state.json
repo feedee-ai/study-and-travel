@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "historyId": "8d5aa379-6f55-4b89-949c-2bcd9be27ffe",
+  "currentRevision": "0f753f28-f80d-4b16-8002-51bfc35cd967",
+  "pendingChanges": false,
+  "files": {
+    "assets/fonts/Inter.woff2": {
+      "hash": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+      "content": "/root/.cache/hyperframes/history/8d5aa379-6f55-4b89-949c-2bcd9be27ffe/blobs/31/3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+    },
+    "assets/vendor/gsap.min.js": {
+      "hash": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+      "content": "/root/.cache/hyperframes/history/8d5aa379-6f55-4b89-949c-2bcd9be27ffe/blobs/c1/c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280"
+    },
+    "index.html": {
+      "hash": "f4513e3d526dd6e3b978725cd246d765b19fb1b97de605b54d0795d0b988ce87",
+      "content": "/root/.cache/hyperframes/history/8d5aa379-6f55-4b89-949c-2bcd9be27ffe/blobs/f4/f4513e3d526dd6e3b978725cd246d765b19fb1b97de605b54d0795d0b988ce87"
+    },
+    "assets/fonts/Emoji.ttf": {
+      "hash": "93cdc4ee9aa40e2afceecc63da0ca05ec7aab4bec991ece51a6b52389f48a477",
+      "content": "/root/.cache/hyperframes/history/8d5aa379-6f55-4b89-949c-2bcd9be27ffe/blobs/93/93cdc4ee9aa40e2afceecc63da0ca05ec7aab4bec991ece51a6b52389f48a477"
+    }
+  },
+  "revisions": {
+    "0f753f28-f80d-4b16-8002-51bfc35cd967": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1793728244613,
+      "endedAt": 1793728244615,
+      "files": {
+        "index.html": {
+          "before": "/root/.cache/hyperframes/history/8d5aa379-6f55-4b89-949c-2bcd9be27ffe/blobs/98/9887cc3b60b855c61e3ff394084c86693ff455d2adb3cc552379e40f9327d247",
+          "after": "/root/.cache/hyperframes/history/8d5aa379-6f55-4b89-949c-2bcd9be27ffe/blobs/f4/f4513e3d526dd6e3b978725cd246d765b19fb1b97de605b54d0795d0b988ce87"
+        }
+      }
+    }
+  },
+  "checks": {
+    "latest": {
+      "revision": null,
+      "id": "4f207144-6d0d-46fa-8c18-09d761307c32"
+    },
+    "revisions": {},
+    "unversioned": [
+      {
+        "id": "4f207144-6d0d-46fa-8c18-09d761307c32",
+        "scope": "project",
+        "report": "/home/user/study-and-travel/hair-ads/work/r2/v5-mountain-air/hf/.hyperframes/artifacts/checks/4f207144-6d0d-46fa-8c18-09d761307c32.json",
+        "metadata": {
+          "ok": true,
+          "browserSkipped": false,
+          "options": {
+            "samples": 9,
+            "atTransitions": false,
+            "maxIssues": 80,
+            "collapseStatic": true,
+            "tolerance": 2,
+            "timeout": 10000,
+            "contrast": true,
+            "strict": false,
+            "snapshots": false,
+            "browserGpuMode": "auto"
+          }
+        },
+        "createdAt": 1793726997242,
+        "contentHash": "e4af8cbe88a724a015e5458834570dfbd1abb92f4bdd66c8e7ffc89fba7a9cec",
+        "revision": null,
+        "inputFingerprint": "6194e6e65d8c9b9791278f7783aff2071cffa544bfe36d5344d7e699c84deea7",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      }
+    ]
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "renders": {
+    "latest": {
+      "id": "327a14a4-1757-4e3d-b7d1-753dbee8cf6b",
+      "completedAt": 1793728288390,
+      "output": "/home/user/study-and-travel/hair-ads/work/r2/v5-mountain-air/overlay.mov",
+      "status": "completed",
+      "revision": "0f753f28-f80d-4b16-8002-51bfc35cd967"
+    },
+    "retainedRevisions": [
+      "0f753f28-f80d-4b16-8002-51bfc35cd967"
+    ]
+  },
+  "pendingArtifactCleanup": []
+}

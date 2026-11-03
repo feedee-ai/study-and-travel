@@ -19,6 +19,7 @@ spec = json.loads((d / "spec.json").read_text())
 hf = d / "hf"; (hf / "assets/fonts").mkdir(parents=True, exist_ok=True); (hf / "assets/vendor").mkdir(parents=True, exist_ok=True)
 work = pathlib.Path(__file__).resolve().parent.parent
 shutil.copy(work / "fonts/Inter.woff2", hf / "assets/fonts/Inter.woff2")
+shutil.copy("/usr/share/fonts/truetype/noto/NotoColorEmoji.ttf", hf / "assets/fonts/Emoji.ttf")
 shutil.copy(work / "de/01-desire/hf/assets/vendor/gsap.min.js", hf / "assets/vendor/gsap.min.js")
 
 E = lambda s: html.escape(s, quote=False)
@@ -26,9 +27,10 @@ body, js = [], []
 for i, ev in enumerate(spec["events"]):
     k, eid, a, b = ev["kind"], f"e{i}", ev["t_in"], ev["t_out"]
     if k == "hook":
-        rows = "".join(f'<div class="hb"><span>{E(l)}</span></div>' for l in ev["lines"])
+        st = ' style="opacity:1"' if a <= 0 else ""
+        rows = "".join(f'<div class="hb"{st}><span>{E(l)}</span></div>' for l in ev["lines"])
         body.append(f'<div class="hook" id="{eid}" style="top:{ev["y"]}px">{rows}</div>')
-        js.append(f'tl.fromTo("#{eid} .hb", {{opacity:0, y:26, scale:.94}}, {{opacity:1, y:0, scale:1, duration:.42, ease:"back.out(1.7)", stagger:.09}}, {a});')
+        if a > 0: js.append(f'tl.fromTo("#{eid} .hb", {{opacity:0, y:26, scale:.94}}, {{opacity:1, y:0, scale:1, duration:.42, ease:"back.out(1.7)", stagger:.09}}, {a});')
         js.append(f'tl.to("#{eid} .hb", {{opacity:0, y:-12, duration:.22, ease:"power2.in", stagger:.04}}, {b - .22});')
     elif k == "sub":
         rows = "".join(f'<div class="sl">{E(l)}</div>' for l in ev["lines"])
@@ -36,8 +38,9 @@ for i, ev in enumerate(spec["events"]):
         js.append(f'tl.fromTo("#{eid} .sl", {{opacity:0, y:20}}, {{opacity:1, y:0, duration:.45, ease:"power3.out", stagger:.1}}, {a});')
         js.append(f'tl.to("#{eid} .sl", {{opacity:0, duration:.22, ease:"power2.in"}}, {b - .22});')
     elif k == "chip":
-        body.append(f'<div class="chipw" style="top:{ev["y"]}px"><div class="chip {ev.get("tone","dark")}" id="{eid}">{E(ev["text"])}</div></div>')
-        js.append(f'tl.fromTo("#{eid}", {{opacity:0, scale:.8}}, {{opacity:1, scale:1, duration:.35, ease:"back.out(2)"}}, {a});')
+        st = ' style="opacity:1"' if a <= 0 else ""
+        body.append(f'<div class="chipw" style="top:{ev["y"]}px"><div class="chip {ev.get("tone","dark")}" id="{eid}"{st}>{E(ev["text"])}</div></div>')
+        if a > 0: js.append(f'tl.fromTo("#{eid}", {{opacity:0, scale:.8}}, {{opacity:1, scale:1, duration:.35, ease:"back.out(2)"}}, {a});')
         js.append(f'tl.to("#{eid}", {{opacity:0, duration:.18}}, {b - .18});')
     elif k == "scrim":
         body.append(f'<div class="scrim" id="{eid}" style="top:{ev["y0"]}px;height:{ev["y1"]-ev["y0"]}px;'
@@ -49,7 +52,7 @@ for i, ev in enumerate(spec["events"]):
         js.append(f'tl.fromTo("#{eid} .ck", {{opacity:0, y:18}}, {{opacity:1, y:0, duration:.45, ease:"power3.out"}}, {a});')
         js.append(f'tl.fromTo("#{eid} .cm", {{opacity:0, y:26, scale:.92}}, {{opacity:1, y:0, scale:1, duration:.5, ease:"back.out(1.8)"}}, {a + .15});')
         js.append(f'tl.fromTo("#{eid} .cf", {{opacity:0, y:14}}, {{opacity:1, y:0, duration:.45, ease:"power3.out"}}, {a + .35});')
-        js.append(f'tl.fromTo("#{eid} .cm", {{scale:1}}, {{scale:1.035, duration:.5, ease:"sine.inOut", yoyo:true, repeat:1}}, {a + 1.1});')
+        js.append(f'tl.to("#{eid} .cm span", {{scale:1.035, duration:.5, ease:"sine.inOut", yoyo:true, repeat:1}}, {a + 1.1});')
 
 dur = spec["duration"]
 page = f"""<!doctype html>
@@ -59,15 +62,16 @@ page = f"""<!doctype html>
 <script src="assets/vendor/gsap.min.js"></script>
 <style>
   @font-face {{ font-family: "Inter"; src: url("assets/fonts/Inter.woff2") format("woff2"); font-weight: 100 900; }}
+  @font-face {{ font-family: "Emoji"; src: url("assets/fonts/Emoji.ttf") format("truetype"); }}
   html, body {{ margin: 0; background: transparent; }}
   #root {{ position: relative; width: 1080px; height: 1920px; overflow: hidden; color: #fff;
-          font-family: "Inter", "Noto Color Emoji", sans-serif; -webkit-font-smoothing: antialiased; }}
-  .loc {{ position: absolute; top: 196px; left: 0; right: 0; display: flex; justify-content: center; opacity: 0; }}
+          font-family: "Inter", "Emoji", sans-serif; -webkit-font-smoothing: antialiased; }}
+  .loc {{ position: absolute; top: 196px; left: 0; right: 0; display: flex; justify-content: center; }}
   .loc span {{ padding: 12px 26px; border-radius: 999px; background: rgba(14,12,11,.42); font-weight: 600; font-size: 34px;
               letter-spacing: .01em; backdrop-filter: blur(6px); }}
   .hook {{ position: absolute; left: 60px; right: 60px; display: flex; flex-direction: column; align-items: center; gap: 10px; }}
   .hb {{ opacity: 0; }}
-  .hb span {{ display: inline-block; background: #fff; color: #141210; font-weight: 750; font-size: 62px; line-height: 1.12;
+  .hb span {{ display: inline-block; background: #fff; color: #141210; font-weight: 760; font-size: 70px; line-height: 1.12;
              padding: 14px 28px 16px; border-radius: 16px; letter-spacing: -.01em; box-shadow: 0 10px 30px rgba(0,0,0,.18); }}
   .sub {{ position: absolute; left: 60px; right: 60px; text-align: center; }}
   .sl {{ opacity: 0; font-weight: 750; font-size: 66px; line-height: 1.14; letter-spacing: -.01em;
@@ -94,7 +98,6 @@ page = f"""<!doctype html>
   <script>
     (function () {{
       const tl = gsap.timeline({{ paused: true }});
-      tl.fromTo("#loc", {{ opacity: 0, y: -8 }}, {{ opacity: 1, y: 0, duration: .4, ease: "power2.out" }}, 0.05);
       {(chr(10) + "      ").join(js)}
       tl.set({{}}, {{}}, {dur});
       window.__timelines = window.__timelines || {{}};

@@ -1,0 +1,106 @@
+{
+ "duration": 13.75,
+ "events": [
+  {
+   "kind": "hook",
+   "t_in": 0,
+   "t_out": 2.8,
+   "y": 330,
+   "lines": [
+    "4 transformations",
+    "this week in St. Moritz"
+   ]
+  },
+  {
+   "kind": "chip",
+   "t_in": 0,
+   "t_out": 1.22,
+   "y": 1380,
+   "text": "1/4 · BEFORE",
+   "tone": "dark"
+  },
+  {
+   "kind": "chip",
+   "t_in": 1.3,
+   "t_out": 2.85,
+   "y": 1380,
+   "text": "1/4 · AFTER",
+   "tone": "light"
+  },
+  {
+   "kind": "hook",
+   "t_in": 3.0,
+   "t_out": 5.65,
+   "y": 330,
+   "lines": [
+    "Real clients.",
+    "Real hair."
+   ]
+  },
+  {
+   "kind": "chip",
+   "t_in": 2.95,
+   "t_out": 4.05,
+   "y": 1380,
+   "text": "2/4 · BEFORE",
+   "tone": "dark"
+  },
+  {
+   "kind": "chip",
+   "t_in": 4.12,
+   "t_out": 5.7,
+   "y": 1380,
+   "text": "2/4 · AFTER",
+   "tone": "light"
+  },
+  {
+   "kind": "chip",
+   "t_in": 5.8,
+   "t_out": 6.9,
+   "y": 1380,
+   "text": "3/4 · BEFORE",
+   "tone": "dark"
+  },
+  {
+   "kind": "chip",
+   "t_in": 6.98,
+   "t_out": 8.55,
+   "y": 1380,
+   "text": "3/4 · AFTER",
+   "tone": "light"
+  },
+  {
+   "kind": "chip",
+   "t_in": 8.65,
+   "t_out": 9.75,
+   "y": 1380,
+   "text": "4/4 · DURING",
+   "tone": "dark"
+  },
+  {
+   "kind": "chip",
+   "t_in": 9.82,
+   "t_out": 10.7,
+   "y": 1380,
+   "text": "4/4 · AFTER",
+   "tone": "light"
+  },
+  {
+   "kind": "scrim",
+   "t_in": 10.4,
+   "t_out": 13.75,
+   "y0": 820,
+   "y1": 1920,
+   "a": 0.62
+  },
+  {
+   "kind": "cta",
+   "t_in": 10.6,
+   "t_out": 13.75,
+   "kicker": "Keratin · Hair Botox · Hair Recovery",
+   "main": "Your turn? DM me 📩",
+   "foot": "Send a photo — I'll tell you what it needs"
+  }
+ ],
+ "loc": "St. Moritz"
+}

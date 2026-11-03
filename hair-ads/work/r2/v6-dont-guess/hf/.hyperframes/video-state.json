@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "historyId": "cff9f49a-b8da-4b8d-ad77-d99d7b9be2e2",
+  "currentRevision": "82e22f75-4932-4619-a67c-2b400d175b64",
+  "pendingChanges": false,
+  "files": {
+    "assets/fonts/Inter.woff2": {
+      "hash": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+      "content": "/root/.cache/hyperframes/history/cff9f49a-b8da-4b8d-ad77-d99d7b9be2e2/blobs/31/3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+    },
+    "assets/vendor/gsap.min.js": {
+      "hash": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+      "content": "/root/.cache/hyperframes/history/cff9f49a-b8da-4b8d-ad77-d99d7b9be2e2/blobs/c1/c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280"
+    },
+    "index.html": {
+      "hash": "70c8e55b98e795b7afb497f8f8f5fe9bd64844a75568f7d422e67e575e52fbbd",
+      "content": "/root/.cache/hyperframes/history/cff9f49a-b8da-4b8d-ad77-d99d7b9be2e2/blobs/70/70c8e55b98e795b7afb497f8f8f5fe9bd64844a75568f7d422e67e575e52fbbd"
+    },
+    "assets/fonts/Emoji.ttf": {
+      "hash": "93cdc4ee9aa40e2afceecc63da0ca05ec7aab4bec991ece51a6b52389f48a477",
+      "content": "/root/.cache/hyperframes/history/cff9f49a-b8da-4b8d-ad77-d99d7b9be2e2/blobs/93/93cdc4ee9aa40e2afceecc63da0ca05ec7aab4bec991ece51a6b52389f48a477"
+    }
+  },
+  "revisions": {
+    "82e22f75-4932-4619-a67c-2b400d175b64": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1793728405646,
+      "endedAt": 1793728405647,
+      "files": {
+        "index.html": {
+          "before": "/root/.cache/hyperframes/history/cff9f49a-b8da-4b8d-ad77-d99d7b9be2e2/blobs/55/55f25eb22934bbf2ccecf5aab1e4e99c8d5438ef6a5dabfc794c6769c8f3a723",
+          "after": "/root/.cache/hyperframes/history/cff9f49a-b8da-4b8d-ad77-d99d7b9be2e2/blobs/70/70c8e55b98e795b7afb497f8f8f5fe9bd64844a75568f7d422e67e575e52fbbd"
+        }
+      }
+    }
+  },
+  "checks": {
+    "latest": {
+      "revision": null,
+      "id": "673c1986-0c5c-4c60-9cd2-87dcd195a0d5"
+    },
+    "revisions": {},
+    "unversioned": [
+      {
+        "id": "673c1986-0c5c-4c60-9cd2-87dcd195a0d5",
+        "scope": "project",
+        "report": "/home/user/study-and-travel/hair-ads/work/r2/v6-dont-guess/hf/.hyperframes/artifacts/checks/673c1986-0c5c-4c60-9cd2-87dcd195a0d5.json",
+        "metadata": {
+          "ok": true,
+          "browserSkipped": false,
+          "options": {
+            "samples": 9,
+            "atTransitions": false,
+            "maxIssues": 80,
+            "collapseStatic": true,
+            "tolerance": 2,
+            "timeout": 10000,
+            "contrast": true,
+            "strict": false,
+            "snapshots": false,
+            "browserGpuMode": "auto"
+          }
+        },
+        "createdAt": 1793727001052,
+        "contentHash": "1c58efac0a36e7c4b633e181a9c88d471aee7a66e12a4e2500f2a2325f5b1477",
+        "revision": null,
+        "inputFingerprint": "57e897df1fd7b515d4dcc8eaa55a241ed6dc778cc3305239f84e9f1319b9c1fe",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      }
+    ]
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "renders": {
+    "latest": {
+      "id": "fd8152c4-b292-4667-87aa-91b675dd8cc2",
+      "completedAt": 1793728447962,
+      "output": "/home/user/study-and-travel/hair-ads/work/r2/v6-dont-guess/overlay.mov",
+      "status": "completed",
+      "revision": "82e22f75-4932-4619-a67c-2b400d175b64"
+    },
+    "retainedRevisions": [
+      "82e22f75-4932-4619-a67c-2b400d175b64"
+    ]
+  },
+  "pendingArtifactCleanup": []
+}

@@ -34,3 +34,8 @@
 | 02 PAIN | A New Start | Chillout | https://assets.mixkit.co/music/144/144.mp3 | 0 с, приглушён до 3.85 с |
 | 03 PRIVATE | Smooth Jazz | Downtempo | https://assets.mixkit.co/music/640/640.mp3 | 6.0 с |
 | 04 TIME | Pop 08 | Chillout | https://assets.mixkit.co/music/701/701.mp3 | 3.75 с (дроп на 4.25 с) |
+
+# r2 (ноябрь)
+| файл | ссылка | где |
+|---|---|---|
+| mk_4283-2160.mp4 (4K) | https://mixkit.co/free-stock-video/swiss-alps-snow-background-time-lapse-4283/ | r2 V5 (начало) |

@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "historyId": "505a338d-d670-4ddf-a567-ba4d5ff7395b",
+  "currentRevision": "c6dc4f79-caaf-48a9-b95a-49a1add388d8",
+  "pendingChanges": false,
+  "files": {
+    "assets/fonts/Inter.woff2": {
+      "hash": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+      "content": "/root/.cache/hyperframes/history/505a338d-d670-4ddf-a567-ba4d5ff7395b/blobs/31/3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+    },
+    "assets/vendor/gsap.min.js": {
+      "hash": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+      "content": "/root/.cache/hyperframes/history/505a338d-d670-4ddf-a567-ba4d5ff7395b/blobs/c1/c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280"
+    },
+    "index.html": {
+      "hash": "e429f9834d90a58c8d9d99750fcb0ec082ff45c6a5d197209b23c326ec05da97",
+      "content": "/root/.cache/hyperframes/history/505a338d-d670-4ddf-a567-ba4d5ff7395b/blobs/e4/e429f9834d90a58c8d9d99750fcb0ec082ff45c6a5d197209b23c326ec05da97"
+    },
+    "assets/fonts/Emoji.ttf": {
+      "hash": "93cdc4ee9aa40e2afceecc63da0ca05ec7aab4bec991ece51a6b52389f48a477",
+      "content": "/root/.cache/hyperframes/history/505a338d-d670-4ddf-a567-ba4d5ff7395b/blobs/93/93cdc4ee9aa40e2afceecc63da0ca05ec7aab4bec991ece51a6b52389f48a477"
+    }
+  },
+  "revisions": {
+    "c6dc4f79-caaf-48a9-b95a-49a1add388d8": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1793727724124,
+      "endedAt": 1793727724125,
+      "files": {
+        "index.html": {
+          "before": "/root/.cache/hyperframes/history/505a338d-d670-4ddf-a567-ba4d5ff7395b/blobs/85/859f762382a592b878b24a20a056202675f90149730fc730c5b73a3906c7b613",
+          "after": "/root/.cache/hyperframes/history/505a338d-d670-4ddf-a567-ba4d5ff7395b/blobs/e4/e429f9834d90a58c8d9d99750fcb0ec082ff45c6a5d197209b23c326ec05da97"
+        }
+      }
+    }
+  },
+  "checks": {
+    "latest": {
+      "revision": null,
+      "id": "21355e35-5077-4b25-aab5-063e69ab909d"
+    },
+    "revisions": {},
+    "unversioned": [
+      {
+        "id": "8fe4a789-1298-4faf-a44f-eb14aa359bbf",
+        "scope": "project",
+        "report": "/home/user/study-and-travel/hair-ads/work/r2/v2-four-clients/hf/.hyperframes/artifacts/checks/8fe4a789-1298-4faf-a44f-eb14aa359bbf.json",
+        "metadata": {
+          "ok": true,
+          "browserSkipped": false,
+          "options": {
+            "samples": 9,
+            "atTransitions": false,
+            "maxIssues": 80,
+            "collapseStatic": true,
+            "tolerance": 2,
+            "timeout": 10000,
+            "contrast": true,
+            "strict": false,
+            "snapshots": false,
+            "browserGpuMode": "auto"
+          }
+        },
+        "createdAt": 1793726983554,
+        "contentHash": "eb20fca755ee50a8238b33e1a9201199a2ce5b7275a154b6e2abf9d2352d09f1",
+        "revision": null,
+        "inputFingerprint": "b694341230e1690ff99e4d35c9c33adfc22664fdec32c488088612cc3c03edaf",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      },
+      {
+        "id": "21355e35-5077-4b25-aab5-063e69ab909d",
+        "scope": "project",
+        "report": "/home/user/study-and-travel/hair-ads/work/r2/v2-four-clients/hf/.hyperframes/artifacts/checks/21355e35-5077-4b25-aab5-063e69ab909d.json",
+        "metadata": {
+          "ok": true,
+          "browserSkipped": false,
+          "options": {
+            "samples": 9,
+            "atTransitions": false,
+            "maxIssues": 80,
+            "collapseStatic": true,
+            "tolerance": 2,
+            "timeout": 10000,
+            "contrast": true,
+            "strict": false,
+            "snapshots": false,
+            "browserGpuMode": "auto"
+          }
+        },
+        "createdAt": 1793727014352,
+        "contentHash": "eb20fca755ee50a8238b33e1a9201199a2ce5b7275a154b6e2abf9d2352d09f1",
+        "revision": null,
+        "inputFingerprint": "b694341230e1690ff99e4d35c9c33adfc22664fdec32c488088612cc3c03edaf",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      }
+    ]
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "renders": {
+    "latest": {
+      "id": "78ecc3ed-9b00-474c-900a-bb9b5a961c01",
+      "completedAt": 1793727768031,
+      "output": "/home/user/study-and-travel/hair-ads/work/r2/v2-four-clients/overlay.mov",
+      "status": "completed",
+      "revision": "c6dc4f79-caaf-48a9-b95a-49a1add388d8"
+    },
+    "retainedRevisions": [
+      "c6dc4f79-caaf-48a9-b95a-49a1add388d8"
+    ]
+  },
+  "pendingArtifactCleanup": []
+}

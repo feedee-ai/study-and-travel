@@ -1,0 +1,60 @@
+{
+ "duration": 12.9,
+ "events": [
+  {
+   "kind": "hook",
+   "t_in": 0,
+   "t_out": 2.15,
+   "y": 330,
+   "lines": [
+    "St. Moritz winters",
+    "are hard on hair ❄️"
+   ]
+  },
+  {
+   "kind": "hook",
+   "t_in": 2.25,
+   "t_out": 5.2,
+   "y": 330,
+   "lines": [
+    "Dry air. Heating.",
+    "Hats. Ski helmets."
+   ]
+  },
+  {
+   "kind": "hook",
+   "t_in": 5.35,
+   "t_out": 7.65,
+   "y": 330,
+   "lines": [
+    "Fix it before",
+    "the season starts"
+   ]
+  },
+  {
+   "kind": "chip",
+   "t_in": 7.8,
+   "t_out": 9.6,
+   "y": 1380,
+   "text": "AFTER",
+   "tone": "light"
+  },
+  {
+   "kind": "scrim",
+   "t_in": 9.4,
+   "t_out": 12.9,
+   "y0": 820,
+   "y1": 1920,
+   "a": 0.62
+  },
+  {
+   "kind": "cta",
+   "t_in": 9.6,
+   "t_out": 12.9,
+   "kicker": "Keratin · Hair Botox · Hair Recovery",
+   "main": "DM me a photo of your hair 📩",
+   "foot": "Book before the December rush"
+  }
+ ],
+ "loc": "St. Moritz"
+}

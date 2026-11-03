@@ -1,0 +1,50 @@
+{
+ "duration": 13.25,
+ "events": [
+  {
+   "kind": "hook",
+   "t_in": 0,
+   "t_out": 2.2,
+   "y": 330,
+   "lines": [
+    "Keratin or Hair Botox?",
+    "Don't guess."
+   ]
+  },
+  {
+   "kind": "hook",
+   "t_in": 2.3,
+   "t_out": 5.45,
+   "y": 1120,
+   "lines": [
+    "I look at your hair first —",
+    "then choose what it needs"
+   ]
+  },
+  {
+   "kind": "chip",
+   "t_in": 6.8,
+   "t_out": 9.6,
+   "y": 1380,
+   "text": "RESULT",
+   "tone": "light"
+  },
+  {
+   "kind": "scrim",
+   "t_in": 9.700000000000001,
+   "t_out": 13.25,
+   "y0": 820,
+   "y1": 1920,
+   "a": 0.62
+  },
+  {
+   "kind": "cta",
+   "t_in": 9.9,
+   "t_out": 13.25,
+   "kicker": "Not sure what your hair needs?",
+   "main": "Send me a photo 📩",
+   "foot": "I'll reply with my recommendation"
+  }
+ ],
+ "loc": "St. Moritz"
+}

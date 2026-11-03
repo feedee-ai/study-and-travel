@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "historyId": "f5620f3c-127c-45e2-8bea-8ffc10581be2",
+  "currentRevision": "8774fbae-7568-4d7e-8137-e495880b9f48",
+  "pendingChanges": false,
+  "files": {
+    "assets/fonts/Inter.woff2": {
+      "hash": "3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62",
+      "content": "/root/.cache/hyperframes/history/f5620f3c-127c-45e2-8bea-8ffc10581be2/blobs/31/3100e775e8616cd2611beecfa23a4263d7037586789b43f035236a2e6fbd4c62"
+    },
+    "assets/vendor/gsap.min.js": {
+      "hash": "c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280",
+      "content": "/root/.cache/hyperframes/history/f5620f3c-127c-45e2-8bea-8ffc10581be2/blobs/c1/c174bfce53a729418d57a8ad8625e7247c793a22fef8e2851e3cfa3de9cd8280"
+    },
+    "index.html": {
+      "hash": "24a4ccbda6ef8d88b30fefaeced0283bee5168845ee6c0bbdce5589871a8ded1",
+      "content": "/root/.cache/hyperframes/history/f5620f3c-127c-45e2-8bea-8ffc10581be2/blobs/24/24a4ccbda6ef8d88b30fefaeced0283bee5168845ee6c0bbdce5589871a8ded1"
+    },
+    "assets/fonts/Emoji.ttf": {
+      "hash": "93cdc4ee9aa40e2afceecc63da0ca05ec7aab4bec991ece51a6b52389f48a477",
+      "content": "/root/.cache/hyperframes/history/f5620f3c-127c-45e2-8bea-8ffc10581be2/blobs/93/93cdc4ee9aa40e2afceecc63da0ca05ec7aab4bec991ece51a6b52389f48a477"
+    }
+  },
+  "revisions": {
+    "8774fbae-7568-4d7e-8137-e495880b9f48": {
+      "actor": {
+        "kind": "outside",
+        "name": "Outside"
+      },
+      "label": "Changed outside the app",
+      "startedAt": 1793728081122,
+      "endedAt": 1793728081123,
+      "files": {
+        "index.html": {
+          "before": "/root/.cache/hyperframes/history/f5620f3c-127c-45e2-8bea-8ffc10581be2/blobs/80/80e822bce092cad303475b9f72f5babeb331871bffc565b5c42ba5efff239d34",
+          "after": "/root/.cache/hyperframes/history/f5620f3c-127c-45e2-8bea-8ffc10581be2/blobs/24/24a4ccbda6ef8d88b30fefaeced0283bee5168845ee6c0bbdce5589871a8ded1"
+        }
+      }
+    }
+  },
+  "checks": {
+    "latest": {
+      "revision": null,
+      "id": "c9aee035-ca4f-476d-ac8d-6945603ed14e"
+    },
+    "revisions": {},
+    "unversioned": [
+      {
+        "id": "c9aee035-ca4f-476d-ac8d-6945603ed14e",
+        "scope": "project",
+        "report": "/home/user/study-and-travel/hair-ads/work/r2/v4-frizz-to-glass/hf/.hyperframes/artifacts/checks/c9aee035-ca4f-476d-ac8d-6945603ed14e.json",
+        "metadata": {
+          "ok": true,
+          "browserSkipped": false,
+          "options": {
+            "samples": 9,
+            "atTransitions": false,
+            "maxIssues": 80,
+            "collapseStatic": true,
+            "tolerance": 2,
+            "timeout": 10000,
+            "contrast": true,
+            "strict": false,
+            "snapshots": false,
+            "browserGpuMode": "auto"
+          }
+        },
+        "createdAt": 1793726992620,
+        "contentHash": "d26e4db865d973157c277add0c05f44f92abdf3abcae50190aebd04559f561f6",
+        "revision": null,
+        "inputFingerprint": "823ff8f7c6988343a3c9d39d1476ae22b4d6135c2e0db4a1961a036789f7f60d",
+        "inputScope": "local-project-files",
+        "attribution": "unversioned"
+      }
+    ]
+  },
+  "snapshots": {
+    "latest": null,
+    "revisions": {},
+    "unversioned": []
+  },
+  "renders": {
+    "latest": {
+      "id": "e929bc2a-9264-4037-b479-b65734c92e26",
+      "completedAt": 1793728123926,
+      "output": "/home/user/study-and-travel/hair-ads/work/r2/v4-frizz-to-glass/overlay.mov",
+      "status": "completed",
+      "revision": "8774fbae-7568-4d7e-8137-e495880b9f48"
+    },
+    "retainedRevisions": [
+      "8774fbae-7568-4d7e-8137-e495880b9f48"
+    ]
+  },
+  "pendingArtifactCleanup": []
+}

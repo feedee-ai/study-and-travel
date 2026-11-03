@@ -1,0 +1,57 @@
+{
+ "duration": 13.05,
+ "events": [
+  {
+   "kind": "hook",
+   "t_in": 0,
+   "t_out": 3.75,
+   "y": 330,
+   "lines": [
+    "Same hair.",
+    "One appointment."
+   ]
+  },
+  {
+   "kind": "chip",
+   "t_in": 0,
+   "t_out": 3.72,
+   "y": 1380,
+   "text": "BEFORE",
+   "tone": "dark"
+  },
+  {
+   "kind": "chip",
+   "t_in": 3.9,
+   "t_out": 9.2,
+   "y": 1380,
+   "text": "AFTER",
+   "tone": "light"
+  },
+  {
+   "kind": "hook",
+   "t_in": 4.2,
+   "t_out": 9.1,
+   "y": 330,
+   "lines": [
+    "Smooth. Soft. Glossy."
+   ]
+  },
+  {
+   "kind": "scrim",
+   "t_in": 9.25,
+   "t_out": 13.05,
+   "y0": 820,
+   "y1": 1920,
+   "a": 0.62
+  },
+  {
+   "kind": "cta",
+   "t_in": 9.45,
+   "t_out": 13.05,
+   "kicker": "Keratin · Hair Botox · Hair Recovery",
+   "main": "DM me a photo of your hair 📩",
+   "foot": "At your place in St. Moritz & around"
+  }
+ ],
+ "loc": "St. Moritz"
+}
