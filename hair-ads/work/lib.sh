@@ -30,9 +30,13 @@ shot() {
   [ "$(ffprobe -v error -select_streams v:0 -show_entries stream=color_transfer -of csv=p=0 "$f")" = "arib-std-b67" ] && pre="$TONEMAP,"
   local geo; geo=$(ffprobe -v error -select_streams v:0 -show_entries stream=width,height,r_frame_rate -of csv=p=0 "$f")
   local w h r; IFS=, read -r w h r <<< "$geo"
+  # iPhone пишет 1920x1080 с поворотом −90: ffmpeg сам разворачивает кадр, ширину и высоту меняем местами
+  local rot; rot=$(ffprobe -v error -select_streams v:0 -show_entries stream_side_data=rotation -of csv=p=0 "$f" | tr -d ' ,-')
+  [ "$rot" = 90 ] || [ "$rot" = 270 ] && { local t=$w; w=$h; h=$t; }
   local pre_crop="" fpsf="fps=30"
   [ "$w" -gt "$h" ] && pre_crop="crop=trunc(ih*9/16/2)*2:ih:(iw-ih*9/16)/2+iw*${XS0:-0}:0,"
   [ "$r" = "24000/1001" ] || [ "$r" = "24/1" ] || [ "$r" = "25/1" ] && fpsf="framerate=fps=30"
+  [ "${FPSMODE:-}" = blend ] && fpsf="framerate=fps=30"
   local srcdur; srcdur=$(echo "$dur*$sp+0.2" | bc -l | sed "s/^\./0./")
   # масштаб: z(t) = z0 * (z1/z0)^S(t/dur), S = sine.inOut; рендер в 2× для субпиксельной точности
   local Z="($z0*pow($z1/$z0,0.5-0.5*cos(PI*min(t/$dur,1))))"
