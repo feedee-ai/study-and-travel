@@ -436,7 +436,6 @@ def words_film():
     f.title("qa", ["I couldn't find anyone"], 0, 4.45, 560, size=84, static=True)
     f.title("qb", ["*in the valley*"], .45, 4.45, 652, size=84)
     f.title("qc", ["who does this."], .9, 4.45, 744, size=84)
-    f.caps("by", "— A., St. Moritz · after her first visit", 1.7, 4.45, 900, size=27, ls=".2em")
     # 2. Мастер раскладывает инструменты — «теперь я приезжаю к вам»
     f.clip("tools", "c_tools", 4.3, 2.8, z=10); f.dissolve("q", "tools", 4.3, .5); f.kenburns("tools", 4.3, 2.8, 1.0, 1.05)
     f.title("t1", ["Now I come", "*to you.*"], 4.6, 6.85, 300, size=96, color=ESP, shadow=False)
