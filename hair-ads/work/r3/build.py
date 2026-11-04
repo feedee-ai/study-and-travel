@@ -113,6 +113,18 @@ class Film:
         if t_out is not None:
             self.tl(f'tl.to("#brand", {{opacity:0, duration:.4}}, {t_out});')
 
+    def dm(self, did="dm", color=CREAM, y=1400, t_in=None, t_out=None):
+        """Постоянная пилюля «DM TO BOOK ♡» (как в первом запуске): видна с кадра 0 до финального экрана."""
+        bg = "rgba(26,19,14,.34)" if color == CREAM else "rgba(250,247,242,.55)"
+        op = "" if t_in is None else "opacity:0;"
+        self.html(f'<div class="dmw" style="top:{y}px;z-index:58"><div class="dm" id="{did}" style="color:{color};border-color:{color};background:{bg};{op}">'
+                  f'DM TO BOOK <svg width="28" height="25" viewBox="0 0 24 21" aria-hidden="true"><path d="M12 19.5s-9-5.5-9-11.6A4.9 4.9 0 0 1 12 5.2a4.9 4.9 0 0 1 9 2.7c0 6.1-9 11.6-9 11.6z" fill="none" stroke="currentColor" stroke-width="1.7"/></svg></div></div>')
+        if t_in is not None:
+            self.tl(f'tl.fromTo("#{did}", {{opacity:0}}, {{opacity:1, duration:.5}}, {t_in});')
+        if t_out is not None:
+            self.tl(f'tl.to("#{did}", {{opacity:0, duration:.4}}, {t_out});')
+        self.dm_ids = getattr(self, "dm_ids", []) + [did]
+
     def snow(self, t0, t1, n=70, seed=7):
         """Снег из DOM-точек: детерминированный (сид), линейное падение — функция времени таймлайна."""
         import random
@@ -142,13 +154,16 @@ class Film:
         self.tl(f'tl.fromTo("#w_endbl", {{opacity:0}}, {{opacity:1, duration:.7, ease:"sine.inOut"}}, {t});')
         self.html('<div class="veil" id="veil" style="z-index:31"></div>')
         self.tl(f'tl.fromTo("#veil", {{opacity:0}}, {{opacity:1, duration:.7, ease:"sine.inOut"}}, {t});')
+        for d in getattr(self, "dm_ids", []):
+            self.tl(f'tl.to("#{d}", {{opacity:0, duration:.4}}, {t});')
         self.caps("ek", kicker, t + .35, None, 560, size=27, ls=".26em", rule=True, z=55)
         if head_family == "serif":
             self.title("eh", head, t + .5, None, 640, size=head_size, z=55)
         else:
             self.title("eh", head, t + .5, None, 650, size=head_size, family="sans", weight=300, ls=".14em", lh=1.25, z=55, stagger=.09)
         self.html(f'<div class="pillw" style="top:{960 if len(head) > 1 else 880}px;z-index:56"><div class="pill" id="pill">'
-                  f'<span>DM me</span><b>“{E(keyword)}”</b><i class="shine" id="shine"><i></i></i></div></div>')
+                  + (f'<span>DM me</span><b>“{E(keyword)}”</b>' if keyword else '<b>DM to book</b><svg width="28" height="25" viewBox="0 0 24 21" aria-hidden="true"><path d="M12 19.5s-9-5.5-9-11.6A4.9 4.9 0 0 1 12 5.2a4.9 4.9 0 0 1 9 2.7c0 6.1-9 11.6-9 11.6z" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>')
+                  + '<i class="shine" id="shine"><i></i></i></div></div>')
         self.tl(f'tl.fromTo("#pill", {{opacity:0, y:22, scale:.96}}, {{opacity:1, y:0, scale:1, duration:.8, ease:"expo.out"}}, {t + 1.0});')
         self.tl(f'tl.fromTo("#shine", {{x:-200}}, {{x:760, duration:1.1, ease:"power2.inOut"}}, {t + 1.7});')
         self.caps("ef", foot, t + 1.25, None, 1110 if len(head) > 1 else 1030, size=28, ls=".06em", weight=400, z=55)
@@ -206,6 +221,11 @@ class Film:
           padding:34px 74px 36px; border-radius:999px; background:{CREAM}; color:{ESP};
           font-size:46px; letter-spacing:.06em; box-shadow:0 18px 50px rgba(0,0,0,.28); }}
   .pill span {{ font-weight:400; }}
+  .pill svg {{ align-self:center; }}
+  .dmw {{ position:absolute; left:0; right:0; display:flex; justify-content:center; }}
+  .dm {{ display:flex; align-items:center; gap:14px; padding:15px 34px 15px 40px; border:1.5px solid; border-radius:999px;
+        font-size:30px; font-weight:500; letter-spacing:.28em; }}
+  .dm svg {{ width:24px; height:22px; }}
   .pill b {{ font-weight:600; letter-spacing:.12em; }}
   .shine {{ position:absolute; top:-30%; bottom:-30%; width:120px; left:0; }}
   .shine i {{ position:absolute; inset:0; background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.85),rgba(255,255,255,0)); transform:skewX(-18deg); }}
@@ -269,7 +289,8 @@ def winter():
     f.leak(9.8, 1.0, peak=.6)
     f.title("t4", ["Soft, glossy —", "*ready for the season.*"], 10.5, 11.95, 360, size=88)
     f.brand()
-    f.endcard(12.0, "w_swing_bl", "Keratin · Hair Botox · Hair Recovery", ["Book before", "*the season starts.*"], "WINTER")
+    f.dm()
+    f.endcard(12.0, "w_swing_bl", "Keratin · Hair Botox · Hair Recovery", ["Book before", "*the season starts.*"], None)
     return f
 
 
@@ -298,6 +319,8 @@ def arrival():
         if k: f.tl(f'tl.to("#n{k}", {{opacity:.35, color:"#8C7B6B", duration:.4}}, {t});')
     f.tl('tl.set("#n1", {opacity:1, color:"' + ESP + '"}, 0);')
     f.brand(color=ESP)
+    f.dm(color=ESP, y=1500, t_out=9.9)
+    f.dm("dm2", y=1400, t_in=10.4)
     f.title("h1", ["The salon", "*just arrived.*"], 0, 2.6, 250, size=86, color=ESP, shadow=False, static=True)
     f.title("h2", ["No salon.", "*No commute.*"], 2.75, 4.65, 250, size=86, color=ESP, shadow=False)
     f.title("h3", ["Everything", "*comes with me.*"], 4.85, 6.4, 250, size=86, color=ESP, shadow=False)
@@ -313,7 +336,7 @@ def arrival():
     f.tl('tl.fromTo("#brand2", {opacity:0}, {opacity:1, duration:.5}, 10.6);')
     f.title("h6", ["Salon result.", "*Your sofa.*"], 10.75, 12.15, 540, size=104)
     f.clip("aend", "a_end", 11.9, 3.5, z=21); f.dissolve("rev", "aend", 11.9, .5)
-    f.endcard(12.2, "a_end_bl", "Keratin · Hair Botox · Hair Recovery", ["Your salon,", "*at home.*"], "HOME")
+    f.endcard(12.2, "a_end_bl", "Keratin · Hair Botox · Hair Recovery", ["Your salon,", "*at home.*"], None)
     return f
 
 
@@ -357,7 +380,8 @@ def glass():
     tE = round(tS + 2.5, 3)
     f.clip("gend", "g_end", tE, round(f.dur - tE, 3), z=12); f.dissolve("sw", "gend", tE, .5)
     f.brand()
-    f.endcard(tE + .3, "g_end_bl", "Keratin · Hair Botox — at your place", ["Your glass hair", "*starts here.*"], "GLASS")
+    f.dm()
+    f.endcard(tE + .3, "g_end_bl", "Keratin · Hair Botox — at your place", ["Your glass hair", "*starts here.*"], None)
     return f
 
 
@@ -441,7 +465,8 @@ def words_film():
     f.clip("r3", "c_r3", 14.7, 3.9, z=16); f.dissolve("r2", "r3", 14.7, .45); f.kenburns("r3", 14.7, 3.9, 1.0, 1.05)
     f.title("res", ["Mirror shine.", "*Every hair type.*"], 11.35, 15.15, 1150, size=96)
     f.brand()
-    f.endcard(15.3, "c_r3_bl", "Keratin · Hair Botox · Hair Recovery", ["Your hair,", "*next.*"], "VALLEY")
+    f.dm()
+    f.endcard(15.3, "c_r3_bl", "Keratin · Hair Botox · Hair Recovery", ["Your hair,", "*next.*"], None)
     return f
 
 
@@ -474,7 +499,8 @@ def classic():
     f.leak(9.55, 1.0, peak=.5)
     f.clip("ke", "k_end", 11.8, 3.4, z=8); f.dissolve("rs", "ke", 11.8, .45)
     f.brand()
-    f.endcard(11.9, "k_end_bl", "Keratin · Hair Botox · Hair Recovery", ["YOUR HAIR.", "YOUR SPACE."], "HAIR",
+    f.dm()
+    f.endcard(11.9, "k_end_bl", "Keratin · Hair Botox · Hair Recovery", ["YOUR HAIR.", "YOUR SPACE."], None,
               head_family="sans", head_size=72)
     return f
 
