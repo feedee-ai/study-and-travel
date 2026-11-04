@@ -394,29 +394,54 @@ def alena():
 
 
 def words_film():
-    """Голос клиентки: её фраза крупно поверх её же результата."""
-    f = Film("words", 14.2)
-    f.css = ".qm{position:absolute;left:70px;top:330px;font-family:'CG',serif;font-size:300px;line-height:1;color:" + CHAMP + ";z-index:49;opacity:.9}"
-    f.clip("q", "c_q", 0, 4.0, z=1); f.kenburns("q", 0, 4.0, 1.0, 1.06)
+    """Отзыв клиентки поверх ЕЁ результата → мастер раскладывает инструменты → процесс и названия процедур →
+    результаты разных клиенток (блеск, движение) → CTA. Текст держится дольше: 0.5 с + 0.3 с на слово и больше."""
+    f = Film("words", 18.6)
+    f.css = (".qm{position:absolute;left:70px;top:330px;font-family:'CG',serif;font-size:300px;line-height:1;color:" + CHAMP + ";z-index:49;opacity:.9}"
+             ".lowveil{position:absolute;left:0;right:0;top:760px;bottom:0;opacity:0;z-index:30;"
+             "background:linear-gradient(180deg,rgba(20,14,10,0),rgba(20,14,10,.45) 30%,rgba(20,14,10,.55))}"
+             ".menu{position:absolute;left:0;right:0;top:960px;text-align:center;z-index:50;font-family:'CG',serif;font-weight:300;color:" + CREAM + "}"
+             ".menu .it{display:block;font-size:92px;line-height:1.12;opacity:0}"
+             ".menu .rl{display:block;width:70px;height:1px;margin:6px auto;background:" + CHAMP + ";opacity:.9}")
+    # 1. Отзыв — на результате той самой клиентки (27.10), держим долго и спокойно
+    f.clip("q", "c_q2", 0, 4.8, z=1); f.kenburns("q", 0, 4.8, 1.0, 1.06)
     f.html('<div class="veil" id="qveil" style="z-index:2;opacity:1"></div>')
-    f.tl('tl.to("#qveil", {opacity:0, duration:.6}, 3.2);')
+    f.tl('tl.to("#qveil", {opacity:0, duration:.5}, 4.3);')
     f.html('<div class="qm" id="qm">“</div>')
-    f.tl('tl.to("#qm", {opacity:0, duration:.3}, 3.1);')
-    f.title("qt", ["I couldn't find"], 0, 3.4, 560, size=86, static=True)
-    f.title("qt2", ["anyone *in the valley*", "who does this."], .35, 3.4, 650, size=86, stagger=.11)
-    f.caps("by", "— A., St. Moritz · after her first visit", 1.5, 3.4, 900, size=26, ls=".2em")
-    f.clip("proc", "c_proc", 3.3, 2.0, z=10)
-    f.tl('tl.fromTo("#w_proc", {clipPath:"inset(100% 0 0 0)"}, {clipPath:"inset(0% 0 0 0)", duration:.7, ease:"power3.inOut"}, 3.3);')
-    f.kenburns("proc", 3.3, 2.0, 1.06, 1.0)
-    f.title("w2", ["Now she doesn't", "*have to look.*"], 3.7, 5.2, 540, size=92)
-    f.clip("iron", "c_iron", 5.0, 1.85, z=11); f.dissolve("proc", "iron", 5.0, .3); f.kenburns("iron", 5.0, 1.85, 1.0, 1.05)
-    f.caps("w3", "I come to you", 5.3, 6.7, 560, size=34, ls=".3em", rule=True)
-    f.clip("res", "c_res", 6.4, 2.6, z=12); f.dissolve("iron", "res", 6.4, .45); f.kenburns("res", 6.4, 2.6, 1.0, 1.05)
-    f.leak(6.25, 1.0, peak=.55)
-    f.title("w4", ["She's already planning", "*her next visit.*"], 6.75, 9.0, 540, size=86)
-    f.clip("cend", "c_end", 8.55, 4.4, z=13); f.dissolve("res", "cend", 8.55, .45)
+    f.tl('tl.to("#qm", {opacity:0, duration:.3}, 4.15);')
+    f.title("qa", ["I couldn't find anyone"], 0, 4.45, 560, size=84, static=True)
+    f.title("qb", ["*in the valley*"], .45, 4.45, 652, size=84)
+    f.title("qc", ["who does this."], .9, 4.45, 744, size=84)
+    f.caps("by", "— A., St. Moritz · after her first visit", 1.7, 4.45, 900, size=27, ls=".2em")
+    # 2. Мастер раскладывает инструменты — «теперь я приезжаю к вам»
+    f.clip("tools", "c_tools", 4.3, 2.8, z=10); f.dissolve("q", "tools", 4.3, .5); f.kenburns("tools", 4.3, 2.8, 1.0, 1.05)
+    f.title("t1", ["Now I come", "*to you.*"], 4.6, 6.85, 300, size=96, color=ESP, shadow=False)
+    f.caps("t1c", "Your home · your chalet · your hotel", 4.95, 6.85, 530, size=28, color=ESP, ls=".2em", shadow=False, rule=True)
+    # 3. Процесс + процедуры списком (держим весь отрезок ~4.3 с)
+    f.clip("drip", "c_drip", 6.65, 1.9, z=11); f.dissolve("tools", "drip", 6.65, .45)
+    f.kenburns("drip", 6.65, 1.9, 1.04, 1.1)
+    f.clip("apply", "c_apply", 8.2, 1.8, z=12); f.dissolve("drip", "apply", 8.2, .35); f.kenburns("apply", 8.2, 1.8, 1.0, 1.05)
+    f.clip("iron", "c_iron", 9.65, 1.8, z=13); f.dissolve("apply", "iron", 9.65, .35); f.kenburns("iron", 9.65, 1.8, 1.0, 1.05)
+    f.html('<div class="lowveil" id="lowveil"></div>')
+    f.tl('tl.fromTo("#lowveil", {opacity:0}, {opacity:1, duration:.6, ease:"sine.inOut"}, 6.8);')
+    f.tl('tl.to("#lowveil", {opacity:0, duration:.5, ease:"sine.inOut"}, 11.1);')
+    f.caps("mk", "The treatments", 6.95, 11.25, 880, size=28, ls=".32em")
+    f.html('<div class="menu" id="menu"><span class="it" id="mi1">Keratin</span><span class="rl" id="mr1"></span>'
+           '<span class="it" id="mi2"><i>Hair Botox</i></span><span class="rl" id="mr2"></span>'
+           '<span class="it" id="mi3">Hair Recovery</span></div>')
+    for k, t in enumerate([7.15, 7.6, 8.05]):
+        f.tl(f'tl.fromTo("#mi{k+1}", {{opacity:0, y:18, filter:"blur(8px)"}}, {{opacity:1, y:0, filter:"blur(0px)", duration:.7, ease:"expo.out"}}, {t});')
+    for k, t in enumerate([7.4, 7.85]):
+        f.tl(f'tl.fromTo("#mr{k+1}", {{scaleX:0}}, {{scaleX:1, duration:.7, ease:"expo.out"}}, {t});')
+    f.tl('tl.to(["#mi1","#mi2","#mi3","#mr1","#mr2"], {opacity:0, filter:"blur(6px)", duration:.3, ease:"power2.in", stagger:.04}, 10.95);')
+    # 4. Результаты разных клиенток: блеск и движение
+    f.clip("r1", "c_r1", 11.0, 2.3, z=14); f.dissolve("iron", "r1", 11.0, .45); f.kenburns("r1", 11.0, 2.3, 1.0, 1.05)
+    f.leak(10.85, 1.0, peak=.5)
+    f.clip("r2", "c_r2", 12.85, 2.3, z=15); f.dissolve("r1", "r2", 12.85, .45); f.kenburns("r2", 12.85, 2.3, 1.0, 1.05)
+    f.clip("r3", "c_r3", 14.7, 3.9, z=16); f.dissolve("r2", "r3", 14.7, .45); f.kenburns("r3", 14.7, 3.9, 1.0, 1.05)
+    f.title("res", ["Mirror shine.", "*Every hair type.*"], 11.35, 15.15, 1150, size=96)
     f.brand()
-    f.endcard(10.0, "c_end_bl", "Keratin · Hair Botox · Hair Recovery", ["Your hair,", "*next.*"], "VALLEY")
+    f.endcard(15.3, "c_r3_bl", "Keratin · Hair Botox · Hair Recovery", ["Your hair,", "*next.*"], "VALLEY")
     return f
 
 

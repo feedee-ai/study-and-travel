@@ -60,3 +60,11 @@ s k_alena new/lud_4692.mov 5.0 2.4 0.9 "$W"
 s k_res   new/ann_5495.mov 11 2.6 0.7 "$W"
 s k_end   new/mur_5694.mov 6.0 4.4 0.6 "$W"
 echo SEGS_DONE
+# --- Client's words v2 (отзыв → процесс и процедуры → результаты разных клиенток)
+s c_q2    new/ann_5494.mov 20 4.8 0.6 "$W"
+s c_tools new/lud_4665.mov 2.6 2.8 1.0 "$W"
+s c_drip  new/det_5588.mov 50.5 1.9 0.6 "$W"
+s c_apply new/lud_4700.mov 11.0 1.8 0.9 "$W"
+s c_r1    new/mur_5693.mov 9.0 2.3 0.6 "$W"
+s c_r2    new/joa_5749.mov 3.6 2.3 0.6 "$W"
+s c_r3    new/ann_5563.mov 24 5.6 0.6 "$W"

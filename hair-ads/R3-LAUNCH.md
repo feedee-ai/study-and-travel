@@ -11,7 +11,7 @@
 | arrival | салон сам приезжает к тебе | **HOME** | A |
 | glass | тренд «glass hair» | **GLASS** | G |
 | alena | мастер — лицо бренда, доверие | **ALENA** | M |
-| words | слова клиентки: «в долине никто не делает» | **VALLEY** | C |
+| words | отзыв клиентки → мастер едет к вам → Keratin · Hair Botox · Hair Recovery → результаты разных клиенток | **VALLEY** | C |
 | classic | эволюция первого запуска: Smooth · Silky · Glossy | **HAIR** | K |
 
 **Ответ Алёны на кодовое слово** (шаблон в Instagram → Saved replies):
@@ -40,12 +40,12 @@
 
 **alena** — Hi, I'm Alena — hair specialist in St. Moritz. I come to you with everything I need and choose the treatment for your hair, not from a template. DM me "ALENA" — I reply myself. · Headline: *Meet your hair specialist*
 
-**words** — "I couldn't find anyone in the valley who does this." Now she doesn't have to look. Keratin, Hair Botox and Hair Recovery — I come to you in St. Moritz & the Engadin. DM me "VALLEY". · Headline: *Finally, in the valley*
+**words** — "I couldn't find anyone in the valley who does this." Now I come to you — Keratin, Hair Botox and Hair Recovery at your home, chalet or hotel in St. Moritz & the Engadin. Mirror shine, for every hair type. DM me "VALLEY". · Headline: *Finally, in the valley*
 
 **classic** — Smooth. Silky. Glossy. Hair treatments tailored to your hair — at your place in St. Moritz. DM me "HAIR". · Headline: *Your hair. Your space.*
 
 ## Что проверить до запуска
-- **words**: цитата — пересказ слов клиентки (27.10) на английском, подпись «— A., St. Moritz». Лучше получить от неё «ок» на такую формулировку.
+- **words**: цитата — пересказ слов клиентки 27.10 (по дате — Аннетт; под цитатой её же результат), подпись «— A., St. Moritz». Лучше получить от неё «ок» на формулировку.
 - **alena / arrival / classic**: в кадре мастер из папки «2.11 Люда» — считаем, что это Алёна. Если это не она — эти кадры заменю.
 - Лица клиенток (Аннетт, блонд-каре) — согласие есть (подтвердил).
 - Музыка: Mixkit (бесплатная лицензия, можно в рекламе). Если хочется трендовый трек — бери версии без музыки и добавляй звук в Ads Manager.
