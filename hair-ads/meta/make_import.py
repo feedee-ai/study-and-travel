@@ -17,11 +17,12 @@ COPY = {  # заголовок + основной текст (вариант A);
  "words":   ("Finally, in the valley", "\"I couldn't find anyone in the valley who does this.\"\nNow you don't have to look. Keratin, Hair Botox and Hair Recovery — at your home in St. Moritz & the Engadin.\nDM to book 🤍"),
 }
 COMMON = {
-    "Campaign Status": "PAUSED", "Buying Type": "AUCTION", "Special Ad Categories": "None",
+    "Campaign Status": "PAUSED", "Buying Type": "AUCTION", "Special Ad Categories": "None", "New Objective": "Yes",
     "Campaign Page ID": page, "Link Object ID": f"o:{page}",
     "Ad Set Run Status": "PAUSED", "Ad Status": "PAUSED",
-    "Cities": "St. Moritz, Graubünden, Switzerland (+40 km)", "Location Types": "home, recent",
-    "Gender": "Women", "Age Min": "23", "Age Max": "55", "Locales": "English (All)",
+    # гео: страна CH; город St. Moritz +40 км выставить в кабинете (формат города Meta отклонила)
+    "Countries": "CH",
+    "Gender": "Women", "Age Min": "23", "Age Max": "55",
     "Publisher Platforms": "instagram", "Instagram Positions": "stream, story, explore, reels", "Device Platforms": "mobile",
     "Billing Event": "IMPRESSIONS", "Attribution Spec": '[{"event_type":"CLICK_THROUGH","window_days":1}]',
     "Creative Type": "Video Page Post Ad", "Instagram Account ID": ig, "Instagram Account ID (New)": ig, "Use Page as Actor": "No",
