@@ -1,0 +1,83 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<script src="assets/vendor/gsap.min.js"></script>
+<style>
+  @font-face { font-family:"CG"; src:url("assets/fonts/CG-normal-300.ttf"); font-weight:300; font-style:normal; }
+  @font-face { font-family:"CG"; src:url("assets/fonts/CG-italic-300.ttf"); font-weight:300; font-style:italic; }
+  @font-face { font-family:"CG"; src:url("assets/fonts/CG-normal-400.ttf"); font-weight:400; font-style:normal; }
+  @font-face { font-family:"CG"; src:url("assets/fonts/CG-italic-400.ttf"); font-weight:400; font-style:italic; }
+  @font-face { font-family:"Jost"; src:url("assets/fonts/Jost.woff2") format("woff2"); font-weight:100 900; }
+  html,body { margin:0; background:#000; }
+  #root { position:relative; width:1080px; height:1920px; overflow:hidden; background:#000;
+          font-family:"Jost",sans-serif; -webkit-font-smoothing:antialiased; }
+  .vw { position:absolute; overflow:hidden; }
+  .vw video { position:absolute; left:0; top:0; width:100%; height:100%; object-fit:cover; }
+  .ttl { position:absolute; }
+  .ttl .ln { display:block; white-space:nowrap; position:relative; }
+  .ttl .sc { position:absolute; left:-12%; right:-12%; top:-45%; bottom:-45%; opacity:0; pointer-events:none;
+             background:radial-gradient(closest-side, rgba(20,14,10,.42), rgba(20,14,10,.18) 60%, rgba(20,14,10,0)); }
+  .ttl .w { display:inline-block; opacity:0; }
+  .ttl .it { font-style:italic; }
+  .cap { position:absolute; text-transform:uppercase; }
+  .cap .mask { overflow:hidden; padding:4px 0; }
+  .cap .in { display:inline-block; }
+  .cap .rule { display:block; width:64px; height:1px; margin:18px auto 0; }
+  .brand { position:absolute; left:0; right:0; display:flex; justify-content:center; align-items:center; gap:22px;
+           font-size:25px; font-weight:500; letter-spacing:.32em; padding-left:.32em;
+           text-shadow:0 1px 14px rgba(20,14,10,.4); }
+  .brand .bl { width:46px; height:1px; opacity:.8; }
+  .leak { position:absolute; left:-30%; top:-10%; width:160%; height:120%; opacity:0; pointer-events:none;
+          background: radial-gradient(38% 30% at 30% 42%, rgba(255,214,160,.55), rgba(255,170,100,.22) 45%, rgba(255,140,60,0) 72%),
+                      radial-gradient(30% 24% at 70% 62%, rgba(255,236,200,.45), rgba(255,210,160,0) 70%); }
+  .veil { position:absolute; inset:0; opacity:0;
+          background: linear-gradient(180deg, rgba(42,33,28,.30), rgba(42,33,28,.42) 45%, rgba(42,33,28,.30)); }
+  .pillw { position:absolute; left:0; right:0; display:flex; justify-content:center; }
+  .pill { position:relative; overflow:hidden; display:flex; align-items:baseline; gap:16px; opacity:0;
+          padding:34px 74px 36px; border-radius:999px; background:#FAF7F2; color:#2A211C;
+          font-size:46px; letter-spacing:.06em; box-shadow:0 18px 50px rgba(0,0,0,.28); }
+  .pill span { font-weight:400; }
+  .pill b { font-weight:600; letter-spacing:.12em; }
+  .shine { position:absolute; top:-30%; bottom:-30%; width:120px; left:0; }
+  .shine i { position:absolute; inset:0; background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.85),rgba(255,255,255,0)); transform:skewX(-18deg); }
+  .snow { position:absolute; inset:0; pointer-events:none; }
+  .fl { position:absolute; top:0; border-radius:50%; background:#fff; }
+  
+</style></head>
+<body>
+<div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="15.2" data-fps="30">
+<div class="vw" id="w_face" style="left:0;top:0;width:1080px;height:1920px;z-index:1;"><video id="face" class="clip" src="assets/m_face.mp4" data-start="0" data-duration="2.8" data-track-index="1" muted playsinline></video></div>
+<div class="cap" id="role" style="top:300px;left:70px;width:940px;text-align:center;font-size:24px;letter-spacing:.32em;color:#FAF7F2;font-weight:500;z-index:50;text-shadow:0 1px 14px rgba(20,14,10,.45);"><div class="mask"><span class="in">Hair specialist · St. Moritz</span></div></div>
+<div class="ttl" id="nm" data-static="1" style="top:330px;left:150px;width:900px;text-align:center;font-family:'CG', serif;font-weight:300;font-size:250px;line-height:1;letter-spacing:-0.01em;color:#FAF7F2;z-index:8;text-shadow:0 2px 26px rgba(20,14,10,.38),0 1px 3px rgba(20,14,10,.25);"><i class="sc" style="opacity:1"></i><div class="ln"><span style="opacity:1" class="w">Alena</span></div></div>
+<div class="vw" id="w_cut" style="left:0;top:0;width:1080px;height:1920px;z-index:9"><video id="cut" class="clip" src="assets/m_face_cut.webm" data-start="0" data-duration="2.8" muted playsinline></video></div>
+<div class="vw" id="w_full" style="left:0;top:0;width:1080px;height:1920px;z-index:10;"><video id="full" class="clip" src="assets/m_full.mp4" data-start="2.35" data-duration="2.45" data-track-index="10" muted playsinline></video></div>
+<div class="leak" id="lk1" style="z-index:40"></div>
+<div class="ttl" id="q1" style="top:1150px;left:70px;width:940px;text-align:center;font-family:'CG', serif;font-weight:300;font-size:86px;line-height:1.04;letter-spacing:-0.01em;color:#FAF7F2;z-index:50;text-shadow:0 2px 26px rgba(20,14,10,.38),0 1px 3px rgba(20,14,10,.25);"><i class="sc"></i><div class="ln"><span class="w">I</span> <span class="w">bring</span> <span class="w">everything</span></div><div class="ln"><span class="w it">to</span> <span class="w it">your</span> <span class="w it">home.</span></div></div>
+<div class="vw" id="w_lean" style="left:0;top:0;width:1080px;height:1920px;z-index:11;"><video id="lean" class="clip" src="assets/m_lean.mp4" data-start="4.35" data-duration="3.0" data-track-index="11" muted playsinline></video></div>
+<div class="ttl" id="q2" style="top:1150px;left:70px;width:940px;text-align:center;font-family:'CG', serif;font-weight:300;font-size:86px;line-height:1.04;letter-spacing:-0.01em;color:#FAF7F2;z-index:50;text-shadow:0 2px 26px rgba(20,14,10,.38),0 1px 3px rgba(20,14,10,.25);"><i class="sc"></i><div class="ln"><span class="w">I</span> <span class="w">look</span> <span class="w">at</span> <span class="w">your</span> <span class="w">hair</span></div><div class="ln"><span class="w it">before</span> <span class="w it">I</span> <span class="w it">choose.</span></div></div>
+<div class="vw" id="w_mix" style="left:0;top:0;width:1080px;height:1920px;z-index:12;"><video id="mix" class="clip" src="assets/m_mix.mp4" data-start="6.55" data-duration="2.0" data-track-index="12" muted playsinline></video></div>
+<div class="cap" id="svc" style="top:1040px;left:70px;width:940px;text-align:center;font-size:28px;letter-spacing:.32em;color:#FAF7F2;font-weight:500;z-index:50;text-shadow:0 1px 14px rgba(20,14,10,.45);"><div class="mask"><span class="in">Keratin · Hair Botox · Hair Recovery</span></div><span class="rule" style="background:#D8C3A5"></span></div>
+<div class="ttl" id="q3" style="top:1120px;left:70px;width:940px;text-align:center;font-family:'CG', serif;font-weight:300;font-size:76px;line-height:1.04;letter-spacing:-0.01em;color:#FAF7F2;z-index:50;text-shadow:0 2px 26px rgba(20,14,10,.38),0 1px 3px rgba(20,14,10,.25);"><i class="sc"></i><div class="ln"><span class="w it">Only</span> <span class="w it">professional</span> <span class="w">products.</span></div></div>
+<div class="vw" id="w_r1" style="left:0;top:0;width:1080px;height:1920px;z-index:13;"><video id="r1" class="clip" src="assets/m_res1.mp4" data-start="8.1" data-duration="2.2" data-track-index="13" muted playsinline></video></div>
+<div class="ttl" id="q4" style="top:1150px;left:70px;width:940px;text-align:center;font-family:'CG', serif;font-weight:300;font-size:92px;line-height:1.04;letter-spacing:-0.01em;color:#FAF7F2;z-index:50;text-shadow:0 2px 26px rgba(20,14,10,.38),0 1px 3px rgba(20,14,10,.25);"><i class="sc"></i><div class="ln"><span class="w it">Tailored</span> <span class="w">to</span> <span class="w">every</span></div><div class="ln"><span class="w">hair</span> <span class="w">type.</span></div></div>
+<div class="vw" id="w_r2" style="left:0;top:0;width:1080px;height:1920px;z-index:14;"><video id="r2" class="clip" src="assets/m_res2.mp4" data-start="9.85" data-duration="2.2" data-track-index="14" muted playsinline></video></div>
+<div class="leak" id="lk2" style="z-index:40"></div>
+<div class="vw" id="w_mend" style="left:0;top:0;width:1080px;height:1920px;z-index:15;"><video id="mend" class="clip" src="assets/m_end.mp4" data-start="11.6" data-duration="3.6" data-track-index="15" muted playsinline></video></div>
+<div class="brand" id="brand" style="top:196px;color:#FAF7F2;z-index:60"><span class="bl" style="background:#FAF7F2"></span>ST. MORITZ · ENGADIN<span class="bl" style="background:#FAF7F2"></span></div>
+<div class="vw" id="w_endbl" style="left:0;top:0;width:1080px;height:1920px;z-index:30;"><video id="endbl" class="clip" src="assets/m_end_bl.mp4" data-start="11.95" data-duration="3.25" data-track-index="30" muted playsinline></video></div>
+<div class="veil" id="veil" style="z-index:31"></div>
+<div class="cap" id="ek" style="top:560px;left:70px;width:940px;text-align:center;font-size:27px;letter-spacing:.26em;color:#FAF7F2;font-weight:500;z-index:55;text-shadow:0 1px 14px rgba(20,14,10,.45);"><div class="mask"><span class="in">Keratin · Hair Botox · Hair Recovery</span></div><span class="rule" style="background:#D8C3A5"></span></div>
+<div class="ttl" id="eh" style="top:640px;left:70px;width:940px;text-align:center;font-family:'CG', serif;font-weight:300;font-size:92px;line-height:1.04;letter-spacing:-0.01em;color:#FAF7F2;z-index:55;text-shadow:0 2px 26px rgba(20,14,10,.38),0 1px 3px rgba(20,14,10,.25);"><i class="sc"></i><div class="ln"><span class="w">Say</span> <span class="w">hi</span> <span class="w">—</span></div><div class="ln"><span class="w it">I</span> <span class="w it">reply</span> <span class="w it">myself.</span></div></div>
+<div class="pillw" style="top:960px;z-index:56"><div class="pill" id="pill"><span>DM me</span><b>“ALENA”</b><i class="shine" id="shine"><i></i></i></div></div>
+<div class="cap" id="ef" style="top:1110px;left:70px;width:940px;text-align:center;font-size:28px;letter-spacing:.06em;color:#FAF7F2;font-weight:400;z-index:55;text-shadow:0 1px 14px rgba(20,14,10,.45);"><div class="mask"><span class="in">I come to you · St. Moritz &amp; Engadin</span></div></div>
+<script>
+  (function () {
+    const tl = gsap.timeline({ paused: true });
+    
+tl.fromTo("#w_face video", {scale:1.0, x:0, y:0}, {scale:1.05, x:0, y:0, duration:2.8, ease:"sine.inOut"}, 0);    tl.to("#role .in", {yPercent:-110, duration:.35, ease:"power3.in"}, 2.1999999999999997);    tl.to("#nm .w", {opacity:0, filter:"blur(7px)", duration:.22, ease:"power2.in", stagger:.025}, 2.3000000000000003);    tl.to("#nm .sc", {opacity:0, duration:.3, ease:"sine.in"}, 2.3000000000000003);    tl.fromTo("#w_cut video", {scale:1.0, x:0, y:0}, {scale:1.05, x:0, y:0, duration:2.8, ease:"sine.inOut"}, 0);    tl.fromTo("#w_full", {opacity:0}, {opacity:1, duration:0.45, ease:"sine.inOut"}, 2.35);    tl.fromTo("#w_full video", {scale:1.0, x:0, y:0}, {scale:1.05, x:0, y:0, duration:2.45, ease:"sine.inOut"}, 2.35);    tl.fromTo("#lk1", {opacity:0, xPercent:-30}, {opacity:0.5, xPercent:0.0, duration:0.45, ease:"sine.in"}, 2.2);    tl.to("#lk1", {opacity:0, xPercent:30, duration:0.55, ease:"sine.out"}, 2.6500000000000004);    tl.fromTo("#q1 .sc", {opacity:0}, {opacity:1, duration:.6, ease:"sine.out"}, 2.65);    tl.fromTo("#q1 .w", {opacity:0, y:16, filter:"blur(9px)"}, {opacity:1, y:0, filter:"blur(0px)", duration:.6, ease:"expo.out", stagger:0.07}, 2.65);    tl.to("#q1 .w", {opacity:0, filter:"blur(7px)", duration:.22, ease:"power2.in", stagger:.025}, 4.25);    tl.to("#q1 .sc", {opacity:0, duration:.3, ease:"sine.in"}, 4.25);    tl.fromTo("#w_lean", {opacity:0}, {opacity:1, duration:0.45, ease:"sine.inOut"}, 4.35);    tl.fromTo("#w_lean video", {scale:1.02, x:0, y:0}, {scale:1.08, x:0, y:0, duration:3.0, ease:"sine.inOut"}, 4.35);    tl.fromTo("#q2 .sc", {opacity:0}, {opacity:1, duration:.6, ease:"sine.out"}, 4.6);    tl.fromTo("#q2 .w", {opacity:0, y:16, filter:"blur(9px)"}, {opacity:1, y:0, filter:"blur(0px)", duration:.6, ease:"expo.out", stagger:0.07}, 4.6);    tl.to("#q2 .w", {opacity:0, filter:"blur(7px)", duration:.22, ease:"power2.in", stagger:.025}, 6.3);    tl.to("#q2 .sc", {opacity:0, duration:.3, ease:"sine.in"}, 6.3);    tl.fromTo("#w_mix", {clipPath:"circle(0% at 50% 50%)"}, {clipPath:"circle(75% at 50% 50%)", duration:.8, ease:"power3.inOut"}, 6.55);    tl.fromTo("#w_mix video", {scale:1.1, x:0, y:0}, {scale:1.0, x:0, y:0, duration:2.0, ease:"sine.inOut"}, 6.55);    tl.fromTo("#svc .in", {yPercent:110, opacity:1}, {yPercent:0, duration:.8, ease:"expo.out"}, 6.85);    tl.fromTo("#svc .rule", {scaleX:0}, {scaleX:1, duration:.9, ease:"expo.out"}, 7.0);    tl.to("#svc .in", {yPercent:-110, duration:.35, ease:"power3.in"}, 8.0);    tl.to("#svc .rule", {scaleX:0, duration:.3, ease:"power3.in"}, 8.049999999999999);    tl.fromTo("#q3 .sc", {opacity:0}, {opacity:1, duration:.6, ease:"sine.out"}, 7.05);    tl.fromTo("#q3 .w", {opacity:0, y:16, filter:"blur(9px)"}, {opacity:1, y:0, filter:"blur(0px)", duration:.6, ease:"expo.out", stagger:0.07}, 7.05);    tl.to("#q3 .w", {opacity:0, filter:"blur(7px)", duration:.22, ease:"power2.in", stagger:.025}, 8.049999999999999);    tl.to("#q3 .sc", {opacity:0, duration:.3, ease:"sine.in"}, 8.049999999999999);    tl.fromTo("#w_r1", {opacity:0}, {opacity:1, duration:0.45, ease:"sine.inOut"}, 8.1);    tl.fromTo("#w_r1 video", {scale:1.0, x:0, y:0}, {scale:1.05, x:0, y:0, duration:2.2, ease:"sine.inOut"}, 8.1);    tl.fromTo("#q4 .sc", {opacity:0}, {opacity:1, duration:.6, ease:"sine.out"}, 8.35);    tl.fromTo("#q4 .w", {opacity:0, y:16, filter:"blur(9px)"}, {opacity:1, y:0, filter:"blur(0px)", duration:.6, ease:"expo.out", stagger:0.07}, 8.35);    tl.to("#q4 .w", {opacity:0, filter:"blur(7px)", duration:.22, ease:"power2.in", stagger:.025}, 9.85);    tl.to("#q4 .sc", {opacity:0, duration:.3, ease:"sine.in"}, 9.85);    tl.fromTo("#w_r2", {opacity:0}, {opacity:1, duration:0.45, ease:"sine.inOut"}, 9.85);    tl.fromTo("#lk2", {opacity:0, xPercent:-30}, {opacity:0.55, xPercent:0.0, duration:0.45, ease:"sine.in"}, 9.7);    tl.to("#lk2", {opacity:0, xPercent:30, duration:0.55, ease:"sine.out"}, 10.149999999999999);    tl.fromTo("#w_mend", {opacity:0}, {opacity:1, duration:0.45, ease:"sine.inOut"}, 11.6);    tl.fromTo("#w_endbl", {opacity:0}, {opacity:1, duration:.7, ease:"sine.inOut"}, 12.0);    tl.fromTo("#veil", {opacity:0}, {opacity:1, duration:.7, ease:"sine.inOut"}, 12.0);    tl.fromTo("#ek .in", {yPercent:110, opacity:1}, {yPercent:0, duration:.8, ease:"expo.out"}, 12.35);    tl.fromTo("#ek .rule", {scaleX:0}, {scaleX:1, duration:.9, ease:"expo.out"}, 12.5);    tl.fromTo("#eh .sc", {opacity:0}, {opacity:1, duration:.6, ease:"sine.out"}, 12.5);    tl.fromTo("#eh .w", {opacity:0, y:16, filter:"blur(9px)"}, {opacity:1, y:0, filter:"blur(0px)", duration:.6, ease:"expo.out", stagger:0.07}, 12.5);    tl.fromTo("#pill", {opacity:0, y:22, scale:.96}, {opacity:1, y:0, scale:1, duration:.8, ease:"expo.out"}, 13.0);    tl.fromTo("#shine", {x:-200}, {x:760, duration:1.1, ease:"power2.inOut"}, 13.7);    tl.fromTo("#ef .in", {yPercent:110, opacity:1}, {yPercent:0, duration:.8, ease:"expo.out"}, 13.25);
+    tl.set({}, {}, 15.2);
+    window.__timelines = window.__timelines || {};
+    window.__timelines["main"] = tl;
+  })();
+</script>
+</div>
+</body></html>

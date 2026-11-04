@@ -1,0 +1,86 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<script src="assets/vendor/gsap.min.js"></script>
+<style>
+  @font-face { font-family:"CG"; src:url("assets/fonts/CG-normal-300.ttf"); font-weight:300; font-style:normal; }
+  @font-face { font-family:"CG"; src:url("assets/fonts/CG-italic-300.ttf"); font-weight:300; font-style:italic; }
+  @font-face { font-family:"CG"; src:url("assets/fonts/CG-normal-400.ttf"); font-weight:400; font-style:normal; }
+  @font-face { font-family:"CG"; src:url("assets/fonts/CG-italic-400.ttf"); font-weight:400; font-style:italic; }
+  @font-face { font-family:"Jost"; src:url("assets/fonts/Jost.woff2") format("woff2"); font-weight:100 900; }
+  html,body { margin:0; background:#000; }
+  #root { position:relative; width:1080px; height:1920px; overflow:hidden; background:#000;
+          font-family:"Jost",sans-serif; -webkit-font-smoothing:antialiased; }
+  .vw { position:absolute; overflow:hidden; }
+  .vw video { position:absolute; left:0; top:0; width:100%; height:100%; object-fit:cover; }
+  .ttl { position:absolute; }
+  .ttl .ln { display:block; white-space:nowrap; position:relative; }
+  .ttl .sc { position:absolute; left:-12%; right:-12%; top:-45%; bottom:-45%; opacity:0; pointer-events:none;
+             background:radial-gradient(closest-side, rgba(20,14,10,.42), rgba(20,14,10,.18) 60%, rgba(20,14,10,0)); }
+  .ttl .w { display:inline-block; opacity:0; }
+  .ttl .it { font-style:italic; }
+  .cap { position:absolute; text-transform:uppercase; }
+  .cap .mask { overflow:hidden; padding:4px 0; }
+  .cap .in { display:inline-block; }
+  .cap .rule { display:block; width:64px; height:1px; margin:18px auto 0; }
+  .brand { position:absolute; left:0; right:0; display:flex; justify-content:center; align-items:center; gap:22px;
+           font-size:25px; font-weight:500; letter-spacing:.32em; padding-left:.32em;
+           text-shadow:0 1px 14px rgba(20,14,10,.4); }
+  .brand .bl { width:46px; height:1px; opacity:.8; }
+  .leak { position:absolute; left:-30%; top:-10%; width:160%; height:120%; opacity:0; pointer-events:none;
+          background: radial-gradient(38% 30% at 30% 42%, rgba(255,214,160,.55), rgba(255,170,100,.22) 45%, rgba(255,140,60,0) 72%),
+                      radial-gradient(30% 24% at 70% 62%, rgba(255,236,200,.45), rgba(255,210,160,0) 70%); }
+  .veil { position:absolute; inset:0; opacity:0;
+          background: linear-gradient(180deg, rgba(42,33,28,.30), rgba(42,33,28,.42) 45%, rgba(42,33,28,.30)); }
+  .pillw { position:absolute; left:0; right:0; display:flex; justify-content:center; }
+  .pill { position:relative; overflow:hidden; display:flex; align-items:baseline; gap:16px; opacity:0;
+          padding:34px 74px 36px; border-radius:999px; background:#FAF7F2; color:#2A211C;
+          font-size:46px; letter-spacing:.06em; box-shadow:0 18px 50px rgba(0,0,0,.28); }
+  .pill span { font-weight:400; }
+  .pill b { font-weight:600; letter-spacing:.12em; }
+  .shine { position:absolute; top:-30%; bottom:-30%; width:120px; left:0; }
+  .shine i { position:absolute; inset:0; background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.85),rgba(255,255,255,0)); transform:skewX(-18deg); }
+  .snow { position:absolute; inset:0; pointer-events:none; }
+  .fl { position:absolute; top:0; border-radius:50%; background:#fff; }
+  .glint{position:absolute;left:-40%;top:-20%;width:60%;height:140%;opacity:0;pointer-events:none;background:linear-gradient(100deg,rgba(255,250,240,0) 25%,rgba(255,248,236,.32) 50%,rgba(255,250,240,0) 75%)}.gl{transform:rotate(12deg)}.gl{position:absolute;inset:0;pointer-events:none}
+</style></head>
+<body>
+<div id="root" data-composition-id="main" data-width="1080" data-height="1920" data-start="0" data-duration="13.6" data-fps="30">
+<div class="vw" id="w_mac" style="left:0;top:0;width:1080px;height:1920px;z-index:1;"><video id="mac" class="clip" src="assets/g_macro.mp4" data-start="0" data-duration="2.2" data-track-index="1" muted playsinline></video></div>
+<div class="gl" style="z-index:35"><div class="glint" id="gn1"></div></div>
+<div class="cap" id="c1" style="top:440px;left:70px;width:940px;text-align:center;font-size:28px;letter-spacing:.32em;color:#FAF7F2;font-weight:500;z-index:50;text-shadow:0 1px 14px rgba(20,14,10,.45);"><div class="mask"><span class="in">Now in St. Moritz</span></div></div>
+<div class="ttl" id="gt" data-static="1" style="top:500px;left:70px;width:940px;text-align:center;font-family:'CG', serif;font-weight:300;font-size:230px;line-height:0.9;letter-spacing:-0.01em;color:#FAF7F2;z-index:50;text-shadow:0 2px 26px rgba(20,14,10,.38),0 1px 3px rgba(20,14,10,.25);"><i class="sc" style="opacity:1"></i><div class="ln"><span style="opacity:1" class="w">Glass</span></div><div class="ln"><span style="opacity:1" class="w it">hair.</span></div></div>
+<div class="vw" id="w_m0" style="left:0;top:0;width:1080px;height:1920px;z-index:2;"><video id="m0" class="clip" src="assets/g_m1.mp4" data-start="1.95" data-duration="0.68" data-track-index="2" muted playsinline></video></div>
+<div class="cap" id="mw0" style="top:900px;left:70px;width:940px;text-align:center;font-size:42px;letter-spacing:.34em;color:#FAF7F2;font-weight:500;z-index:50;text-shadow:0 1px 14px rgba(20,14,10,.45);"><div class="mask"><span class="in">Smooth</span></div></div>
+<div class="vw" id="w_m1" style="left:0;top:0;width:1080px;height:1920px;z-index:3;"><video id="m1" class="clip" src="assets/g_m2.mp4" data-start="2.38" data-duration="0.68" data-track-index="3" muted playsinline></video></div>
+<div class="vw" id="w_m2" style="left:0;top:0;width:1080px;height:1920px;z-index:4;"><video id="m2" class="clip" src="assets/g_m3.mp4" data-start="2.81" data-duration="0.68" data-track-index="4" muted playsinline></video></div>
+<div class="cap" id="mw2" style="top:900px;left:70px;width:940px;text-align:center;font-size:42px;letter-spacing:.34em;color:#FAF7F2;font-weight:500;z-index:50;text-shadow:0 1px 14px rgba(20,14,10,.45);"><div class="mask"><span class="in">Soft</span></div></div>
+<div class="vw" id="w_m3" style="left:0;top:0;width:1080px;height:1920px;z-index:5;"><video id="m3" class="clip" src="assets/g_m4.mp4" data-start="3.24" data-duration="0.68" data-track-index="5" muted playsinline></video></div>
+<div class="vw" id="w_m4" style="left:0;top:0;width:1080px;height:1920px;z-index:6;"><video id="m4" class="clip" src="assets/g_m5.mp4" data-start="3.67" data-duration="0.68" data-track-index="6" muted playsinline></video></div>
+<div class="cap" id="mw4" style="top:900px;left:70px;width:940px;text-align:center;font-size:42px;letter-spacing:.34em;color:#FAF7F2;font-weight:500;z-index:50;text-shadow:0 1px 14px rgba(20,14,10,.45);"><div class="mask"><span class="in">Mirror shine</span></div></div>
+<div class="vw" id="w_m5" style="left:0;top:0;width:1080px;height:1920px;z-index:7;"><video id="m5" class="clip" src="assets/g_m6.mp4" data-start="4.1" data-duration="0.68" data-track-index="7" muted playsinline></video></div>
+<div class="vw" id="w_hand" style="left:0;top:0;width:1080px;height:1920px;z-index:10;"><video id="hand" class="clip" src="assets/g_hand.mp4" data-start="4.53" data-duration="2.8" data-track-index="10" muted playsinline></video></div>
+<div class="gl" style="z-index:35"><div class="glint" id="gn2"></div></div>
+<div class="ttl" id="g2" style="top:540px;left:70px;width:940px;text-align:center;font-family:'CG', serif;font-weight:300;font-size:96px;line-height:1.04;letter-spacing:-0.01em;color:#FAF7F2;z-index:50;text-shadow:0 2px 26px rgba(20,14,10,.38),0 1px 3px rgba(20,14,10,.25);"><i class="sc"></i><div class="ln"><span class="w">Mirror</span> <span class="w">shine,</span></div><div class="ln"><span class="w it">no</span> <span class="w it">filter.</span></div></div>
+<div class="vw" id="w_sw" style="left:0;top:0;width:1080px;height:1920px;z-index:11;"><video id="sw" class="clip" src="assets/g_swing.mp4" data-start="6.88" data-duration="3.0" data-track-index="11" muted playsinline></video></div>
+<div class="leak" id="lk3" style="z-index:40"></div>
+<div class="ttl" id="g3" style="top:540px;left:70px;width:940px;text-align:center;font-family:'CG', serif;font-weight:300;font-size:96px;line-height:1.04;letter-spacing:-0.01em;color:#FAF7F2;z-index:50;text-shadow:0 2px 26px rgba(20,14,10,.38),0 1px 3px rgba(20,14,10,.25);"><i class="sc"></i><div class="ln"><span class="w">Real</span> <span class="w">clients.</span></div><div class="ln"><span class="w it">Real</span> <span class="w it">shine.</span></div></div>
+<div class="vw" id="w_gend" style="left:0;top:0;width:1080px;height:1920px;z-index:12;"><video id="gend" class="clip" src="assets/g_end.mp4" data-start="9.38" data-duration="4.22" data-track-index="12" muted playsinline></video></div>
+<div class="brand" id="brand" style="top:196px;color:#FAF7F2;z-index:60"><span class="bl" style="background:#FAF7F2"></span>ST. MORITZ · ENGADIN<span class="bl" style="background:#FAF7F2"></span></div>
+<div class="vw" id="w_endbl" style="left:0;top:0;width:1080px;height:1920px;z-index:30;"><video id="endbl" class="clip" src="assets/g_end_bl.mp4" data-start="9.63" data-duration="3.97" data-track-index="30" muted playsinline></video></div>
+<div class="veil" id="veil" style="z-index:31"></div>
+<div class="cap" id="ek" style="top:560px;left:70px;width:940px;text-align:center;font-size:27px;letter-spacing:.26em;color:#FAF7F2;font-weight:500;z-index:55;text-shadow:0 1px 14px rgba(20,14,10,.45);"><div class="mask"><span class="in">Keratin · Hair Botox — at your place</span></div><span class="rule" style="background:#D8C3A5"></span></div>
+<div class="ttl" id="eh" style="top:640px;left:70px;width:940px;text-align:center;font-family:'CG', serif;font-weight:300;font-size:92px;line-height:1.04;letter-spacing:-0.01em;color:#FAF7F2;z-index:55;text-shadow:0 2px 26px rgba(20,14,10,.38),0 1px 3px rgba(20,14,10,.25);"><i class="sc"></i><div class="ln"><span class="w">Your</span> <span class="w">glass</span> <span class="w">hair</span></div><div class="ln"><span class="w it">starts</span> <span class="w it">here.</span></div></div>
+<div class="pillw" style="top:960px;z-index:56"><div class="pill" id="pill"><span>DM me</span><b>“GLASS”</b><i class="shine" id="shine"><i></i></i></div></div>
+<div class="cap" id="ef" style="top:1110px;left:70px;width:940px;text-align:center;font-size:28px;letter-spacing:.06em;color:#FAF7F2;font-weight:400;z-index:55;text-shadow:0 1px 14px rgba(20,14,10,.45);"><div class="mask"><span class="in">I come to you · St. Moritz &amp; Engadin</span></div></div>
+<script>
+  (function () {
+    const tl = gsap.timeline({ paused: true });
+    
+tl.fromTo("#w_mac video", {scale:1.04, x:0, y:0}, {scale:1.12, x:0, y:0, duration:2.2, ease:"sine.inOut"}, 0);    tl.fromTo("#gn1", {x:-200, opacity:0}, {x:1500, opacity:1, duration:1.2, ease:"power2.inOut"}, 0.15);    tl.to("#gn1", {opacity:0, duration:.2}, 1.15);    tl.to("#c1 .in", {yPercent:-110, duration:.35, ease:"power3.in"}, 1.5499999999999998);    tl.to("#gt .w", {opacity:0, filter:"blur(7px)", duration:.22, ease:"power2.in", stagger:.025}, 1.65);    tl.to("#gt .sc", {opacity:0, duration:.3, ease:"sine.in"}, 1.65);    tl.fromTo("#w_m0", {opacity:0, xPercent:8, filter:"blur(10px)"}, {opacity:1, xPercent:0, filter:"blur(0px)", duration:.22, ease:"power2.out"}, 1.95);    tl.fromTo("#w_m0 video", {scale:1.08, x:0, y:0}, {scale:1.0, x:0, y:0, duration:0.6799999999999999, ease:"sine.inOut"}, 1.95);    tl.fromTo("#mw0 .in", {yPercent:110, opacity:1}, {yPercent:0, duration:.8, ease:"expo.out"}, 1.97);    tl.to("#mw0 .in", {yPercent:-110, duration:.35, ease:"power3.in"}, 2.46);    tl.fromTo("#w_m1", {opacity:0, xPercent:-8, filter:"blur(10px)"}, {opacity:1, xPercent:0, filter:"blur(0px)", duration:.22, ease:"power2.out"}, 2.38);    tl.fromTo("#w_m1 video", {scale:1.08, x:0, y:0}, {scale:1.0, x:0, y:0, duration:0.6799999999999999, ease:"sine.inOut"}, 2.38);    tl.fromTo("#w_m2", {opacity:0, xPercent:8, filter:"blur(10px)"}, {opacity:1, xPercent:0, filter:"blur(0px)", duration:.22, ease:"power2.out"}, 2.81);    tl.fromTo("#w_m2 video", {scale:1.08, x:0, y:0}, {scale:1.0, x:0, y:0, duration:0.6799999999999999, ease:"sine.inOut"}, 2.81);    tl.fromTo("#mw2 .in", {yPercent:110, opacity:1}, {yPercent:0, duration:.8, ease:"expo.out"}, 2.83);    tl.to("#mw2 .in", {yPercent:-110, duration:.35, ease:"power3.in"}, 3.32);    tl.fromTo("#w_m3", {opacity:0, xPercent:-8, filter:"blur(10px)"}, {opacity:1, xPercent:0, filter:"blur(0px)", duration:.22, ease:"power2.out"}, 3.24);    tl.fromTo("#w_m3 video", {scale:1.08, x:0, y:0}, {scale:1.0, x:0, y:0, duration:0.6799999999999999, ease:"sine.inOut"}, 3.24);    tl.fromTo("#w_m4", {opacity:0, xPercent:8, filter:"blur(10px)"}, {opacity:1, xPercent:0, filter:"blur(0px)", duration:.22, ease:"power2.out"}, 3.67);    tl.fromTo("#w_m4 video", {scale:1.08, x:0, y:0}, {scale:1.0, x:0, y:0, duration:0.6799999999999999, ease:"sine.inOut"}, 3.67);    tl.fromTo("#mw4 .in", {yPercent:110, opacity:1}, {yPercent:0, duration:.8, ease:"expo.out"}, 3.69);    tl.to("#mw4 .in", {yPercent:-110, duration:.35, ease:"power3.in"}, 4.180000000000001);    tl.fromTo("#w_m5", {opacity:0, xPercent:-8, filter:"blur(10px)"}, {opacity:1, xPercent:0, filter:"blur(0px)", duration:.22, ease:"power2.out"}, 4.1);    tl.fromTo("#w_m5 video", {scale:1.08, x:0, y:0}, {scale:1.0, x:0, y:0, duration:0.6799999999999999, ease:"sine.inOut"}, 4.1);    tl.fromTo("#w_hand", {opacity:0}, {opacity:1, duration:.25}, 4.53);    tl.fromTo("#w_hand video", {scale:1.0, x:0, y:0}, {scale:1.06, x:0, y:0, duration:2.8, ease:"sine.inOut"}, 4.53);    tl.fromTo("#gn2", {x:-200, opacity:0}, {x:1500, opacity:1, duration:1.3, ease:"power2.inOut"}, 5.13);    tl.to("#gn2", {opacity:0, duration:.2}, 6.2299999999999995);    tl.fromTo("#g2 .sc", {opacity:0}, {opacity:1, duration:.6, ease:"sine.out"}, 4.83);    tl.fromTo("#g2 .w", {opacity:0, y:16, filter:"blur(9px)"}, {opacity:1, y:0, filter:"blur(0px)", duration:.6, ease:"expo.out", stagger:0.07}, 4.83);    tl.to("#g2 .w", {opacity:0, filter:"blur(7px)", duration:.22, ease:"power2.in", stagger:.025}, 6.63);    tl.to("#g2 .sc", {opacity:0, duration:.3, ease:"sine.in"}, 6.63);    tl.fromTo("#w_sw", {opacity:0}, {opacity:1, duration:0.45, ease:"sine.inOut"}, 6.88);    tl.fromTo("#w_sw video", {scale:1.0, x:0, y:0}, {scale:1.05, x:0, y:0, duration:3.0, ease:"sine.inOut"}, 6.88);    tl.fromTo("#lk3", {opacity:0, xPercent:-30}, {opacity:0.55, xPercent:0.0, duration:0.45, ease:"sine.in"}, 6.68);    tl.to("#lk3", {opacity:0, xPercent:30, duration:0.55, ease:"sine.out"}, 7.13);    tl.fromTo("#g3 .sc", {opacity:0}, {opacity:1, duration:.6, ease:"sine.out"}, 7.18);    tl.fromTo("#g3 .w", {opacity:0, y:16, filter:"blur(9px)"}, {opacity:1, y:0, filter:"blur(0px)", duration:.6, ease:"expo.out", stagger:0.07}, 7.18);    tl.to("#g3 .w", {opacity:0, filter:"blur(7px)", duration:.22, ease:"power2.in", stagger:.025}, 8.979999999999999);    tl.to("#g3 .sc", {opacity:0, duration:.3, ease:"sine.in"}, 8.979999999999999);    tl.fromTo("#w_gend", {opacity:0}, {opacity:1, duration:0.5, ease:"sine.inOut"}, 9.38);    tl.fromTo("#w_endbl", {opacity:0}, {opacity:1, duration:.7, ease:"sine.inOut"}, 9.680000000000001);    tl.fromTo("#veil", {opacity:0}, {opacity:1, duration:.7, ease:"sine.inOut"}, 9.680000000000001);    tl.fromTo("#ek .in", {yPercent:110, opacity:1}, {yPercent:0, duration:.8, ease:"expo.out"}, 10.030000000000001);    tl.fromTo("#ek .rule", {scaleX:0}, {scaleX:1, duration:.9, ease:"expo.out"}, 10.180000000000001);    tl.fromTo("#eh .sc", {opacity:0}, {opacity:1, duration:.6, ease:"sine.out"}, 10.180000000000001);    tl.fromTo("#eh .w", {opacity:0, y:16, filter:"blur(9px)"}, {opacity:1, y:0, filter:"blur(0px)", duration:.6, ease:"expo.out", stagger:0.07}, 10.180000000000001);    tl.fromTo("#pill", {opacity:0, y:22, scale:.96}, {opacity:1, y:0, scale:1, duration:.8, ease:"expo.out"}, 10.680000000000001);    tl.fromTo("#shine", {x:-200}, {x:760, duration:1.1, ease:"power2.inOut"}, 11.38);    tl.fromTo("#ef .in", {yPercent:110, opacity:1}, {yPercent:0, duration:.8, ease:"expo.out"}, 10.930000000000001);
+    tl.set({}, {}, 13.6);
+    window.__timelines = window.__timelines || {};
+    window.__timelines["main"] = tl;
+  })();
+</script>
+</div>
+</body></html>
