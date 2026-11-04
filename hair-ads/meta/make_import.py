@@ -29,7 +29,7 @@ COMMON = {
 }
 CAMPAIGNS = [
     # холодная: посещения профиля — как лучшая кампания октября
-    dict(camp="R3 · Profile · EN · cold", obj="Outcome Traffic", adset="Women 23-55 · St. Moritz +40km", budget="14",
+    dict(camp="R3 · Profile · EN · cold", obj="Traffic", adset="Women 23-55 · St. Moritz +40km", budget="14",
          dest="INSTAGRAM_PROFILE", goal="VISIT_INSTAGRAM_PROFILE", cta="VIEW_INSTAGRAM_PROFILE",
          ads=["classic", "glass", "arrival", "winter"]),
     # ретаргет: сообщения в директ (аудитории выбрать в кабинете до запуска)
