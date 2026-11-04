@@ -24,7 +24,7 @@ COMMON = {
     "Gender": "Women", "Age Min": "23", "Age Max": "55", "Locales": "English (All)",
     "Publisher Platforms": "instagram", "Instagram Positions": "stream, story, explore, reels", "Device Platforms": "mobile",
     "Billing Event": "IMPRESSIONS", "Attribution Spec": '[{"event_type":"CLICK_THROUGH","window_days":1}]',
-    "Creative Type": "Video Page Post Ad", "Instagram Account ID": ig, "Use Page as Actor": "No",
+    "Creative Type": "Video Page Post Ad", "Instagram Account ID": ig, "Instagram Account ID (New)": ig, "Use Page as Actor": "No",
 }
 CAMPAIGNS = [
     # холодная: посещения профиля — как лучшая кампания октября
