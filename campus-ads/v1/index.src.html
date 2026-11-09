@@ -19,15 +19,13 @@ __CSS__
 
   /* хук */
   #hook { left: 72px; top: 330px; width: 936px; height: 520px; }
-  #hook .big { position: absolute; left: -10px; top: -40px; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 380px; line-height: 400px;
+  #hook .big { position: absolute; left: -6px; top: -26px; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 330px; line-height: 350px;
                color: var(--y); text-shadow: 0 16px 60px rgba(0,0,0,.35); }
-  #hook .t { position: absolute; left: 290px; top: 30px; width: 650px; display: flex; flex-wrap: wrap; gap: 0 18px; }
-  #hook .t em { display: block; font-style: normal; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 54px; line-height: 66px;
+  #hook .t { position: absolute; left: 318px; top: 26px; width: 618px; display: flex; flex-wrap: wrap; gap: 0 16px; }
+  #hook .t em { display: block; font-style: normal; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 48px; line-height: 60px;
                 text-transform: uppercase; text-shadow: 0 4px 24px rgba(0,0,0,.45); }
   #hook .t em.k { color: var(--y); background: rgba(12,12,12,.88); border-radius: 12px; padding: 0 14px 4px; margin: 4px 0; text-shadow: none; }
-  #hook .par { position: absolute; left: 290px; top: 300px; font-size: 30px; }
-  #loc { left: 72px; top: 1620px; font-size: 26px; gap: 10px; opacity: 0; }
-  #loc svg { width: 26px; height: 32px; }
+  #hook .par { position: absolute; left: 318px; top: 330px; font-size: 28px; }
 
   /* заголовок факта */
   .fh { position: absolute; left: 72px; top: 318px; display: flex; align-items: baseline; gap: 22px; opacity: 0; }
@@ -35,60 +33,82 @@ __CSS__
           text-shadow: 0 8px 30px rgba(0,0,0,.35); }
   .fh span { display: block; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 60px; text-transform: uppercase; text-shadow: 0 4px 22px rgba(0,0,0,.5); }
 
+  /* безкоштовно */
+  #free { left: 72px; top: 330px; width: 936px; height: 330px; }
+  #free .coin { position: absolute; left: 0; top: 0; width: 230px; height: 230px; border-radius: 50%; background: var(--y); box-shadow: inset 0 0 0 14px #F2B705, 0 20px 60px rgba(0,0,0,.35);
+                font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 120px; line-height: 230px; text-align: center; color: var(--k); opacity: 0; }
+  #free .w { position: absolute; left: 258px; top: 46px; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 60px; line-height: 72px; text-transform: uppercase;
+             text-shadow: 0 6px 30px rgba(0,0,0,.45); opacity: 0; }
+  #free .y { position: absolute; left: 262px; top: 132px; font-size: 34px; opacity: 0; }
+  #free .sp { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: var(--y); opacity: 0; }
+
   /* 1 мова */
-  #f1 .b1 { left: 72px; top: 470px; padding: 22px 32px 26px; border-bottom-left-radius: 8px; opacity: 0; }
-  #f1 .b1 small, #f1 .b2 small { display: block; font-size: 24px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; opacity: .55; }
-  #f1 .b1 b, #f1 .b2 b { display: block; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 50px; line-height: 62px; }
-  #f1 .b2 { left: 470px; top: 560px; padding: 22px 32px 26px; background: var(--y); border-bottom-right-radius: 8px; opacity: 0; }
-  #f1 .meter { left: 72px; top: 470px; width: 936px; height: 250px; opacity: 0; }
-  #f1 .meter .cap1 { position: absolute; left: 40px; top: 30px; font-weight: 800; font-size: 26px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.7); }
-  #f1 .meter .segs { position: absolute; left: 40px; top: 84px; width: 856px; height: 40px; display: flex; gap: 10px; }
+  #f1 .b1 { left: 72px; top: 462px; padding: 20px 30px 24px; border-bottom-left-radius: 8px; opacity: 0; }
+  #f1 .b1 small, #f1 .b2 small { display: block; font-size: 22px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; opacity: .55; }
+  #f1 .b1 b, #f1 .b2 b { display: block; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 44px; line-height: 54px; }
+  #f1 .b2 { left: 150px; top: 586px; padding: 20px 30px 24px; background: var(--y); border-bottom-left-radius: 8px; opacity: 0; }
+  #flag { left: 690px; top: 300px; width: 300px; height: 200px; opacity: 0; }
+  #flag svg { position: absolute; left: 0; top: 0; width: 300px; height: 200px; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,.35); }
+  #flag .lb { position: absolute; left: 0; top: 214px; font-size: 26px; }
+  .lt { position: absolute; width: 74px; height: 74px; border-radius: 20px; background: #fff; color: var(--k); font-family: "Unbounded", sans-serif; font-weight: 900;
+        font-size: 40px; line-height: 74px; text-align: center; box-shadow: 0 12px 30px rgba(0,0,0,.3); opacity: 0; }
+  .lt.y { background: var(--y); }
+  #f1 .meter { left: 72px; top: 450px; width: 936px; height: 230px; opacity: 0; }
+  #f1 .meter .cap1 { position: absolute; left: 40px; top: 26px; font-weight: 800; font-size: 26px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.7); }
+  #f1 .meter .segs { position: absolute; left: 40px; top: 74px; width: 856px; height: 40px; display: flex; gap: 10px; }
   #f1 .meter .segs i { display: block; flex: 1; height: 40px; border-radius: 12px; background: rgba(255,255,255,.18); overflow: hidden; position: relative; }
   #f1 .meter .segs i b { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: var(--y); transform-origin: 0 50%; transform: scaleX(0); }
-  #f1 .meter .ends { position: absolute; left: 40px; top: 148px; width: 856px; display: flex; justify-content: space-between; font-weight: 800; font-size: 28px; }
+  #f1 .meter .ends { position: absolute; left: 40px; top: 132px; width: 856px; display: flex; justify-content: space-between; font-weight: 800; font-size: 28px; }
   #f1 .meter .ends .g { color: var(--y); }
-  #f1 .meter .brand { position: absolute; left: 40px; top: 196px; font-size: 24px; color: rgba(255,255,255,.75); font-weight: 700; }
+  #f1 .meter .brand { position: absolute; left: 40px; top: 178px; font-size: 24px; color: rgba(255,255,255,.75); font-weight: 700; }
 
   /* 2 іспити */
-  #f2 .sheet { left: 72px; top: 470px; width: 470px; height: 300px; padding: 0; opacity: 0; }
-  #f2 .sheet .h { position: absolute; left: 36px; top: 34px; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 34px; text-transform: uppercase; }
-  #f2 .sheet .ln { position: absolute; left: 36px; height: 14px; border-radius: 7px; background: #e6e6e6; }
-  #f2 .sheet .strike { position: absolute; left: 20px; top: 140px; width: 430px; height: 16px; border-radius: 8px; background: var(--y); transform-origin: 0 50%;
-                       transform: rotate(-14deg) scaleX(0); }
-  #f2 .stamp { left: 400px; top: 640px; width: 330px; height: 150px; border: 8px solid var(--y); border-radius: 26px; color: var(--y); background: rgba(12,12,12,.82);
-               display: flex; align-items: center; justify-content: center; text-align: center; font-family: "Unbounded", sans-serif; font-weight: 900;
-               font-size: 44px; line-height: 50px; text-transform: uppercase; opacity: 0; }
-  #f2 .note { left: 590px; top: 470px; width: 380px; padding: 20px 24px 22px; border-radius: 24px; background: rgba(12,12,12,.85); font-size: 30px; line-height: 40px;
-              font-weight: 700; color: #fff; opacity: 0; }
-  #f2 .chips { left: 72px; top: 470px; width: 936px; height: 300px; opacity: 0; }
+  #exam { left: 72px; top: 462px; width: 600px; height: 104px; perspective: 900px; }
+  #exam .a, #exam .b { position: absolute; left: 0; top: 0; height: 104px; display: flex; align-items: center; gap: 18px; padding: 0 34px; border-radius: 26px;
+                       font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 40px; text-transform: uppercase; white-space: nowrap; backface-visibility: hidden; }
+  #exam .a { background: rgba(12,12,12,.88); color: #fff; opacity: 0; }
+  #exam .a .st { position: absolute; left: 20px; right: 20px; top: 46px; height: 12px; border-radius: 6px; background: var(--y); transform-origin: 0 50%; transform: scaleX(0); }
+  #exam .b { background: var(--y); color: var(--k); opacity: 0; }
+  .tick { position: absolute; left: 0; width: 2400px; height: 84px; display: flex; gap: 16px; opacity: 0; }
+  .tick .p { display: flex; align-items: center; gap: 12px; height: 84px; padding: 0 28px 0 12px; border-radius: 42px; background: #fff; color: var(--k);
+             font-weight: 800; font-size: 32px; white-space: nowrap; box-shadow: 0 12px 30px rgba(0,0,0,.25); flex: none; }
+  .tick .p.k { background: var(--k); color: #fff; }
+  .tick .p i { display: block; width: 60px; height: 60px; border-radius: 50%; background: var(--y); position: relative; flex: none; }
+  .tick .p i svg { position: absolute; left: 13px; top: 13px; width: 34px; height: 34px; }
+  #f2 .chips { left: 72px; top: 462px; width: 936px; height: 240px; opacity: 0; }
   #f2 .chips .c { position: absolute; display: inline-flex; align-items: center; gap: 14px; padding: 16px 28px 18px 16px; border-radius: 999px; background: #fff;
-                  color: var(--k); font-weight: 800; font-size: 36px; white-space: nowrap; box-shadow: 0 16px 40px rgba(0,0,0,.25); opacity: 0; }
-  #f2 .chips .c i { display: block; width: 50px; height: 50px; border-radius: 50%; background: var(--y); }
-  #f2 .chips .to { position: absolute; left: 0; top: 214px; font-size: 32px; opacity: 0; }
+                  color: var(--k); font-weight: 800; font-size: 34px; white-space: nowrap; box-shadow: 0 16px 40px rgba(0,0,0,.25); opacity: 0; }
+  #f2 .chips .c i { display: block; width: 46px; height: 46px; border-radius: 50%; background: var(--y); }
+  #f2 .chips .to { position: absolute; left: 0; top: 176px; font-size: 30px; opacity: 0; }
 
   /* 3 дедлайни */
-  #f3 .cal { left: 72px; top: 470px; width: 380px; height: 300px; overflow: hidden; opacity: 0; }
-  #f3 .cal .top { position: absolute; left: 0; top: 0; width: 380px; height: 74px; background: var(--k); color: var(--y); border-radius: 34px 34px 0 0;
-                  font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 30px; line-height: 74px; text-align: center; text-transform: uppercase; }
-  #f3 .cal .g { position: absolute; left: 26px; top: 92px; width: 328px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
-  #f3 .cal .g i { display: block; height: 32px; border-radius: 8px; background: #eee; }
-  #f3 .cal .ring { position: absolute; width: 64px; height: 64px; border-radius: 50%; border: 6px solid #E5352B; box-sizing: border-box; }
-  #f3 .tags { left: 490px; top: 486px; width: 520px; display: flex; flex-direction: column; gap: 16px; }
-  #f3 .tags .pillK { font-size: 32px; opacity: 0; align-self: flex-start; }
-  #f3 .tags .pillY { font-size: 32px; opacity: 0; align-self: flex-start; }
-  #f3 .bars { left: 72px; top: 460px; width: 936px; height: 330px; opacity: 0; }
-  #f3 .bars .hd { position: absolute; left: 40px; top: 30px; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 34px; text-transform: uppercase; color: var(--y); }
-  #f3 .bars .row { position: absolute; left: 40px; width: 856px; height: 64px; }
-  #f3 .bars .row span { position: absolute; left: 0; top: 0; font-weight: 800; font-size: 32px; line-height: 64px; color: #fff; opacity: 0; }
-  #f3 .bars .row i { position: absolute; left: 330px; top: 18px; width: 526px; height: 28px; border-radius: 14px; background: rgba(255,255,255,.18); }
-  #f3 .bars .row b { position: absolute; left: 330px; top: 18px; width: 526px; height: 28px; border-radius: 14px; background: var(--y); transform-origin: 0 50%; transform: scaleX(0); }
+  #f3 .cal { left: 72px; top: 450px; width: 360px; height: 266px; overflow: hidden; opacity: 0; }
+  #f3 .cal .top { position: absolute; left: 0; top: 0; width: 360px; height: 66px; background: var(--k); color: var(--y); border-radius: 34px 34px 0 0;
+                  font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 28px; line-height: 66px; text-align: center; text-transform: uppercase; }
+  #f3 .cal .g { position: absolute; left: 24px; top: 84px; width: 312px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+  #f3 .cal .g i { display: block; height: 30px; border-radius: 8px; background: #eee; }
+  #f3 .cal .ring { position: absolute; width: 60px; height: 60px; border-radius: 50%; border: 6px solid #E5352B; box-sizing: border-box; }
+  #f3 .tags { left: 460px; top: 456px; width: 520px; display: flex; flex-direction: column; gap: 10px; }
+  #f3 .tags .pillK, #f3 .tags .pillY { font-size: 28px; opacity: 0; align-self: flex-start; }
+  #f3 .bars { left: 72px; top: 440px; width: 936px; height: 262px; opacity: 0; }
+  #f3 .bars .hd { position: absolute; left: 36px; top: 24px; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 30px; text-transform: uppercase; color: var(--y); }
+  #f3 .bars .row { position: absolute; left: 36px; width: 864px; height: 56px; }
+  #f3 .bars .row span { position: absolute; left: 0; top: 0; font-weight: 800; font-size: 30px; line-height: 56px; color: #fff; opacity: 0; }
+  #f3 .bars .row i { position: absolute; left: 300px; top: 16px; width: 564px; height: 24px; border-radius: 12px; background: rgba(255,255,255,.18); }
+  #f3 .bars .row b { position: absolute; left: 300px; top: 16px; width: 564px; height: 24px; border-radius: 12px; background: var(--y); transform-origin: 0 50%; transform: scaleX(0); }
 
   /* 4 головне */
-  #f4 .dip { left: 72px; top: 460px; width: 936px; height: 330px; opacity: 0; }
-  #f4 .dip .stars { position: absolute; left: 30px; top: 25px; width: 280px; height: 280px; }
-  #f4 .dip .t1 { position: absolute; left: 350px; top: 70px; font-weight: 800; font-size: 28px; letter-spacing: .12em; text-transform: uppercase; opacity: .55; }
-  #f4 .dip .t2 { position: absolute; left: 350px; top: 112px; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 52px; line-height: 60px; text-transform: uppercase; }
-  #f4 .exp { left: 380px; top: 720px; font-size: 34px; opacity: 0; }
+  #f4 .dip { left: 72px; top: 446px; width: 936px; height: 236px; overflow: hidden; opacity: 0; }
+  #f4 .dip .stars { position: absolute; left: 22px; top: 18px; width: 200px; height: 200px; }
+  #f4 .dip .t1 { position: absolute; left: 250px; top: 50px; font-weight: 800; font-size: 26px; letter-spacing: .12em; text-transform: uppercase; opacity: .55; }
+  #f4 .dip .t2 { position: absolute; left: 250px; top: 88px; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 46px; line-height: 54px; text-transform: uppercase; }
+  #f4 .dip .shine { position: absolute; left: -200px; top: -60px; width: 120px; height: 360px; background: linear-gradient(90deg, rgba(255,210,26,0), rgba(255,210,26,.55), rgba(255,210,26,0));
+                    transform: rotate(18deg); }
+  #f4 .exp { left: 0; width: 1080px; top: 560px; display: flex; justify-content: center; opacity: 0; }
+  #f4 .exp .pillY { font-size: 46px; padding: 18px 34px 20px; gap: 18px; }
+  #f4 .exp2 { left: 0; width: 1080px; top: 700px; display: flex; justify-content: center; gap: 14px; }
+  #f4 .exp2 .pillK { font-size: 28px; opacity: 0; }
+  #f4 .fut { left: 72px; top: 446px; font-size: 40px; opacity: 0; gap: 16px; }
 
   /* CTA: шлях */
   #f5 { left: 72px; top: 320px; width: 936px; height: 460px; }
@@ -101,9 +121,11 @@ __CSS__
 
   /* финал */
   #end { left: 0; top: 0; width: 1080px; height: 1920px; background: var(--y); color: var(--k); clip-path: circle(0% at 50% 50%); }
-  #end .vid { position: absolute; left: 340px; top: 250px; width: 400px; height: 400px; border-radius: 50%; overflow: hidden; background: #222;
+  #end .vid { position: absolute; left: 340px; top: 230px; width: 400px; height: 400px; border-radius: 50%; overflow: hidden; background: #222;
               box-shadow: 0 0 0 12px #fff, 0 30px 80px rgba(0,0,0,.25); }
   #endv { position: absolute; left: -328px; top: -719px; width: 1100px; height: 1956px; object-fit: cover; }
+  #end .who { position: absolute; left: 0; width: 1080px; top: 610px; display: flex; justify-content: center; }
+  #end .who .pillK { font-size: 24px; text-transform: none; font-family: "Manrope", sans-serif; font-weight: 800; }
   #end .kick { position: absolute; left: 0; width: 1080px; top: 740px; text-align: center; font-family: "Unbounded", sans-serif; font-weight: 700; font-size: 34px;
                text-transform: uppercase; letter-spacing: .04em; }
   #end h1 { position: absolute; left: 60px; width: 960px; top: 800px; margin: 0; text-align: center; font-family: "Unbounded", sans-serif; font-weight: 900;
@@ -124,6 +146,7 @@ __CSS__
   <div id="plateW"><div id="plateZ">
     <video id="plate" class="clip" data-start="0" data-duration="__VDUR__" data-track-index="0" src="assets/media/plate.mp4" muted playsinline></video>
   </div></div>
+__BROLL__
   <div id="scrimTop" class="abs"></div>
   <div id="scrimBot" class="abs"></div>
 
@@ -140,11 +163,23 @@ __CSS__
     <div class="t"><em>речі</em><em>про</em><em class="k">безкоштовний</em><em class="k">вступ</em><em>до</em><em>Словаччини</em></div>
     <div class="par pillY">які варто знати батькам</div>
   </div>
-  <div id="loc" class="abs pillK"><svg viewBox="0 0 26 32"><path d="M13 1C6.4 1 1 6.2 1 12.6 1 21.3 13 31 13 31s12-9.7 12-18.4C25 6.2 19.6 1 13 1z" fill="#FFD21A"/><circle cx="13" cy="12.5" r="4.6" fill="#0C0C0C"/></svg>Кампус UKF · Нітра</div>
+__STUD__
+
+  <!-- безкоштовно -->
+  <div id="free" class="abs"><div class="coin" id="coin">€</div><div class="w">Безкоштовно</div><div class="y pillY">так, навчання — 0 €</div>
+    <i class="sp" style="left:240px; top:20px"></i><i class="sp" style="left:30px; top:250px"></i><i class="sp" style="left:220px; top:230px"></i><i class="sp" style="left:-10px; top:30px"></i></div>
 
   <!-- 1 мова -->
   <div id="f1">
     <div class="fh" id="fh1"><b>01</b><span>Мова</span></div>
+    <div id="flag" class="abs"><svg viewBox="0 0 300 200"><g id="flagG">
+      <rect width="300" height="67" fill="#fff"/><rect y="67" width="300" height="66" fill="#0B4EA2"/><rect y="133" width="300" height="67" fill="#EE1C25"/>
+      <path d="M62 40 h84 v62 c0 30 -20 48 -42 58 c-22 -10 -42 -28 -42 -58 Z" fill="#fff"/>
+      <path d="M68 46 h72 v56 c0 26 -17 42 -36 51 c-19 -9 -36 -25 -36 -51 Z" fill="#EE1C25"/>
+      <path d="M100 58 h8 v14 h16 v8 h-16 v8 h20 v8 h-20 v24 h-8 v-24 h-20 v-8 h20 v-8 h-16 v-8 h16 Z" fill="#fff"/>
+      <path d="M72 130 c8 -14 20 -14 26 -6 c6 -12 22 -12 28 0 c6 -8 16 -6 18 4 c-6 12 -20 22 -40 30 c-16 -6 -28 -16 -32 -28 Z" fill="#0B4EA2"/></g></svg>
+      <div class="lb pillK">словацька мова</div></div>
+    __LETTERS__
     <div class="card b1"><small>словацькою</small><b>Dobrý deň!</b></div>
     <div class="card b2"><small>українською</small><b>Добрий день!</b></div>
     <div class="cardK meter"><div class="cap1">рівень мови</div>
@@ -156,15 +191,14 @@ __CSS__
   <!-- 2 іспити -->
   <div id="f2">
     <div class="fh" id="fh2"><b>02</b><span>Іспити</span></div>
-    <div class="card sheet"><div class="h">Вступний іспит</div>
-      <i class="ln" style="top:110px; width:380px"></i><i class="ln" style="top:146px; width:320px"></i><i class="ln" style="top:182px; width:360px"></i><i class="ln" style="top:218px; width:250px"></i>
-      <i class="strike"></i></div>
-    <div class="abs stamp">без<br>іспитів</div>
-    <div class="abs note">на багато спеціальностей*<br><span style="opacity:.75; font-size:26px">*умови залежать від університету та факультету</span></div>
+    <div id="exam" class="abs"><div class="a">Вступні іспити<i class="st"></i></div>
+      <div class="b"><svg width="44" height="44" viewBox="0 0 44 44"><path d="M8 23l9 9 19-20" fill="none" stroke="#0C0C0C" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>Без іспитів</div></div>
+    <div class="tick" id="tk1" style="top:596px">__TICK1__</div>
+    <div class="tick" id="tk2" style="top:694px">__TICK2__</div>
     <div class="abs chips">
       <div class="c" style="left:0; top:0"><i></i>сильні сторони</div>
-      <div class="c" style="left:380px; top:0"><i></i>інтереси</div>
-      <div class="c" style="left:0; top:100px"><i></i>цілі</div>
+      <div class="c" style="left:372px; top:0"><i></i>інтереси</div>
+      <div class="c" style="left:640px; top:0"><i></i>цілі</div>
       <div class="to pillY">→ напрям саме під вашу дитину</div>
     </div>
   </div>
@@ -172,12 +206,12 @@ __CSS__
   <!-- 3 дедлайни -->
   <div id="f3">
     <div class="fh" id="fh3"><b>03</b><span>Дедлайни</span></div>
-    <div class="card cal"><div class="top">Дедлайн</div><div class="g">__CAL__</div><div class="ring" id="calring" style="left:206px; top:156px"></div></div>
+    <div class="card cal"><div class="top">Дедлайн</div><div class="g">__CAL__</div><div class="ring" id="calring" style="left:191px; top:144px"></div></div>
     <div class="abs tags"><div class="pillY">місця</div><div class="pillY">дедлайни</div><div class="pillK">залежать від ВНЗ</div></div>
     <div class="cardK bars"><div class="hd">Чим раніше — тим більше часу</div>
-      <div class="row" style="top:96px"><span>мова</span><i></i><b></b></div>
-      <div class="row" style="top:170px"><span>документи</span><i></i><b></b></div>
-      <div class="row" style="top:244px"><span>факультет</span><i></i><b></b></div>
+      <div class="row" style="top:76px"><span>мова</span><i></i><b></b></div>
+      <div class="row" style="top:134px"><span>документи</span><i></i><b></b></div>
+      <div class="row" style="top:192px"><span>факультет</span><i></i><b></b></div>
     </div>
   </div>
 
@@ -187,9 +221,11 @@ __CSS__
     <div class="card dip">
       <svg class="stars" viewBox="-140 -140 280 280"><g id="starring">__STARS__</g>
         <path d="M-56 -6 L0 -30 L56 -6 L0 18 Z" fill="#0C0C0C"/><path d="M-34 4 v26 c20 14 48 14 68 0 v-26 L0 18 Z" fill="#0C0C0C"/><path d="M48 -2 v34" stroke="#0C0C0C" stroke-width="5"/></svg>
-      <div class="t1">не лише</div><div class="t2">європейський<br>диплом</div>
+      <div class="t1">не лише</div><div class="t2">європейський<br>диплом</div><i class="shine"></i>
     </div>
-    <div class="abs exp pillY"><svg width="40" height="40" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke="#0C0C0C" stroke-width="4"/><path d="M4 20h32M20 4c-8 9-8 23 0 32M20 4c8 9 8 23 0 32" fill="none" stroke="#0C0C0C" stroke-width="3"/></svg>+ міжнародний досвід</div>
+    <div class="abs exp"><div class="pillY"><svg width="54" height="54" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke="#0C0C0C" stroke-width="4"/><path d="M4 20h32M20 4c-8 9-8 23 0 32M20 4c8 9 8 23 0 32" fill="none" stroke="#0C0C0C" stroke-width="3"/></svg>Міжнародний досвід</div></div>
+    <div class="abs exp2"><div class="pillK">подорожі</div><div class="pillK">нові друзі</div><div class="pillK">Європа поруч</div></div>
+    <div class="abs fut pillY"><svg width="44" height="44" viewBox="0 0 48 48"><path d="M6 38 L18 24 L26 30 L40 12" fill="none" stroke="#0C0C0C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M30 11 H41 V22" fill="none" stroke="#0C0C0C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>+ власне майбутнє</div>
   </div>
 
   <!-- 5 CTA шлях -->
@@ -212,6 +248,7 @@ __CSS__
   <!-- финал -->
   <div id="end" class="abs">
     <div class="vid"><video id="endv" class="clip" data-start="0" data-duration="__VDUR__" data-track-index="5" src="assets/media/plate_small.mp4" muted playsinline></video></div>
+    <div class="who"><div class="pillK">студентка, яка вступила з Study and Travel</div></div>
     <div class="kick">Отримайте</div>
     <h1>Безкоштовна консультація</h1>
     <div class="btn"><b>Детальніше</b><svg width="60" height="60" viewBox="0 0 66 66"><circle cx="33" cy="33" r="33" fill="#FFD21A"/><path d="M22 33h22M35 23l10 10-10 10" stroke="#0C0C0C" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -242,32 +279,52 @@ __COMMONJS__
       D.hookW.forEach((t, i) => tl.fromTo(`#hook .t em:nth-child(${i + 1})`, { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.25, ease: E }, t));
       tl.fromTo("#hook .par", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3, ease: EB }, T.par);
       tl.to("#hook", { opacity: 0, y: -40, duration: 0.25, ease: "power2.in" }, T.f1 - 0.2);
-      tl.fromTo("#loc", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.35, ease: E }, 0.6);
-      tl.to("#loc", { opacity: 0, duration: 0.25 }, T.f1);
+__STUDJS__
+
+      // ---------- безкоштовно ----------
+      tl.fromTo("#coin", { opacity: 0, scale: 0.2, rotation: -200 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.55, ease: EB }, T.free - 0.05);
+      tl.to("#coin", { scaleX: -1, duration: 0.25, yoyo: true, repeat: 3, ease: "sine.inOut" }, T.free + 0.5);
+      tl.fromTo("#free .w", { opacity: 0, x: -40, scale: 0.9 }, { opacity: 1, x: 0, scale: 1, duration: 0.35, ease: EB }, T.free + 0.1);
+      tl.fromTo("#free .y", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: EB }, T.free + 0.55);
+      tl.fromTo("#free .sp", { opacity: 1, scale: 0 }, { opacity: 0, scale: 2.4, duration: 0.6, ease: "power2.out", stagger: 0.06 }, T.free + 0.35);
+      tl.to("#free", { opacity: 0, y: -30, duration: 0.2, ease: "power2.in" }, T.mova - 0.2);
 
       // ---------- заголовки фактов ----------
-      [["#fh1", T.f1, T.f2], ["#fh2", T.f2, T.f3], ["#fh3", T.f3, T.f4], ["#fh4", T.f4, T.f5]].forEach(([id, a, b]) => {
+      [["#fh1", T.mova, T.f2], ["#fh2", T.f2, T.f3], ["#fh3", T.f3, T.f4], ["#fh4", T.f4, T.zd]].forEach(([id, a, b]) => {
         tl.fromTo(id, { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.35, ease: E }, a + 0.05);
         tl.fromTo(id + " b", { scale: 1.6 }, { scale: 1, duration: 0.45, ease: EB, transformOrigin: "0% 60%" }, a + 0.05);
         tl.to(id, { opacity: 0, x: 40, duration: 0.2, ease: "power2.in" }, b - 0.2);
       });
 
-      // ---------- 1 мова ----------
+      // ---------- 1 мова: прапор, літери, репліки ----------
+      tl.fromTo("#flag", { opacity: 0, scale: 0.3, rotation: 12, transformOrigin: "100% 0%" }, { opacity: 1, scale: 1, rotation: 0, duration: 0.5, ease: EB }, T.b1 - 0.3);
+      tl.fromTo("#flagG", { skewY: 0, svgOrigin: "0 100" }, { skewY: 3, duration: 0.45, yoyo: true, repeat: 3, ease: "sine.inOut" }, T.b1 + 0.2);
+      D.letters.forEach(([x, y], i) => {
+        const t = T.b1 + 0.05 + i * 0.09;
+        tl.fromTo(`#lt${i}`, { opacity: 0, x: 840 - x, y: 400 - y, scale: 0.2, rotation: -40 }, { opacity: 1, x: 0, y: 0, scale: 1, rotation: (i % 2 ? 8 : -8), duration: 0.45, ease: EB }, t);
+        tl.to(`#lt${i}`, { y: (i % 2 ? -10 : 10), duration: 0.6, yoyo: true, repeat: 1, ease: "sine.inOut" }, t + 0.45);
+      });
       tl.fromTo("#f1 .b1", { opacity: 0, scale: 0.6, transformOrigin: "0% 100%" }, { opacity: 1, scale: 1, duration: 0.35, ease: EB }, T.b1);
-      tl.fromTo("#f1 .b2", { opacity: 0, scale: 0.6, transformOrigin: "100% 100%" }, { opacity: 1, scale: 1, duration: 0.35, ease: EB }, T.b1 + 0.45);
-      tl.to(["#f1 .b1", "#f1 .b2"], { opacity: 0, y: -20, duration: 0.2 }, T.meter - 0.2);
+      tl.fromTo("#f1 .b2", { opacity: 0, scale: 0.6, transformOrigin: "0% 100%" }, { opacity: 1, scale: 1, duration: 0.35, ease: EB }, T.b1 + 0.4);
+      tl.to(["#f1 .b1", "#f1 .b2", "#flag"], { opacity: 0, y: -24, duration: 0.2 }, T.meter - 0.2);
+      tl.to(".lt", { opacity: 0, scale: 0.4, duration: 0.18, ease: "power2.in" }, T.meter + 0.12);
       tl.fromTo("#f1 .meter", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: E }, T.meter);
       tl.fromTo("#f1 .meter .segs b", { scaleX: 0 }, { scaleX: 1, duration: 0.32, ease: "power2.out", stagger: T.meterStep }, T.meterFill);
       tl.fromTo("#f1 .meter .ends .g", { opacity: 0.25 }, { opacity: 1, duration: 0.2 }, T.meterFill + 4 * T.meterStep + 0.3);
       tl.to("#f1 .meter", { opacity: 0, duration: 0.2 }, T.f2 - 0.2);
 
-      // ---------- 2 іспити ----------
-      tl.fromTo("#f2 .sheet", { opacity: 0, y: 40, rotation: -4 }, { opacity: 1, y: 0, rotation: -2, duration: 0.4, ease: EB }, T.f2 + 0.1);
-      tl.fromTo("#f2 .strike", { scaleX: 0, rotation: -14 }, { scaleX: 1, rotation: -14, duration: 0.3, ease: "power2.out" }, T.strike);
-      tl.fromTo("#f2 .stamp", { opacity: 0, scale: 2.2, rotation: -20 }, { opacity: 1, scale: 1, rotation: -8, duration: 0.3, ease: "power4.in" }, T.strike + 0.2);
-      tl.fromTo("#f2 .stamp", { x: 0 }, { x: 6, duration: 0.05, yoyo: true, repeat: 3, immediateRender: false }, T.strike + 0.5);
-      tl.fromTo("#f2 .note", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: E }, T.note);
-      tl.to(["#f2 .sheet", "#f2 .stamp", "#f2 .note"], { opacity: 0, y: -20, duration: 0.2 }, T.chips - 0.2);
+      // ---------- 2 іспити: одна плашка + стрічки спеціальностей ----------
+      tl.fromTo("#exam .a", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.3, ease: E }, T.f2 + 0.1);
+      tl.fromTo("#exam .st", { scaleX: 0 }, { scaleX: 1, duration: 0.25, ease: "power2.out" }, T.strike);
+      tl.to("#exam .a", { rotationX: 90, opacity: 0, duration: 0.18, ease: "power2.in", transformOrigin: "50% 50%" }, T.strike + 0.35);
+      tl.fromTo("#exam .b", { rotationX: -90, opacity: 0, transformOrigin: "50% 50%" }, { rotationX: 0, opacity: 1, duration: 0.3, ease: EB }, T.strike + 0.5);
+      tl.fromTo("#exam .b", { scale: 1 }, { scale: 1.08, duration: 0.12, yoyo: true, repeat: 1, immediateRender: false }, T.strike + 0.8);
+      [["#tk1", 60, -520], ["#tk2", -760, -240]].forEach(([id, x0, x1]) => {
+        tl.fromTo(id, { opacity: 0, x: x0 + 300 }, { opacity: 1, x: x0, duration: 0.35, ease: E }, T.spec - 0.05);
+        tl.fromTo(id, { x: x0 }, { x: x1, duration: T.chips - T.spec, ease: "none", immediateRender: false }, T.spec + 0.3);
+      });
+      tl.fromTo(".tick .p", { scale: 0.6 }, { scale: 1, duration: 0.3, ease: EB, stagger: 0.03 }, T.spec - 0.05);
+      tl.to(["#exam", "#tk1", "#tk2"], { opacity: 0, y: -20, duration: 0.2 }, T.chips - 0.2);
       tl.set("#f2 .chips", { opacity: 1 }, T.chips);
       D.chipT.forEach((t, i) => tl.fromTo(`#f2 .chips .c:nth-child(${i + 1})`, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.3, ease: EB }, t));
       tl.fromTo("#f2 .chips .to", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.3, ease: EB }, T.chipTo);
@@ -288,9 +345,19 @@ __COMMONJS__
       // ---------- 4 головне ----------
       tl.fromTo("#f4 .dip", { opacity: 0, y: 40, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: EB }, T.dip);
       tl.fromTo("#starring path", { scale: 0, opacity: 0, svgOrigin: "0 0" }, { scale: 1, opacity: 1, duration: 0.25, ease: EB, stagger: 0.05 }, T.dip + 0.2);
-      tl.fromTo("#starring", { rotation: 0, svgOrigin: "0 0" }, { rotation: 60, duration: T.f5 - T.dip, ease: "none" }, T.dip);
-      tl.fromTo("#f4 .exp", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: EB }, T.exp);
-      tl.to(["#f4 .dip", "#f4 .exp"], { opacity: 0, y: -20, duration: 0.2 }, T.f5 - 0.2);
+      tl.fromTo("#starring", { rotation: 0, svgOrigin: "0 0" }, { rotation: 60, duration: T.zd - T.dip, ease: "none" }, T.dip);
+      tl.fromTo("#f4 .shine", { x: 0 }, { x: 1300, duration: 0.9, ease: "power2.inOut" }, T.dipl);
+      tl.to("#f4 .dip", { opacity: 0, y: -20, duration: 0.18 }, T.zd - 0.18);
+      // вставка: міжнародний досвід
+      D.broll.forEach((b) => {
+        tl.fromTo(`#bz-${b.id}`, { scale: 1.18 }, { scale: 1.0, duration: b.d + 0.2, ease: "power2.out" }, b.t);
+        if (b.enter) tl.fromTo(`#bw-${b.id}`, { xPercent: 100 }, { xPercent: 0, duration: 0.3, ease: "expo.out" }, b.t);
+      });
+      tl.fromTo("#f4 .exp", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.4, ease: EB }, T.mdos - 0.1);
+      tl.fromTo("#f4 .exp2 .pillK", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, ease: EB, stagger: 0.12 }, T.mdos + 0.25);
+      tl.to(["#f4 .exp", "#f4 .exp2"], { opacity: 0, duration: 0.15 }, T.bud - 0.1);
+      tl.fromTo("#f4 .fut", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.35, ease: EB }, T.fut);
+      tl.to("#f4 .fut", { opacity: 0, duration: 0.2 }, T.f5 - 0.2);
 
       // ---------- 5 шлях ----------
       const p5 = document.getElementById("p5"), L5 = p5.getTotalLength(); p5.style.strokeDasharray = `${L5}`;
@@ -308,13 +375,14 @@ __COMMONJS__
       // ---------- финал ----------
       tl.fromTo("#end", { clipPath: "circle(0% at 50% 50%)" }, { clipPath: "circle(150% at 50% 50%)", duration: 0.6, ease: "power3.inOut" }, T.end0);
       tl.fromTo("#end .vid", { scale: 0.3, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: EB }, T.end0 + 0.25);
+      tl.fromTo("#end .who", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: EB }, T.end0 + 0.5);
       tl.fromTo(["#end .kick", "#end h1"], { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: E, stagger: 0.1 }, T.end0 + 0.35);
       tl.fromTo("#end .btn", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.45, ease: EB }, T.end0 + 0.5);
       tl.fromTo("#end .tap", { opacity: 0, scale: 1.6 }, { opacity: 1, scale: 1, duration: 0.2, ease: E }, T.tap);
       tl.to("#end .btn", { scale: 0.95, duration: 0.09, yoyo: true, repeat: 1 }, T.tap + 0.18);
       tl.fromTo("#end .ripple", { opacity: 0.9, scale: 0.6 }, { opacity: 0, scale: 4, duration: 0.6, ease: "power2.out", immediateRender: false }, T.tap + 0.2);
       tl.to("#end .tap", { opacity: 0, duration: 0.2 }, T.tap + 0.5);
-      tl.to("#end .vid", { scale: 0, opacity: 0, duration: 0.3, ease: "power2.in" }, D.vdur - 0.3);
+      tl.to(["#end .vid", "#end .who"], { scale: 0, opacity: 0, duration: 0.3, ease: "power2.in" }, D.vdur - 0.3);
       tl.fromTo("#end .wm", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.35, ease: E }, T.end0 + 0.8);
       tl.to("#end .btn", { scale: 1.04, duration: 0.45, yoyo: true, repeat: 3, ease: "sine.inOut" }, T.tap + 0.8);
 

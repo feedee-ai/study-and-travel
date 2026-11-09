@@ -8,12 +8,16 @@ WH, WH2, POP, SPK, BIG = ("s1490", 0.72), ("s1489", 0.71), ("s3005", 0.04), ("s2
 EV = []
 if VID == "v1":
     MUSIC, MOFF, MVOL = "m473", 0.0, -14          # Mixkit «Talent in the Air», 123 BPM, ровная энергия
-    for i, t in enumerate([T["f1"], T["f2"], T["f3"], T["f4"], T["f5"]]): EV.append(((WH, WH2)[i % 2], t, -15))
+    for i, t in enumerate([T["mova"], T["f2"], T["f3"], T["f4"], T["f5"]]): EV.append(((WH, WH2)[i % 2], t, -15))
     EV.append((BIG, T["end0"] + 0.1, -12))
-    for t in [0.02] + X["hookW"][2:4] + [T["par"], T["hud0"], T["b1"], T["b1"] + 0.45, T["meter"], T["note"], T["chipTo"], T["bars"], T["dip"], T["exp"], T["badge"]] \
+    for t in [0.02] + X["hookW"][2:4] + [T["par"], T["hud0"], T["b1"], T["b1"] + 0.45, T["meter"], T["spec"], T["chipTo"], T["bars"], T["dip"], T["badge"]] \
              + X["chipT"] + X["tagT"] + X["barT"]:
         EV.append((POP, t, -18))
     EV += [(POP, T["strike"] + 0.48, -10), (POP, T["tap"], -13)]
+    EV += [(POP, 0.45, -16), (SPK, 0.85, -21), (POP, T["free"], -12), (SPK, T["free"] + 0.4, -18), (POP, T["b1"] - 0.3, -15)]
+    EV += [(POP, T["b1"] + 0.05 + i * 0.09, -22) for i in range(7)]
+    EV += [(WH2, T["spec"], -17), (POP, T["mdos"] - 0.1, -14), (POP, T["fut"], -16)]
+    EV += [((WH, WH2)[i % 2], b["t"], -14) for i, b in enumerate(X["broll"])]
     EV += [(SPK, t, -20) for t in X["checks"]]
 else:
     MUSIC, MOFF, MVOL = X["music"], X["moff"], -14

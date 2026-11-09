@@ -42,15 +42,24 @@ __CSS__
                box-shadow: 0 16px 40px rgba(0,0,0,.25); opacity: 0; }
   #crowd .av svg { position: absolute; left: 0; top: 0; width: 134px; height: 134px; }
   #crowd .lb { position: absolute; left: 0; top: 330px; font-size: 38px; opacity: 0; }
-  #curator { left: 72px; top: 280px; width: 860px; height: 330px; opacity: 0; }
-  #curator .card { left: 0; top: 0; width: 860px; height: 300px; }
-  #curator .ava { position: absolute; left: 36px; top: 36px; width: 110px; height: 110px; border-radius: 50%; background: var(--k); color: var(--y);
-                  font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 36px; line-height: 110px; text-align: center; }
-  #curator .on { position: absolute; left: 118px; top: 118px; width: 30px; height: 30px; border-radius: 50%; background: #2DC26B; border: 5px solid #fff; }
-  #curator .nm { position: absolute; left: 176px; top: 44px; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 32px; }
-  #curator .st { position: absolute; left: 176px; top: 92px; font-size: 26px; font-weight: 700; color: #2DC26B; }
-  #curator .msg { position: absolute; left: 36px; top: 176px; width: 780px; padding: 22px 30px 24px; border-radius: 26px 26px 26px 8px; background: #F2F2F2;
-                  font-weight: 700; font-size: 36px; line-height: 46px; box-sizing: border-box; }
+  #curator { left: 72px; top: 196px; width: 936px; height: 490px; opacity: 0; }
+  #curator .card { left: 0; top: 0; width: 936px; height: 490px; overflow: hidden; }
+  #curator .ava { position: absolute; left: 32px; top: 30px; width: 96px; height: 96px; border-radius: 50%; background: var(--k); color: var(--y);
+                  font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 30px; line-height: 96px; text-align: center; }
+  #curator .on { position: absolute; left: 104px; top: 102px; width: 28px; height: 28px; border-radius: 50%; background: #2DC26B; border: 5px solid #fff; }
+  #curator .nm { position: absolute; left: 150px; top: 36px; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 30px; }
+  #curator .st { position: absolute; left: 150px; top: 82px; font-size: 25px; font-weight: 700; color: #2DC26B; }
+  #curator .hr { position: absolute; left: 0; top: 150px; width: 936px; height: 2px; background: #EEE; }
+  #curator .m { position: absolute; max-width: 640px; padding: 18px 28px 20px; border-radius: 28px; font-weight: 700; font-size: 32px; line-height: 42px; box-sizing: border-box; opacity: 0; }
+  #curator .m small { display: block; font-size: 21px; line-height: 28px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; opacity: .55; }
+  #curator .me { right: 32px; top: 174px; background: var(--y); color: var(--k); border-bottom-right-radius: 8px; }
+  #curator .cu { left: 32px; top: 312px; background: #F0F0F0; color: var(--k); border-bottom-left-radius: 8px; }
+  #curator .dots { position: absolute; left: 32px; top: 330px; width: 120px; height: 64px; border-radius: 28px; background: #F0F0F0; display: flex; align-items: center;
+                   justify-content: center; gap: 10px; opacity: 0; }
+  #curator .dots i { display: block; width: 14px; height: 14px; border-radius: 50%; background: #999; }
+  #crowd .say { position: absolute; left: 0; top: 0; font-size: 40px; opacity: 0; }
+  #crowd .lb { gap: 14px; }
+  #crowd .lb svg { width: 44px; height: 30px; border-radius: 6px; }
 
   /* 2 — реальність */
   #real { left: 0; top: 260px; width: 1080px; height: 460px; text-align: center; }
@@ -106,8 +115,10 @@ __CSS__
   <div id="plateW"><div id="plateZ">
     <video id="plate" class="clip" data-start="0" data-duration="__VDUR__" data-track-index="0" src="assets/media/plate.mp4" muted playsinline></video>
   </div></div>
+__BROLL__
   <div id="scrimTop" class="abs"></div>
   <div id="scrimBot" class="abs"></div>
+__STUD__
 
   <!-- 0 переваги -->
   <div id="h0" class="abs"><em>Що</em><em>дає</em><em>дитині</em><em>навчання</em><em>в</em><em class="k">Словаччині?</em></div>
@@ -123,10 +134,13 @@ __CSS__
   <div id="dost" class="abs">це все<br>доступно</div>
   <div id="zero" class="abs"><div class="n">0 €</div><div class="t pillY">за навчання в університеті</div></div>
   <div id="lang" class="abs"><div class="b"><small>словацька</small><b>Ahoj! Ďakujem!</b></div><div class="ok pillY">мова вчиться легко</div></div>
-  <div id="crowd" class="abs">__AVATARS__<div class="lb pillY">дуже багато українців</div></div>
+  <div id="crowd" class="abs"><div class="say pillK">дитина не буде одна</div>
+    <div class="lb pillY"><svg viewBox="0 0 44 30"><rect width="44" height="15" fill="#0057B7"/><rect y="15" width="44" height="15" fill="#FFD700"/></svg>дуже багато українців</div></div>
   <div id="curator" class="abs"><div class="card"><div class="ava">S&amp;T</div><i class="on"></i>
-    <div class="nm">Куратор Study and Travel</div><div class="st">● завжди на зв'язку</div>
-    <div class="msg">Я поруч, якщо виникнуть питання вже на місці</div></div></div>
+    <div class="nm">Куратор Study and Travel</div><div class="st">● онлайн · на місці у Словаччині</div><i class="hr"></i>
+    <div class="m me"><small>студентка</small>Мені потрібна допомога із заселенням</div>
+    <div class="dots"><i></i><i></i><i></i></div>
+    <div class="m cu"><small>куратор</small>Так, усе вирішимо! Буду через 10 хвилин</div></div></div>
 
   <!-- 2 реальність -->
   <div id="real" class="abs"><div class="w">реальністю</div><div class="p"><div class="pillK">правильний шлях до вступу</div></div></div>
@@ -170,6 +184,7 @@ __COMMONJS__
       const T = D.T;
       const out = (sel, t) => tl.to(sel, { opacity: 0, y: -24, duration: 0.2, ease: "power2.in" }, t - 0.2);
 
+__STUDJS__
       // ---------- 0 бенто ----------
       [0.02, 0.12, 0.22, 0.3, 0.68, 0.76].forEach((t, i) => tl.fromTo(`#h0 em:nth-child(${i + 1})`, { opacity: 0, y: 50, scale: 0.9 },
         { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: EB }, t));
@@ -192,11 +207,19 @@ __COMMONJS__
       tl.fromTo("#lang .ok", { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3, ease: EB }, T.lang + 0.6);
       out("#lang", T.alone);
       tl.fromTo("#crowd", { opacity: 0 }, { opacity: 1, duration: 0.1 }, T.alone);
-      T.avat.forEach((t, i) => tl.fromTo(`#crowd .av:nth-child(${i + 1})`, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.35, ease: EB }, t));
-      tl.fromTo("#crowd .lb", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: EB }, T.ukr);
+      D.broll.forEach((b) => {
+        tl.fromTo(`#bz-${b.id}`, { scale: 1.15 }, { scale: 1.0, duration: b.d + 0.3, ease: "power2.out" }, b.t);
+        if (b.enter) tl.fromTo(`#bw-${b.id}`, { xPercent: 100 }, { xPercent: 0, duration: 0.32, ease: "expo.out" }, b.t);
+      });
+      tl.fromTo("#crowd .say", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.35, ease: EB }, T.alone + 0.1);
+      tl.fromTo("#crowd .lb", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: EB }, T.ukr - 0.4);
       out("#crowd", T.cur);
       tl.fromTo("#curator", { opacity: 0, y: 50, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: EB }, T.cur);
-      tl.fromTo("#curator .msg", { opacity: 0, scale: 0.8, transformOrigin: "0% 100%" }, { opacity: 1, scale: 1, duration: 0.3, ease: EB }, T.cur + 1.2);
+      tl.fromTo("#curator .me", { opacity: 0, scale: 0.7, transformOrigin: "100% 100%" }, { opacity: 1, scale: 1, duration: 0.3, ease: EB }, T.cur + 0.5);
+      tl.fromTo("#curator .dots", { opacity: 0 }, { opacity: 1, duration: 0.15 }, T.cur + 1.0);
+      tl.fromTo("#curator .dots i", { y: 0 }, { y: -8, duration: 0.18, yoyo: true, repeat: 3, stagger: 0.08, ease: "sine.inOut" }, T.cur + 1.05);
+      tl.to("#curator .dots", { opacity: 0, duration: 0.1 }, T.cur + 1.75);
+      tl.fromTo("#curator .cu", { opacity: 0, scale: 0.7, transformOrigin: "0% 100%" }, { opacity: 1, scale: 1, duration: 0.3, ease: EB }, T.cur + 1.8);
       tl.to("#curator .on", { scale: 1.3, duration: 0.35, yoyo: true, repeat: 5, ease: "sine.inOut" }, T.cur + 0.5);
       out("#curator", T.s2);
 
