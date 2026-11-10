@@ -7,7 +7,9 @@ VOICE = f"{HERE}/../{VID}/build/voice.wav"; OUT = f"{HERE}/../{VID}/hf/assets/au
 WH, WH2, POP, SPK, BIG = ("s1490", 0.72), ("s1489", 0.71), ("s3005", 0.04), ("s2350", 0.96), ("s1492", 1.09)
 EV = []
 if VID == "v1":
-    MUSIC, MOFF, MVOL = "m33", 11.95, -13         # Mixkit «Motivating Mornings», 121 BPM, со дропа трека — вдохновляюще и с драйвом
+    # Mixkit «Raising Me Higher»: финальный удар трека (91.5 с) — на последнем слове, трек заканчивается вместе с роликом
+    MUSIC, MVOL, FOUT = "m34", -10, 0.5
+    MOFF = round(91.5 - (tm["T"]["end0"] + 4.05), 2)
     for i, t in enumerate([T["mova"], T["f2"], T["f3"], T["f4"], T["f5"]]): EV.append(((WH, WH2)[i % 2], t, -15))
     EV.append((BIG, T["end0"] + 0.1, -12))
     for t in [0.02] + X["hookW"][2:4] + [T["par"], T["hud0"], T["b1"], T["b1"] + 0.45, T["meter"], T["spec"], T["chipTo"], T["bars"], T["dip"], T["badge"]] \
@@ -20,13 +22,13 @@ if VID == "v1":
     EV += [((WH, WH2)[i % 2], b["t"], -14) for i, b in enumerate(X["broll"])]
     EV += [(SPK, t, -20) for t in X["checks"]]
 else:
-    MUSIC, MOFF, MVOL = X["music"], X["moff"], -14
+    MUSIC, MOFF, MVOL, FOUT = X["music"], X["moff"], -9, 1.4
     for i, t in enumerate(X["whoosh"]): EV.append(((WH, WH2)[i % 2], t, -15))
     EV += [(POP, t, -18) for t in X["pops"]] + [(SPK, t, -20) for t in X["sparks"]] + [(BIG, X["big"], -12)]
 inputs = ["-i", VOICE, "-ss", str(MOFF), "-t", str(DUR + 0.5), "-i", f"{STOCK}/{MUSIC}.mp3"]
 fc = [f"[0:a]aresample=48000,apad=whole_dur={DUR}[vo]", "[vo]asplit[v1][vkey]",
-      f"[1:a]aresample=48000,volume={MVOL}dB,afade=t=in:d=0.3,afade=t=out:st={DUR - 1.4}:d=1.4[mus]",
-      "[mus][vkey]sidechaincompress=threshold=0.04:ratio=5:attack=25:release=400:makeup=1[md]"]
+      f"[1:a]aresample=48000,volume={MVOL}dB,afade=t=in:d=0.3,afade=t=out:st={DUR - FOUT}:d={FOUT}[mus]",
+      "[mus][vkey]sidechaincompress=threshold=0.05:ratio=3:attack=30:release=350:makeup=1[md]"]
 lab = []
 for k, ((f, pk), t, db) in enumerate(EV):
     inputs += ["-i", f"{STOCK}/{f}.mp3"]; d = max(0, int(round((t - pk) * 1000)))

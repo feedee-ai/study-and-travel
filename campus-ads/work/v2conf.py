@@ -10,7 +10,8 @@ def conf(E, wt, seg):
     T["stud0"], T["stud1"] = 0.35, 2.35
     mid = wt("Словаччині", 13.5) - 0.1
     BR = [dict(id="friends", t=T["alone"] - 0.02, d=round(mid - T["alone"] + 0.02, 3), enter=False), dict(id="campus", t=mid, d=round(T["cur"] - 0.04 - mid, 3), enter=True)]
-    extra = dict(music="m726", moff=0.0,
+    # Mixkit «Dreaming Big»: кульминация трека (73 с) — на слове «реальністю»
+    extra = dict(music="m31", moff=round(73.0 - T["real"], 2),
                  whoosh=[T["s1"], T["s2"], T["s3"], T["s4"]],
                  pops=T["tiles"] + [T["dost"], T["lang"], T["alone"] + 0.1, T["ukr"] - 0.4, T["cur"], T["path"], T["q"], T["form"]] + T["steps"],
                  sparks=[T["zero"], T["steps"][-1], T["tap"] + 0.2], big=T["end0"] + 0.1, broll=BR)

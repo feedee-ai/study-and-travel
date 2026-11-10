@@ -22,5 +22,6 @@ cd v1/hf && npx hyperframes render -o ../../out/render_v1.mp4 --quality delivery
 Распознавание: sherpa-onnx `nemo-parakeet-tdt-0.6b-v3` (мультиязычная, украинский) → `work/asr_parakeet.json`.
 
 ## Звук (Mixkit Free License)
-v1 — «Motivating Mornings» со дропа, старт 11.95 с (https://assets.mixkit.co/music/33/33.mp3), v2 — «Uplifting Bass» (https://assets.mixkit.co/music/726/726.mp3).
+v1 — «Raising Me Higher» (https://assets.mixkit.co/music/34/34.mp3), финальный удар трека совпадает с последним словом;
+v2 — «Dreaming Big» (https://assets.mixkit.co/music/31/31.mp3), кульминация на «реальністю». Музыка на −9…−10 dB, мягкий дакинг под голос.
 SFX: Mixkit 1490, 1489, 3005, 2350, 1492. Шрифты: Unbounded, Manrope (OFL).
