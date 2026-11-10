@@ -7,9 +7,8 @@ VOICE = f"{HERE}/../{VID}/build/voice.wav"; OUT = f"{HERE}/../{VID}/hf/assets/au
 WH, WH2, POP, SPK, BIG = ("s1490", 0.72), ("s1489", 0.71), ("s3005", 0.04), ("s2350", 0.96), ("s1492", 1.09)
 EV = []
 if VID == "v1":
-    # Mixkit «Raising Me Higher»: финальный удар трека (91.5 с) — на последнем слове, трек заканчивается вместе с роликом
-    MUSIC, MVOL, FOUT = "m34", -10, 0.5
-    MOFF = round(91.5 - (tm["T"]["end0"] + 4.05), 2)
+    # Mixkit «Tears of Joy» (folk-pop: гитара, пианино) — тёплая ровная энергия под подачу фактов
+    MUSIC, MOFF, MVOL, FOUT = "m839", 0.0, -10, 1.4
     for i, t in enumerate([T["mova"], T["f2"], T["f3"], T["f4"], T["f5"]]): EV.append(((WH, WH2)[i % 2], t, -15))
     EV.append((BIG, T["end0"] + 0.1, -12))
     for t in [0.02] + X["hookW"][2:4] + [T["par"], T["hud0"], T["b1"], T["b1"] + 0.45, T["meter"], T["spec"], T["chipTo"], T["bars"], T["dip"], T["badge"]] \
@@ -22,7 +21,7 @@ if VID == "v1":
     EV += [((WH, WH2)[i % 2], b["t"], -14) for i, b in enumerate(X["broll"])]
     EV += [(SPK, t, -20) for t in X["checks"]]
 else:
-    MUSIC, MOFF, MVOL, FOUT = X["music"], X["moff"], -9, 1.4
+    MUSIC, MOFF, MVOL, FOUT = X["music"], X["moff"], -10, 1.4
     for i, t in enumerate(X["whoosh"]): EV.append(((WH, WH2)[i % 2], t, -15))
     EV += [(POP, t, -18) for t in X["pops"]] + [(SPK, t, -20) for t in X["sparks"]] + [(BIG, X["big"], -12)]
 inputs = ["-i", VOICE, "-ss", str(MOFF), "-t", str(DUR + 0.5), "-i", f"{STOCK}/{MUSIC}.mp3"]

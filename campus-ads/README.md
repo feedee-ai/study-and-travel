@@ -22,6 +22,6 @@ cd v1/hf && npx hyperframes render -o ../../out/render_v1.mp4 --quality delivery
 Распознавание: sherpa-onnx `nemo-parakeet-tdt-0.6b-v3` (мультиязычная, украинский) → `work/asr_parakeet.json`.
 
 ## Звук (Mixkit Free License)
-v1 — «Raising Me Higher» (https://assets.mixkit.co/music/34/34.mp3), финальный удар трека совпадает с последним словом;
-v2 — «Dreaming Big» (https://assets.mixkit.co/music/31/31.mp3), кульминация на «реальністю». Музыка на −9…−10 dB, мягкий дакинг под голос.
+v1 — «Tears of Joy» (folk-pop, https://assets.mixkit.co/music/839/839.mp3) — тёплая ровная энергия;
+v2 — «It's Love» (пианино, https://assets.mixkit.co/music/834/834.mp3), подъём трека на «реальністю». Музыка ~8 dB под голосом, мягкий дакинг.
 SFX: Mixkit 1490, 1489, 3005, 2350, 1492. Шрифты: Unbounded, Manrope (OFL).
