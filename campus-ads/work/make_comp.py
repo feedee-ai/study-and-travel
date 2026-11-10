@@ -18,24 +18,24 @@ seg = [s["out_in"] for s in E["segs"]]
 if VID == "v1":
     END0 = seg[7]; DUR = round(E["dur"] + 0.55, 2)
     T = dict(hud0=3.45, hud1=seg[6], f1=seg[1], f2=seg[3], f3=seg[4], f4=seg[5], f5=seg[6], end0=END0,
-             par=wt("які"), free=wt("Безкоштовно"), mova=wt("навчання", 6), b1=wt("словацькою"), meter=wt("Її"),
+             par=wt("які"), free=wt("Безкоштовно"), mova=wt("навчання", seg[1] + 1), b1=wt("словацькою"), meter=wt("Її"),
              meterFill=wt("потрібного") - 0.1, meterStep=0.22,
-             strike=wt("іспитів"), spec=wt("багато", 16.5), chips=wt("Тому", 20), chipTo=wt("напрям"),
-             bars=wt("Чим"), dip=wt("головне,"), zd=wt("можливість"), mdos=wt("міжнародний"), bud=wt("і", 38), fut=wt("будувати", 38),
-             p5a=wt("пройти"), p5b=wt("вступу.", 43), badge=wt("Study", 40), tap=wt("«Детальніше»"), stud0=0.35, stud1=1.95)
+             strike=wt("іспитів"), spec=wt("багато", seg[3]), chips=wt("Тому", seg[3] + 3), chipTo=wt("напрям"),
+             bars=wt("Чим"), dip=wt("головне,"), zd=wt("можливість"), mdos=wt("міжнародний"), bud=wt("і", seg[5] + 4), fut=wt("будувати", seg[5] + 4),
+             p5a=wt("пройти"), p5b=wt("вступу.", seg[6] + 2), badge=wt("Study", seg[6]), tap=wt("«Детальніше»"), stud0=0.35, stud1=1.95)
     T["dipl"] = T["dip"] + 1.2
-    extra = dict(checks=[wt("вступу.") + 0.25, wt("дитину.", 23) + 0.3, wt("факультету.", 31) + 0.4, wt("майбутнє.") + 0.35],
+    extra = dict(checks=[wt("вступу.") + 0.25, wt("дитину.", seg[3] + 3) + 0.3, wt("факультету.", seg[4] + 5) + 0.4, wt("майбутнє.") + 0.35],
                  hookW=[wt(x) for x in ["речі", "про", "безкоштовний", "вступ", "до", "Словаччини,"]],
-                 chipT=[wt("Study", 20.5) + 0.2, wt("допоможе", 21) + 0.1, wt("підібрати")],
-                 tagT=[wt("Місця"), wt("дедлайни"), wt("залежать", 25)],
-                 barT=[wt("вивчення"), wt("оформлення"), wt("вибір", 31)])
+                 chipT=[wt("Study", seg[3] + 3) + 0.2, wt("допоможе", seg[3] + 3) + 0.1, wt("підібрати")],
+                 tagT=[wt("Місця"), wt("дедлайни"), wt("залежать", seg[4])],
+                 barT=[wt("вивчення"), wt("оформлення"), wt("вибір", seg[4] + 5)])
     t1 = T["zd"] - 0.02; tb = T["bud"] - 0.03
     BR = [dict(id="intl", t=t1, d=round(tb - t1, 3), enter=False)]   # один спокойный кадр: студенты из разных стран на кампусе
     extra["broll"] = BR
     LET = [(660, 600), (752, 636), (846, 598), (938, 640), (700, 712), (800, 722), (900, 716)]
     extra["letters"] = LET
     ZOOM = [(0, 1.20, 1.03, seg[1], .48, .47), (seg[1], 1.0, 1.05, seg[2] - seg[1], .49, .5), (seg[2], 1.24, 1.28, seg[3] - seg[2], .49, .5),
-            (seg[3], 1.0, 1.04, 4.85, .6, .5), (wt("Тому", 20), 1.22, 1.26, seg[4] - wt("Тому", 20), .6, .38),
+            (seg[3], 1.0, 1.04, 4.85, .6, .5), (wt("Тому", seg[3] + 3), 1.22, 1.26, seg[4] - wt("Тому", seg[3] + 3), .6, .38),
             (seg[4], 1.0, 1.04, 2.95, .62, .45), (wt("Чим"), 1.22, 1.26, seg[5] - wt("Чим"), .62, .28),
             (seg[5], 1.0, 1.05, T["zd"] - seg[5], .45, .45), (T["bud"], 1.18, 1.22, seg[6] - T["bud"], .45, .40),
             (seg[6], 1.08, 1.0, seg[7] - seg[6], .47, .47), (seg[7], 1.18, 1.22, 4.6, .47, .47)]
@@ -61,7 +61,7 @@ if VID == "v1":
     broll_html = "\n".join(f'  <div class="vw" id="bw-{b["id"]}"><div class="vz" id="bz-{b["id"]}"><video id="v-{b["id"]}" class="clip" data-start="{b["t"]}" '
                            f'data-duration="{round(b["d"] + (0.32 if i == 0 else 0), 3)}" data-track-index="{i + 1}" src="assets/media/{b["id"]}.mp4" muted playsinline></video></div></div>'
                            for i, b in enumerate(BR))
-    SUBS = {"__CAL__": cal, "__STARS__": stars, "__LETTERS__": letters, "__TICK1__": tick(r1 + r1), "__TICK2__": tick(r2 + r2), "__BROLL__": broll_html}
+    SUBS = {"__CAL__": cal, "__STARS__": stars, "__LETTERS__": letters, "__TICK1__": tick(r1 + r1), "__TICK2__": tick(r2 + r2), "__BROLL__": broll_html, "__STUD__": "", "__STUDJS__": ""}   # в v1 бейдж только на финальной карточке
 else:
     DUR, END0 = 46.6, None
     sys.path.insert(0, HERE); from v2conf import conf
