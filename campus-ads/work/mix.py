@@ -7,7 +7,7 @@ VOICE = f"{HERE}/../{VID}/build/voice.wav"; OUT = f"{HERE}/../{VID}/hf/assets/au
 WH, WH2, POP, SPK, BIG = ("s1490", 0.72), ("s1489", 0.71), ("s3005", 0.04), ("s2350", 0.96), ("s1492", 1.09)
 EV = []
 if VID == "v1":
-    MUSIC, MOFF, MVOL = "m473", 0.0, -14          # Mixkit «Talent in the Air», 123 BPM, ровная энергия
+    MUSIC, MOFF, MVOL = "m33", 11.95, -13         # Mixkit «Motivating Mornings», 121 BPM, со дропа трека — вдохновляюще и с драйвом
     for i, t in enumerate([T["mova"], T["f2"], T["f3"], T["f4"], T["f5"]]): EV.append(((WH, WH2)[i % 2], t, -15))
     EV.append((BIG, T["end0"] + 0.1, -12))
     for t in [0.02] + X["hookW"][2:4] + [T["par"], T["hud0"], T["b1"], T["b1"] + 0.45, T["meter"], T["spec"], T["chipTo"], T["bars"], T["dip"], T["badge"]] \

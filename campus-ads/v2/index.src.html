@@ -6,6 +6,7 @@
 <style>
 __CSS__
   #bgY { left: 0; top: 0; width: 1080px; height: 1920px; background: var(--y); }
+  #stud { top: 650px; }
   #plateW { transform-origin: 0 0; }
 
   /* 0 — переваги: бенто */
@@ -42,19 +43,19 @@ __CSS__
                box-shadow: 0 16px 40px rgba(0,0,0,.25); opacity: 0; }
   #crowd .av svg { position: absolute; left: 0; top: 0; width: 134px; height: 134px; }
   #crowd .lb { position: absolute; left: 0; top: 330px; font-size: 38px; opacity: 0; }
-  #curator { left: 72px; top: 196px; width: 936px; height: 490px; opacity: 0; }
-  #curator .card { left: 0; top: 0; width: 936px; height: 490px; overflow: hidden; }
+  #curator { left: 72px; top: 160px; width: 936px; height: 520px; opacity: 0; }
+  #curator .card { left: 0; top: 0; width: 936px; height: 520px; overflow: hidden; }
   #curator .ava { position: absolute; left: 32px; top: 30px; width: 96px; height: 96px; border-radius: 50%; background: var(--k); color: var(--y);
                   font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 30px; line-height: 96px; text-align: center; }
   #curator .on { position: absolute; left: 104px; top: 102px; width: 28px; height: 28px; border-radius: 50%; background: #2DC26B; border: 5px solid #fff; }
   #curator .nm { position: absolute; left: 150px; top: 36px; font-family: "Unbounded", sans-serif; font-weight: 800; font-size: 30px; }
   #curator .st { position: absolute; left: 150px; top: 82px; font-size: 25px; font-weight: 700; color: #2DC26B; }
   #curator .hr { position: absolute; left: 0; top: 150px; width: 936px; height: 2px; background: #EEE; }
-  #curator .m { position: absolute; max-width: 640px; padding: 18px 28px 20px; border-radius: 28px; font-weight: 700; font-size: 32px; line-height: 42px; box-sizing: border-box; opacity: 0; }
+  #curator .m { position: absolute; max-width: 640px; padding: 18px 28px 20px; border-radius: 28px; font-weight: 700; font-size: 30px; line-height: 40px; box-sizing: border-box; opacity: 0; }
   #curator .m small { display: block; font-size: 21px; line-height: 28px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; opacity: .55; }
-  #curator .me { right: 32px; top: 174px; background: var(--y); color: var(--k); border-bottom-right-radius: 8px; }
-  #curator .cu { left: 32px; top: 312px; background: #F0F0F0; color: var(--k); border-bottom-left-radius: 8px; }
-  #curator .dots { position: absolute; left: 32px; top: 330px; width: 120px; height: 64px; border-radius: 28px; background: #F0F0F0; display: flex; align-items: center;
+  #curator .me { right: 32px; top: 170px; background: var(--y); color: var(--k); border-bottom-right-radius: 8px; }
+  #curator .cu { left: 32px; top: 344px; background: #F0F0F0; color: var(--k); border-bottom-left-radius: 8px; }
+  #curator .dots { position: absolute; left: 32px; top: 350px; width: 120px; height: 64px; border-radius: 28px; background: #F0F0F0; display: flex; align-items: center;
                    justify-content: center; gap: 10px; opacity: 0; }
   #curator .dots i { display: block; width: 14px; height: 14px; border-radius: 50%; background: #999; }
   #crowd .say { position: absolute; left: 0; top: 0; font-size: 40px; opacity: 0; }
@@ -100,13 +101,14 @@ __CSS__
 
   /* финал */
   #end { left: 0; top: 0; width: 1080px; height: 1920px; background: var(--y); color: var(--k); clip-path: inset(100% 0 0 0); }
-  #end .wm { position: absolute; left: 0; width: 1080px; top: 520px; text-align: center; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 46px; letter-spacing: .06em; }
-  #end h1 { position: absolute; left: 60px; width: 960px; top: 620px; margin: 0; text-align: center; font-family: "Unbounded", sans-serif; font-weight: 900;
+  #end .q { position: absolute; left: 90px; width: 900px; top: 470px; margin: 0; text-align: center; font-weight: 800; font-size: 44px; line-height: 56px; }
+  #end .wm { position: absolute; left: 0; width: 1080px; top: 380px; text-align: center; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 46px; letter-spacing: .06em; }
+  #end h1 { position: absolute; left: 60px; width: 960px; top: 690px; margin: 0; text-align: center; font-family: "Unbounded", sans-serif; font-weight: 900;
             font-size: 96px; line-height: 106px; text-transform: uppercase; }
-  #end p { position: absolute; left: 90px; width: 900px; top: 880px; margin: 0; text-align: center; font-weight: 800; font-size: 40px; line-height: 52px; }
-  #end .btn { position: absolute; left: 160px; top: 1060px; width: 760px; height: 160px; border-radius: 80px; background: var(--k); color: var(--y);
+  #end p { position: absolute; left: 90px; width: 900px; top: 930px; margin: 0; text-align: center; font-weight: 800; font-size: 40px; line-height: 52px; }
+  #end .btn { position: absolute; left: 160px; top: 1100px; width: 760px; height: 160px; border-radius: 80px; background: var(--k); color: var(--y);
               display: flex; align-items: center; justify-content: center; font-family: "Unbounded", sans-serif; font-weight: 900; font-size: 48px; text-transform: uppercase; white-space: nowrap; }
-  #end .down { position: absolute; left: 508px; top: 1280px; width: 64px; height: 64px; }
+  #end .down { position: absolute; left: 508px; top: 1300px; width: 64px; height: 64px; }
 </style>
 </head>
 <body>
@@ -171,8 +173,9 @@ __STUD__
 
   <div id="end" class="abs">
     <div class="wm">STUDY AND TRAVEL</div>
-    <h1>Безкоштовна консультація</h1>
-    <p>Вступ до університетів Словаччини — від вибору до життя на місці</p>
+    <div class="q">Хочете дізнатися, як ваша дитина може вступити до університету Словаччини?</div>
+    <h1>Залишайте заявку</h1>
+    <p>на безкоштовну консультацію від Study and Travel — зараз</p>
     <div class="btn">Залишити заявку</div>
     <svg class="down" viewBox="0 0 64 64"><path d="M32 8v42M14 34l18 18 18-18" stroke="#0C0C0C" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </div>
@@ -254,7 +257,7 @@ __STUDJS__
 
       // ---------- финал ----------
       tl.fromTo("#end", { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.55, ease: "power3.inOut" }, T.end0);
-      tl.fromTo(["#end .wm", "#end h1", "#end p"], { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: E, stagger: 0.1 }, T.end0 + 0.3);
+      tl.fromTo(["#end .wm", "#end .q", "#end h1", "#end p"], { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: E, stagger: 0.1 }, T.end0 + 0.3);
       tl.fromTo("#end .btn", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.45, ease: EB }, T.end0 + 0.6);
       tl.fromTo("#end .down", { opacity: 0, y: -10 }, { opacity: 1, y: 10, duration: 0.4, ease: "sine.inOut" }, T.end0 + 0.9);
       tl.to("#end .down", { y: -6, duration: 0.4, yoyo: true, repeat: 2, ease: "sine.inOut" }, T.end0 + 1.3);

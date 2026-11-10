@@ -7,7 +7,7 @@ def conf(E, wt, seg):
              cur=wt("куратор"), real=wt("реальністю,"), path=wt("правильно"),
              steps=[wt("вибору", 27), wt("спеціальності", 28.5), wt("супроводження"), wt("вивченням"), wt("підготовкою"), wt("будемо")],
              q=seg[4] + 0.02, form=wt("Залишайте"), type1=wt("заявку") + 0.2, tap=wt("консультацію", 42), end0=wt("за", 43.5) - 0.3)
-    T["stud1"] = 4.6
+    T["stud0"], T["stud1"] = 0.35, 2.35
     mid = wt("Словаччині", 13.5) - 0.1
     BR = [dict(id="friends", t=T["alone"] - 0.02, d=round(mid - T["alone"] + 0.02, 3), enter=False), dict(id="campus", t=mid, d=round(T["cur"] - 0.04 - mid, 3), enter=True)]
     extra = dict(music="m726", moff=0.0,

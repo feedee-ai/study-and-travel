@@ -22,15 +22,15 @@ if VID == "v1":
              meterFill=wt("потрібного") - 0.1, meterStep=0.22,
              strike=wt("іспитів"), spec=wt("багато", 16.5), chips=wt("Тому", 20), chipTo=wt("напрям"),
              bars=wt("Чим"), dip=wt("головне,"), zd=wt("можливість"), mdos=wt("міжнародний"), bud=wt("і", 38), fut=wt("будувати", 38),
-             p5a=wt("пройти"), p5b=wt("вступу.", 43), badge=wt("Study", 40), tap=wt("«Детальніше»"), stud1=seg[1] - 0.25)
+             p5a=wt("пройти"), p5b=wt("вступу.", 43), badge=wt("Study", 40), tap=wt("«Детальніше»"), stud0=0.35, stud1=1.95)
     T["dipl"] = T["dip"] + 1.2
     extra = dict(checks=[wt("вступу.") + 0.25, wt("дитину.", 23) + 0.3, wt("факультету.", 31) + 0.4, wt("майбутнє.") + 0.35],
                  hookW=[wt(x) for x in ["речі", "про", "безкоштовний", "вступ", "до", "Словаччини,"]],
                  chipT=[wt("Study", 20.5) + 0.2, wt("допоможе", 21) + 0.1, wt("підібрати")],
                  tagT=[wt("Місця"), wt("дедлайни"), wt("залежать", 25)],
                  barT=[wt("вивчення"), wt("оформлення"), wt("вибір", 31)])
-    t1 = T["zd"] - 0.02; t2 = round(t1 + (T["bud"] - t1) / 2, 3); tb = T["bud"] - 0.03
-    BR = [dict(id="travel1", t=t1, d=round(t2 - t1, 3), enter=False), dict(id="travel2", t=t2, d=round(tb - t2, 3), enter=True)]
+    t1 = T["zd"] - 0.02; tb = T["bud"] - 0.03
+    BR = [dict(id="intl", t=t1, d=round(tb - t1, 3), enter=False)]   # один спокойный кадр: студенты из разных стран на кампусе
     extra["broll"] = BR
     LET = [(660, 600), (752, 636), (846, 598), (938, 640), (700, 712), (800, 722), (900, 716)]
     extra["letters"] = LET
@@ -115,13 +115,19 @@ COMMONJS = """      const D = __DATA__;
         });
       });
 """
-STUD = ('  <div id="stud" class="abs"><div class="ic"><svg viewBox="0 0 48 48"><path d="M2 18 L24 8 L46 18 L24 28 Z" fill="#0C0C0C"/>'
+STUD = ('  <div id="stud" class="abs"><div class="row"><div class="pl"><div class="ic"><svg viewBox="0 0 48 48"><path d="M2 18 L24 8 L46 18 L24 28 Z" fill="#0C0C0C"/>'
         '<path d="M11 23 v11 c8 6 18 6 26 0 v-11 L24 29 Z" fill="#0C0C0C"/><path d="M42 20 v14" stroke="#0C0C0C" stroke-width="3"/></svg>'
         '<i class="ok"><svg viewBox="0 0 18 16"><path d="M2 8 l5 5 l9 -11" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div>'
-        '<div><b>Вступила з Study and Travel</b><small>студентка · навчається у Словаччині</small></div></div>')
-STUDJS = """      tl.fromTo("#stud", { opacity: 0, y: 40, scale: 0.9 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: EB }, 0.45);
-      tl.fromTo("#stud .ok", { scale: 0 }, { scale: 1, duration: 0.35, ease: EB }, 0.85);
-      tl.to("#stud", { opacity: 0, y: 30, duration: 0.25, ease: "power2.in" }, T.stud1);"""
+        '<b>Вступила з Study and Travel</b></div></div>'
+        '<svg class="arr" viewBox="0 0 140 100"><path id="studA" d="M58 6 C 96 20, 104 52, 74 86" fill="none" stroke="#FFD21A" stroke-width="7" stroke-linecap="round"/>'
+        '<path id="studH" d="M60 70 L 72 90 L 92 78" fill="none" stroke="#FFD21A" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>')
+STUDJS = """      tl.fromTo("#stud", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.35, ease: E }, T.stud0);
+      tl.fromTo("#stud .pl", { scale: 0.6 }, { scale: 1, duration: 0.4, ease: EB }, T.stud0);
+      tl.fromTo("#stud .ok", { scale: 0 }, { scale: 1, duration: 0.3, ease: EB }, T.stud0 + 0.35);
+      tl.fromTo("#studA", { strokeDasharray: 120, strokeDashoffset: 120 }, { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, T.stud0 + 0.3);
+      tl.fromTo("#studH", { strokeDasharray: 50, strokeDashoffset: 50 }, { strokeDashoffset: 0, duration: 0.15, ease: "power2.out" }, T.stud0 + 0.62);
+      tl.to("#stud .arr", { y: 8, duration: 0.3, yoyo: true, repeat: 3, ease: "sine.inOut" }, T.stud0 + 0.8);
+      tl.to("#stud", { opacity: 0, y: -16, duration: 0.2, ease: "power2.in" }, T.stud1);"""
 SUBS.setdefault("__STUD__", STUD); SUBS.setdefault("__STUDJS__", STUDJS)
 data = dict(T=T, zoom=ZOOM, caps=caps, capStyle=CAPSTYLE, vdur=round(E["dur"] - 0.06, 3), **extra)
 src = open(f"{HERE}/../{VID}/index.src.html").read()
