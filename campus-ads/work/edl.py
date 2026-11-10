@@ -12,7 +12,7 @@ CUTS = {
         ("IMG_1977", 8.13, 14.60),  #   Тому Study and Travel готує … до вступу
         ("IMG_1978", 0.00, 9.31),   # 2 без іспитів … саме під вашу дитину
         ("IMG_1981", 0.00, 9.40),   # 3 місця та дедлайни
-        ("IMG_1979", 0.40, 8.26),   # 4 а головне … і будувати власне майбутнє
+        ("IMG_1979", 0.12, 8.26),   # 4 а головне … і будувати власне майбутнє
         ("IMG_1982", 0.00, 6.92),   # CTA: якщо … до вступу
         ("IMG_1982", 8.94, 13.00),  #   тисніть «Детальніше» …
     ]),
@@ -61,7 +61,8 @@ def clip_words(clip):
 def build(vid):
     c = CUTS[vid]; sp = c["speed"]; t = 0.0; segs, words = [], []
     for clip, a, b in c["segs"]:
-        d = (b - a) / sp
+        d = round((b - a) / sp * 30) / 30          # целое число кадров: звук и картинка режутся на одном кадре
+        b = round(a + d * sp, 4)
         segs.append(dict(clip=clip, src_in=a, src_out=b, out_in=round(t, 3), out_out=round(t + d, 3)))
         for w in clip_words(clip):
             if (w["s"] >= a - 0.05 or a < 0.2) and w["s"] < b - 0.05:

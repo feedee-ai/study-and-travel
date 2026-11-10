@@ -12,9 +12,9 @@ VOICE = ("highpass=f=95,afftdn=nf=-30:tn=1,afftdn=nf=-40,"
          "deesser=i=0.3:m=0.5:f=0.5,acompressor=threshold=-24dB:ratio=3:attack=6:release=110:makeup=2,alimiter=limit=0.85:level=false")
 ins, fv, fa = [], [], []
 for i, s in enumerate(E["segs"]):
-    ins += ["-ss", str(s["src_in"]), "-t", str(s["src_out"] - s["src_in"]), "-i", f"{SRC}/{s['clip']}.MOV"]
-    d = (s["src_out"] - s["src_in"]) / sp
-    fv.append(f"[{i}:v]{TONEMAP},fps=30,setpts=(PTS-STARTPTS)/{sp},{GRADE},scale=1080:1920:flags=lanczos,setsar=1,trim=0:{d:.4f}[v{i}]")
+    ins += ["-ss", str(s["src_in"]), "-t", str(s["src_out"] - s["src_in"] + 0.3), "-i", f"{SRC}/{s['clip']}.MOV"]
+    d = s["out_out"] - s["out_in"]; nf = int(round(d * 30))
+    fv.append(f"[{i}:v]{TONEMAP},setpts=(PTS-STARTPTS)/{sp},fps=30,{GRADE},scale=1080:1920:flags=lanczos,setsar=1,trim=end_frame={nf},setpts=PTS-STARTPTS[v{i}]")
     fa.append(f"[{i}:a]aresample=48000,asetpts=PTS-STARTPTS,atempo={sp},atrim=0:{d:.4f},afade=t=in:d=0.012,afade=t=out:st={d - 0.03:.4f}:d=0.03[a{i}]")
 n = len(E["segs"])
 fc = ";".join(fv + fa) + ";" + "".join(f"[v{i}]" for i in range(n)) + f"concat=n={n}:v=1:a=0[vo];" + \

@@ -99,8 +99,9 @@ COMMONJS = """      const D = __DATA__;
       const tl = gsap.timeline({ paused: true });
       const E = "power3.out", EB = "back.out(1.7)";
       D.zoom.forEach(([t, z0, z1, d, ox, oy]) => {
-        tl.set("#plateZ", { scale: z0, transformOrigin: `${ox * 100}% ${oy * 100}%` }, t);
-        tl.to("#plateZ", { scale: z1, duration: d, ease: "sine.out" }, t + 0.001);
+        // рендер подаёт таймлайну время на кадр раньше видео: зум ставим за кадр до склейки, твин кончается до следующей
+        tl.set("#plateZ", { scale: z0, transformOrigin: `${ox * 100}% ${oy * 100}%` }, Math.max(0, t - 1 / 30 - 0.004));
+        tl.to("#plateZ", { scale: z1, duration: Math.max(0.05, d - 0.08), ease: "sine.out" }, Math.max(0.001, t - 1 / 30 + 0.001));
       });
       const capsEl = document.getElementById("caps");
       D.caps.forEach((c, ci) => {
